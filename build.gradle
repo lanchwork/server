@@ -1,0 +1,66 @@
+buildscript {
+    ext {
+        kotlin_version = '1.1.4'
+        springBootVersion = '2.0.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        // Kotlin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // Spring-boot
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+    }
+}
+
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.2.51'
+    id 'war'
+}
+
+group 'com.cloud'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // Kotlin
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
+    compile("org.jetbrains.kotlin:kotlin-reflect:$kotlin_version")
+    // Spring-boot
+    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    // Mybatis
+    compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2'
+    // 支持jsp
+    compile 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.7'
+    // jsp的jstl表达式
+    compile 'javax.servlet:jstl:1.2'
+    // mysql
+    compile('mysql:mysql-connector-java:5.1.13')
+    // pagehelper
+    compile group: 'com.github.pagehelper', name: 'pagehelper', version: '4.1.0'
+    compile("org.springframework.boot:spring-boot-starter-logging")
+    compile 'net.logstash.logback:logstash-logback-encoder:5.1'
+}
