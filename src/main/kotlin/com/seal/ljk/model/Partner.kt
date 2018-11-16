@@ -5,6 +5,6 @@ data class Partner (
     var channelMark: String = "",
     var partnerName: String = "",
     var walletAddr: String = "",
-    var isOpen: Int = 0,
+    var openFlag: Int = 0,
     var remark: String = ""
 ) : Base()
