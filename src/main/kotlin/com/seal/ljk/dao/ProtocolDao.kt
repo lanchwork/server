@@ -1,6 +1,6 @@
 package com.seal.ljk.dao
 
-import com.seal.ljk.model.Partner
+import com.seal.ljk.model.Protocol
 import org.apache.ibatis.annotations.*
 import org.springframework.stereotype.Repository
 
@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository
 interface ProtocolDao {
 
     @Select("select * from protocol")
-    fun getAllPartner(): List<Partner>
+    fun getAllPartner(): List<Protocol>
 
 }
