@@ -2,6 +2,7 @@ package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.dao.ProtocolDao
+import com.seal.ljk.model.Protocol
 import com.seal.ljk.service.ProtocolService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -17,12 +18,13 @@ class ProtocolController {
     /*查看协议*/
     @GetMapping("/all")
     fun getAllPartner(): ResVal {
+        val resultList: List<Protocol>
         try {
-            protocolService.getAllPartner()
+            resultList=protocolService.getAllPartner()
         } catch (e: Exception) {
             return ResVal(1, "Data Access Error!")
         }
-        return ResVal(0, protocolService.getAllPartner())
+        return ResVal(0, resultList)
     }
 
 }
