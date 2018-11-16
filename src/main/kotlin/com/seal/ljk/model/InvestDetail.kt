@@ -11,7 +11,7 @@ class InvestDetail(var investDetailId: String = "",
                    var chainTransNo: String,
                    var investorWalletAddr: String,
 
-                   var investAmt: BigInteger,
+                   var investAmt: BigDecimal,
 
                    var InvestPeriod: Int=0,
                    var dayRate: BigDecimal,
@@ -19,15 +19,15 @@ class InvestDetail(var investDetailId: String = "",
                    var investDate:String = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date()),
                    var expirreDate:String = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date()),
 
-                   var preRcvPrincipal: BigInteger,
-                   var preIncome: BigInteger,
-                   var preRcvAmt: BigInteger,
+                   var preRcvPrincipal: BigDecimal,
+                   var preIncome: BigDecimal,
+                   var preRcvAmt: BigDecimal,
 
                    var actualRcvDate:String = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date()),
-                   var actualRcvPrincipal: BigInteger,
-                   var actualRcvInterest: BigInteger,
+                   var actualRcvPrincipal: BigDecimal,
+                   var actualRcvInterest: BigDecimal,
 
-                   var actualRcvAmt: BigInteger,
+                   var actualRcvAmt: BigDecimal,
                    var partnerId: String = "",
                    var partnerWalletAddr: String = "",
 
