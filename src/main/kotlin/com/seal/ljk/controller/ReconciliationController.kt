@@ -1,6 +1,7 @@
 package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.model.Reconciliation
 import com.seal.ljk.service.ReconciliationService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
@@ -17,32 +18,35 @@ class ReconciliationController {
 
     @GetMapping("/all")
     fun getAllReconciliation(): ResVal {
+        val resultList: List<Reconciliation>
         try {
-            reconciliationService.getAllReconciliation()
+            resultList = reconciliationService.getAllReconciliation()
         } catch (e: Exception) {
             return ResVal(1, "Data Access Error!")
         }
-        return ResVal(0, reconciliationService.getAllReconciliation())
+        return ResVal(0, resultList)
     }
 
     @GetMapping("/getById")
     fun getReconciliationById(@RequestParam partnerId: String): ResVal {
+        val result: Reconciliation
         try {
-            reconciliationService.getReconciliationById(partnerId)
+            result = reconciliationService.getReconciliationById(partnerId)
         } catch (e: Exception) {
             return ResVal(1, "Data Access Error!")
         }
-        return ResVal(0, reconciliationService.getReconciliationById(partnerId))
+        return ResVal(0, result)
     }
 
     @GetMapping("/list")
     fun getReconciliationList(@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
+        val resultList: List<Reconciliation>
         val currentPageNew = (currentPage - 1) * pageSize
         try {
-            reconciliationService.getReconciliationList(currentPageNew, pageSize)
+            resultList = reconciliationService.getReconciliationList(currentPageNew, pageSize)
         } catch (e: Exception) {
             return ResVal(1, "Data Access Error!")
         }
-        return ResVal(0, reconciliationService.getReconciliationList(currentPageNew, pageSize))
+        return ResVal(0, resultList)
     }
 }
