@@ -1,15 +1,16 @@
 package com.seal.ljk.model
 
+import java.math.BigDecimal
 import java.math.BigInteger
 
 class Loan(var loanId: String = "",
            var loanerWalletAddr: String = "",
 
-           var totalRepayAmt: BigInteger ,
-           var totalLoanAmt: BigInteger,
+           var totalRepayAmt: BigDecimal,
+           var totalLoanAmt: BigDecimal,
 
-           var payInterest: String = "",
+           var payInterest: BigDecimal,
 
-           var unpayInterest: BigInteger,
-           var totalPayAmt: BigInteger,
+           var unpayInterest: BigDecimal,
+           var totalPayAmt: BigDecimal,
            var remark: String = ""): Base()
