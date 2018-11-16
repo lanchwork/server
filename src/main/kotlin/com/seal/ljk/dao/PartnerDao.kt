@@ -27,4 +27,6 @@ interface PartnerDao {
     @Select("select * from partner limit #{currentPage}, #{pageSize}")
     fun getPartnerList(@Param("currentPage") currentPage: Int, @Param("pageSize") pageSize: Int): List<Partner>
 
+    @Select("select partner_Id,channel_Mark,partner_Name from partner where is_Open = 1")
+    fun getOpenPartnerList():List<Partner>
 }

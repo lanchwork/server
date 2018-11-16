@@ -15,12 +15,13 @@ class PartnerController {
 
     @GetMapping("/all")
     fun getAllPartner(): ResVal {
+        val resultList: List<Partner>
         try {
-            partnerService.getAllPartner()
+            resultList = partnerService.getAllPartner()
         } catch (e: Exception) {
             return ResVal(1, "Data Access Error!")
         }
-        return ResVal(0, partnerService.getAllPartner())
+        return ResVal(0, resultList)
     }
 
     @RequestMapping("/add")
@@ -55,23 +56,38 @@ class PartnerController {
 
     @GetMapping("/getById")
     fun getPartnerById(@RequestParam partnerId: String): ResVal {
+        val result: Partner
         try {
-            partnerService.getPartnerById(partnerId)
+            result = partnerService.getPartnerById(partnerId)
         } catch (e: Exception) {
             return ResVal(1, "Data Access Error!")
         }
-        return ResVal(0, partnerService.getPartnerById(partnerId))
+        return ResVal(0, result)
     }
 
     @GetMapping("/list")
     fun getPartnerList(@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
+        val resultList: List<Partner>
         val currentPageNew = (currentPage - 1) * pageSize
         try {
-            partnerService.getPartnerList(currentPageNew, pageSize)
+            resultList = partnerService.getPartnerList(currentPageNew, pageSize)
         } catch (e: Exception) {
             return ResVal(1, "Data Access Error!")
         }
-        return ResVal(0, partnerService.getPartnerList(currentPageNew, pageSize))
+        return ResVal(0, resultList)
     }
 
+    /**
+     * 选择合作方
+     */
+    @RequestMapping("/openPartner")
+    fun getOpenPartner():ResVal{
+        val resultList: List<Partner>
+        try {
+            resultList = partnerService.getOpenPartner()
+        } catch (e: Exception) {
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, resultList)
+    }
 }

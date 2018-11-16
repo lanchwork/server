@@ -34,4 +34,8 @@ class PartnerService {
     fun getPartnerList(currentPage: Int, pageSize: Int): List<Partner> {
         return partnerDao.getPartnerList(currentPage, pageSize)
     }
+
+    fun getOpenPartner() : List<Partner>{
+        return partnerDao.getOpenPartnerList()
+    }
 }
