@@ -15,14 +15,14 @@ class InvestDetail(
                    var investPeriod: Int=0,
                    var dayRate: BigDecimal= BigDecimal(0),
 
-                   var investDate:Date,
-                   var expirreDate:Date,
+                   var investDate:Date=Date(),
+                   var expirreDate:Date=Date(),
 
                    var preRcvPrincipal: BigDecimal= BigDecimal(0),
                    var preIncome: BigDecimal= BigDecimal(0),
                    var preRcvAmt: BigDecimal= BigDecimal(0),
 
-                   var actualRcvDate:Date,
+                   var actualRcvDate:Date=Date(),
                    var actualRcvPrincipal: BigDecimal= BigDecimal(0),
                    var actualRcvInterest: BigDecimal= BigDecimal(0),
 
