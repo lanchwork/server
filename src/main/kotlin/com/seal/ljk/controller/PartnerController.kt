@@ -77,4 +77,17 @@ class PartnerController {
         return ResVal(0, resultList)
     }
 
+    /**
+     * 选择合作方
+     */
+    @RequestMapping("/openPartner")
+    fun getOpenPartner():ResVal{
+        val resultList: List<Partner>
+        try {
+            resultList = partnerService.getOpenPartner()
+        } catch (e: Exception) {
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, resultList)
+    }
 }
