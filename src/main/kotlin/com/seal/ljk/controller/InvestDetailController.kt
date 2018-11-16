@@ -1,0 +1,32 @@
+package com.seal.ljk.controller
+
+import com.seal.ljk.common.ResVal
+import com.seal.ljk.model.InvestDetail
+import com.seal.ljk.service.InvestDetailService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.*
+import java.lang.Exception
+
+@RestController
+@RequestMapping("/investDetail")
+class InvestDetailController {
+
+    @Autowired
+    lateinit var investDetailService: InvestDetailService
+
+    /*投资已还款列表查询*/
+    @GetMapping("/list")
+    fun getRepaymentList(@RequestParam investorWalletAddr: String,@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
+        val resultList: List<InvestDetail>
+        val currentPageNew = (currentPage - 1) * pageSize
+        try {
+            resultList=investDetailService.getRepaymentList(investorWalletAddr,currentPageNew, pageSize)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, resultList)
+    }
+
+
+}
