@@ -1,6 +1,6 @@
 package com.seal.ljk.model
 
-class Partner (
+data class Partner (
     var partnerId: String = "",
     var channelMark: String = "",
     var partnerName: String = "",
