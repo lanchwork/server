@@ -1,6 +1,7 @@
 package com.seal.ljk.model
 
 import java.math.BigDecimal
+import java.util.*
 
 
 /**
@@ -20,18 +21,18 @@ class LoanDetail (
         var chainTransNo: String = "",
         var investorWalletAddr: String = "",
         var investId: String = "",
-        var duePrinpal: String = "",
+        var duePrinpal: BigDecimal = BigDecimal(0),
         var dueInterest: BigDecimal = BigDecimal(0),
         var dueAmt: BigDecimal = BigDecimal(0),
-        var dueDate: String = "",
+        var dueDate: Date = Date(),
         var actualPayPrincipal: BigDecimal = BigDecimal(0),
         var actualPayInterest: BigDecimal = BigDecimal(0),
         var actualPayAmt: BigDecimal = BigDecimal(0),
-        var actualPayDate: String = "",
-        var loanPeriod: String = "",
+        var actualPayDate: Date = Date(),
+        var loanPeriod: Int = 0,
         var dayRate: BigDecimal = BigDecimal(0),
         var status: Int = 0,
         var overdueDay: Int = 0,
-        var investDate: String = "",
+        var investDate: Date = Date(),
         var remark: String = ""
 ): Base()
