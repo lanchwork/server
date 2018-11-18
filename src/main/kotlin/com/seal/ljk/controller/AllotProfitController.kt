@@ -3,6 +3,7 @@ package com.seal.ljk.controller
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.dao.AllotProfitDao
 import com.seal.ljk.model.AllotProfit
+import com.seal.ljk.service.AllotProfitService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -25,13 +26,13 @@ import java.lang.Exception
 class AllotProfitController {
 
     @Autowired
-    lateinit var allotProfitDao: AllotProfitDao
+    lateinit var allotProfitService: AllotProfitService
 
     @RequestMapping("/getByPartnerId")
     fun getByPartnerId(@RequestParam partnerId: String): ResVal{
-        val allotProfit: AllotProfit?
+        val allotProfit: AllotProfit
         try {
-            allotProfit = allotProfitDao.getByPartnerId(partnerId)
+            allotProfit = allotProfitService.getByPartnerId(partnerId)
         } catch (e: Exception){
             return ResVal(1, "Data Access Error")
         }
@@ -41,7 +42,7 @@ class AllotProfitController {
     @RequestMapping("/add")
     fun create(@RequestBody allotProfit: AllotProfit): ResVal{
         try {
-            allotProfitDao.create(allotProfit)
+            allotProfitService.create(allotProfit)
         } catch (e: Exception){
             e.printStackTrace()
             return ResVal(1, "Data Access Error!")
@@ -52,7 +53,7 @@ class AllotProfitController {
     @RequestMapping("/update")
     fun update(@RequestBody allotProfit: AllotProfit): ResVal{
         try {
-            allotProfitDao.updateById(allotProfit)
+            allotProfitService.update(allotProfit)
         } catch (e: Exception){
             return ResVal(1, "Data Access Error!")
         }
@@ -62,7 +63,7 @@ class AllotProfitController {
     @RequestMapping("/delete")
     fun deleteByPartnerId(@RequestParam partnerId: String): ResVal{
         try {
-            allotProfitDao.deleteByPartnerId(partnerId)
+            allotProfitService.deleteByPartnerId(partnerId)
         } catch (e: Exception){
             return ResVal(1, "Data Access Error!")
         }
