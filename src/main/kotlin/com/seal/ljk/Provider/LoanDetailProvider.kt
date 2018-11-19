@@ -1,14 +1,14 @@
 package com.seal.ljk.Provider
 
-import com.seal.ljk.Query.QloanDetail
+import com.seal.ljk.Query.QLoanDetail
 import org.apache.ibatis.jdbc.SQL
 
 class LoanDetailProvider {
 
     private val LOAN_DETAIL = "loan_detail"
 
-    fun queryLoanDetail(qLoanDetail: QloanDetail): String{
-        var sql:SQL = SQL().SELECT("*").FROM(LOAN_DETAIL)
+    fun queryLoanDetail(qLoanDetail: QLoanDetail): String{
+        val sql:SQL = SQL().SELECT("*").FROM(LOAN_DETAIL)
 
         val partnerId = qLoanDetail.partnerId
         if(partnerId.isNotEmpty()){

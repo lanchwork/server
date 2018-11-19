@@ -11,7 +11,7 @@ class AllotProfitService {
     @Autowired
     lateinit var allotProfitDao: AllotProfitDao
 
-    fun getByPartnerId(partnerId: String): AllotProfit{
+    fun getByPartnerId(partnerId: String): List<AllotProfit>{
         return allotProfitDao.getByPartnerId(partnerId)
     }
 

@@ -30,7 +30,7 @@ class AllotProfitController {
 
     @RequestMapping("/getByPartnerId")
     fun getByPartnerId(@RequestParam partnerId: String): ResVal{
-        val allotProfit: AllotProfit
+        val allotProfit: List<AllotProfit>
         try {
             allotProfit = allotProfitService.getByPartnerId(partnerId)
         } catch (e: Exception){

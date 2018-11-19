@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository
 interface AllotProfitDao {
 
     @Select("select * from allot_profit where partner_id = #{partnerId}")
-    fun getByPartnerId(@Param("partnerId") partnerId: String): AllotProfit
+    fun getByPartnerId(@Param("partnerId") partnerId: String): List<AllotProfit>
 
     @Insert("insert into allot_profit(allot_profit_id, partner_id, partner_product_cycle, partner_product_day_rate, allot_type, partner_scale, seal_scale, " +
             "platform_wallet_addr, investor_highest_day_rate, create_date, create_user, update_date, update_user, remark) " +

@@ -1,6 +1,6 @@
 package com.seal.ljk.Query
 
-data class QloanDetail(
+data class QLoanDetail(
         var partnerId: String = "",
         var loanId: String = "",
         var investId: String = "",

@@ -1,13 +1,11 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.Query.QLoanDetail
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.LoanDetail
-import com.seal.ljk.service.LoanDetailServise
+import com.seal.ljk.service.LoanDetailService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.lang.Exception
 
 
@@ -16,13 +14,13 @@ import java.lang.Exception
 class LoanDetailController {
 
     @Autowired
-    lateinit var loanDetailService:LoanDetailServise
+    lateinit var loanDetailService: LoanDetailService
 
     /*投资已还款列表查询*/
     @GetMapping("/list")
     fun getRepaymentList(@RequestParam partnerWalletAddr: String, @RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
         val currentPageNew = (currentPage - 1) * pageSize
-        var resultList : List<LoanDetail>
+        val resultList : List<LoanDetail>
         try {
            resultList = loanDetailService.getRepaymentList(partnerWalletAddr,currentPageNew,pageSize)
         }catch (e: Exception) {
@@ -32,4 +30,17 @@ class LoanDetailController {
 
         return ResVal(0,resultList)
     }
+
+    @RequestMapping("query")
+    fun query(@RequestBody qLoanDetail: QLoanDetail): ResVal{
+        val resultList: List<LoanDetail>
+        try {
+            resultList = loanDetailService.query(qLoanDetail)
+        } catch (e: Exception){
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, resultList)
+    }
+
 }
