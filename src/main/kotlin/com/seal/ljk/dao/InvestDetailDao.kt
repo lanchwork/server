@@ -21,10 +21,10 @@ interface InvestDetailDao {
     fun getNonReturnList(@Param("investorWalletAddr") investorWalletAddr : String,@Param("currentPage") currentPage: Int, @Param("pageSize") pageSize: Int): List<InvestDetail>
 
     @Select("select sum(actual_rcv_principal) from invest_detail where investor_wallet_addr=#{investorWalletAddr} and status=2")
-    fun getActualRcvPrincipalSum(@Param("investorWalletAddr") investorWalletAddr : String): BigDecimal
+    fun getActualRcvPrincipalSum(@Param("investorWalletAddr") investorWalletAddr : String)
 
     @Select("select sum(actual_rcv_interest) from invest_detail where investor_wallet_addr=#{investorWalletAddr} and status=2")
-    fun getActualRcvInterestSum(@Param("investorWalletAddr") investorWalletAddr : String): BigDecimal
+    fun getActualRcvInterestSum(@Param("investorWalletAddr") investorWalletAddr : String)
 
     /***
      * 投资明细查询
