@@ -2,12 +2,10 @@ package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.Reconciliation
+import com.seal.ljk.query.QReconciliation
 import com.seal.ljk.service.ReconciliationService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/reconciliation")
@@ -49,4 +47,17 @@ class ReconciliationController {
         }
         return ResVal(0, resultList)
     }
+    
+    @PostMapping("/byCondition")
+    fun getReconciliationByCondition(@RequestBody qReconciliation: QReconciliation): ResVal {
+        val resultList: List<Reconciliation>
+        try {
+            resultList = reconciliationService.getReconciliationByCondition(qReconciliation)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, resultList)
+    }
+    
 }
