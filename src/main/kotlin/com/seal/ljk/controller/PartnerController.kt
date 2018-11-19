@@ -2,7 +2,9 @@ package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.dao.PartnerDao
+import com.seal.ljk.model.CompanyInfo
 import com.seal.ljk.model.Partner
+import com.seal.ljk.service.PartnerService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.lang.Exception
@@ -13,6 +15,8 @@ class PartnerController {
 
     @Autowired
     lateinit var partnerDao: PartnerDao
+    @Autowired
+    lateinit var partnerService: PartnerService
 
     @GetMapping("/all")
     fun getAllPartner(): ResVal {
@@ -75,4 +79,14 @@ class PartnerController {
         return ResVal(0, partnerDao.getPartnerList(currentPageNew, pageSize))
     }
 
+    @GetMapping("/getCompanyInfo")
+    fun getCompanyInfo(@RequestParam partner: String): ResVal {
+        var info: CompanyInfo
+        try {
+            info = partnerService.getCompanyInfo(partner)
+        } catch (e: Exception) {
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, info)
+    }
 }
