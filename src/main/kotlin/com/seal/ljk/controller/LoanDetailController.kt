@@ -16,7 +16,7 @@ class LoanDetailController {
     @Autowired
     lateinit var loanDetailService: LoanDetailService
 
-    /*投资已还款列表查询*/
+    /*借款已还款列表查询*/
     @GetMapping("/list")
     fun getRepaymentList(@RequestParam partnerWalletAddr: String, @RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
         val currentPageNew = (currentPage - 1) * pageSize
@@ -42,5 +42,22 @@ class LoanDetailController {
         }
         return ResVal(0, resultList)
     }
+    /**
+     * 生成未还款列表
+     * @param partnerId 根据合作方Id查询
+     * @author lanch
+     */
+    @PostMapping("/listNoRepay")
+    fun getNotRepaymentList(@RequestParam partnerId : String): ResVal{
 
+        var resultList : List<LoanDetail>
+        try {
+            resultList = loanDetailService.getNotRepayList(partnerId)
+        }catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+
+        return ResVal(0,resultList)
+    }
 }

@@ -30,6 +30,7 @@ class PartnerProductController {
            try {
                partnerProductService.createPartnerProduct(partnerProduct)
            }catch (e : Exception){
+               e.printStackTrace()
                return ResVal(1,"Data Access Error!")
            }
         return ResVal(0,"success")
@@ -40,6 +41,7 @@ class PartnerProductController {
         try {
             partnerProductService.deletePartnerProductById(partnerProductId)
         }catch (e : Exception){
+            e.printStackTrace()
             return ResVal(1,"Data Access Error!")
         }
         return ResVal(0,"success")
@@ -51,6 +53,7 @@ class PartnerProductController {
         try {
             partnerProductService.updatePartnerProductById(partnerProduct)
         }catch (e : Exception){
+            e.printStackTrace()
             return ResVal(1,"Data Access Error!")
         }
         return ResVal(0,"success")

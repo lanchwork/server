@@ -23,5 +23,10 @@ class LoanDetailService {
 
         return loanDetailDao.getRepaymentList(partnerWalletAddr,currentPage,pageSize)
     }
-
+    /**
+     * 我的借款未还款列表
+     */
+    fun getNotRepayList(partnerId : String):List<LoanDetail>{
+        return loanDetailDao.getNotRepayList(partnerId)
+    }
 }
