@@ -2,6 +2,7 @@ package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.InvestDetail
+import com.seal.ljk.query.QInvestDetail
 import com.seal.ljk.service.InvestDetailService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -28,5 +29,28 @@ class InvestDetailController {
         return ResVal(0, resultList)
     }
 
+    @PostMapping("/walletInvestDetail")
+    fun queryWalletInvestDetail(@RequestBody qInvestDetail: QInvestDetail): ResVal {
+        val resultList: List<InvestDetail>
+        try {
+            resultList = investDetailService.queryWalletInvestDetail(qInvestDetail)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, resultList)
+    }
+
+    @PostMapping("/paybackInvestDetail")
+    fun queryPaybackInvestDetail(@RequestBody qInvestDetail: QInvestDetail): ResVal {
+        val resultList: List<InvestDetail>
+        try {
+            resultList = investDetailService.queryPaybackInvestDetail(qInvestDetail)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, resultList)
+    }
 
 }
