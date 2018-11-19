@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository
 @Repository
 interface LoanDao {
 
-    @Select("select * from loan where loaner_wallet_addr = #{loanerWalletAddr}")
+    @Select("select loan_id,loaner_wallet_addr,total_repay_amt,total_loan_amt,pay_interest,unpay_interest,total_pay_amt,create_date,create_user,update_date,update_user,remark " +
+            "from loan where loaner_wallet_addr = #{loanerWalletAddr}")
     fun getPartnerById(@Param("loanerWalletAddr") loanerWalletAddr : String): Loan
 
 
