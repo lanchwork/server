@@ -54,4 +54,17 @@ class InvestDetailController {
         return ResVal(0, resultList)
     }
 
+    /*已投资未回款列表*/
+    @GetMapping("/nonReturnList")
+    fun getNonReturnList(@RequestParam investorWalletAddr: String,@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
+        val resultList: List<InvestDetail>
+        val currentPageNew = (currentPage - 1) * pageSize
+        try {
+            resultList=investDetailService.getNonReturnList(investorWalletAddr,currentPageNew, pageSize)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, resultList)
+    }
 }

@@ -43,4 +43,9 @@ class InvestDetailService {
     fun queryPaybackInvestDetail(qInvestDetail: QInvestDetail): List<InvestDetail>{
         return investDetailDao.queryPaybackInvestDetail(qInvestDetail)
     }
+
+    /*已投资未回款列表*/
+    fun getNonReturnList(investorWalletAddr: String,currentPage: Int, pageSize: Int):List<InvestDetail> {
+        return investDetailDao.getNonReturnList(investorWalletAddr,currentPage, pageSize)
+    }
 }
