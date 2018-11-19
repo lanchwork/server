@@ -33,7 +33,6 @@ class LoanDetailProvider {
         //(currentPage-1)*pageSize为当前页的开始行数
         val currentPage = (qLoanDetail.currentPage - 1) * qLoanDetail.pageSize
         val sqlString: String = sql.toString() + "\nlimit " + currentPage.toString() + ", " + qLoanDetail.pageSize.toString()
-        println(sqlString)
         return sqlString
     }
 }
