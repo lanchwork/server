@@ -2,11 +2,6 @@ package com.seal.ljk.service
 
 import com.seal.ljk.dao.PartnerDao
 import com.seal.ljk.model.CompanyInfo
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Service
-
-@Service
-import com.seal.ljk.dao.PartnerDao
 import com.seal.ljk.model.Partner
 import com.seal.ljk.query.QPartner
 import org.springframework.beans.factory.annotation.Autowired
@@ -49,8 +44,6 @@ class PartnerService {
     fun getOpenPartner() : List<Partner>{
         return partnerDao.getOpenPartnerList()
     }
-    @Autowired
-    lateinit var partnerDao: PartnerDao
 
     fun getCompanyInfo(partner: String): CompanyInfo {
         var companyInfo: CompanyInfo = CompanyInfo()

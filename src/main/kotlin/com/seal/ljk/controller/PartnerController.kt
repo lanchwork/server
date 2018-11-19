@@ -6,8 +6,6 @@ import com.seal.ljk.model.CompanyInfo
 import com.seal.ljk.model.Partner
 import com.seal.ljk.service.PartnerService
 import com.seal.ljk.query.QPartner
-import com.seal.ljk.service.PartnerService
-import com.seal.ljk.service.PartnerService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
