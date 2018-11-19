@@ -2,7 +2,6 @@ package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.InvestDetail
-import com.seal.ljk.model.InvestDetailList
 import com.seal.ljk.query.QInvestDetail
 import com.seal.ljk.service.InvestDetailService
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,7 +18,7 @@ class InvestDetailController {
     /*投资已还款列表查询*/
     @GetMapping("/list")
     fun getRepaymentList(@RequestParam investorWalletAddr: String,@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
-        val resultList: InvestDetailList
+        val resultList: List<InvestDetail>
         val currentPageNew = (currentPage - 1) * pageSize
         try {
             resultList=investDetailService.getRepaymentList(investorWalletAddr,currentPageNew, pageSize)
