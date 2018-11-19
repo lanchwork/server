@@ -1,4 +1,4 @@
-package com.seal.ljk.Query
+package com.seal.ljk.query
 
 data class QLoanDetail(
         var partnerId: String = "",

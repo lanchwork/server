@@ -1,6 +1,6 @@
-package com.seal.ljk.Provider
+package com.seal.ljk.provider
 
-import com.seal.ljk.Query.QLoanDetail
+import com.seal.ljk.query.QLoanDetail
 import org.apache.ibatis.jdbc.SQL
 
 class LoanDetailProvider {

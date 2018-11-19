@@ -1,7 +1,7 @@
 package com.seal.ljk.dao
 
-import com.seal.ljk.Provider.LoanDetailProvider
-import com.seal.ljk.Query.QLoanDetail
+import com.seal.ljk.provider.LoanDetailProvider
+import com.seal.ljk.query.QLoanDetail
 import com.seal.ljk.model.LoanDetail
 import org.apache.ibatis.annotations.*
 import org.springframework.stereotype.Repository

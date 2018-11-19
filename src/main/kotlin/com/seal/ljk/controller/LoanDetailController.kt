@@ -1,6 +1,6 @@
 package com.seal.ljk.controller
 
-import com.seal.ljk.Query.QLoanDetail
+import com.seal.ljk.query.QLoanDetail
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.LoanDetail
 import com.seal.ljk.service.LoanDetailService
