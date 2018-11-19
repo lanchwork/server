@@ -12,8 +12,16 @@ class LoanDetailService {
     @Autowired
     lateinit var loanDetailDao: LoanDetailDao
 
-    fun query(qLoanDetail: QloanDetail): List<LoanDetail>{
-        return loanDetailDao.queryByProvider(qLoanDetail)
+//    fun query(qLoanDetail: QloanDetail): List<LoanDetail>{
+//        return loanDetailDao.queryByProvider(qLoanDetail)
+//    }
+
+    /**
+     * 我的借款已还款列表
+     */
+    fun getRepaymentList(partnerWalletAddr: String,currentPage: Int, pageSize: Int):List<LoanDetail>{
+
+        return loanDetailDao.getRepaymentList(partnerWalletAddr,currentPage,pageSize)
     }
 
 }
