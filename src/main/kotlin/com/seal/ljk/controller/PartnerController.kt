@@ -2,6 +2,7 @@ package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.Partner
+import com.seal.ljk.query.QPartner
 import com.seal.ljk.service.PartnerService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -12,6 +13,18 @@ class PartnerController {
 
     @Autowired
     lateinit var partnerService: PartnerService
+
+    @PostMapping("/byCondition")
+    fun getPartnerByCondition(@RequestBody qPartner: QPartner): ResVal {
+        val resultList: List<Partner>
+        try {
+            resultList = partnerService.getPartnerByCondition(qPartner)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, resultList)
+    }
 
     @GetMapping("/all")
     fun getAllPartner(): ResVal {

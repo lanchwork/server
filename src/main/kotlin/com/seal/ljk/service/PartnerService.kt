@@ -2,6 +2,7 @@ package com.seal.ljk.service
 
 import com.seal.ljk.dao.PartnerDao
 import com.seal.ljk.model.Partner
+import com.seal.ljk.query.QPartner
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -10,6 +11,10 @@ class PartnerService {
 
     @Autowired
     lateinit var partnerDao: PartnerDao
+
+    fun getPartnerByCondition(qPartner: QPartner): List<Partner> {
+        return partnerDao.getPartnerByCondition(qPartner)
+    }
 
     fun getAllPartner(): List<Partner> {
         return partnerDao.getAllPartner()

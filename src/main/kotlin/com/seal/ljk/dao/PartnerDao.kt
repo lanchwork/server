@@ -1,11 +1,16 @@
 package com.seal.ljk.dao
 
 import com.seal.ljk.model.Partner
+import com.seal.ljk.provider.PartnerProvider
+import com.seal.ljk.query.QPartner
 import org.apache.ibatis.annotations.*
 import org.springframework.stereotype.Repository
 
 @Repository
 interface PartnerDao {
+
+    @SelectProvider(type = PartnerProvider::class, method = "getPartnerByCondition")
+    fun getPartnerByCondition(qPartner: QPartner): List<Partner>
 
     @Select("select * from partner")
     fun getAllPartner(): List<Partner>
