@@ -14,7 +14,6 @@ class InvestDetailService {
     lateinit var investDetailDao: InvestDetailDao
 
     /*投资已还款列表查询*/
-    /*投资已还款列表查询*/
     fun getRepaymentList(investorWalletAddr: String,currentPage: Int, pageSize: Int):InvestDetailList {
         var resulList= InvestDetailList()
         //统计出投资总金额和已收总利息
