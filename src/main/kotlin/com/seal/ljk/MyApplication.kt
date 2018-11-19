@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean
 import java.util.*
 
 
-@MapperScan("com.seal.ljk.dao")
+@MapperScan("com.seal.ljk.dao","com.seal.ljk.service")
 @SpringBootApplication
 open class MyApplication()
 
