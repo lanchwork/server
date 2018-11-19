@@ -5,6 +5,7 @@ class PartnerProduct (
     var allotProfitId:String = "",        //分润设置ID
     var productName:String = "",          //产品名称
     var dayRate:Int = 0,             //日利率（投）
-    var isOpen:Int = 0,               //是否开启
-    var endDate:String = ""              //截止日期
+    var openFlag:Int = 0,               //是否开启
+    var endDate:String = "",              //截止日期
+    var remark:String = ""
 ):Base()

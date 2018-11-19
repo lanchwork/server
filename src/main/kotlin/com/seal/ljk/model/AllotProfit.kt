@@ -1,5 +1,6 @@
 package com.seal.ljk.model
 
+import java.math.BigDecimal
 import java.sql.Timestamp
 
 
@@ -13,14 +14,14 @@ import java.sql.Timestamp
  * @create: 2018-11-16 11:49
  **/
 class AllotProfit (
-    var allotProfitId: String? = null,
-    var partnerId: String? = null,
-    var partnerProductCycle: Int? = null,
-    var partnerProductDayRate: Double? = null,
-    var allotType: Int? = null,
-    var partnerScale: Double? = null,
-    var sealScale: Double? = null,
-    var platformWalletAddr: String? = null,
-    var investorHighestDayRate: Double? = null,
-    var remark: String? = null
+        var allotProfitId: String = "",
+        var partnerId: String = "",
+        var partnerProductCycle: Int = 0,
+        var partnerProductDayRate: BigDecimal = BigDecimal(0),
+        var allotType: Int = 0,
+        var partnerScale: BigDecimal = BigDecimal(0),
+        var sealScale: BigDecimal = BigDecimal(0),
+        var platformWalletAddr: String = "",
+        var investorHighestDayRate: BigDecimal = BigDecimal(0),
+        var remark: String = ""
 ): Base()

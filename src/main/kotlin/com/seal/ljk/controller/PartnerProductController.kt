@@ -49,7 +49,7 @@ class PartnerProductController {
     fun updateById(@RequestBody partnerProduct: PartnerProduct) : ResVal {
 
         try {
-            val a : Int=partnerProductService.updatePartnerProductById(partnerProduct)
+            partnerProductService.updatePartnerProductById(partnerProduct)
         }catch (e : Exception){
             return ResVal(1,"Data Access Error!")
         }
