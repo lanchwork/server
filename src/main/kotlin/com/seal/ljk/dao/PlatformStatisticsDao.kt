@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface PlatformStatisticsDao {
 
-    @Select("select top 1 from table_name order by platform_statistics_id desc")
+    @Select("select * from platform_statistics order by platform_statistics_id desc limit 1")
     fun getPlatformStatisticsLast(): PlatformStatistics?
 
     @Insert("insert into platform_statistics(platform_statistics_id, " +
