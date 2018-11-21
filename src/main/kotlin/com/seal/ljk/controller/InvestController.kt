@@ -32,4 +32,17 @@ class InvestController {
         return ResVal(0, result)
     }
 
+    /***
+     * 我要投资
+     */
+    @RequestMapping("/want")
+    fun saveWantInvest(@RequestBody data: Map<String, Any>): ResVal {
+        try {
+            investService.saveWantInvest(data)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, "SUCCESS")
+    }
 }
