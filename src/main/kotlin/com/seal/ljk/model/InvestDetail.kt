@@ -12,7 +12,7 @@ class InvestDetail(
         var investPeriod: Int = 0,
         var dayRate: BigDecimal = BigDecimal(0),
         var investDate: Date = Date(),
-        var expirreDate: Date = Date(),
+        var expireDate: Date = Date(),
         var preRcvPrincipal: BigDecimal = BigDecimal(0),
         var preIncome: BigDecimal = BigDecimal(0),
         var preRcvAmt: BigDecimal = BigDecimal(0),
