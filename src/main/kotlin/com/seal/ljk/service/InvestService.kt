@@ -2,11 +2,12 @@ package com.seal.ljk.service
 
 import com.seal.ljk.common.Constant
 import com.seal.ljk.common.HttpUtil
-import com.seal.ljk.dao.InvestDao
+import com.seal.ljk.dao.*
 import com.seal.ljk.model.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.math.BigDecimal
 import java.util.*
 
 @Service
@@ -15,6 +16,21 @@ open class InvestService {
     @Autowired
     lateinit var investDao: InvestDao
 
+    @Autowired
+    lateinit var investDetailDao: InvestDetailDao
+
+    @Autowired
+    lateinit var loanDao: LoanDao
+
+    @Autowired
+    lateinit var loanDetailDao: LoanDetailDao
+
+    @Autowired
+    lateinit var transDetailDao: TransDetailDao
+
+    @Autowired
+    lateinit var partnerProductDao: PartnerProductDao
+
     /*投资收益统计数据查询*/
     fun getPartnerById(investorWalletAddr: String): Invest {
         return investDao.getPartnerById(investorWalletAddr)
@@ -22,32 +38,37 @@ open class InvestService {
 
     /***
      * 我要投资
+     * data: 合作方钱包地址/合作方ID/合作方产品ID/投资人钱包地址/投资金额
      */
     @Transactional
     open fun saveWantInvest(data: Map<String, Any>) {
 
-        // data包括合作方的钱包地址和合作方产品ID和投资金额
-
         // 调用主链接口
-        this.doWalletApi()
+        // this.doWalletApi()
 
         // 生成投资明细表
         val investDetail = this.buildInvestDetail(data)
+        investDetailDao.createInvestDetail(investDetail)
 
         // 生成投资汇总表
-        val invest = this.buildInvest(data, investDetail)
+        val invest = this.buildInvest(investDetail)
+        investDao.createInvest(invest)
 
         // 生成投资-交易明细
         val investTransDetail = this.buildTransDetail(investDetail, Constant.TRANS_TYPE.INVEST)
+        transDetailDao.createTransDetail(investTransDetail)
 
         // 生成借款明细表
-        val loanDetail = this.buildLoanDetail(data, investDetail)
+        val loanDetail = this.buildLoanDetail(investDetail)
+        loanDetailDao.createLoanDetail(loanDetail)
 
         // 生成借款汇总表
-        val loan = this.buildLoan(data, loanDetail)
+        val loan = this.buildLoan(loanDetail)
+        loanDao.createLoan(loan)
 
         // 生成借款-交易明细
         val loanTransDetail = this.buildTransDetail(loanDetail, Constant.TRANS_TYPE.LOAN)
+        transDetailDao.createTransDetail(loanTransDetail)
 
     }
 
@@ -59,45 +80,46 @@ open class InvestService {
 
     private fun buildInvestDetail(data: Map<String, Any>): InvestDetail {
 
-        val partnerWalletAddr = data.get("partnerWalletAddr")
-        val productId = data.get("productId")
-        val investAmt = data.get("investAmt")
-
+        val partnerWalletAddr = data["partnerWalletAddr"].toString()
+        val partnerId = data["partnerId"].toString()
+        val productId = data["productId"].toString()
+        val investAmt = data["investAmt"].toString()
+        val investPeriod = data["investPeriod"].toString()
+        val investorWalletAddr = data["investorWalletAddr"].toString()
 
         val investDetail = InvestDetail()
         // 根据规则生成
-        investDetail.investDetailId = UUID.randomUUID().toString()
-        investDetail.investId = UUID.randomUUID().toString()
-        investDetail.chainTransNo = UUID.randomUUID().toString()
+        investDetail.investDetailId = UUID.randomUUID().toString().substring(0, 20)
+        investDetail.investId = UUID.randomUUID().toString().substring(0, 20)
+        investDetail.chainTransNo = UUID.randomUUID().toString().substring(0, 20)
 
         // 获取当前用户信息作为投资人数据
-        investDetail.investAmt
-        investDetail.investorWalletAddr
+        investDetail.investAmt = BigDecimal(investAmt)
+        investDetail.investorWalletAddr = investorWalletAddr
 
         // 根据ID获取投资的产品
-        val product = PartnerProduct()
-        investDetail.investPeriod = product.endDate.toInt()
-        investDetail.dayRate
+        val product = partnerProductDao.getPartnerProductById(productId)
+        investDetail.investPeriod = investPeriod.toInt()
+        investDetail.dayRate = product.dayRate
         investDetail.investDate = Date()
-        investDetail.expireDate = Date(product.endDate)
+        investDetail.expireDate = product.endDate
 
         // 计算金额
         investDetail.preRcvPrincipal = investDetail.investAmt
-        investDetail.preIncome
+        investDetail.preIncome = investDetail.preRcvPrincipal.multiply(investDetail.dayRate).multiply(BigDecimal(investDetail.investPeriod))
         investDetail.preRcvAmt = investDetail.preRcvPrincipal.add(investDetail.preIncome)
 
         // 合作方信息
-        investDetail.partnerId
-        investDetail.partnerWalletAddr = partnerWalletAddr.toString()
+        investDetail.partnerId = partnerId
+        investDetail.partnerWalletAddr = partnerWalletAddr
 
         // 默认初始状态
-        investDetail.status
-
+        investDetail.status = Constant.INVEST_STATUS.BACKING
 
         return investDetail
     }
 
-    private fun buildInvest(data: Map<String, Any>, investDetail: InvestDetail): Invest {
+    private fun buildInvest(investDetail: InvestDetail): Invest {
         val invest = Invest()
         invest.investId = investDetail.investId
         invest.investorWalletAddr = investDetail.investorWalletAddr
@@ -107,13 +129,13 @@ open class InvestService {
         return invest
     }
 
-    private fun buildLoanDetail(data: Map<String, Any>, investDetail: InvestDetail): LoanDetail {
+    private fun buildLoanDetail(investDetail: InvestDetail): LoanDetail {
         val loanDetail = LoanDetail()
-        loanDetail.loanDetailId = UUID.randomUUID().toString()
+        loanDetail.loanDetailId = UUID.randomUUID().toString().substring(0, 20)
         loanDetail.partnerId = investDetail.partnerId
         loanDetail.partnerWalletAddr = investDetail.partnerWalletAddr
-        loanDetail.loanId = UUID.randomUUID().toString()
-        loanDetail.chainTransNo = UUID.randomUUID().toString()
+        loanDetail.loanId = UUID.randomUUID().toString().substring(0, 20)
+        loanDetail.chainTransNo = UUID.randomUUID().toString().substring(0, 20)
         loanDetail.investorWalletAddr = investDetail.investorWalletAddr
         loanDetail.investId = investDetail.investId
         loanDetail.duePrinpal = investDetail.preRcvPrincipal
@@ -123,12 +145,12 @@ open class InvestService {
         loanDetail.loanPeriod = investDetail.investPeriod
         loanDetail.dayRate = investDetail.dayRate
         // 默认初始状态
-        loanDetail.status
+        loanDetail.status = Constant.LOAN_STATUS.PAYING
         loanDetail.investDate = investDetail.investDate
         return loanDetail
     }
 
-    private fun buildLoan(data: Map<String, Any>, loanDetail: LoanDetail): Loan {
+    private fun buildLoan(loanDetail: LoanDetail): Loan {
         val loan = Loan()
         loan.loanId = loanDetail.loanId
         loan.loanerWalletAddr = loanDetail.investorWalletAddr
@@ -141,7 +163,7 @@ open class InvestService {
     private fun buildTransDetail(data: Any, transType: String): TransDetail {
         val transDetail = TransDetail()
         if (Constant.TRANS_TYPE.LOAN == transType && data is LoanDetail) {
-            transDetail.transDetailId = UUID.randomUUID().toString()
+            transDetail.transDetailId = UUID.randomUUID().toString().substring(0, 20)
             transDetail.transDate = data.investDate
             transDetail.walletAddr = data.partnerWalletAddr + "TO" + data.investorWalletAddr
             transDetail.transType = transType
@@ -149,7 +171,7 @@ open class InvestService {
             transDetail.chainTransNo = data.chainTransNo
             transDetail.transAmt = data.actualPayAmt
         } else if (Constant.TRANS_TYPE.INVEST == transType && data is InvestDetail) {
-            transDetail.transDetailId = UUID.randomUUID().toString()
+            transDetail.transDetailId = UUID.randomUUID().toString().substring(0, 20)
             transDetail.transDate = data.investDate
             transDetail.walletAddr = data.investorWalletAddr + "TO" + data.partnerWalletAddr
             transDetail.transType = transType

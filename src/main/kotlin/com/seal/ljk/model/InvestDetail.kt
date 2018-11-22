@@ -3,7 +3,7 @@ package com.seal.ljk.model
 import java.math.BigDecimal
 import java.util.*
 
-class InvestDetail(
+data class InvestDetail(
         var investDetailId: String = "",
         var investId: String = "",
         var chainTransNo: String = "",

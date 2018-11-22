@@ -10,7 +10,7 @@ interface PartnerProductDao {
     @Select("select * from partner_product")
     fun getAllPartnerProduct(): List<PartnerProduct>
 
-    @Select("select * from partner_product where partner_Product_Id = #{partnerProductId}")
+    @Select("select * from partner_product where partner_product_id = #{partnerProductId}")
     fun getPartnerProductById(@Param("partnerProductId") partnerProductId : String): PartnerProduct
 
     @Insert("insert into partner_product(" +
