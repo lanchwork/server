@@ -1,6 +1,6 @@
 package com.seal.ljk.model
 
-class User (
+data class User (
         var id:String="",            //用户名id
         var username:String="",            //用户名
         var password:String = "",           //密码

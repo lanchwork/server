@@ -24,7 +24,8 @@ interface UserDao {
     @SelectProvider(type = UserProvider::class, method = "queryUser")
     fun query(qUser: QUser): List<User>
 
-
+    @Select("select id,username,password,channel_mark,name,phone,email,role_type,start_flag from user where username=#{user.username}")
+    fun selectUserByUsername(@Param("user") user:User):User
 }
 
 

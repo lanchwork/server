@@ -28,6 +28,14 @@ class UserService {
     fun query(qUser: QUser): List<User> {
         return userDao.query(qUser)
     }
-
+    fun login(user:User):User?{
+        val data:User = userDao.selectUserByUsername(user)
+        if(data!=null){
+            if(data.password.equals(user.password)){
+                return data
+            }
+        }
+        return null
+    }
 
 }

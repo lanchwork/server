@@ -7,6 +7,8 @@ import com.seal.ljk.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.lang.Exception
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpSession
 
 @RestController
 @RequestMapping("/user")
@@ -59,4 +61,22 @@ class UserController {
         return ResVal(0, resultList)
     }
 
+    /**
+     * 登入功能
+     */
+    @RequestMapping("/login")
+    fun login(@RequestBody user:User,httpServletRequest: HttpServletRequest): ResVal{
+        try {
+            val session : HttpSession = httpServletRequest.getSession(true)
+            val data:User? = userService.login(user)
+            if(data!=null){
+                session.setAttribute("user",user)
+                return ResVal(0, user)
+            }
+        } catch (e: Exception){
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(1, "Data Access Error!")
+    }
 }
