@@ -1,7 +1,7 @@
 package com.seal.ljk.service
 
-import com.seal.ljk.query.QLoanDetail
 import com.seal.ljk.dao.LoanDetailDao
+import com.seal.ljk.query.QLoanDetail
 import com.seal.ljk.model.LoanDetail
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
