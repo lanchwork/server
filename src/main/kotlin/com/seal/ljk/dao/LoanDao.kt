@@ -14,7 +14,7 @@ interface LoanDao {
             "from loan where loaner_wallet_addr = #{loanerWalletAddr}")
     fun getPartnerById(@Param("loanerWalletAddr") loanerWalletAddr : String): Loan
 
-    @Select("select * from loan where loan_id = #{loanId}")
+    @Select("select loan_id, loaner_wallet_addr, total_repay_amt, total_loan_amt, pay_interest, unpay_interest, total_pay_amt, create_date, create_user, update_date, update_user, remark from loan where loan_id = #{loanId}")
     fun getLoanById(@Param("loanId") loanId: String): Loan
 
     @Insert("insert into loan(loan_id, loaner_wallet_addr, total_repay_amt, total_loan_amt, pay_interest, unpay_interest, total_pay_amt, create_date, create_user, update_date, update_user, remark) " +

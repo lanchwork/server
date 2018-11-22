@@ -8,8 +8,7 @@ class InvestDetailProvider {
     private val INVEST_DETAIL = "invest_detail"
 
     fun queryWalletInvestDetail(qInvestDetail: QInvestDetail): String{
-        val element = " investor_wallet_addr,  invest_amt, invest_period, day_rate, invest_date, expire_date, " +
-                "pre_rcv_amt, partner_id, partner_wallet_addr, invest_id "
+        val element = " investor_wallet_addr,  invest_amt, invest_period, day_rate, invest_date, expire_date, " + "pre_rcv_amt, partner_id, partner_wallet_addr, invest_id "
         val sql: SQL = SQL().SELECT(element).FROM(INVEST_DETAIL)
 
         val investorWalletAddr = qInvestDetail.investorWalletAddr

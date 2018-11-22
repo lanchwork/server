@@ -26,7 +26,7 @@ interface PartnerProductDao {
     @Update("update partner_product set  allot_Profit_Id=#{partnerProduct.allotProfitId}, product_Name=#{partnerProduct.productName}, day_Rate=#{partnerProduct.dayRate}, open_Flag=#{partnerProduct.openFlag}, end_Date=#{partnerProduct.endDate}, remark=#{partnerProduct.remark}, create_Date=#{partnerProduct.createDate}, create_User=#{partnerProduct.createUser}, update_Date=#{partnerProduct.updateDate}, update_User=#{partnerProduct.updateUser} where partner_Product_Id=#{partnerProduct.partnerProductId}")
     fun updatePartnerProductById(@Param("partnerProduct") partnerProduct :PartnerProduct ): Int
 
-    @Select("select * from partner_product limit #{currentPage}, #{pageSize}")
+    @Select("select partner_product_id, allot_profit_id, product_name, day_rate, open_flag, end_date, remark, create_date, create_user, update_date, update_user from partner_product limit #{currentPage}, #{pageSize}")
     fun getPartnerProductList(@Param("currentPage") currentPage : Int, @Param("pageSize") pageSize : Int): List<PartnerProduct>
 
 }
