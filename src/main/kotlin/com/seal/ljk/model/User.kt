@@ -9,5 +9,5 @@ class User (
         var phone:String = "",           //手机号
         var email:String = "",           //邮箱
         var roleType:Int = 0,           //角色类型
-        var isStart:Int = 0           //是否开启   0为是 1为否
+        var startFlag:Int = 0           //是否开启   0为是 1为否
 )
