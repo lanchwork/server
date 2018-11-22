@@ -1,13 +1,10 @@
 package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
-import com.seal.ljk.dao.LoanDao
-import com.seal.ljk.dao.ProtocolDao
 import com.seal.ljk.model.Loan
 import com.seal.ljk.service.LoanService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
-import java.lang.Exception
 
 @RestController
 @RequestMapping("/loan")
@@ -30,5 +27,18 @@ class LoanController {
         return ResVal(0, result)
     }
 
+    /***
+     * 我要还款
+     */
+    @RequestMapping("/want")
+    fun saveWantRepay(@RequestBody data: Map<String, Any>): ResVal {
+        try {
+            loanService.saveWantRepay(data)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, "SUCCESS")
+    }
 
 }
