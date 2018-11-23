@@ -30,6 +30,10 @@ class UserService {
         return userDao.updateUser(user)
     }
 
+    fun updatePasswordById(userId:String,password: String) {
+        return userDao.updatePasswordById(userId,password)
+    }
+
     fun getUserById(userId: String): User {
         return userDao.getUserById(userId)
     }

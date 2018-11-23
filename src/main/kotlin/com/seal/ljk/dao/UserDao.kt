@@ -21,6 +21,9 @@ interface UserDao {
     @Update("update user set username=#{user.username},password=#{user.password},channel_mark=#{user.channelMark},name=#{user.name},phone=#{user.phone},email=#{user.email},role_type=#{user.roleType},start_flag=#{user.startFlag} where id = #{user.id}")
     fun updateUser(@Param("user") user: User)
 
+    @Update("update user set password=#{password} where id = #{userId}")
+    fun updatePasswordById(@Param("userId")userId:String,@Param("password")password: String)
+
     @Select("select id,username,password,channel_mark,name,phone,email,role_type,start_flag from user where id = #{userId}")
     fun getUserById(userId: String): User
 
@@ -29,6 +32,8 @@ interface UserDao {
 
     @Select("select id,username,password,channel_mark,name,phone,email,role_type,start_flag from user where username=#{user.username}")
     fun selectUserByUsername(@Param("user") user:User):User
+
+
 
 
 }

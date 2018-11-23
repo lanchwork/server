@@ -63,6 +63,20 @@ class UserController {
     }
 
     /**
+     * 用户修改密码
+     */
+    @GetMapping("/updatePassword")
+    fun updatePasswordById(@RequestParam userId: String,@RequestParam password: String): ResVal {
+        try {
+            userService.updatePasswordById(userId,password)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, "success")
+    }
+
+    /**
      * 获取用户
      */
     @GetMapping("/getById")
