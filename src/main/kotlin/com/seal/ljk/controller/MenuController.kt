@@ -79,7 +79,7 @@ class MenuController {
     /**
      * 角色菜单权限配置
      */
-    @RequestMapping("/batchInsert")
+    @RequestMapping("/batchUpdate")
     fun updateRoleMenu(@RequestBody roleMenuList: RoleMenuList): ResVal {
         try {
             menuService.updateRoleMenu(roleMenuList)
@@ -90,6 +90,19 @@ class MenuController {
         return ResVal(0, "success")
     }
 
-
+    /**
+     * 角色菜单权限展示列表
+     */
+    @GetMapping("/queryMenuByRoleId")
+    fun queryRoleMenu(@RequestParam  roleId: Int): ResVal {
+        val resultList: List<Int>
+        try {
+            resultList=menuService.queryRoleMenu(roleId)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, resultList)
+    }
 
 }

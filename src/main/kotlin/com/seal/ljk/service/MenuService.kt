@@ -32,5 +32,15 @@ class MenuService {
         return menuDao.updateRoleMenu(roleMenuList)
     }
 
+    fun queryRoleMenu(roleId: Int):List<Int> {
+        var roleMenuList = menuDao.queryRoleMenu(roleId)
+        var list = mutableListOf<Int>()
+
+        roleMenuList.forEach{
+            list.add(it.menuId)
+        }
+        return list
+    }
+
 
 }

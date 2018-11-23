@@ -1,6 +1,7 @@
 package com.seal.ljk.dao
 
 import com.seal.ljk.model.Menu
+import com.seal.ljk.model.RoleMenu
 import com.seal.ljk.model.RoleMenuList
 import com.seal.ljk.model.User
 import com.seal.ljk.provider.RoleMenuProvider
@@ -28,6 +29,9 @@ interface MenuDao {
 
     @InsertProvider(type = RoleMenuProvider::class, method = "updateRoleMenu")
     fun updateRoleMenu(roleMenuList: RoleMenuList)
+
+    @Select("select role_id,menu_id from role_menu where role_id = #{roleId}")
+    fun queryRoleMenu(roleId: Int):List<RoleMenu>
 }
 
 
