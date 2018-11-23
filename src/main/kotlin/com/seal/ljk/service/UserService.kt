@@ -1,5 +1,6 @@
 package com.seal.ljk.service
 
+import com.seal.ljk.dao.MenuDao
 import com.seal.ljk.dao.UserDao
 import com.seal.ljk.model.User
 import com.seal.ljk.query.QUser
@@ -11,6 +12,9 @@ class UserService {
 
     @Autowired
     lateinit var userDao: UserDao
+
+    @Autowired
+    lateinit var menuDao:MenuDao
 
     fun create(user: User){
         user.id=user.channelMark+user.username
@@ -28,11 +32,17 @@ class UserService {
     fun query(qUser: QUser): List<User> {
         return userDao.query(qUser)
     }
-    fun login(user:User):User?{
+    fun login(user:User):Map<String, Any>?{
         val data:User = userDao.selectUserByUsername(user)
+        val map= hashMapOf<String,Any>()
         if(data!=null){
             if(data.password.equals(user.password)){
-                return data
+                map.put("user", data)
+                val menuList=menuDao.selectMenuListByUserId(data)
+
+                println(menuList)
+                map.put("menu",menuList)
+                return map
             }
         }
         return null

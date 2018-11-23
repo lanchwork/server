@@ -62,21 +62,21 @@ class UserController {
     }
 
     /**
-     * 登入功能
+     *登入功能
      */
     @RequestMapping("/login")
     fun login(@RequestBody user:User,httpServletRequest: HttpServletRequest): ResVal{
         try {
             val session : HttpSession = httpServletRequest.getSession(true)
-            val data:User? = userService.login(user)
+            val data:Map<String,Any>? = userService.login(user)
             if(data!=null){
-                session.setAttribute("user",user)
-                return ResVal(0, user)
+                session.setAttribute("data",data.get("user"))
+                return ResVal(0, data.get("menu"))
             }
         } catch (e: Exception){
             e.printStackTrace()
             return ResVal(1, "Data Access Error!")
         }
-        return ResVal(1, "Data Access Error!")
+        return ResVal(1, "账户或密码错误")
     }
 }
