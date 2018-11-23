@@ -19,7 +19,9 @@ class InvestController {
     @Autowired
     lateinit var investService: InvestService
 
-    /*投资收益统计数据查询*/
+    /**
+     * 投资收益统计数据查询
+     */
     @GetMapping("/getById")
     fun getPartnerById(@RequestParam investorWalletAddr: String): ResVal {
         val result: Invest

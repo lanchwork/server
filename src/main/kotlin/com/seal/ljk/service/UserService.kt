@@ -16,21 +16,27 @@ class UserService {
     @Autowired
     lateinit var menuDao:MenuDao
 
-    fun create(user: User){
+    fun createUser(user: User){
+
         user.id=user.channelMark+user.username
-        return userDao.create(user)
+        return userDao.createUser(user)
     }
 
     fun deleteUserById(userId: String) {
         return userDao.deleteUserById(userId)
     }
 
-    fun update(user: User) {
-        return userDao.update(user)
+    fun updateUser(user: User) {
+        return userDao.updateUser(user)
     }
 
-    fun query(qUser: QUser): List<User> {
-        return userDao.query(qUser)
+    fun getUserById(userId: String): User {
+        return userDao.getUserById(userId)
+    }
+
+
+    fun queryUser(qUser: QUser): List<User> {
+        return userDao.queryUser(qUser)
     }
     fun login(user:User):Map<String, Any>?{
         val data:User = userDao.selectUserByUsername(user)
@@ -47,5 +53,7 @@ class UserService {
         }
         return null
     }
+
+
 
 }

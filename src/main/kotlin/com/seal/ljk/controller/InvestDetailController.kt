@@ -16,7 +16,9 @@ class InvestDetailController {
     @Autowired
     lateinit var investDetailService: InvestDetailService
 
-    /*投资已还款列表查询*/
+    /**
+     * 投资已还款列表查询
+     */
     @GetMapping("/list")
     fun getRepaymentList(@RequestParam investorWalletAddr: String,@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
         val resultList: InvestDetailList
