@@ -45,8 +45,6 @@ class UserService {
             if(data.password.equals(user.password)){
                 map.put("user", data)
                 val menuList=menuDao.selectMenuListByUserId(data)
-
-                println(menuList)
                 map.put("menu",menuList)
                 return map
             }
