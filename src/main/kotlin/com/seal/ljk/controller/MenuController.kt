@@ -2,6 +2,7 @@ package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.Menu
+import com.seal.ljk.model.RoleMenuList
 import com.seal.ljk.service.MenuService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -78,7 +79,16 @@ class MenuController {
     /**
      * 角色菜单权限配置
      */
-
+    @RequestMapping("/batchInsert")
+    fun updateRoleMenu(@RequestBody roleMenuList: RoleMenuList): ResVal {
+        try {
+            menuService.updateRoleMenu(roleMenuList)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, "success")
+    }
 
 
 

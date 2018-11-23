@@ -2,6 +2,7 @@ package com.seal.ljk.service
 
 import com.seal.ljk.dao.MenuDao
 import com.seal.ljk.model.Menu
+import com.seal.ljk.model.RoleMenuList
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -25,6 +26,10 @@ class MenuService {
 
     fun getMenuList(currentPage: Int, pageSize: Int): List<Menu> {
         return menuDao.getMenuList(currentPage,pageSize)
+    }
+
+    fun updateRoleMenu(roleMenuList: RoleMenuList) {
+        return menuDao.updateRoleMenu(roleMenuList)
     }
 
 
