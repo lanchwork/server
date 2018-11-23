@@ -14,7 +14,9 @@ class LoanController {
     @Autowired
     lateinit var loanService: LoanService
 
-    /*借款利息支付统计查询*/
+    /**
+     * 借款利息支付统计查询
+     */
     @GetMapping("/getById")
     fun getPartnerById(@RequestParam loanerWalletAddr: String): ResVal {
         val result: Loan

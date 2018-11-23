@@ -13,19 +13,24 @@ interface UserDao {
             "values(#{user.id},#{user.username},#{user.password}," +
             "#{user.channelMark},#{user.name},#{user.phone}," +
             "#{user.email},#{user.roleType},#{user.startFlag})")
-    fun create(@Param("user") user : User)
+    fun createUser(@Param("user") user : User)
 
     @Delete("delete from user where id = #{userId}")
     fun deleteUserById(userId: String)
 
     @Update("update user set username=#{user.username},password=#{user.password},channel_mark=#{user.channelMark},name=#{user.name},phone=#{user.phone},email=#{user.email},role_type=#{user.roleType},start_flag=#{user.startFlag} where id = #{user.id}")
-    fun update(@Param("user") user: User)
+    fun updateUser(@Param("user") user: User)
+
+    @Select("select id,username,password,channel_mark,name,phone,email,role_type,start_flag from user where id = #{userId}")
+    fun getUserById(userId: String): User
 
     @SelectProvider(type = UserProvider::class, method = "queryUser")
-    fun query(qUser: QUser): List<User>
+    fun queryUser(qUser: QUser): List<User>
 
     @Select("select id,username,password,channel_mark,name,phone,email,role_type,start_flag from user where username=#{user.username}")
     fun selectUserByUsername(@Param("user") user:User):User
+
+
 }
 
 

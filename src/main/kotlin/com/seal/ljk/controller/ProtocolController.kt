@@ -15,7 +15,9 @@ class ProtocolController {
     @Autowired
     lateinit var protocolService: ProtocolService
 
-    /*查看协议*/
+    /**
+     * 查看协议
+     */
     @GetMapping("/all")
     fun getAllPartner(): ResVal {
         val resultList: List<Protocol>

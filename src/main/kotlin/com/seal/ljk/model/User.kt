@@ -1,7 +1,7 @@
 package com.seal.ljk.model
 
 data class User (
-        var id:String="",            //用户名id
+        var id:String="",            //用户id
         var username:String="",            //用户名
         var password:String = "",           //密码
         var channelMark:String = "",        //渠道标识
