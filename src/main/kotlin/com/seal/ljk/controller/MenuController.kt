@@ -2,6 +2,7 @@ package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.Menu
+import com.seal.ljk.model.RoleMenu
 import com.seal.ljk.model.RoleMenuList
 import com.seal.ljk.service.MenuService
 import org.springframework.beans.factory.annotation.Autowired
@@ -95,7 +96,7 @@ class MenuController {
      */
     @GetMapping("/queryMenuByRoleId")
     fun queryRoleMenu(@RequestParam  roleId: Int): ResVal {
-        val resultList: List<Int>
+        val resultList: List<RoleMenu>
         try {
             resultList=menuService.queryRoleMenu(roleId)
         } catch (e: Exception) {

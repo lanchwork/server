@@ -2,6 +2,7 @@ package com.seal.ljk.service
 
 import com.seal.ljk.dao.MenuDao
 import com.seal.ljk.model.Menu
+import com.seal.ljk.model.RoleMenu
 import com.seal.ljk.model.RoleMenuList
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -32,14 +33,8 @@ class MenuService {
         return menuDao.updateRoleMenu(roleMenuList)
     }
 
-    fun queryRoleMenu(roleId: Int):List<Int> {
-        var roleMenuList = menuDao.queryRoleMenu(roleId)
-        var list = mutableListOf<Int>()
-
-        roleMenuList.forEach{
-            list.add(it.menuId)
-        }
-        return list
+    fun queryRoleMenu(roleId: Int):List<RoleMenu> {
+        return menuDao.queryRoleMenu(roleId)
     }
 
 
