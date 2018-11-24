@@ -16,12 +16,9 @@ import java.sql.Timestamp
 class AllotProfit (
         var allotProfitId: String = "",
         var partnerId: String = "",
-        var partnerProductCycle: Int = 0,
-        var partnerProductDayRate: BigDecimal = BigDecimal(0),
-        var allotType: Int = 0,
-        var partnerScale: BigDecimal = BigDecimal(0),
-        var sealScale: BigDecimal = BigDecimal(0),
-        var platformWalletAddr: String = "",
-        var investorHighestDayRate: BigDecimal = BigDecimal(0),
+        var sealWalletAddr: String = "",
+        var incomeMethod: Int = 0,
+        var partnerRatio: BigDecimal = BigDecimal(0),
+        var sealRatio: BigDecimal = BigDecimal(0),
         var remark: String = ""
 ): Base()

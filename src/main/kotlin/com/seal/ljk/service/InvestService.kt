@@ -29,7 +29,7 @@ open class InvestService {
     lateinit var transDetailDao: TransDetailDao
 
     @Autowired
-    lateinit var partnerProductDao: PartnerProductDao
+    lateinit var delegateDao: DelegateDao
 
     /*投资收益统计数据查询*/
     fun getPartnerById(investorWalletAddr: String): Invest {
@@ -98,7 +98,7 @@ open class InvestService {
         investDetail.investorWalletAddr = investorWalletAddr
 
         // 根据ID获取投资的产品
-        val product = partnerProductDao.getPartnerProductById(productId)
+        val product = delegateDao.getDelegateById(productId)
         investDetail.investPeriod = investPeriod.toInt()
         investDetail.dayRate = product.dayRate
         investDetail.investDate = Date()

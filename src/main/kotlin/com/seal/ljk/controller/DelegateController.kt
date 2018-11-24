@@ -1,34 +1,34 @@
 package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
-import com.seal.ljk.model.PartnerProduct
-import com.seal.ljk.service.PartnerProductService
+import com.seal.ljk.model.Delegate
+import com.seal.ljk.service.DelegateService
 import org.apache.ibatis.annotations.Param
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(("/partnerProduct"))
-class PartnerProductController {
+class DelegateController {
 
     @Autowired
-    lateinit var partnerProductService: PartnerProductService
+    lateinit var delegateService: DelegateService
 
     @GetMapping("/all")
     fun getAll() : Any {
-        val partnerProducts :List<PartnerProduct>
+        val delegates :List<Delegate>
         try {
-            partnerProducts = partnerProductService.getAllPartnerProduct()
+            delegates = delegateService.getAllDelegate()
         }catch (e : Exception){
             return ResVal(1,"Data Access Error!")
         }
-        return ResVal(0,partnerProducts)
+        return ResVal(0,delegates)
     }
 
     @PostMapping("/add")
-    fun create(@RequestBody partnerProduct : PartnerProduct) : ResVal{
+    fun create(@RequestBody delegate : Delegate) : ResVal{
            try {
-               partnerProductService.createPartnerProduct(partnerProduct)
+               delegateService.createDelegate(delegate)
            }catch (e : Exception){
                e.printStackTrace()
                return ResVal(1,"Data Access Error!")
@@ -39,7 +39,7 @@ class PartnerProductController {
     @GetMapping("/delete")
     fun deleterById(@Param("partnerProductId") partnerProductId : String) : ResVal {
         try {
-            partnerProductService.deletePartnerProductById(partnerProductId)
+            delegateService.deleteDelegateById(partnerProductId)
         }catch (e : Exception){
             e.printStackTrace()
             return ResVal(1,"Data Access Error!")
@@ -48,10 +48,10 @@ class PartnerProductController {
     }
 
     @RequestMapping("/update")
-    fun updateById(@RequestBody partnerProduct: PartnerProduct) : ResVal {
+    fun updateById(@RequestBody delegate: Delegate) : ResVal {
 
         try {
-            partnerProductService.updatePartnerProductById(partnerProduct)
+            delegateService.updateDelegateById(delegate)
         }catch (e : Exception){
             e.printStackTrace()
             return ResVal(1,"Data Access Error!")
@@ -61,25 +61,25 @@ class PartnerProductController {
 
     @GetMapping("/getById")
     fun getById(@RequestParam("partnerProductId") partnerProductId : String) : ResVal {
-        val partnerProduct : PartnerProduct
+        val delegate : Delegate
         try {
-            partnerProduct = partnerProductService.getPartnerProductById(partnerProductId)
+            delegate = delegateService.getDelegateById(partnerProductId)
         }catch (e : Exception){
             return ResVal(1,"Data Access Error!")
         }
-        return ResVal(0,partnerProduct)
+        return ResVal(0,delegate)
     }
 
     @GetMapping("/list")
     fun getList(@RequestParam("currentPage") currentPage : Int, @RequestParam("pageSize") pageSize : Int) : ResVal {
-        val partnerProducts : List<PartnerProduct>
+        val delegates : List<Delegate>
         try {
             val currentPageNew = (currentPage - 1) * pageSize
-            partnerProducts = partnerProductService.getPartnerProductList(currentPageNew, pageSize)
+            delegates = delegateService.getDelegateList(currentPageNew, pageSize)
         }catch (e : Exception){
             return ResVal(1,"Data Access Error!")
         }
-        return ResVal(0,partnerProducts)
+        return ResVal(0,delegates)
     }
 
 }
