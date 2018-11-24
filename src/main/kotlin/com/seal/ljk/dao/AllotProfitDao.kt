@@ -18,7 +18,7 @@ interface AllotProfitDao {
     fun create(@Param("allotProfit") allotProfit : AllotProfit): Int
 
     @Update("update allot_profit set partner_id=#{allotProfit.partnerId}, seal_wallet_addr=#{allotProfit.sealWalletAddr}, income_method=#{allotProfit.incomeMethod}, " +
-            "partner_ratio=#{allotProfit.partnerRatio}, seal_ratio=#{allotProfit.sealRatio}, investor_highest_day_rate=#{allotProfit.investorHighestDayRate}, " +
+            "partner_ratio=#{allotProfit.partnerRatio}, seal_ratio=#{allotProfit.sealRatio}, " +
             "create_date=#{allotProfit.createDate}, create_user=#{allotProfit.createUser}, update_date=#{allotProfit.updateDate}, update_user=#{allotProfit.updateUser}, remark=#{allotProfit.remark} " +
             "where allot_profit_id = #{allotProfit.allotProfitId}")
     fun update(@Param("allotProfit") allotProfit: AllotProfit): Int

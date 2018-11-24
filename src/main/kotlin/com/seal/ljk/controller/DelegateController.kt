@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping(("/partnerProduct"))
+@RequestMapping(("/delegate"))
 class DelegateController {
 
     @Autowired
@@ -37,9 +37,9 @@ class DelegateController {
     }
 
     @GetMapping("/delete")
-    fun deleterById(@Param("partnerProductId") partnerProductId : String) : ResVal {
+    fun deleterById(@Param("delegateId") delegateId: String) : ResVal {
         try {
-            delegateService.deleteDelegateById(partnerProductId)
+            delegateService.deleteDelegateById(delegateId)
         }catch (e : Exception){
             e.printStackTrace()
             return ResVal(1,"Data Access Error!")
@@ -60,10 +60,10 @@ class DelegateController {
     }
 
     @GetMapping("/getById")
-    fun getById(@RequestParam("partnerProductId") partnerProductId : String) : ResVal {
+    fun getById(@RequestParam("delegateId") delegateId : String) : ResVal {
         val delegate : Delegate
         try {
-            delegate = delegateService.getDelegateById(partnerProductId)
+            delegate = delegateService.getDelegateById(delegateId)
         }catch (e : Exception){
             return ResVal(1,"Data Access Error!")
         }
