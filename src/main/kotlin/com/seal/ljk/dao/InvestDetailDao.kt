@@ -32,6 +32,12 @@ interface InvestDetailDao {
     @SelectProvider(type = InvestDetailProvider::class, method = "queryPaybackInvestDetail")
     fun queryPaybackInvestDetail(qInvestDetail: QInvestDetail): List<InvestDetail>
 
+    /***
+     * 授权投资明细查询
+     */
+    @SelectProvider(type = InvestDetailProvider::class, method = "queryAuthorizeInvestDetail")
+    fun queryAuthorizeInvestDetail(qInvestDetail: QInvestDetail): List<InvestDetail>
+
     @Select("select * from invest_detail where invest_detail_id = #{investDetailId}")
     fun getInvestDetailById(@Param("investDetailId") investDetailId: String): InvestDetail
 

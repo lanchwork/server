@@ -7,6 +7,8 @@ data class QInvestDetail (
         var investPeriodFrom: String = "",
         var investPeriodTo: String = "",
         var status: String = "",
+        var investDateFrom: String = "",
+        var investDateTo: String = "",
         var currentPage: Int = 1,
         var pageSize: Int = 10
 )
