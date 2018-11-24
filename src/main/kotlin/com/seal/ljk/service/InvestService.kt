@@ -100,9 +100,9 @@ open class InvestService {
         // 根据ID获取投资的产品
         val product = delegateDao.getDelegateById(productId)
         investDetail.investPeriod = investPeriod.toInt()
-        investDetail.dayRate = product.dayRate
+        investDetail.dayRate = product.expectDayRate
         investDetail.investDate = Date()
-        investDetail.expireDate = product.endDate
+        investDetail.expireDate = product.deadline
 
         // 计算金额
         investDetail.preRcvPrincipal = investDetail.investAmt
