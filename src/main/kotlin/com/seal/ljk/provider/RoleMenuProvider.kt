@@ -11,12 +11,14 @@ class RoleMenuProvider {
     fun updateRoleMenu(roleMenuList: RoleMenuList): String {
         var roleId=roleMenuList.roleId
         val sb = StringBuilder()
-        sb.append("INSERT INTO role_menu (role_id,menu_id) VALUES")
+        sb.append("INSERT INTO role_menu (role_id,menu_id,menu_pid) VALUES")
         roleMenuList.list.forEach {
             sb.append("(")
             sb.append(roleId)
             sb.append(",")
-            sb.append(it.id)
+            sb.append(it.code)
+            sb.append(",")
+            sb.append(it.pcode)
             sb.append(")")
             sb.append(",")
         }
