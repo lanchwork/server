@@ -52,7 +52,11 @@ class PartnerController {
     @GetMapping("/delete")
     fun deletePartnerById(@RequestParam partnerId: String): ResVal {
         try {
-            partnerService.deletePartnerById(partnerId)
+            val result = partnerService.deletePartnerById(partnerId)
+            //若合作方名下的产品已经产生交易，则无法删除
+            if(result == -1){
+                return ResVal(-1, "Partner's products already have transactions")
+            }
         } catch (e: Exception) {
             return ResVal(1, "Data Access Error!")
         }
