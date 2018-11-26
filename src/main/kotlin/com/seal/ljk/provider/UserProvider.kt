@@ -8,7 +8,7 @@ class UserProvider {
     private val USER = "user"
 
     fun queryUser(qUser: QUser): String{
-        val sql:SQL = SQL().SELECT("id,username,password,channel_mark,name,phone,email,role_type,start_flag").FROM(USER)
+        val sql:SQL = SQL().SELECT("id,username,password,channel_mark,name,phone,email,role_type,start_flag,create_date,create_user,update_date,update_user").FROM(USER)
 
         /*查询条件*/
         val channelMark = qUser.channelMark
