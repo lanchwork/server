@@ -5,4 +5,4 @@ data class Role (
         var roleName:String="",           //角色名
         var roleDescription:String=""     //角色描述
 
-)
+):Base()

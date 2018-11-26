@@ -10,4 +10,4 @@ data class User (
         var email:String = "",           //邮箱
         var roleType:Int = 0,           //角色类型
         var startFlag:Int = 0           //是否开启   0为是 1为否
-)
+):Base()
