@@ -38,7 +38,7 @@ interface UserDao {
     /**
      * 根据UserId查询roleId
      */
-    @Select("select role_type from user where username=#{user.id}")
+    @Select("select role_type from user where id=#{user.id}")
     fun selectRoleTypeByUserId(@Param("user") user:User):Int
 
 

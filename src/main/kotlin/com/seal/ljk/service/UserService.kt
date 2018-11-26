@@ -51,41 +51,32 @@ class UserService {
             if(data.password.equals(user.password)){
                 map.put("user", data)
                 val menuList=menuDao.selectMenuListByUserId(data)
-                val roleMenuList=RoleMenuList()
-                roleMenuList.roleId = userDao.selectRoleTypeByUserId(user)
 
-                /*var menuTypeSet= mutableSetOf<String>()
-                var dataMap = hashMapOf<String,List<Menu>>()
+                var dataMap = hashMapOf<String,Any>()
+                dataMap.put("roleId",userDao.selectRoleTypeByUserId(data))
+                var dataList = arrayListOf<Menu>()
                 menuList.forEach{
-                    menuTypeSet.add(it.menuType)
+                    if("0".equals(it.pcode)){
+                        dataList.add(it)
+                    }
                 }
-                for (item in menuTypeSet) {
-                    var resultList = arrayListOf<Menu>()
-                    menuList.forEach() {
-                        if(item.equals(it.menuType)){
-                            resultList.add(it)
+                for(item in dataList){
+                    var resultMap = HashMap<String,Any>()
+                    menuList.forEach{
+                        if(item.code.equals(it.pcode)){
+                            resultMap.put("menuId",it.id)
+                            resultMap.put("menuName",it.menuName)
+                            resultMap.put("pcode",it.pcode)
+                            resultMap.put("code",it.code)
                         }
                     }
-                    dataMap.put(item,resultList)
-                }
-                roleMenuList.map = dataMap*/
-
-                var menuTypeSet= mutableSetOf<String>()
-                var dataMap = hashMapOf<String,List<Menu>>()
-                menuList.forEach{
-                    menuTypeSet.add(it.pcode)
+                    dataMap.put(item.menuName,resultMap)
                 }
 
-                map.put("menu",roleMenuList)
+                map.put("menu",dataMap)
                 return map
             }
         }
         return null
     }
-}
-fun main(args: Array<String>) {
-    var menuSet= mutableSetOf<String>()
-    menuSet.add("123")
-    menuSet.add("123")
-    print(menuSet.toString())
 }
