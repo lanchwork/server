@@ -24,7 +24,7 @@ interface MenuDao {
     @Select("select id,menu_name from menu limit #{currentPage}, #{pageSize}")
     fun getMenuList(@Param("currentPage")currentPage: Int, @Param("pageSize")pageSize: Int): List<Menu>
 
-    @Select("SELECT m.id as id,m.menu_name as menu_name FROM user u JOIN role r ON u.role_type=r.id JOIN role_menu rm ON r.id=rm.role_id JOIN menu m ON  rm.menu_id=m.id WHERE u.id=#{user.id}")
+    @Select("SELECT m.id as id,m.menu_name as menu_name,m.pcode as pcode,m.code as code FROM user u JOIN role r ON u.role_type=r.id JOIN role_menu rm ON r.id=rm.role_id JOIN menu m ON  rm.menu_id=m.id WHERE u.id=#{user.id}")
     fun selectMenuListByUserId(@Param("user") user: User):List<Menu>
 
     @InsertProvider(type = RoleMenuProvider::class, method = "updateRoleMenu")

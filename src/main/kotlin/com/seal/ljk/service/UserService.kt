@@ -2,6 +2,8 @@ package com.seal.ljk.service
 
 import com.seal.ljk.dao.MenuDao
 import com.seal.ljk.dao.UserDao
+import com.seal.ljk.model.Menu
+import com.seal.ljk.model.RoleMenuList
 import com.seal.ljk.model.User
 import com.seal.ljk.query.QUser
 import org.springframework.beans.factory.annotation.Autowired
@@ -49,13 +51,41 @@ class UserService {
             if(data.password.equals(user.password)){
                 map.put("user", data)
                 val menuList=menuDao.selectMenuListByUserId(data)
-                map.put("menu",menuList)
+                val roleMenuList=RoleMenuList()
+                roleMenuList.roleId = userDao.selectRoleTypeByUserId(user)
+
+                /*var menuTypeSet= mutableSetOf<String>()
+                var dataMap = hashMapOf<String,List<Menu>>()
+                menuList.forEach{
+                    menuTypeSet.add(it.menuType)
+                }
+                for (item in menuTypeSet) {
+                    var resultList = arrayListOf<Menu>()
+                    menuList.forEach() {
+                        if(item.equals(it.menuType)){
+                            resultList.add(it)
+                        }
+                    }
+                    dataMap.put(item,resultList)
+                }
+                roleMenuList.map = dataMap*/
+
+                var menuTypeSet= mutableSetOf<String>()
+                var dataMap = hashMapOf<String,List<Menu>>()
+                menuList.forEach{
+                    menuTypeSet.add(it.pcode)
+                }
+
+                map.put("menu",roleMenuList)
                 return map
             }
         }
         return null
     }
-
-
-
+}
+fun main(args: Array<String>) {
+    var menuSet= mutableSetOf<String>()
+    menuSet.add("123")
+    menuSet.add("123")
+    print(menuSet.toString())
 }
