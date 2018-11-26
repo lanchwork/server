@@ -1,7 +1,6 @@
 package com.seal.ljk.dao
 
 import com.seal.ljk.model.Delegate
-import com.seal.ljk.model.DelegateData
 import com.seal.ljk.model.Partner
 import org.apache.ibatis.annotations.*
 import org.springframework.stereotype.Repository
@@ -40,5 +39,5 @@ interface DelegateDao {
             "from partner p " +
             "JOIN allot_profit ap ON p.partner_id = ap.partner_id JOIN delegate d ON ap.allot_profit_id = d.allot_profit_id " +
             "WHERE p.partner_id = #{partner.partnerId}")
-    fun getDelegateData(@Param("partner") partner: Partner):List<DelegateData>
+    fun getDelegateData(@Param("partner") partner: Partner):List<Map<String, Any>>
 }

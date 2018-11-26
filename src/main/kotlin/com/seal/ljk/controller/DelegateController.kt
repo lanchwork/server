@@ -2,7 +2,6 @@ package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.Delegate
-import com.seal.ljk.model.DelegateData
 import com.seal.ljk.model.Partner
 import com.seal.ljk.service.DelegateService
 import org.apache.ibatis.annotations.Param
@@ -90,7 +89,7 @@ class DelegateController {
      */
     @PostMapping("/delegateData")
     fun getDelegateData(@RequestBody partner:Partner) : ResVal {
-        val delegates : List<DelegateData>
+        val delegates : List<Map<String, Any>>
         try {
 
             delegates = delegateService.getDelegateData(partner)

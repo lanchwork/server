@@ -2,7 +2,6 @@ package com.seal.ljk.service
 
 import com.seal.ljk.dao.DelegateDao
 import com.seal.ljk.model.Delegate
-import com.seal.ljk.model.DelegateData
 import com.seal.ljk.model.Partner
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -48,7 +47,7 @@ class DelegateService {
      * 可委托列表
      * lanch
      */
-    fun getDelegateData(partner: Partner) : List<DelegateData> {
+    fun getDelegateData(partner: Partner) : List<Map<String, Any>> {
 
         return delegateDao.getDelegateData(partner)
     }
