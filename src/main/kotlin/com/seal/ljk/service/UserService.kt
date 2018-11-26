@@ -16,11 +16,11 @@ class UserService {
     lateinit var userDao: UserDao
 
     @Autowired
-    lateinit var menuDao:MenuDao
+    lateinit var menuDao: MenuDao
 
-    fun createUser(user: User){
+    fun createUser(user: User) {
 
-        user.id=user.channelMark+user.username
+        user.id = user.channelMark + user.username
         return userDao.createUser(user)
     }
 
@@ -32,8 +32,8 @@ class UserService {
         return userDao.updateUser(user)
     }
 
-    fun updatePasswordById(userId:String,password: String) {
-        return userDao.updatePasswordById(userId,password)
+    fun updatePasswordById(userId: String, password: String) {
+        return userDao.updatePasswordById(userId, password)
     }
 
     fun getUserById(userId: String): User {
@@ -44,39 +44,55 @@ class UserService {
     fun queryUser(qUser: QUser): List<User> {
         return userDao.queryUser(qUser)
     }
-    fun login(user:User):Map<String, Any>?{
-        val data:User = userDao.selectUserByUsername(user)
-        val map= hashMapOf<String,Any>()
-        if(data!=null){
-            if(data.password.equals(user.password)){
+
+    /**
+     * 登入功能,登入后列出权限菜单
+     * lanch
+     */
+    fun login(user: User): Map<String, Any>? {
+        val data: User = userDao.selectUserByUsername(user)
+        val map = hashMapOf<String, Any>()
+        var dataMap= hashMapOf<String, Any>()
+        if (data != null) {
+            if (data.password.equals(user.password)) {
                 map.put("user", data)
-                val menuList=menuDao.selectMenuListByUserId(data)
+                dataMap= getMenuListByUser(data) as HashMap<String, Any>
 
-                var dataMap = hashMapOf<String,Any>()
-                dataMap.put("roleId",userDao.selectRoleTypeByUserId(data))
-                var dataList = arrayListOf<Menu>()
-                menuList.forEach{
-                    if("0".equals(it.pcode)){
-                        dataList.add(it)
-                    }
-                }
-                for(item in dataList){
-                    var resultMap = HashMap<String,Any>()
-                    menuList.forEach{
-                        if(item.code.equals(it.pcode)){
-                            resultMap.put("menuId",it.id)
-                            resultMap.put("menuName",it.menuName)
-                            resultMap.put("pcode",it.pcode)
-                            resultMap.put("code",it.code)
-                        }
-                    }
-                    dataMap.put(item.menuName,resultMap)
-                }
-
-                map.put("menu",dataMap)
-                return map
             }
+            map.put("menu", dataMap)
+            return map
         }
         return null
+    }
+
+    /**
+     * 根据用户id列出权限菜单
+     * @param user 传入一个有用户Id的用户对象
+     * @return 二次封装的菜单Map集合
+     * lanch
+     */
+    fun getMenuListByUser(user: User): Map<String, Any> {
+        val menuList = menuDao.selectMenuListByUserId(user)
+        var dataMap = hashMapOf<String, Any>()
+        dataMap.put("roleId", userDao.selectRoleTypeByUserId(user))
+        var dataList = arrayListOf<Menu>()
+        menuList.forEach {
+            if ("0".equals(it.pcode)) {
+                dataList.add(it)
+            }
+        }
+        for (item in dataList) {
+            var resultMap = HashMap<String, Any>()
+            menuList.forEach {
+                if (item.code.equals(it.pcode)) {
+                    resultMap.put("menuId", it.id)
+                    resultMap.put("menuName", it.menuName)
+                    resultMap.put("pcode", it.pcode)
+                    resultMap.put("code", it.code)
+                }
+            }
+            dataMap.put(item.menuName, resultMap)
+        }
+        return dataMap
     }
 }

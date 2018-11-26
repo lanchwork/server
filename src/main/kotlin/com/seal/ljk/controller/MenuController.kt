@@ -4,7 +4,9 @@ import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.Menu
 import com.seal.ljk.model.RoleMenu
 import com.seal.ljk.model.RoleMenuList
+import com.seal.ljk.model.User
 import com.seal.ljk.service.MenuService
+import com.seal.ljk.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.lang.Exception
@@ -19,6 +21,8 @@ class MenuController {
     @Autowired
     lateinit var menuService: MenuService
 
+    @Autowired
+    lateinit var userService:UserService
     /**
      * 菜单新增
      */
@@ -99,6 +103,20 @@ class MenuController {
         val resultList: List<RoleMenu>
         try {
             resultList=menuService.queryRoleMenu(roleId)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, resultList)
+    }
+    /**
+     * 根据用户对象的用户Id查询菜单权限
+     */
+    @PostMapping("/getMenuListByUser")
+    fun getMenuListByUser(@RequestBody  user: User): ResVal {
+        var resultList:HashMap<String, Any>
+        try {
+            resultList= userService.getMenuListByUser(user) as HashMap<String, Any>
         } catch (e: Exception) {
             e.printStackTrace()
             return ResVal(1, "Data Access Error!")
