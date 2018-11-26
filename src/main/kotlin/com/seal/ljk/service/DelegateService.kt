@@ -2,6 +2,8 @@ package com.seal.ljk.service
 
 import com.seal.ljk.dao.DelegateDao
 import com.seal.ljk.model.Delegate
+import com.seal.ljk.model.DelegateData
+import com.seal.ljk.model.Partner
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
@@ -40,5 +42,14 @@ class DelegateService {
     fun getDelegateList(currentPage : Int, pageSize : Int) : List<Delegate> {
         val currentPageNew = (currentPage - 1) * pageSize
         return delegateDao.getDelegateList(currentPageNew, pageSize)
+    }
+
+    /**
+     * 可委托列表
+     * lanch
+     */
+    fun getDelegateData(partner: Partner) : List<DelegateData> {
+
+        return delegateDao.getDelegateData(partner)
     }
 }

@@ -35,7 +35,11 @@ interface UserDao {
     @Select("select id,username,password,channel_mark,name,phone,email,role_type,start_flag,create_date,create_user,update_date,update_user from user where username=#{user.username}")
     fun selectUserByUsername(@Param("user") user:User):User
 
-
+    /**
+     * 根据UserId查询roleId
+     */
+    @Select("select role_type from user where username=#{user.id}")
+    fun selectRoleTypeByUserId(@Param("user") user:User):Int
 
 
 }
