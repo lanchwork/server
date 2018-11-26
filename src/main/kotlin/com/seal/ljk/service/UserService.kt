@@ -82,16 +82,18 @@ class UserService {
             }
         }
         for (item in dataList) {
-            var resultMap = HashMap<String, Any>()
+            var list= arrayListOf<Map<String,Any>>()
             menuList.forEach {
+                var resultMap = HashMap<String, Any>()
                 if (item.code.equals(it.pcode)) {
                     resultMap.put("menuId", it.id)
                     resultMap.put("menuName", it.menuName)
                     resultMap.put("pcode", it.pcode)
                     resultMap.put("code", it.code)
+                    list.add(resultMap)
                 }
             }
-            dataMap.put(item.menuName, resultMap)
+            dataMap.put(item.menuName, list)
         }
         return dataMap
     }
