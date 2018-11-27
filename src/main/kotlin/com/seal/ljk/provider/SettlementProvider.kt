@@ -1,6 +1,5 @@
 package com.seal.ljk.provider
 
-import com.seal.ljk.query.QLoan
 import com.seal.ljk.query.QSettlement
 import org.apache.ibatis.jdbc.SQL
 
