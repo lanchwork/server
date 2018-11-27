@@ -16,22 +16,6 @@ class InvestDetailController {
     @Autowired
     lateinit var investDetailService: InvestDetailService
 
-    /**
-     * 投资已还款列表查询
-     */
-    @GetMapping("/list")
-    fun getRepaymentList(@RequestParam investorWalletAddr: String,@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
-        val resultList: InvestDetailList
-        val currentPageNew = (currentPage - 1) * pageSize
-        try {
-            resultList=investDetailService.getRepaymentList(investorWalletAddr,currentPageNew, pageSize)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return ResVal(1, "Data Access Error!")
-        }
-        return ResVal(0, resultList)
-    }
-
     /***
      * 授权投资明细查询
      */
