@@ -17,7 +17,7 @@ class InvestSumController {
      * 收益统计数据
      */
     @GetMapping("/byUser")
-    fun getPartnerById(@RequestParam userNo: String): ResVal {
+    fun getInvestSumByUser(@RequestParam userNo: String): ResVal {
         val result: InvestSum
         try {
             result = investSumService.getInvestSumByUser(userNo)
