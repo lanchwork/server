@@ -2,8 +2,8 @@ package com.seal.ljk.dao
 
 
 import com.seal.ljk.model.InvestDetail
-import com.seal.ljk.model.LoanDetail
 import com.seal.ljk.model.PlatformStatistics
+import com.seal.ljk.model.Settlement
 import org.apache.ibatis.annotations.*
 import org.springframework.stereotype.Repository
 
@@ -27,8 +27,8 @@ interface PlatformStatisticsDao {
     @Select("select * from invest_detail")
     fun getAllInvestDetail():List<InvestDetail>
 
-    @Select("select * from loan_detail")
-    fun getAllLoanDetail():List<LoanDetail>
+    @Select("select * from settlement")
+    fun getAllSettlement():List<Settlement>
 }
 
 
