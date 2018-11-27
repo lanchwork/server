@@ -33,36 +33,6 @@ class InvestDetailController {
     }
 
     /***
-     * 投资明细查询
-     */
-    @PostMapping("/walletInvestDetail")
-    fun queryWalletInvestDetail(@RequestBody qInvestDetail: QInvestDetail): ResVal {
-        val resultList: List<InvestDetail>
-        try {
-            resultList = investDetailService.queryWalletInvestDetail(qInvestDetail)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return ResVal(1, "Data Access Error!")
-        }
-        return ResVal(0, resultList)
-    }
-
-    /***
-     * 投资人回款明细查询
-     */
-    @PostMapping("/paybackInvestDetail")
-    fun queryPaybackInvestDetail(@RequestBody qInvestDetail: QInvestDetail): ResVal {
-        val resultList: List<InvestDetail>
-        try {
-            resultList = investDetailService.queryPaybackInvestDetail(qInvestDetail)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return ResVal(1, "Data Access Error!")
-        }
-        return ResVal(0, resultList)
-    }
-
-    /***
      * 授权投资明细查询
      */
     @PostMapping("/authorizeInvestDetail")

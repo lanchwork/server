@@ -21,18 +21,6 @@ interface InvestDetailDao {
     fun getNonReturnList(@Param("investorWalletAddr") investorWalletAddr : String,@Param("currentPage") currentPage: Int, @Param("pageSize") pageSize: Int): List<InvestDetail>
 
     /***
-     * 投资明细查询
-     */
-    @SelectProvider(type = InvestDetailProvider::class, method = "queryWalletInvestDetail")
-    fun queryWalletInvestDetail(qInvestDetail: QInvestDetail): List<InvestDetail>
-
-    /***
-     * 回款明细查询
-     */
-    @SelectProvider(type = InvestDetailProvider::class, method = "queryPaybackInvestDetail")
-    fun queryPaybackInvestDetail(qInvestDetail: QInvestDetail): List<InvestDetail>
-
-    /***
      * 授权投资明细查询
      */
     @SelectProvider(type = InvestDetailProvider::class, method = "queryAuthorizeInvestDetail")

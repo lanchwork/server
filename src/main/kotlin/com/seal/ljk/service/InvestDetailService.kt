@@ -31,20 +31,6 @@ class InvestDetailService {
     }
 
     /***
-     * 投资明细查询
-     */
-    fun queryWalletInvestDetail(qInvestDetail: QInvestDetail): List<InvestDetail>{
-        return investDetailDao.queryWalletInvestDetail(qInvestDetail)
-    }
-
-    /***
-     * 投资人回款明细查询
-     */
-    fun queryPaybackInvestDetail(qInvestDetail: QInvestDetail): List<InvestDetail>{
-        return investDetailDao.queryPaybackInvestDetail(qInvestDetail)
-    }
-
-    /***
      * 授权投资明细查询
      */
     fun queryAuthorizeInvestDetail(qInvestDetail: QInvestDetail): List<InvestDetail>{
