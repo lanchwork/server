@@ -12,6 +12,6 @@ class SettlementSumService {
     lateinit var settlementSumDao: SettlementSumDao
 
     fun getSettlementSumByUser(userNo: String): SettlementSum {
-        return settlementSumDao.getSettlementSumByUser(userNo)
+        return settlementSumDao.getSettlementSumByUser(userNo)!!
     }
 }

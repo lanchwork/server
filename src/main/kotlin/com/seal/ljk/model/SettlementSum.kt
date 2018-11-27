@@ -10,4 +10,4 @@ data class SettlementSum(
         var paidProfit: BigDecimal = BigDecimal(0),
         var toPayProfit: BigDecimal = BigDecimal(0),
         var remark: String = ""
-)
+) : Base()

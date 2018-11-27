@@ -30,4 +30,18 @@ class SettlementController {
         }
         return ResVal(0, resultList)
     }
+
+    /***
+     * 结算
+     */
+    @RequestMapping("/want")
+    fun saveWantInvest(@RequestBody data: Map<String, Any>): ResVal {
+        try {
+            settlementService.saveWantSettlement(data)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, "SUCCESS")
+    }
 }

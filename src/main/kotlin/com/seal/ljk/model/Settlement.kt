@@ -19,4 +19,4 @@ data class Settlement(
         var investorWalletAddr: String = "",
         var sealWalletAddr: String = "",
         var remark: String = ""
-)
+) : Base()
