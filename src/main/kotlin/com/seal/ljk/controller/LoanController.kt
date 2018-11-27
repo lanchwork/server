@@ -1,7 +1,7 @@
 package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
-import com.seal.ljk.model.Loan
+import com.seal.ljk.model.LoanList
 import com.seal.ljk.query.QLoan
 import com.seal.ljk.service.LoanService
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,16 +12,15 @@ import java.lang.Exception
 @RequestMapping("/loan")
 class LoanController {
 
-
     @Autowired
     lateinit var loanService: LoanService
 
     /**
-     *  根据投资编号查询放款投资明细
+     *  根据投资编号查询放款明细
      * */
     @RequestMapping("/getLoanList")
     fun getLoanListByInvestNo(@RequestBody qLoan: QLoan): ResVal {
-        val resultList: List<Loan>
+        val resultList: LoanList
         try {
             resultList = loanService.getLoanListByInvestNo(qLoan)
         } catch (e: Exception) {

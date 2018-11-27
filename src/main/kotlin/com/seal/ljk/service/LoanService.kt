@@ -7,13 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-open class LoanService {
+class LoanService {
 
     @Autowired
     lateinit var loanDao: LoanDao
 
-    fun getLoanListByInvestNo(qLoan: QLoan): List<Loan> {
-        return loanDao.getLoanListByInvestNo(qLoan)
+    fun getLoanListByInvestNo(qLoan: QLoan): LoanList {
+        val resultList = LoanList()
+        resultList.list = loanDao.getLoanListByInvestNo(qLoan)
+        //可结算金额settleableAmt=
+
+        //已结算金额settledAmt=
+
+        //未结算金额unsettledAmt=
+
+        return resultList
     }
 
 

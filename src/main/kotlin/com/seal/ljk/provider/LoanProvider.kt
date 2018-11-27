@@ -11,8 +11,8 @@ class LoanProvider {
         val sql:SQL = SQL().SELECT("*").FROM(LOAN)
 
         /*查询条件*/
-        val channelMark = qLoan.investNo
-        if(channelMark.isNotEmpty()){
+        val investNo = qLoan.investNo
+        if(investNo.isNotEmpty()){
             sql.WHERE(" invest_no LIKE #{investNo}")
         }
         //(currentPage-1)*pageSize为当前页的开始行数
