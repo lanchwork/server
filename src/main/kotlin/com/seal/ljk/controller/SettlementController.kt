@@ -1,6 +1,7 @@
 package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.model.InvestSettlement
 import com.seal.ljk.model.Settlement
 import com.seal.ljk.query.QSettlement
 import com.seal.ljk.service.SettlementService
@@ -34,7 +35,7 @@ class SettlementController {
     /***
      * 结算
      */
-    @RequestMapping("/want")
+ /*   @RequestMapping("/want")
     fun saveWantInvest(@RequestBody data: Map<String, Any>): ResVal {
         try {
             settlementService.saveWantSettlement(data)
@@ -43,5 +44,20 @@ class SettlementController {
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "SUCCESS")
+    }*/
+
+    /**
+     *  结算待处理明细条件查询
+     * */
+    @RequestMapping("/querySettlementList")
+    fun querySettlementByConditions(@RequestBody qSettlement: QSettlement): ResVal {
+        val resultList: List<InvestSettlement>
+        try {
+            resultList = settlementService.querySettlementByConditions(qSettlement)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, resultList)
     }
 }

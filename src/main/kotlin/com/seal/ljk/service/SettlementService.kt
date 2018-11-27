@@ -2,6 +2,7 @@ package com.seal.ljk.service
 
 import com.seal.ljk.dao.SettlementDao
 import com.seal.ljk.dao.SettlementSumDao
+import com.seal.ljk.model.InvestSettlement
 import com.seal.ljk.model.Settlement
 import com.seal.ljk.model.SettlementSum
 import com.seal.ljk.query.QSettlement
@@ -20,7 +21,7 @@ open class SettlementService {
     @Autowired
     lateinit var settlementSumDao: SettlementSumDao
 
-    fun getSettlementListByUserNo(qSettlement: QSettlement): List<Settlement> {
+    open fun getSettlementListByUserNo(qSettlement: QSettlement): List<Settlement> {
         return settlementDao.getSettlementListByUserNo(qSettlement)
     }
 
@@ -88,5 +89,9 @@ open class SettlementService {
         } else {
             settlementSumDao.updateSettlementSumById(settlementSum)
         }
+    }
+
+    open fun querySettlementByConditions(qSettlement: QSettlement): List<InvestSettlement> {
+        return  settlementDao.querySettlementByConditions(qSettlement)
     }
 }
