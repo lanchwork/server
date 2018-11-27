@@ -7,7 +7,7 @@ class LoanProvider {
 
     private val LOAN = "loan"
 
-    fun queryLoan(qLoan: QLoan): String{
+    fun getLoanListByInvestNo(qLoan: QLoan): String{
         val sql:SQL = SQL().SELECT("*").FROM(LOAN)
 
         /*查询条件*/
@@ -22,7 +22,7 @@ class LoanProvider {
         return sqlString
     }
 
-    fun queryInvestLoan(qLoan: QLoan): String{
+    fun queryInvestLoanByConditions(qLoan: QLoan): String{
         val sql:SQL = SQL().SELECT("* from invest_detail i LEFT JOIN loan l on i.invest_no=l.invest_no")
 
         /*查询条件*/

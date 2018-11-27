@@ -10,10 +10,10 @@ import org.springframework.stereotype.Repository
 @Repository
 interface LoanDao {
 
-    @SelectProvider(type = LoanProvider::class, method = "queryLoan")
+    @SelectProvider(type = LoanProvider::class, method = "getLoanListByInvestNo")
     fun getLoanListByInvestNo(qLoan: QLoan): List<Loan>
 
-    @SelectProvider(type = LoanProvider::class, method = "queryInvestLoan")
+    @SelectProvider(type = LoanProvider::class, method = "queryInvestLoanByConditions")
     fun queryInvestLoanByConditions(qLoan: QLoan): List<InvestLoan>
 
 
