@@ -47,6 +47,21 @@ class InvestDetailController {
         return ResVal(0, resultList)
     }
 
+    /***
+     * 投资列表
+     */
+    @PostMapping("/byUser")
+    fun getInvestDetailByUser(@RequestParam userNo: String): ResVal {
+        val resultList: List<InvestDetail>
+        try {
+            resultList = investDetailService.getInvestDetailByUser(userNo)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, resultList)
+    }
+
     /*已投资未回款列表*/
     @GetMapping("/nonReturnList")
     fun getNonReturnList(@RequestParam investorWalletAddr: String,@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {

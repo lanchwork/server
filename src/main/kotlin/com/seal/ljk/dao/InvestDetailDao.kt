@@ -26,8 +26,11 @@ interface InvestDetailDao {
     @SelectProvider(type = InvestDetailProvider::class, method = "queryAuthorizeInvestDetail")
     fun queryAuthorizeInvestDetail(qInvestDetail: QInvestDetail): List<InvestDetail>
 
-    @Select("select * from invest_detail where invest_detail_id = #{investDetailId}")
-    fun getInvestDetailById(@Param("investDetailId") investDetailId: String): InvestDetail
+    /***
+     * 投资列表
+     */
+    @Select("select invest_amt, invest_period, expect_day_rate, invest_no, invest_date, status from invest_detail where user_no = #{userNo}")
+    fun getInvestDetailByUser(@Param("userNo") userNo: String): List<InvestDetail>
 
     @Select("select * from invest_detail where invest_id = #{investId}")
     fun getInvestDetailByInvestId(@Param("investId") investId: String): InvestDetail

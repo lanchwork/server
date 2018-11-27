@@ -33,8 +33,15 @@ class InvestDetailService {
     /***
      * 授权投资明细查询
      */
-    fun queryAuthorizeInvestDetail(qInvestDetail: QInvestDetail): List<InvestDetail>{
+    fun queryAuthorizeInvestDetail(qInvestDetail: QInvestDetail): List<InvestDetail> {
         return investDetailDao.queryAuthorizeInvestDetail(qInvestDetail)
+    }
+
+    /***
+     * 投资列表
+     */
+    fun getInvestDetailByUser(userNo: String): List<InvestDetail> {
+        return investDetailDao.getInvestDetailByUser(userNo)
     }
 
     /*已投资未回款列表*/
