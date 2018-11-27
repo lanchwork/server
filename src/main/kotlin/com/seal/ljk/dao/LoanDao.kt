@@ -1,5 +1,6 @@
 package com.seal.ljk.dao
 
+import com.seal.ljk.model.InvestLoan
 import com.seal.ljk.model.Loan
 import com.seal.ljk.provider.LoanProvider
 import com.seal.ljk.query.QLoan
@@ -11,6 +12,9 @@ interface LoanDao {
 
     @SelectProvider(type = LoanProvider::class, method = "queryLoan")
     fun getLoanListByInvestNo(qLoan: QLoan): List<Loan>
+
+    @SelectProvider(type = LoanProvider::class, method = "queryInvestLoan")
+    fun queryInvestLoanByInvestNo(qLoan: QLoan): List<InvestLoan>
 
 
 }

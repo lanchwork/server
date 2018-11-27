@@ -1,6 +1,8 @@
 package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.model.InvestLoan
+import com.seal.ljk.model.Loan
 import com.seal.ljk.model.LoanList
 import com.seal.ljk.query.QLoan
 import com.seal.ljk.service.LoanService
@@ -23,6 +25,21 @@ class LoanController {
         val resultList: LoanList
         try {
             resultList = loanService.getLoanListByInvestNo(qLoan)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, resultList)
+    }
+
+    /**
+     *  实际放款明细条件查询
+     * */
+    @RequestMapping("/queryInvestLoanList")
+    fun queryInvestLoanByInvestNo(@RequestBody qLoan: QLoan): ResVal {
+        val resultList: List<InvestLoan>
+        try {
+            resultList = loanService.queryInvestLoanByInvestNo(qLoan)
         } catch (e: Exception) {
             e.printStackTrace()
             return ResVal(1, "Data Access Error!")
