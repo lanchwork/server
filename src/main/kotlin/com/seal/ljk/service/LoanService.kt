@@ -24,8 +24,8 @@ class LoanService {
         return resultList
     }
 
-    fun queryInvestLoanByInvestNo(qLoan: QLoan): List<InvestLoan> {
-        return loanDao.queryInvestLoanByInvestNo(qLoan)
+    fun queryInvestLoanByConditions(qLoan: QLoan): List<InvestLoan> {
+        return loanDao.queryInvestLoanByConditions(qLoan)
     }
 
 

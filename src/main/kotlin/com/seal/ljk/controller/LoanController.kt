@@ -36,10 +36,10 @@ class LoanController {
      *  实际放款明细条件查询
      * */
     @RequestMapping("/queryInvestLoanList")
-    fun queryInvestLoanByInvestNo(@RequestBody qLoan: QLoan): ResVal {
+    fun queryInvestLoanByConditions(@RequestBody qLoan: QLoan): ResVal {
         val resultList: List<InvestLoan>
         try {
-            resultList = loanService.queryInvestLoanByInvestNo(qLoan)
+            resultList = loanService.queryInvestLoanByConditions(qLoan)
         } catch (e: Exception) {
             e.printStackTrace()
             return ResVal(1, "Data Access Error!")

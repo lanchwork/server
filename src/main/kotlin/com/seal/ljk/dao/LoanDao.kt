@@ -14,7 +14,7 @@ interface LoanDao {
     fun getLoanListByInvestNo(qLoan: QLoan): List<Loan>
 
     @SelectProvider(type = LoanProvider::class, method = "queryInvestLoan")
-    fun queryInvestLoanByInvestNo(qLoan: QLoan): List<InvestLoan>
+    fun queryInvestLoanByConditions(qLoan: QLoan): List<InvestLoan>
 
 
 }
