@@ -25,7 +25,7 @@ interface MenuDao {
     @Select("select id,menu_name,url,sort,pcode,code,flag,icon,create_date,create_user,update_date,update_user from menu limit #{currentPage}, #{pageSize}")
     fun getMenuList(@Param("currentPage")currentPage: Int, @Param("pageSize")pageSize: Int): List<Menu>
 
-    @Select("SELECT m.id as id,m.menu_name as menu_name,m.pcode as pcode,m.code as code FROM user u JOIN role r ON u.role_type=r.id JOIN role_menu rm ON r.id=rm.role_id JOIN menu m ON  rm.menu_id=m.id WHERE u.id=#{user.id} ORDER BY m.sort ASC")
+    @Select("SELECT m.id as id,m.menu_name as menu_name,m.pcode as pcode,m.code as code, m.sort as sort FROM user u JOIN role r ON u.role_type=r.id JOIN role_menu rm ON r.id=rm.role_id JOIN menu m ON  rm.menu_id=m.id WHERE u.id=#{user.id} ORDER BY m.sort ASC")
     fun selectMenuListByUserId(@Param("user") user: User):List<Menu>
 
     @InsertProvider(type = RoleMenuProvider::class, method = "updateRoleMenu")

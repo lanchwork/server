@@ -90,6 +90,7 @@ class UserService {
                     resultMap.put("menuName", it.menuName)
                     resultMap.put("pcode", it.pcode)
                     resultMap.put("code", it.code)
+                    resultMap.put("sort",it.sort)
                     list.add(resultMap)
                 }
             }
