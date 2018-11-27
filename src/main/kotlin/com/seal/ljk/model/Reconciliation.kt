@@ -6,13 +6,14 @@ import java.util.*
 data class Reconciliation(
     var reconciliationId: String = "",
     var partnerId: String = "",
-    var partnerWalletAddr: String = "",
+    var userNo: String = "",
     var statisticsDate: Date,
     var rcvAmt: BigDecimal = BigDecimal.ZERO,
     var loanAmt: BigDecimal = BigDecimal.ZERO,
-    var repayAmt: BigDecimal = BigDecimal.ZERO,
+    var settleAmt: BigDecimal = BigDecimal.ZERO,
     var balance: BigDecimal = BigDecimal.ZERO,
-    var totalInterest: BigDecimal = BigDecimal.ZERO,
-    var reconciliationResult: String = "",
+    var investorTotalProfit: BigDecimal = BigDecimal.ZERO,
+    var sealTotalProfit: BigDecimal = BigDecimal.ZERO,
+    var result: String = "",
     var remark: String = ""
 ) : Base()
