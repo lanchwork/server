@@ -5,10 +5,12 @@ import org.mybatis.spring.annotation.MapperScan
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean
+import org.springframework.scheduling.annotation.EnableScheduling
 import java.util.*
 
 
 @MapperScan("com.seal.ljk.dao","com.seal.ljk.service")
+@EnableScheduling
 @SpringBootApplication
 open class MyApplication()
 
