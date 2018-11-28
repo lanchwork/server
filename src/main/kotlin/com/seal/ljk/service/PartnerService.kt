@@ -1,3 +1,4 @@
+/*
 package com.seal.ljk.service
 
 import com.seal.ljk.dao.PartnerDao
@@ -56,4 +57,4 @@ class PartnerService {
 
         return companyInfo
     }
-}
+}*/

@@ -5,6 +5,7 @@ import com.seal.ljk.provider.InvestDetailProvider
 import com.seal.ljk.query.QInvestDetail
 import org.apache.ibatis.annotations.*
 import org.springframework.stereotype.Repository
+import java.math.BigDecimal
 
 @Repository
 interface InvestDetailDao {
@@ -42,4 +43,7 @@ interface InvestDetailDao {
     @Update("update invest_detail set invest_detail_id=#{investDetail.investDetailId}, user_no=#{investDetail.userNo}, invest_no=#{investDetail.investNo}, chain_trans_no=#{investDetail.chainTransNo}, investor_wallet_addr=#{investDetail.investorWalletAddr}, invest_amt=#{investDetail.investAmt}, invest_period=#{investDetail.investPeriod}, expect_day_rate=#{investDetail.expectDayRate}, invest_date=#{investDetail.investDate}, partner_id=#{investDetail.partnerId}, partner_wallet_addr=#{investDetail.partnerWalletAddr}, status=#{investDetail.status}, create_date=#{investDetail.createDate}, create_user=#{investDetail.createUser}, update_date=#{investDetail.updateDate}, update_user=#{investDetail.updateUser}, remark=#{investDetail.remark}" +
             "where invest_detail_id = #{investDetail.investDetailId}")
     fun updateInvestDetailById(@Param("investDetail") investDetail: InvestDetail)
+
+    @Select("select sum(invest_amt) FROM invest_detail where invest_no=#{investNo}")
+    fun getInvestAmt(investNo: String): BigDecimal
 }
