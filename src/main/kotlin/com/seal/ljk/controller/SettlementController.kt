@@ -35,7 +35,7 @@ class SettlementController {
     /***
      * 结算
      */
- /*   @RequestMapping("/want")
+    @RequestMapping("/want")
     fun saveWantInvest(@RequestBody data: Map<String, Any>): ResVal {
         try {
             settlementService.saveWantSettlement(data)
@@ -44,7 +44,7 @@ class SettlementController {
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "SUCCESS")
-    }*/
+    }
 
     /**
      *  结算待处理明细条件查询
