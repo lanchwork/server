@@ -16,6 +16,7 @@ data class InvestSettlement(
         var investorProfit: BigDecimal = BigDecimal(0),
         var sealProfit: BigDecimal = BigDecimal(0),
 
-        var status: Int = 0
+        var status: Int = 0,
+        var settleTime: Date = Date()
 
 )

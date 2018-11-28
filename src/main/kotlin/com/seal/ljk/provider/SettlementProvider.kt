@@ -42,7 +42,7 @@ class SettlementProvider {
         if(investDateTo.isNotEmpty()){
             sql.WHERE(" Date(invest_date) <= #{investDateTo}")
         }
-
+        sql.WHERE("s.status=1")
         //(currentPage-1)*pageSize为当前页的开始行数
         val currentPage = (qSettlement.currentPage - 1) * qSettlement.pageSize
         val sqlString: String = sql.toString() + "\nlimit " + currentPage.toString() + ", " + qSettlement.pageSize.toString()
