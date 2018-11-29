@@ -28,7 +28,7 @@ class SettlementProvider {
         /*查询条件*/
         val partnerId = qSettlement.partnerId
         if(partnerId.isNotEmpty()){
-            sql.WHERE(" partner_id LIKE #{partnerId}")
+            sql.WHERE(" i.partner_id LIKE #{partnerId}")
         }
         val investNo = qSettlement.investNo
         if(investNo.isNotEmpty()){
