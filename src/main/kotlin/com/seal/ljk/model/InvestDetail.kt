@@ -10,6 +10,7 @@ data class InvestDetail(
         var chainTransNo: String = "",
         var investorWalletAddr: String = "",
         var investAmt: BigDecimal = BigDecimal(0),
+        var unsettledPrincipal: BigDecimal = BigDecimal(0),
         var investPeriod: Int = 0,
         var expectDayRate: BigDecimal = BigDecimal(0),
         var investDate: Date = Date(),

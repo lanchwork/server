@@ -71,6 +71,7 @@ open class InvestSumService {
         investDetail.chainTransNo = UUID.randomUUID().toString().substring(0, 20)
 
         investDetail.investAmt = BigDecimal(investAmt)
+        investDetail.unsettledPrincipal = BigDecimal(investAmt)
         investDetail.investorWalletAddr = investorWalletAddr
         investDetail.userNo = userNo
         investDetail.investPeriod = investPeriod.toInt()
