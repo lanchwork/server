@@ -13,15 +13,15 @@ class UserProvider {
         /*查询条件*/
         val channelMark = qUser.channelMark
         if(channelMark.isNotEmpty()){
-            sql.WHERE(" channel_mark LIKE #{channelMark}")
+            sql.WHERE(" channel_mark LIKE concat('%',#{channelMark},'%') ")
         }
         val username = qUser.username
         if(username.isNotEmpty()){
-            sql.WHERE(" username LIKE #{username}")
+            sql.WHERE(" username LIKE concat('%',#{username},'%') ")
         }
         val startFlag = qUser.startFlag
         if(startFlag.isNotEmpty()){
-            sql.WHERE(" start_flag LIKE #{startFlag}")
+            sql.WHERE(" start_flag LIKE concat('%',#{startFlag},'%') ")
         }
 
         //(currentPage-1)*pageSize为当前页的开始行数

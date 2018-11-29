@@ -13,7 +13,7 @@ class SettlementProvider {
         /*查询条件*/
         val userNo = qSettlement.userNo
         if(userNo.isNotEmpty()){
-            sql.WHERE(" user_no LIKE #{userNo}")
+            sql.WHERE(" user_no LIKE concat('%',#{userNo},'%') ")
             sql.ORDER_BY("apply_time")
         }
         //(currentPage-1)*pageSize为当前页的开始行数
@@ -28,11 +28,11 @@ class SettlementProvider {
         /*查询条件*/
         val partnerId = qSettlement.partnerId
         if(partnerId.isNotEmpty()){
-            sql.WHERE(" i.partner_id LIKE #{partnerId}")
+            sql.WHERE(" i.partner_id LIKE concat('%',#{partnerId},'%')")
         }
         val investNo = qSettlement.investNo
         if(investNo.isNotEmpty()){
-            sql.WHERE(" i.invest_no LIKE #{investNo}")
+            sql.WHERE(" i.invest_no LIKE concat('%',#{investNo},'%')")
         }
         val investDateFrom = qSettlement.investDateFrom
         if(investDateFrom.isNotEmpty()){

@@ -13,7 +13,7 @@ class LoanProvider {
         /*查询条件*/
         val investNo = qLoan.investNo
         if(investNo.isNotEmpty()){
-            sql.WHERE(" invest_no LIKE #{investNo}")
+            sql.WHERE(" invest_no LIKE concat('%',#{investNo},'%')")
             sql.ORDER_BY("status DESC")
         }
         //(currentPage-1)*pageSize为当前页的开始行数
@@ -28,19 +28,19 @@ class LoanProvider {
         /*查询条件*/
         val investorWalletAddr = qLoan.investorWalletAddr
         if(investorWalletAddr.isNotEmpty()){
-            sql.WHERE(" investor_wallet_addr LIKE #{investorWalletAddr}")
+            sql.WHERE(" investor_wallet_addr LIKE concat('%',#{investorWalletAddr},'%')")
         }
         val partnerId = qLoan.partnerId
         if(partnerId.isNotEmpty()){
-            sql.WHERE(" partner_id LIKE #{partnerId}")
+            sql.WHERE(" partner_id LIKE concat('%',#{partnerId},'%')")
         }
         val status = qLoan.status
         if(status>0){
-            sql.WHERE(" l.status LIKE #{status}")
+            sql.WHERE(" l.status LIKE concat('%',#{status},'%')")
         }
         val investNo = qLoan.investNo
         if(investNo.isNotEmpty()){
-            sql.WHERE(" i.invest_no LIKE #{investNo}")
+            sql.WHERE(" i.invest_no LIKE concat('%',#{investNo},'%')")
         }
 
         val repayTimeFrom = qLoan.repayTimeFrom
