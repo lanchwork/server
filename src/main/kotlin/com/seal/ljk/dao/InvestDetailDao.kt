@@ -44,6 +44,6 @@ interface InvestDetailDao {
             "where invest_detail_id = #{investDetail.investDetailId}")
     fun updateInvestDetailById(@Param("investDetail") investDetail: InvestDetail)
 
-    @Select("select sum(invest_amt) FROM invest_detail where invest_no=#{investNo}")
-    fun getInvestAmt(investNo: String): BigDecimal
+    @Select("select unsettled_principal FROM invest_detail where invest_no=#{investNo}")
+    fun getUnsettledPrincipal(investNo: String): BigDecimal
 }
