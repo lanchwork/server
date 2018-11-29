@@ -1,6 +1,5 @@
 package com.seal.ljk.dao
 
-import com.seal.ljk.model.LoanDetail
 import com.seal.ljk.model.Partner
 import com.seal.ljk.provider.PartnerProvider
 import com.seal.ljk.query.QPartner
@@ -18,9 +17,6 @@ interface PartnerDao {
 
     @Select("select * from partner where partner_id = #{partnerId}")
     fun getPartnerById(@Param("partnerId") partnerId: String): Partner
-
-    @Select("select * from loan_detail where partner_id = #{partnerId}")
-    fun getLoanDetailById(@Param("partnerId") partnerId: String): List<LoanDetail>
 
     @Insert("insert into partner(partner_id, channel_mark, partner_name, wallet_addr, open_flag, create_date, create_user, update_date, update_user, remark) " +
             "values(#{partner.partnerId}, #{partner.channelMark}, #{partner.partnerName}, #{partner.walletAddr}, #{partner.openFlag}, #{partner.createDate}, #{partner.createUser}, #{partner.updateDate}, #{partner.updateUser}, #{partner.remark})")

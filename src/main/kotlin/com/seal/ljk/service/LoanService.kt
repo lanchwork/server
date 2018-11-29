@@ -24,24 +24,21 @@ class LoanService {
         resultList.list = loanDao.getLoanListByInvestNo(qLoan)
         var investNo:String=qLoan.investNo
 
-        //已结算金额settledAmt=申请结算金额apply_settle_amt(每笔投资)
+        //已结算金额settledAmt计算
         resultList.settledAmt=settlementDao.getApplySettleAmtSum(investNo)
-        var investAmt = BigDecimal(0)
-        if(resultList.settledAmt!=null){
-            //没查询到结算记录 则当前本金=投资总金额investAmt
-            investAmt= investDetailDao.getInvestAmt(investNo)
-        }else{
-            // 查询到结算记录 则需要根据上次结算时间
 
+        //未结算本金
+        var investAmt= investDetailDao.getUnsettledPrincipal(investNo)
+        //放款已回款分润统计
+        var investorProfitSum =loanDao.getInvestorProfitAndStatus2Sum(investNo)
+        //回款中的本金统计
+        var repayAmtSum =loanDao.getRepayAmtAndStatus1Sum(investNo)
 
-        }
-        //可结算金额settleableAmt=放款已回款分润investorProfit status=2 (每笔投资)+当前本金-回款中的本金repayAmt status=1(每笔投资)
-        var investorProfit =loanDao.getInvestorProfitAndStatus2Sum(investNo)
-        var repayAmt =loanDao.getRepayAmtAndStatus1Sum(investNo)
-        resultList.settleableAmt=investorProfit.add(investAmt).subtract(repayAmt)
+        //可结算金额settleableAmt计算
+        resultList.settleableAmt=investorProfitSum.add(investAmt).subtract(repayAmtSum)
 
-        //未结算金额unsettledAmt=当前本金+放款已回款分润(每笔投资)+回款中的本金 (每笔投资)
-        resultList.settleableAmt=investorProfit.add(investAmt).add(repayAmt)
+        //未结算金额unsettledAmt计算
+        resultList.unsettledAmt=investorProfitSum.add(investAmt).add(repayAmtSum)
         return resultList
     }
 
