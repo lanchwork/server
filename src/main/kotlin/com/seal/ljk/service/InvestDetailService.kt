@@ -31,4 +31,12 @@ class InvestDetailService {
     fun getNonReturnList(investorWalletAddr: String,currentPage: Int, pageSize: Int):List<InvestDetail> {
         return investDetailDao.getNonReturnList(investorWalletAddr,currentPage, pageSize)
     }
+
+    fun getInvestDetailByInvestNo(investNo: String): InvestDetail {
+        return investDetailDao.getInvestDetailByInvestNo(investNo)
+    }
+
+    fun updateInvestDetailById(investDetail: InvestDetail) {
+        investDetailDao.updateInvestDetailById(investDetail)
+    }
 }

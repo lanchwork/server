@@ -33,8 +33,8 @@ interface InvestDetailDao {
     @Select("select invest_amt, invest_period, expect_day_rate, invest_no, invest_date, status from invest_detail where user_no = #{userNo}")
     fun getInvestDetailByUser(@Param("userNo") userNo: String): List<InvestDetail>
 
-    @Select("select * from invest_detail where invest_id = #{investId}")
-    fun getInvestDetailByInvestId(@Param("investId") investId: String): InvestDetail
+    @Select("select * from invest_detail where invest_no = #{investNo}")
+    fun getInvestDetailByInvestNo(@Param("investNo") investNo: String): InvestDetail
 
     @Insert("insert into invest_detail(invest_detail_id, user_no, invest_no, chain_trans_no, investor_wallet_addr, invest_amt, unsettled_principal, invest_period, expect_day_rate, invest_date, partner_id, partner_wallet_addr, status, create_date, create_user, update_date, update_user, remark) " +
             "values(#{investDetail.investDetailId}, #{investDetail.userNo}, #{investDetail.investNo}, #{investDetail.chainTransNo}, #{investDetail.investorWalletAddr}, #{investDetail.investAmt}, #{investDetail.unsettledPrincipal}, #{investDetail.investPeriod}, #{investDetail.expectDayRate}, #{investDetail.investDate}, #{investDetail.partnerId}, #{investDetail.partnerWalletAddr}, #{investDetail.status}, #{investDetail.createDate}, #{investDetail.createUser}, #{investDetail.updateDate}, #{investDetail.updateUser}, #{investDetail.remark})")

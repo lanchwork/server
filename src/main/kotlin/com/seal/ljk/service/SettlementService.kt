@@ -1,7 +1,9 @@
 package com.seal.ljk.service
 
+import com.seal.ljk.common.Constant
 import com.seal.ljk.dao.SettlementDao
 import com.seal.ljk.dao.SettlementSumDao
+import com.seal.ljk.model.InvestDetail
 import com.seal.ljk.model.InvestSettlement
 import com.seal.ljk.model.Settlement
 import com.seal.ljk.model.SettlementSum
@@ -21,46 +23,70 @@ open class SettlementService {
     @Autowired
     lateinit var settlementSumDao: SettlementSumDao
 
+    @Autowired
+    lateinit var partnerService: PartnerService
+
+    @Autowired
+    lateinit var investDetailService: InvestDetailService
+
     open fun getSettlementListByUserNo(qSettlement: QSettlement): List<Settlement> {
         return settlementDao.getSettlementListByUserNo(qSettlement)
     }
 
+    /***
+     * 申请结算
+     */
     @Transactional
-    open fun saveWantSettlement(data: Map<String, Any>) {
-        // 结算的操作是合作方的角色才会操作的。
-
+    open fun saveApplySettlement(data: Map<String, Any>) {
         // 生成结算
-        val settlement = this.buildSettlement(data)
+        val settlement = this.buildSettlement4Apply(data)
+        settlementDao.createSettlement(settlement)
 
         // 生成结算汇总
         this.saveOrUpdateSettlementSum(settlement)
     }
 
-    private fun buildSettlement(data: Map<String, Any>): Settlement {
+    /***
+     * 结算
+     */
+    @Transactional
+    open fun saveWantSettlement(data: Map<String, Any>) {
+        // 请求主链交易接口
 
-        // 界面输入
+        // 更新结算表
+        val settlement = this.buildSettlement4Settle(data)
+        settlementDao.updateSettlementById(settlement)
+
+        // 更新结算汇总
+        this.saveOrUpdateSettlementSum(settlement)
+
+        // 更新投资表
+        val investDetail = this.buildInvestDetail(settlement)
+        investDetailService.updateInvestDetailById(investDetail)
+    }
+
+    private fun buildSettlement4Apply(data: Map<String, Any>): Settlement {
+        // 从待结算明细页面带过来
         val investorWalletAddr = data["investorWalletAddr"].toString()
         val settlementAmt = data["settlementAmt"].toString()
         val sealWalletAddr = data["sealWalletAddr"].toString()
-        val distributableAmt = data["distributableAmt"].toString()
-
-        // 从当前session中获取？
         val partnerWalletAddr = data["partnerWalletAddr"].toString()
-        val userNo = data["userNo"].toString()
-
-        // 从待结算明细页面带过来
+        val partnerId = data["partnerId"].toString()
         val investNo = data["investNo"].toString()
+        val settlePrincipal = data["settlePrincipal"].toString()
 
-        var settlement = Settlement()
+        val settlement = Settlement()
         settlement.settlementId = UUID.randomUUID().toString().substring(0, 20)
-        settlement.userNo = userNo
+        settlement.userNo = this.getPartnerUserNo(partnerId)
         settlement.investNo = investNo
         settlement.applySettleAmt = BigDecimal(settlementAmt)
         settlement.applyTime = Date()
-        settlement.settlePrincipal
+        settlement.settlePrincipal = BigDecimal(settlePrincipal)
+        // 投资人分润=实际放款利息*（1-合作方分润比例）*投资人分润比例
         settlement.investorProfit
+        // Seal分润=实际放款利息*（1-合作方分润比例）*Seal分润比例
         settlement.sealProfit
-        settlement.status
+        settlement.status = Constant.SETTLE_STATUS.APPLY
         settlement.settleTime
         settlement.chainTransNo
         settlement.investorWalletAddr = investorWalletAddr
@@ -70,6 +96,28 @@ open class SettlementService {
         return settlement
     }
 
+    private fun getPartnerUserNo(partnerId: String): String {
+        val partner = partnerService.getPartnerById(partnerId)
+        return partner.userNo
+    }
+
+    private fun buildSettlement4Settle(data: Map<String, Any>): Settlement {
+        val settlementId = data["settlementId"].toString()
+        val settlement = settlementDao.getSettlementById(settlementId)
+        settlement.status = Constant.SETTLE_STATUS.SETTLED
+        settlement.settleTime = Date()
+        settlement.chainTransNo
+        settlement.updateDate = Date()
+        return settlement
+    }
+
+    private fun buildInvestDetail(settlement: Settlement): InvestDetail {
+        val investDetail = investDetailService.getInvestDetailByInvestNo(settlement.investNo)
+        investDetail.unsettledPrincipal = investDetail.unsettledPrincipal.subtract(settlement.settlePrincipal)
+        investDetail.updateDate = Date()
+        return investDetail
+    }
+
     private fun saveOrUpdateSettlementSum(settlement: Settlement) {
 
         // 判断该用户是否已经存在投资汇总表
@@ -77,21 +125,30 @@ open class SettlementService {
         settlementSum = settlementSum ?: SettlementSum()
 
         // 计算金额
-        settlementSum.totalToSettleAmt
-        settlementSum.totalSettledAmt
-        settlementSum.paidProfit
-        settlementSum.toPayProfit
+        if (Constant.SETTLE_STATUS.APPLY == settlement.status) {
+            // 待结算总金额=投资人申请结算金额之和
+            settlementSum.totalToSettleAmt = settlementSum.totalToSettleAmt.add(settlement.applySettleAmt)
+            settlementSum.paidProfit = settlementSum.paidProfit.add(settlement.investorProfit).add(settlement.sealProfit)
+        } else if (Constant.SETTLE_STATUS.SETTLED == settlement.status) {
+            // 已结算总金额=投资人已结算金额之和
+            settlementSum.totalSettledAmt = settlementSum.totalSettledAmt.add(settlement.settlePrincipal)
+            settlementSum.toPayProfit = settlementSum.paidProfit.add(settlement.investorProfit).add(settlement.sealProfit)
+            // 待结算总金额需要进行扣减
+            settlementSum.totalToSettleAmt = settlementSum.totalToSettleAmt.subtract(settlement.applySettleAmt)
+            settlementSum.paidProfit = settlementSum.paidProfit.subtract(settlement.investorProfit.add(settlement.sealProfit))
+        }
 
         if (settlementSum.settlementSumId.isEmpty()) {
             settlementSum.settlementSumId = UUID.randomUUID().toString().substring(0, 20)
             settlementSum.userNo = settlement.userNo
             settlementSumDao.createSettlementSum(settlementSum)
         } else {
+            settlementSum.updateDate = Date()
             settlementSumDao.updateSettlementSumById(settlementSum)
         }
     }
 
     open fun querySettlementByConditions(qSettlement: QSettlement): List<InvestSettlement> {
-        return  settlementDao.querySettlementByConditions(qSettlement)
+        return settlementDao.querySettlementByConditions(qSettlement)
     }
 }

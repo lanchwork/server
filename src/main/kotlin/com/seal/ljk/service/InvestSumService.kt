@@ -81,7 +81,7 @@ open class InvestSumService {
         investDetail.partnerWalletAddr = partnerWalletAddr
 
         // 默认初始状态
-        investDetail.status = Constant.INVEST_STATUS.BACKING
+        investDetail.status = Constant.INVEST_STATUS.SUCCESS
 
         return investDetail
     }

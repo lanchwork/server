@@ -33,10 +33,24 @@ class SettlementController {
     }
 
     /***
+     * 申请结算
+     */
+    @RequestMapping("/apply")
+    fun saveApplySettlement(@RequestBody data: Map<String, Any>): ResVal {
+        try {
+            settlementService.saveApplySettlement(data)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, "SUCCESS")
+    }
+
+    /***
      * 结算
      */
     @RequestMapping("/want")
-    fun saveWantInvest(@RequestBody data: Map<String, Any>): ResVal {
+    fun saveWantSettlement(@RequestBody data: Map<String, Any>): ResVal {
         try {
             settlementService.saveWantSettlement(data)
         } catch (e: Exception) {

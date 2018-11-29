@@ -15,6 +15,7 @@ data class Settlement(
         var status: Int = 0,
         var settleTime: Date = Date(),
         var chainTransNo: String = "",
+        var partnerId: String = "",
         var partnerWalletAddr: String = "",
         var investorWalletAddr: String = "",
         var sealWalletAddr: String = "",
