@@ -1,4 +1,3 @@
-/*
 package com.seal.ljk.service
 
 import com.seal.ljk.dao.PartnerDao
@@ -31,10 +30,6 @@ class PartnerService {
     }
 
     fun deletePartnerById(partnerId: String): Int {
-        val loanDetailList = partnerDao.getLoanDetailById(partnerId)
-        if(loanDetailList.isNotEmpty()){
-            return -1
-        }
         return partnerDao.deletePartnerById(partnerId)
     }
 
@@ -57,4 +52,4 @@ class PartnerService {
 
         return companyInfo
     }
-}*/
+}

@@ -1,4 +1,3 @@
-/*
 package com.seal.ljk.service
 
 import com.seal.ljk.dao.PlatformStatisticsDao
@@ -55,4 +54,4 @@ class PlatformStatisticsService {
 
         platformStatisticsDao.createPlatformStatistics(platformStatistics)
     }
-}*/
+}
