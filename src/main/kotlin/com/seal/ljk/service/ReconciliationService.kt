@@ -39,12 +39,10 @@ class ReconciliationService {
      */
     fun calculateReconciliation(){
         val allPartners = partnerService.getAllPartner()
-        println("test")
         //每天对每一个合作方进行一次统计
         allPartners.forEach {
             //对账主键ID
             val reconciliationId = UUID.randomUUID().toString().substring(0, 20)
-            println(reconciliationId)
             //合作方ID
             val partnerId = it.partnerId
             //统计日期
@@ -52,34 +50,53 @@ class ReconciliationService {
 
             val rcvMap = reconciliationDao.sumInvestAmtByPartnerId(partnerId)
             //收款金额
-            val rcvAmt = BigDecimal(rcvMap["rcvAmt"].toString())
+            val rcvAmt = if(rcvMap != null)
+                rcvMap["rcv_amt"] ?: BigDecimal.ZERO
+            else
+                BigDecimal.ZERO
 
             val loanMap = reconciliationDao.sumLoanAmtByPartnerId(partnerId)
             //放款金额
-            val loanAmt = BigDecimal(loanMap["loanAmt"].toString())
+            val loanAmt = if(loanMap != null)
+                loanMap["loan_amt"] ?: BigDecimal.ZERO
+            else
+                BigDecimal.ZERO
 
             val settledMap = reconciliationDao.sumSettlementByPartnerId(partnerId)
             //结算金额
-            val settleAmt = BigDecimal(settledMap["settleAmt"].toString())
+            val settleAmt = if(settledMap != null)
+                settledMap["settle_amt"] ?: BigDecimal.ZERO
+            else
+                BigDecimal.ZERO
             //投资人总分润
-            val investorTotalProfit = BigDecimal(settledMap["investorTotalProfit"].toString())
+            val investorTotalProfit = if(settledMap != null)
+                settledMap["investor_total_profit"] ?: BigDecimal.ZERO
+            else
+                BigDecimal.ZERO
             //seal总分润
-            val sealTotalProfit = BigDecimal(settledMap["sealTotalProfit"].toString())
+            val sealTotalProfit = if(settledMap != null)
+                settledMap["seal_total_profit"] ?: BigDecimal.ZERO
+            else
+                BigDecimal.ZERO
 
             //计算待结算余额=上一次结算时还在款中的金额(已存储在投资明细表的未结算本金字段)+上一次结算后还款的利润
             val unsettledMap = reconciliationDao.sumUnsettledPrincipalByPartnerId(partnerId)
             val profitMap = reconciliationDao.sumProfitByPartnerId(partnerId)
             //未结算本金
-            val unsettledPrincipal = BigDecimal(unsettledMap["unsettledPrincipal"].toString())
+            val unsettledPrincipal = if(unsettledMap != null)
+                unsettledMap["unsettled_principal"] ?: BigDecimal.ZERO
+            else
+                BigDecimal.ZERO
             //自上次结算后还款的利润
-            val investorProfit = BigDecimal(profitMap["investorProfit"].toString())
+            val investorProfit =  if(unsettledMap != null)
+                profitMap["investor_profit"] ?: BigDecimal.ZERO
+            else
+                BigDecimal.ZERO
             //待结算余额
             val balance = unsettledPrincipal + investorProfit
 
             val reconciliation = Reconciliation(reconciliationId, partnerId, "", statisticsDate, rcvAmt, loanAmt, settleAmt,
                     balance, investorTotalProfit, sealTotalProfit, "","")
-
-            println(reconciliation.toString())
 
         }
     }
