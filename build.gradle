@@ -10,17 +10,20 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.2'
     }
 }
 
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.2.51'
-    id 'war'
+//    id 'war'
 }
 
 group 'com.cloud'
 version '1.0-SNAPSHOT'
+
+apply plugin: 'com.github.johnrengelman.shadow'
 
 sourceCompatibility = 1.8
 
