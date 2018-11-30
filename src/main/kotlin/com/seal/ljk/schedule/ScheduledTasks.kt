@@ -30,8 +30,8 @@ class ScheduledTasks {
      * 定时每天凌晨00:30:00 对账统计数据
      */
 //    @Scheduled(cron = "0 30 0 1/1 * ? *")
-    @Scheduled(cron = "0/10 * * * * *")
-    fun calculateReconciliation(){
-        reconciliationService.calculateReconciliation()
-    }
+//    @Scheduled(cron = "0/10 * * * * *")
+//    fun calculateReconciliation(){
+//        reconciliationService.calculateReconciliation()
+//    }
 }
