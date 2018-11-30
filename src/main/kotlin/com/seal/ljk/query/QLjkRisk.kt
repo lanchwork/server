@@ -11,8 +11,6 @@ package com.seal.ljk.query
  * @create: 2018-11-30 10:23
  **/
 data class QLjkRisk(
-        var riskCalculateId: String = "",    //风险计算ID
-
         var channelMark: String = "",       //渠道标识
         var channelCustomerId: String = "", //渠道客户编号
         var channelFinApplyId: String = "", //渠道融资申请编号

@@ -10,7 +10,7 @@ package com.seal.ljk.model
  *
  * @create: 2018-11-30 09:44
  **/
-class LjkCustomer(
+data class LjkCustomer(
     //客户基本信息
     var customerId: String = "",    //客户编号
     var channelMark: String = "",        //渠道标识

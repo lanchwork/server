@@ -10,7 +10,7 @@ package com.seal.ljk.model
  *
  * @create: 2018-11-30 10:20
  **/
-class LjkRisk(
+data class LjkRisk(
         //风控基本信息
         var riskCalculateId: String = "",   //风险计算Id
         var channelMark: String = "",   //渠道标识

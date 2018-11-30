@@ -23,7 +23,7 @@ class LjkCustomerService {
     lateinit var ljkCustomerDao: LjkCustomerDao
 
     fun query(qLjkCustomer: QLjkCustomer): List<LjkCustomer>{
-        return ljkCustomerDao.queryLjkCustomer(qLjkCustomer)
+        return ljkCustomerDao.queryCustomer(qLjkCustomer)
     }
 
 }

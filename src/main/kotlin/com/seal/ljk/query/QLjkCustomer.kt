@@ -11,8 +11,6 @@ package com.seal.ljk.query
  * @create: 2018-11-30 09:45
  **/
 data class QLjkCustomer(
-        var customerId: String = "",        //客户编号
-
         var channelMark: String = "",       //渠道标识
         var channelCustomerId: String = "", //渠道客户编号
         var customerName:String = "",       //渠道客户名称

@@ -13,6 +13,6 @@ interface LjkCustomerDao {
      * 链金控客户基本信息查询
      */
     @SelectProvider(type = LjkCustomerProvider::class, method = "queryCustomer")
-    fun queryLjkCustomer(qLjkCustomer: QLjkCustomer): List<LjkCustomer>
+    fun queryCustomer(qLjkCustomer: QLjkCustomer): List<LjkCustomer>
 
 }

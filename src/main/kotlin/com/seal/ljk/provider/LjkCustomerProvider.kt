@@ -20,10 +20,6 @@ class LjkCustomerProvider {
     fun queryCustomer(qLjkCustomer: QLjkCustomer): String{
         val sql: SQL = SQL().SELECT("*").FROM(CUSTOMER)
 
-        val customerId = qLjkCustomer.customerId
-        if(customerId.isNotEmpty()){
-            sql.WHERE(" customer_id LIKE #{customerId}")
-        }
         val channelMark = qLjkCustomer.channelMark
         if(channelMark.isNotEmpty()){
             sql.WHERE(" channel_mark LIKE #{channelMark}")

@@ -20,10 +20,6 @@ class LjkRiskProvider {
     fun queryRisk(qLjkRisk: QLjkRisk): String{
         val sql: SQL = SQL().SELECT("*").FROM(RISK)
 
-        val riskCalculatedId = qLjkRisk.riskCalculateId
-        if(riskCalculatedId.isNotEmpty()){
-            sql.WHERE(" risk_calculate_id = #{riskCalculatedId}")
-        }
         val channelMark = qLjkRisk.channelMark
         if(channelMark.isNotEmpty()){
             sql.WHERE("channel_mark = #{channelMark}")
