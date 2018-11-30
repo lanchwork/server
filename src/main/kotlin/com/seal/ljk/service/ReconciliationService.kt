@@ -98,6 +98,10 @@ class ReconciliationService {
             val reconciliation = Reconciliation(reconciliationId, partnerId, "", statisticsDate, rcvAmt, loanAmt, settleAmt,
                     balance, investorTotalProfit, sealTotalProfit, "","")
 
+            println(reconciliation.toString())
+
+            reconciliationDao.create(reconciliation)
+
         }
     }
 }

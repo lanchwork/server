@@ -12,7 +12,7 @@ interface PartnerDao {
     @SelectProvider(type = PartnerProvider::class, method = "getPartnerByCondition")
     fun getPartnerByCondition(qPartner: QPartner): List<Partner>
 
-    @Select("select * from partner")
+    @Select("select * from lc_partner")
     fun getAllPartner(): List<Partner>
 
     @Select("select * from partner where partner_id = #{partnerId}")

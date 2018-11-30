@@ -5,7 +5,7 @@ import org.apache.ibatis.jdbc.SQL
 
 class ReconciliationProvider {
 
-    private val RECONCILIATION = "reconciliation"
+    private val RECONCILIATION = "lc_reconciliation"
 
     fun getReconciliationByCondition(qReconciliation: QReconciliation): String {
         val element = " * "
