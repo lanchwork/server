@@ -1,6 +1,7 @@
 package com.seal.ljk.service
 
 import com.seal.ljk.dao.LjkFinApplyDao
+import com.seal.ljk.model.LjkFinApply
 import com.seal.ljk.query.QLjkFinApply
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -22,6 +23,10 @@ class LjkFinApplyService {
     @Autowired
     lateinit var ljkFinApplyDao: LjkFinApplyDao
 
+    fun queryFinApplyByKey(channelFinApplyId: String): List<LjkFinApply>{
+        return ljkFinApplyDao.queryFinApplyByKey(channelFinApplyId)
+    }
+
     fun queryFinApply(qLjkFinApply: QLjkFinApply): List<Map<String,String>>{
         val ljkFinApplyIdList = ljkFinApplyDao.queryFinApply(qLjkFinApply)
         val resultList = mutableListOf<Map<String,String>>()
@@ -32,18 +37,14 @@ class LjkFinApplyService {
             val productName = it["product_name"].toString()       //产品名称
             val channelCustomerId = it["channel_customer_id"].toString()//借款人编号
             val interestRate = it["interest_rate"].toString()     //利率
-            println("finApplyId $finApplyId")
 
             val loanMap = ljkFinApplyDao.sumLoanAmtByFinApplyId(finApplyId)
             val loanDate = loanMap?.get("loan_date").toString()      //放款时间
             val expireDate = loanMap?.get("expire_date").toString()  //到期时间
             val loanAmt = loanMap?.get("loan_amt").toString() //放款金额
-            println("loanDate $loanDate ")
-            println("loanAmt $loanAmt")
 
             val repayMap = ljkFinApplyDao.sumRepayAmtByFinApplyId(finApplyId)
             val repayAmt = repayMap?.get("repay_amt").toString()      //还款金额
-            println("repayAmt $repayAmt")
 
             val currentStateMap = ljkFinApplyDao.queryCurrentStateByFinApplyId(finApplyId)
             val currentState = currentStateMap?.get("current_state").toString()      //融资状态

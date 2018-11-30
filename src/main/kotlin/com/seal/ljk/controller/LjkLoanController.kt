@@ -5,9 +5,7 @@ import com.seal.ljk.model.LjkLoan
 import com.seal.ljk.query.QLjkLoan
 import com.seal.ljk.service.LjkLoanService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 /**
  * 放款信息
@@ -28,6 +26,18 @@ class LjkLoanController {
         try {
             resultList = ljkLoanService.queryLjkLoanByConditions(qLjkLoan)
         } catch (e: Exception) {
+            e.printStackTrace()
+            return ResVal(1, "Data Access Error!")
+        }
+        return ResVal(0, resultList)
+    }
+
+    @GetMapping("queryLoanByKey")
+    fun queryByKey(@RequestParam channelFinApplyId: String): ResVal{
+        val resultList: List<LjkLoan>
+        try {
+            resultList = ljkLoanService.queryLoanByKey(channelFinApplyId)
+        } catch (e: Exception){
             e.printStackTrace()
             return ResVal(1, "Data Access Error!")
         }

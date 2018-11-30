@@ -15,4 +15,8 @@ class LjkRepayService {
     fun queryLjkRepayByConditions(qLjkRepay: QLjkRepay): List<LjkRepay> {
         return ljkRepayDao.queryByConditions(qLjkRepay)
     }
+
+    fun queryRepayByKey(channelFinApplyId: String): List<LjkRepay>{
+        return ljkRepayDao.queryRepayByKey(channelFinApplyId)
+    }
 }

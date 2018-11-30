@@ -15,4 +15,8 @@ class LjkLoanService {
     fun queryLjkLoanByConditions(qLjkLoan: QLjkLoan): List<LjkLoan> {
         return ljkLoanDao.queryByConditions(qLjkLoan)
     }
+
+    fun queryLoanByKey(channelFinApplyId: String): List<LjkLoan>{
+        return ljkLoanDao.queryLoanByKey(channelFinApplyId)
+    }
 }

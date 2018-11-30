@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RestController
  * @create: 2018-11-30 11:30
  **/
 @RestController
-@RequestMapping("/api/seal/")
+@RequestMapping("/ljkCustomerDetail")
 class LjkCustomerDetailController {
 
     @Autowired
     lateinit var ljkCustomerDetailService: LjkCustomerDetailService
 
-    @GetMapping("getCustomerDetailByKey")
+    @GetMapping("/getCustomerDetailByKey")
     fun getCustomerDetailByKey(@RequestParam customerId: String): ResVal{
         val resultList: List<LjkCustomerDetail>
         try {

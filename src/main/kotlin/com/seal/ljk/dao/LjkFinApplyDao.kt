@@ -1,5 +1,6 @@
 package com.seal.ljk.dao
 
+import com.seal.ljk.model.LjkFinApply
 import com.seal.ljk.provider.LjkFinApplyProvider
 import com.seal.ljk.query.QLjkFinApply
 import org.apache.ibatis.annotations.Select
@@ -14,6 +15,9 @@ interface LjkFinApplyDao {
      */
     @SelectProvider(type = LjkFinApplyProvider::class, method = "queryFinApplyId")
     fun queryFinApply(qLjkFinApply: QLjkFinApply): List<Map<String,Any>>
+
+    @Select("select * from ljk_fin_apply where channel_fin_apply_id=#{channelFinApplyId}")
+    fun queryFinApplyByKey(channelFinApplyId: String): List<LjkFinApply>
 
     /**
      * 统计该融资申请编号的放款总金额

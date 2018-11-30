@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RestController
  * @create: 2018-11-30 11:54
  **/
 @RestController
-@RequestMapping("/api/seal/")
+@RequestMapping("/ljkRiskDetail")
 class LjkRiskDetailController {
 
     @Autowired
     lateinit var ljkRiskDetailService: LjkRiskDetailService
 
-    @GetMapping("getRiskDetailByKey")
+    @GetMapping("/getRiskDetailByKey")
     fun getRiskDetailByKey(@RequestParam riskCalculateId: String): ResVal{
         val resultList: List<LjkRiskDetail>
         try {
