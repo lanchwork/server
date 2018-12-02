@@ -45,6 +45,7 @@ class ReconciliationService {
             val reconciliationId = UUID.randomUUID().toString().substring(0, 20)
             //合作方ID
             val partnerId = it.partnerId
+            val userNo = it.userNo
             //统计日期
             val statisticsDate = Date()
 
@@ -88,14 +89,14 @@ class ReconciliationService {
             else
                 BigDecimal.ZERO
             //自上次结算后还款的利润
-            val investorProfit =  if(unsettledMap != null)
+            val investorProfit =  if(profitMap != null)
                 profitMap["investor_profit"] ?: BigDecimal.ZERO
             else
                 BigDecimal.ZERO
             //待结算余额
             val balance = unsettledPrincipal + investorProfit
 
-            val reconciliation = Reconciliation(reconciliationId, partnerId, "", statisticsDate, rcvAmt, loanAmt, settleAmt,
+            val reconciliation = Reconciliation(reconciliationId, partnerId, userNo, statisticsDate, rcvAmt, loanAmt, settleAmt,
                     balance, investorTotalProfit, sealTotalProfit, "","")
 
             println(reconciliation.toString())
