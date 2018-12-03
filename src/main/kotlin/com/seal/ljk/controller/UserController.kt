@@ -4,6 +4,8 @@ import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.User
 import com.seal.ljk.query.QUser
 import com.seal.ljk.service.UserService
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.lang.Exception
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpSession
  */
 @RestController
 @RequestMapping("/user")
+@Api(description = "用户管理功能相关接口")
 class UserController {
 
     @Autowired
@@ -24,6 +27,7 @@ class UserController {
      * 用户新增
      */
     @RequestMapping("/add")
+    @ApiOperation(value = "用户新增")
     fun createUser(@RequestBody user: User): ResVal{
         try {
             userService.createUser(user)
@@ -38,6 +42,7 @@ class UserController {
      * 用户删除
      */
     @GetMapping("/delete")
+    @ApiOperation(value = "用户删除")
     fun deleteUserById(@RequestParam userId: String): ResVal {
         try {
             userService.deleteUserById(userId)
@@ -52,6 +57,7 @@ class UserController {
      * 用户更新
      */
     @RequestMapping("/update")
+    @ApiOperation(value = "用户更新")
     fun updateUser(@RequestBody user: User): ResVal {
         try {
             userService.updateUser(user)
@@ -66,6 +72,7 @@ class UserController {
      * 用户修改密码
      */
     @GetMapping("/updatePassword")
+    @ApiOperation(value = "用户修改密码")
     fun updatePasswordById(@RequestParam userId: String,@RequestParam password: String): ResVal {
         try {
             userService.updatePasswordById(userId,password)
@@ -80,6 +87,7 @@ class UserController {
      * 获取用户
      */
     @GetMapping("/getById")
+    @ApiOperation(value = "获取用户")
     fun getUserById(@RequestParam userId: String): ResVal {
         val result: User
         try {
@@ -95,6 +103,7 @@ class UserController {
      * 条件查询用户
      */
     @RequestMapping("/query")
+    @ApiOperation(value = "条件查询用户")
     fun queryUser(@RequestBody qUser: QUser): ResVal{
         val resultList: List<User>
         try {
@@ -111,6 +120,7 @@ class UserController {
      *登入功能
      */
     @RequestMapping("/login")
+    @ApiOperation(value = "登入功能")
     fun login(@RequestBody user:User,httpServletRequest: HttpServletRequest): ResVal{
         try {
             val session : HttpSession = httpServletRequest.getSession(true)
