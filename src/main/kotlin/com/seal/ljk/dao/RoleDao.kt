@@ -17,7 +17,7 @@ interface RoleDao {
     @Update("update lc_role set role_name=#{role.roleName},role_description=#{role.roleDescription},create_date=#{role.createDate},create_user=#{role.createUser},update_date=#{role.updateDate},update_user=#{role.updateUser} where id = #{role.id}")
     fun updateRole(@Param("role") role: Role)
 
-    @Select("select id,role_name,role_description,create_date,create_user,update_date,update_user from lc_frole limit #{currentPage}, #{pageSize}")
+    @Select("select id,role_name,role_description,create_date,create_user,update_date,update_user from lc_role limit #{currentPage}, #{pageSize}")
     fun getRoleList(@Param("currentPage")currentPage: Int, @Param("pageSize")pageSize: Int): List<Role>
 
 
