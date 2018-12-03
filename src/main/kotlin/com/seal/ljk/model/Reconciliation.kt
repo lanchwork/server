@@ -15,5 +15,9 @@ data class Reconciliation(
     var investorTotalProfit: BigDecimal = BigDecimal.ZERO,
     var sealTotalProfit: BigDecimal = BigDecimal.ZERO,
     var result: String = "",
-    var remark: String = ""
-) : Base()
+    var remark: String = "",
+    var createDate: Date = Date(),
+    var createUser: String = "",
+    var updateDate: Date = Date(),
+    var updateUser: String = ""
+)

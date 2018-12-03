@@ -1,6 +1,7 @@
 package com.seal.ljk.model
 
 import java.math.BigDecimal
+import java.util.*
 
 data class SettlementSum(
         var settlementSumId: String = "",
@@ -9,5 +10,9 @@ data class SettlementSum(
         var totalSettledAmt: BigDecimal = BigDecimal(0),
         var paidProfit: BigDecimal = BigDecimal(0),
         var toPayProfit: BigDecimal = BigDecimal(0),
-        var remark: String = ""
-) : Base()
+        var remark: String = "",
+        var createDate: Date = Date(),
+        var createUser: String = "",
+        var updateDate: Date = Date(),
+        var updateUser: String = ""
+)

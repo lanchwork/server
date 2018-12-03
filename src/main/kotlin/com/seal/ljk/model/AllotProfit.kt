@@ -2,6 +2,7 @@ package com.seal.ljk.model
 
 import java.math.BigDecimal
 import java.sql.Timestamp
+import java.util.*
 
 
 /**
@@ -20,5 +21,9 @@ class AllotProfit (
         var incomeMethod: Int = 0,
         var partnerRatio: BigDecimal = BigDecimal(0),
         var sealRatio: BigDecimal = BigDecimal(0),
-        var remark: String = ""
-): Base()
+        var remark: String = "",
+        var createDate: Date = Date(),
+        var createUser: String = "",
+        var updateDate: Date = Date(),
+        var updateUser: String = ""
+)

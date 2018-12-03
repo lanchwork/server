@@ -17,5 +17,9 @@ data class InvestDetail(
         var partnerId: String = "",
         var partnerWalletAddr: String = "",
         var status: Int = 0,
-        var remark: String = ""
-) : Base()
+        var remark: String = "",
+        var createDate: Date = Date(),
+        var createUser: String = "",
+        var updateDate: Date = Date(),
+        var updateUser: String = ""
+)
