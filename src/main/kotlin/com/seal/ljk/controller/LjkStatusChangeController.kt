@@ -4,6 +4,8 @@ import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.LjkStatusChange
 import com.seal.ljk.query.QLjkStatusChange
 import com.seal.ljk.service.LjkStatusChangeService
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController
  * **/
 @RestController
 @RequestMapping("/ljkStatusChange")
+@Api(description = "状态迁变功能相关接口")
 class LjkStatusChangeController {
 
     @Autowired
@@ -22,6 +25,7 @@ class LjkStatusChangeController {
     /**
      * 状态迁变条件查询
      * **/
+    @ApiOperation(value = "状态迁变查询")
     @RequestMapping("/queryLjkStatusChange")
     fun queryLjkStatusChangeByConditions(@RequestBody qLjkStatusChange: QLjkStatusChange): ResVal {
         val resultList: List<LjkStatusChange>
