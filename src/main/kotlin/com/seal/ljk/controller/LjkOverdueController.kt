@@ -7,6 +7,7 @@ import com.seal.ljk.service.LjkOverdueService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -25,7 +26,7 @@ class LjkOverdueController {
     /**
      * 逾期信息条件查询
      * **/
-    @RequestMapping("/queryLjkOverdue")
+    @PostMapping("/queryLjkOverdue")
     @ApiOperation(value = "逾期信息条件查询")
     fun queryLjkOverdueByConditions(@RequestBody qLjkOverdue: QLjkOverdue): ResVal {
         val resultList: List<LjkOverdue>

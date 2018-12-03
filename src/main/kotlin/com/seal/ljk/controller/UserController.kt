@@ -26,7 +26,7 @@ class UserController {
     /**
      * 用户新增
      */
-    @RequestMapping("/add")
+    @PostMapping("/add")
     @ApiOperation(value = "用户新增")
     fun createUser(@RequestBody user: User): ResVal{
         try {
@@ -41,7 +41,7 @@ class UserController {
     /**
      * 用户删除
      */
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     @ApiOperation(value = "用户删除")
     fun deleteUserById(@RequestParam userId: String): ResVal {
         try {
@@ -56,7 +56,7 @@ class UserController {
     /**
      * 用户更新
      */
-    @RequestMapping("/update")
+    @PostMapping("/update")
     @ApiOperation(value = "用户更新")
     fun updateUser(@RequestBody user: User): ResVal {
         try {
@@ -71,7 +71,7 @@ class UserController {
     /**
      * 用户修改密码
      */
-    @GetMapping("/updatePassword")
+    @PostMapping("/updatePassword")
     @ApiOperation(value = "用户修改密码")
     fun updatePasswordById(@RequestParam userId: String,@RequestParam password: String): ResVal {
         try {
@@ -86,7 +86,7 @@ class UserController {
     /**
      * 获取用户
      */
-    @GetMapping("/getById")
+    @PostMapping("/getById")
     @ApiOperation(value = "获取用户")
     fun getUserById(@RequestParam userId: String): ResVal {
         val result: User
@@ -102,7 +102,7 @@ class UserController {
     /**
      * 条件查询用户
      */
-    @RequestMapping("/query")
+    @PostMapping("/query")
     @ApiOperation(value = "条件查询用户")
     fun queryUser(@RequestBody qUser: QUser): ResVal{
         val resultList: List<User>
@@ -119,7 +119,7 @@ class UserController {
     /**
      *登入功能
      */
-    @RequestMapping("/login")
+    @PostMapping("/login")
     @ApiOperation(value = "登入功能")
     fun login(@RequestBody user:User,httpServletRequest: HttpServletRequest): ResVal{
         try {

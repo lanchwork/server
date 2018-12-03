@@ -29,7 +29,7 @@ class MenuController {
     /**
      * 菜单新增
      */
-    @RequestMapping("/add")
+    @PostMapping("/add")
     @ApiOperation(value = "菜单新增")
     fun createMenu(@RequestBody menu: Menu): ResVal{
         try {
@@ -44,7 +44,7 @@ class MenuController {
     /**
      * 菜单删除
      */
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     @ApiOperation(value = "菜单删除")
     fun deleteMenuById(@RequestParam menuId: String): ResVal {
         try {
@@ -59,7 +59,7 @@ class MenuController {
     /**
      * 菜单更新
      */
-    @RequestMapping("/update")
+    @PostMapping("/update")
     @ApiOperation(value = "菜单更新")
     fun updateMenu(@RequestBody menu: Menu): ResVal {
         try {
@@ -74,7 +74,7 @@ class MenuController {
     /**
      * 查询菜单列表
      */
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ApiOperation(value = "查询菜单列表")
     fun getMenuList(@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
         val resultList: List<Menu>
@@ -91,7 +91,7 @@ class MenuController {
     /**
      * 角色菜单权限配置
      */
-    @RequestMapping("/batchUpdate")
+    @PostMapping("/batchUpdate")
     @ApiOperation(value = "角色菜单权限配置")
     fun updateRoleMenu(@RequestBody roleMenuList: RoleMenuList): ResVal {
         try {
@@ -106,7 +106,7 @@ class MenuController {
     /**
      * 角色菜单权限展示列表
      */
-    @GetMapping("/queryMenuByRoleId")
+    @PostMapping("/queryMenuByRoleId")
     @ApiOperation(value = "角色菜单权限展示列表")
     fun queryRoleMenu(@RequestParam  roleId: Int): ResVal {
         val resultList: List<RoleMenu>

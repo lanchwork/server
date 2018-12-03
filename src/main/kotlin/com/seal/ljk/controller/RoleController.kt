@@ -23,7 +23,7 @@ class RoleController {
     /**
      * 角色新增
      */
-    @RequestMapping("/add")
+    @PostMapping("/add")
     @ApiOperation(value = "角色新增")
     fun createRole(@RequestBody role: Role): ResVal{
         try {
@@ -38,7 +38,7 @@ class RoleController {
     /**
      * 角色删除
      */
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     @ApiOperation(value = "角色删除")
     fun deleteRoleById(@RequestParam roleId: String): ResVal {
         try {
@@ -53,7 +53,7 @@ class RoleController {
     /**
      * 角色更新
      */
-    @RequestMapping("/update")
+    @PostMapping("/update")
     @ApiOperation(value = "角色更新")
     fun updateRole(@RequestBody role: Role): ResVal {
         try {
@@ -68,7 +68,7 @@ class RoleController {
     /**
      * 查询角色列表
      */
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ApiOperation(value = "查询角色列表")
     fun getRoleList(@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
         val resultList: List<Role>
