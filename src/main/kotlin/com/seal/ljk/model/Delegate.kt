@@ -11,9 +11,5 @@ data class Delegate(
         var guaranteeWay: Int = 0,           //保障方式
         var openFlag: Int = 0,               //是否开启
         var deadline: Date = Date(),              //截止时间
-        var remark: String = "",
-        var createDate: Date = Date(),
-        var createUser: String = "",
-        var updateDate: Date = Date(),
-        var updateUser: String = ""
-)
+        var remark: String = ""
+) : Base()

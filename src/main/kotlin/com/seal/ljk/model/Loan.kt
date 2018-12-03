@@ -19,9 +19,5 @@ class Loan(var loanId: String = "",
            var investorProfit: BigDecimal = BigDecimal(0), //投资人分润
            var sealProfit: BigDecimal = BigDecimal(0), //seal分润
            var repayTime: Date = Date(), //还款时间
-           var status: Int = 0, //状态 1：回款中，2：已回款，3：逾期中；4：已垫付
-           var createDate: Date = Date(),
-           var createUser: String = "",
-           var updateDate: Date = Date(),
-           var updateUser: String = ""
-)
+           var status: Int = 0 //状态 1：回款中，2：已回款，3：逾期中；4：已垫付
+): Base()

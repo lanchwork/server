@@ -19,9 +19,5 @@ data class Settlement(
         var partnerWalletAddr: String = "",
         var investorWalletAddr: String = "",
         var sealWalletAddr: String = "",
-        var remark: String = "",
-        var createDate: Date = Date(),
-        var createUser: String = "",
-        var updateDate: Date = Date(),
-        var updateUser: String = ""
-)
+        var remark: String = ""
+) : Base()
