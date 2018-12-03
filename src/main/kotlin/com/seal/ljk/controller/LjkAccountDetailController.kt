@@ -7,6 +7,7 @@ import com.seal.ljk.service.LjkAccountDetailService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -26,7 +27,7 @@ class LjkAccountDetailController {
      * 平台资金账户明细条件查询
      * **/
     @ApiOperation(value = "平台资金账户明细查询")
-    @RequestMapping("/queryLjkAccountDetail")
+    @PostMapping("/queryLjkAccountDetail")
     fun queryLjkAccountDetailByConditions(@RequestBody qLjkAccountDetail: QLjkAccountDetail): ResVal {
         val resultList: List<LjkAccountDetail>
         try {
