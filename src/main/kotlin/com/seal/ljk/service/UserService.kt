@@ -3,7 +3,6 @@ package com.seal.ljk.service
 import com.seal.ljk.dao.MenuDao
 import com.seal.ljk.dao.UserDao
 import com.seal.ljk.model.Menu
-import com.seal.ljk.model.RoleMenuList
 import com.seal.ljk.model.User
 import com.seal.ljk.query.QUser
 import org.springframework.beans.factory.annotation.Autowired

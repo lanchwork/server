@@ -4,7 +4,7 @@ import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PlatformStatistics (
+data class PlatformStatistics (
 
 
         var platformStatisticsId:String = "",

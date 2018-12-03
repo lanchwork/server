@@ -2,7 +2,6 @@ package com.seal.ljk.service
 
 import com.seal.ljk.dao.InvestDetailDao
 import com.seal.ljk.model.InvestDetail
-import com.seal.ljk.model.InvestDetailList
 import com.seal.ljk.query.QInvestDetail
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

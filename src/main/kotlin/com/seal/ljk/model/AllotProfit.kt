@@ -1,7 +1,6 @@
 package com.seal.ljk.model
 
 import java.math.BigDecimal
-import java.sql.Timestamp
 
 
 /**
@@ -13,7 +12,7 @@ import java.sql.Timestamp
  *
  * @create: 2018-11-16 11:49
  **/
-class AllotProfit (
+data class AllotProfit (
         var allotProfitId: String = "",
         var partnerId: String = "",
         var sealWalletAddr: String = "",

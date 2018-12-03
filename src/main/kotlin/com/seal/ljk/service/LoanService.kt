@@ -5,7 +5,6 @@ import com.seal.ljk.model.*
 import com.seal.ljk.query.QLoan
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.math.BigDecimal
 
 @Service
 class LoanService {

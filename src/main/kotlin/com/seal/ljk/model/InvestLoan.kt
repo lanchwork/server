@@ -3,7 +3,7 @@ package com.seal.ljk.model
 import java.math.BigDecimal
 import java.util.*
 
-class InvestLoan(
+data class InvestLoan(
         var investorWalletAddr: String = "", //投资人钱包地址
         var investNo: String = "", //投资编号
         var actualLoanAmt: BigDecimal = BigDecimal(0), //实际放款金额
