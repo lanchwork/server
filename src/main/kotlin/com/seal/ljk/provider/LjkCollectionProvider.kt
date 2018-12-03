@@ -1,7 +1,6 @@
 package com.seal.ljk.provider
 
 import com.seal.ljk.query.QLjkCollection
-import com.seal.ljk.query.QSettlement
 import org.apache.ibatis.jdbc.SQL
 
 class LjkCollectionProvider {
