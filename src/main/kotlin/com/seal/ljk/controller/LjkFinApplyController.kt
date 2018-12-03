@@ -4,6 +4,8 @@ import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.LjkFinApply
 import com.seal.ljk.query.QLjkFinApply
 import com.seal.ljk.service.LjkFinApplyService
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
@@ -19,12 +21,14 @@ import org.springframework.web.bind.annotation.*
  **/
 @RestController
 @RequestMapping("/ljkFinApply")
+@Api(description = "融资信息功能相关接口")
 class LjkFinApplyController {
 
     @Autowired
     lateinit var ljkFinApplyService: LjkFinApplyService
 
-    @GetMapping("/queryFinApplyByKey")
+    @PostMapping("/queryFinApplyByKey")
+    @ApiOperation(value = "查询融资申请编号为channelFinApplyId的融资信息")
     fun queryByKey(@RequestParam channelFinApplyId: String): ResVal{
         val resultList: List<LjkFinApply>
         try {
@@ -36,7 +40,8 @@ class LjkFinApplyController {
         return ResVal(0, resultList)
     }
 
-    @RequestMapping("/queryFinApply")
+    @PostMapping("/queryFinApply")
+    @ApiOperation(value = "查询融资统计信息")
     fun query(@RequestBody qLjkFinApply: QLjkFinApply): ResVal{
         val resultList: List<Map<String,String>>
         try {

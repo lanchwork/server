@@ -3,11 +3,10 @@ package com.seal.ljk.controller
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.LjkRiskDetail
 import com.seal.ljk.service.LjkRiskDetailService
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 
 /**
@@ -21,12 +20,14 @@ import org.springframework.web.bind.annotation.RestController
  **/
 @RestController
 @RequestMapping("/ljkRiskDetail")
+@Api(description = "风控详细信息功能相关接口")
 class LjkRiskDetailController {
 
     @Autowired
     lateinit var ljkRiskDetailService: LjkRiskDetailService
 
-    @GetMapping("/getRiskDetailByKey")
+    @PostMapping("/getRiskDetailByKey")
+    @ApiOperation(value = "查询风控详细信息")
     fun getRiskDetailByKey(@RequestParam riskCalculateId: String): ResVal{
         val resultList: List<LjkRiskDetail>
         try {

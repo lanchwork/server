@@ -4,7 +4,10 @@ import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.LjkCustomer
 import com.seal.ljk.query.QLjkCustomer
 import com.seal.ljk.service.LjkCustomerService
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -21,12 +24,14 @@ import org.springframework.web.bind.annotation.RestController
  **/
 @RestController
 @RequestMapping("/ljkCustomer")
+@Api(description = "客户基本信息功能相关接口")
 class LjkCustomerController {
 
     @Autowired
     lateinit var ljkCustomerService: LjkCustomerService
 
-    @RequestMapping("/queryCustomer")
+    @PostMapping("/queryCustomer")
+    @ApiOperation(value = "查询客户基本信息")
     fun query(@RequestBody qLjkCustomer: QLjkCustomer): ResVal{
         val resultList: List<LjkCustomer>
         try {

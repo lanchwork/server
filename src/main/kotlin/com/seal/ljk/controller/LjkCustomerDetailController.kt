@@ -3,11 +3,10 @@ package com.seal.ljk.controller
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.LjkCustomerDetail
 import com.seal.ljk.service.LjkCustomerDetailService
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 
 /**
@@ -21,12 +20,14 @@ import org.springframework.web.bind.annotation.RestController
  **/
 @RestController
 @RequestMapping("/ljkCustomerDetail")
+@Api(description = "客户详细信息功能相关接口")
 class LjkCustomerDetailController {
 
     @Autowired
     lateinit var ljkCustomerDetailService: LjkCustomerDetailService
 
-    @GetMapping("/getCustomerDetailByKey")
+    @PostMapping("/getCustomerDetailByKey")
+    @ApiOperation(value = "查询客户详细信息")
     fun getCustomerDetailByKey(@RequestParam customerId: String): ResVal{
         val resultList: List<LjkCustomerDetail>
         try {

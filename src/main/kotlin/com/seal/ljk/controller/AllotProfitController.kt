@@ -6,10 +6,7 @@ import com.seal.ljk.service.AllotProfitService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.lang.Exception
 
 
@@ -24,14 +21,14 @@ import java.lang.Exception
  **/
 @RestController
 @RequestMapping("/allotProfit")
-@Api(description = "xxxx功能相关接口")
+@Api(description = "分润配置功能相关接口")
 class AllotProfitController {
 
     @Autowired
     lateinit var allotProfitService: AllotProfitService
 
-    @RequestMapping("/getByPartnerId")
-    @ApiOperation(value = "xxxx查询")
+    @PostMapping("/getByPartnerId")
+    @ApiOperation(value = "查询合作方ID为参数partnerId的分润配置")
     fun getByPartnerId(@RequestParam partnerId: String): ResVal{
         val allotProfit: List<AllotProfit>
         try {
@@ -42,8 +39,8 @@ class AllotProfitController {
         return ResVal(0, allotProfit)
     }
 
-    @RequestMapping("/add")
-    @ApiOperation(value = "xxxx创建")
+    @PostMapping("/add")
+    @ApiOperation(value = "创建一条分润配置记录")
     fun create(@RequestBody allotProfit: AllotProfit): ResVal{
         try {
             allotProfitService.create(allotProfit)
@@ -54,7 +51,8 @@ class AllotProfitController {
         return ResVal(0, "success")
     }
 
-    @RequestMapping("/update")
+    @PostMapping("/update")
+    @ApiOperation(value = "更新一条分润配置")
     fun update(@RequestBody allotProfit: AllotProfit): ResVal{
         try {
             allotProfitService.update(allotProfit)
@@ -64,7 +62,8 @@ class AllotProfitController {
         return ResVal(0, "success")
     }
 
-    @RequestMapping("/delete")
+    @PostMapping("/delete")
+    @ApiOperation(value = "删除一条分润配置")
     fun deleteByPartnerId(@RequestParam partnerId: String): ResVal{
         try {
             allotProfitService.deleteByPartnerId(partnerId)

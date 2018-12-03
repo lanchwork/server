@@ -10,10 +10,10 @@ import org.springframework.stereotype.Repository
 @Repository
 interface PlatformStatisticsDao {
 
-    @Select("select * from platform_statistics order by platform_statistics_id desc limit 1")
+    @Select("select * from lc_platform_statistics order by platform_statistics_id desc limit 1")
     fun getPlatformStatisticsLast(): PlatformStatistics?
 
-    @Insert("insert into platform_statistics(platform_statistics_id, " +
+    @Insert("insert into lc_platform_statistics(platform_statistics_id, " +
             "statistics_date, total_trans_amt, total_trans_num, total_income_amt, " +
             "total_bad_debt_num, bad_debt_rate, total_overdue_num, overdue_rate, " +
             "remark) " +
@@ -24,10 +24,10 @@ interface PlatformStatisticsDao {
             "#{platformStatistics.overdueRate},#{platformStatistics.remark})")
     fun createPlatformStatistics(@Param("platformStatistics")  platformStatistics:PlatformStatistics):Int
 
-    @Select("select * from invest_detail")
+    @Select("select * from lc_invest_detail")
     fun getAllInvestDetail():List<InvestDetail>
 
-    @Select("select * from settlement")
+    @Select("select * from lc_settlement")
     fun getAllSettlement():List<Settlement>
 }
 
