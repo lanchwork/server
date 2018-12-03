@@ -3,11 +3,14 @@ package com.seal.ljk.controller
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.InvestSum
 import com.seal.ljk.service.InvestSumService
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/investSum")
+@Api("投资汇总相关功能接口")
 class InvestSumController {
 
     @Autowired
@@ -17,6 +20,7 @@ class InvestSumController {
      * 收益统计数据
      */
     @GetMapping("/byUser")
+    @ApiOperation("根据用户获取收益统计数据")
     fun getInvestSumByUser(@RequestParam userNo: String): ResVal {
         val result: InvestSum
         try {
@@ -32,6 +36,7 @@ class InvestSumController {
      * 我要投资
      */
     @RequestMapping("/want")
+    @ApiOperation("授权投资功能")
     fun saveWantInvest(@RequestBody data: Map<String, Any>): ResVal {
         try {
             investSumService.saveWantInvest(data)

@@ -5,17 +5,21 @@ import com.seal.ljk.model.CompanyInfo
 import com.seal.ljk.model.Partner
 import com.seal.ljk.service.PartnerService
 import com.seal.ljk.query.QPartner
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/partner")
+@Api("合作方相关功能接口")
 class PartnerController {
 
     @Autowired
     lateinit var partnerService: PartnerService
 
     @PostMapping("/byCondition")
+    @ApiOperation("根据界面条件获取合作方")
     fun getPartnerByCondition(@RequestBody qPartner: QPartner): ResVal {
         val resultList: List<Partner>
         try {
@@ -28,6 +32,7 @@ class PartnerController {
     }
 
     @GetMapping("/all")
+    @ApiOperation("获取所有合作方")
     fun getAllPartner(): ResVal {
         val resultList: List<Partner>
         try {
@@ -39,6 +44,7 @@ class PartnerController {
     }
 
     @RequestMapping("/add")
+    @ApiOperation("创建合作方")
     fun createPartner(@RequestBody partner: Partner): ResVal {
         try {
             partnerService.createPartner(partner)
@@ -49,6 +55,7 @@ class PartnerController {
     }
 
     @GetMapping("/delete")
+    @ApiOperation("根据ID删除合作方")
     fun deletePartnerById(@RequestParam partnerId: String): ResVal {
         try {
             val result = partnerService.deletePartnerById(partnerId)
@@ -63,6 +70,7 @@ class PartnerController {
     }
 
     @RequestMapping("/update")
+    @ApiOperation("根据ID更新合作方")
     fun updatePartnerById(@RequestBody partner: Partner): ResVal {
         try {
             partnerService.updatePartnerById(partner)
@@ -73,6 +81,7 @@ class PartnerController {
     }
 
     @GetMapping("/getById")
+    @ApiOperation("根据ID获取合作方")
     fun getPartnerById(@RequestParam partnerId: String): ResVal {
         val result: Partner
         try {
@@ -84,6 +93,7 @@ class PartnerController {
     }
 
     @GetMapping("/list")
+    @ApiOperation("获取合作方的列表")
     fun getPartnerList(@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
         val resultList: List<Partner>
         val currentPageNew = (currentPage - 1) * pageSize
@@ -96,6 +106,7 @@ class PartnerController {
     }
 
     @GetMapping("/getCompanyInfo")
+    @ApiOperation("获取合作方公司信息")
     fun getCompanyInfo(@RequestParam partner: String): ResVal {
         var info: CompanyInfo
         try {
@@ -109,6 +120,7 @@ class PartnerController {
      * 选择合作方
      */
     @RequestMapping("/openPartner")
+    @ApiOperation("获取open状态的合作方")
     fun getOpenPartner():ResVal{
         val resultList: List<Partner>
         try {
