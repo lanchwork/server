@@ -36,7 +36,7 @@ class LjkRepayController {
         return ResVal(0, resultList)
     }
     @ApiOperation(value = "根据channelFinApplyId查询还款信息")
-    @GetMapping("/queryRepayByKey")
+    @PostMapping("/queryRepayByKey")
     fun queryByKey(@RequestParam channelFinApplyId: String): ResVal{
         val resultList: List<LjkRepay>
         try {

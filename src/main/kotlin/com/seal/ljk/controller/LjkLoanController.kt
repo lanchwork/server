@@ -35,7 +35,7 @@ class LjkLoanController {
         }
         return ResVal(0, resultList)
     }
-    @ApiOperation(value = "根据Key查询放款信息查询")
+    @ApiOperation(value = "根据channelFinApplyId查询放款信息查询")
     @PostMapping("queryLoanByKey")
     fun queryByKey(@RequestParam channelFinApplyId: String): ResVal{
         val resultList: List<LjkLoan>
