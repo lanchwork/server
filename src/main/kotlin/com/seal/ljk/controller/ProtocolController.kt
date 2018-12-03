@@ -1,7 +1,6 @@
 package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
-import com.seal.ljk.dao.ProtocolDao
 import com.seal.ljk.model.Protocol
 import com.seal.ljk.service.ProtocolService
 import org.springframework.beans.factory.annotation.Autowired

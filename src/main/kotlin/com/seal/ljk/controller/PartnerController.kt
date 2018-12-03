@@ -1,7 +1,6 @@
 package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
-import com.seal.ljk.dao.PartnerDao
 import com.seal.ljk.model.CompanyInfo
 import com.seal.ljk.model.Partner
 import com.seal.ljk.service.PartnerService

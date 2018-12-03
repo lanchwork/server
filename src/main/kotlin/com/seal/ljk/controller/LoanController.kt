@@ -2,7 +2,6 @@ package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.InvestLoan
-import com.seal.ljk.model.Loan
 import com.seal.ljk.model.LoanList
 import com.seal.ljk.query.QLoan
 import com.seal.ljk.service.LoanService

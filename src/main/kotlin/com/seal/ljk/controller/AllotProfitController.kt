@@ -1,7 +1,6 @@
 package com.seal.ljk.controller
 
 import com.seal.ljk.common.ResVal
-import com.seal.ljk.dao.AllotProfitDao
 import com.seal.ljk.model.AllotProfit
 import com.seal.ljk.service.AllotProfitService
 import org.springframework.beans.factory.annotation.Autowired
