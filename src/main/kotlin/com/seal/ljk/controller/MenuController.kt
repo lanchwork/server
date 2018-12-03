@@ -7,6 +7,8 @@ import com.seal.ljk.model.RoleMenuList
 import com.seal.ljk.model.User
 import com.seal.ljk.service.MenuService
 import com.seal.ljk.service.UserService
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.lang.Exception
@@ -16,6 +18,7 @@ import java.lang.Exception
  */
 @RestController
 @RequestMapping("/menu")
+@Api(description = "菜单管理功能相关接口")
 class MenuController {
 
     @Autowired
@@ -27,6 +30,7 @@ class MenuController {
      * 菜单新增
      */
     @RequestMapping("/add")
+    @ApiOperation(value = "菜单新增")
     fun createMenu(@RequestBody menu: Menu): ResVal{
         try {
             menuService.createMenu(menu)
@@ -41,6 +45,7 @@ class MenuController {
      * 菜单删除
      */
     @GetMapping("/delete")
+    @ApiOperation(value = "菜单删除")
     fun deleteMenuById(@RequestParam menuId: String): ResVal {
         try {
             menuService.deleteMenuById(menuId)
@@ -55,6 +60,7 @@ class MenuController {
      * 菜单更新
      */
     @RequestMapping("/update")
+    @ApiOperation(value = "菜单更新")
     fun updateMenu(@RequestBody menu: Menu): ResVal {
         try {
             menuService.updateMenu(menu)
@@ -69,6 +75,7 @@ class MenuController {
      * 查询菜单列表
      */
     @GetMapping("/list")
+    @ApiOperation(value = "查询菜单列表")
     fun getMenuList(@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
         val resultList: List<Menu>
         val currentPageNew = (currentPage - 1) * pageSize
@@ -85,6 +92,7 @@ class MenuController {
      * 角色菜单权限配置
      */
     @RequestMapping("/batchUpdate")
+    @ApiOperation(value = "角色菜单权限配置")
     fun updateRoleMenu(@RequestBody roleMenuList: RoleMenuList): ResVal {
         try {
             menuService.updateRoleMenu(roleMenuList)
@@ -99,6 +107,7 @@ class MenuController {
      * 角色菜单权限展示列表
      */
     @GetMapping("/queryMenuByRoleId")
+    @ApiOperation(value = "角色菜单权限展示列表")
     fun queryRoleMenu(@RequestParam  roleId: Int): ResVal {
         val resultList: List<RoleMenu>
         try {
@@ -113,6 +122,7 @@ class MenuController {
      * 根据用户对象的用户Id查询菜单权限
      */
     @PostMapping("/getMenuListByUser")
+    @ApiOperation(value = "根据用户对象的用户Id查询菜单权限")
     fun getMenuListByUser(@RequestBody  user: User): ResVal {
         var resultList:HashMap<String, Any>
         try {

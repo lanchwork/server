@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/settlement")
-@Api("结算相关功能接口")
+@Api(description = "结算功能相关接口")
 class SettlementController {
 
     @Autowired
@@ -24,7 +24,7 @@ class SettlementController {
      * 根据用户标识查询待结算明细
      * */
     @RequestMapping("/getSettlementList")
-    @ApiOperation("根据用户标识查询待结算明细")
+    @ApiOperation(value = "根据用户标识查询待结算明细")
     fun getSettlementListByUserNo(@RequestBody qSettlement: QSettlement): ResVal {
         val resultList: List<Settlement>
         try {
@@ -40,7 +40,6 @@ class SettlementController {
      * 申请结算
      */
     @RequestMapping("/apply")
-    @ApiOperation("申请结算")
     fun saveApplySettlement(@RequestBody data: Map<String, Any>): ResVal {
         try {
             settlementService.saveApplySettlement(data)
@@ -55,7 +54,6 @@ class SettlementController {
      * 结算
      */
     @RequestMapping("/want")
-    @ApiOperation("结算")
     fun saveWantSettlement(@RequestBody data: Map<String, Any>): ResVal {
         try {
             settlementService.saveWantSettlement(data)
@@ -70,7 +68,7 @@ class SettlementController {
      *  结算待处理明细条件查询
      * */
     @RequestMapping("/querySettlementList")
-    @ApiOperation("结算待处理明细条件查询")
+    @ApiOperation(value = "结算待处理明细条件查询")
     fun querySettlementByConditions(@RequestBody qSettlement: QSettlement): ResVal {
         val resultList: List<InvestSettlement>
         try {

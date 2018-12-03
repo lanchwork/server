@@ -4,6 +4,8 @@ import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.LjkRepay
 import com.seal.ljk.query.QLjkRepay
 import com.seal.ljk.service.LjkRepayService
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*
  * **/
 @RestController
 @RequestMapping("/ljkRepay")
+@Api(description = "xxxx功能相关接口")
 class LjkRepayController {
 
     @Autowired
@@ -20,6 +23,7 @@ class LjkRepayController {
     /**
      * 还款信息条件查询
      * **/
+    @ApiOperation(value = "还款信息条件查询")
     @RequestMapping("/queryLjkRepay")
     fun queryLjkRepayByConditions(@RequestBody qLjkRepay: QLjkRepay): ResVal {
         val resultList: List<LjkRepay>
@@ -31,7 +35,7 @@ class LjkRepayController {
         }
         return ResVal(0, resultList)
     }
-
+    @ApiOperation(value = "xxxx查询")
     @GetMapping("/queryRepayByKey")
     fun queryByKey(@RequestParam channelFinApplyId: String): ResVal{
         val resultList: List<LjkRepay>
