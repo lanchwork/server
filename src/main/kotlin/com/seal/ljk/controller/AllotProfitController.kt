@@ -3,6 +3,8 @@ package com.seal.ljk.controller
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.AllotProfit
 import com.seal.ljk.service.AllotProfitService
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -22,12 +24,14 @@ import java.lang.Exception
  **/
 @RestController
 @RequestMapping("/allotProfit")
+@Api(description = "xxxx功能相关接口")
 class AllotProfitController {
 
     @Autowired
     lateinit var allotProfitService: AllotProfitService
 
     @RequestMapping("/getByPartnerId")
+    @ApiOperation(value = "xxxx查询")
     fun getByPartnerId(@RequestParam partnerId: String): ResVal{
         val allotProfit: List<AllotProfit>
         try {
@@ -39,6 +43,7 @@ class AllotProfitController {
     }
 
     @RequestMapping("/add")
+    @ApiOperation(value = "xxxx创建")
     fun create(@RequestBody allotProfit: AllotProfit): ResVal{
         try {
             allotProfitService.create(allotProfit)
