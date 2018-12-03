@@ -1,6 +1,5 @@
 package com.seal.ljk.provider
 
-import com.seal.ljk.query.QDataDetail
 import com.seal.ljk.query.QDataDetailBusiness
 import org.apache.ibatis.jdbc.SQL
 
