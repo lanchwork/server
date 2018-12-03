@@ -40,6 +40,7 @@ class SettlementController {
      * 申请结算
      */
     @RequestMapping("/apply")
+    @ApiOperation("申请结算")
     fun saveApplySettlement(@RequestBody data: Map<String, Any>): ResVal {
         try {
             settlementService.saveApplySettlement(data)
@@ -54,6 +55,7 @@ class SettlementController {
      * 结算
      */
     @RequestMapping("/want")
+    @ApiOperation("结算")
     fun saveWantSettlement(@RequestBody data: Map<String, Any>): ResVal {
         try {
             settlementService.saveWantSettlement(data)
