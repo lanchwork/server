@@ -5,7 +5,7 @@ import org.apache.ibatis.jdbc.SQL
 
 class UserProvider {
 
-    private val USER = "user"
+    private val USER = "lc_user"
 
     fun queryUser(qUser: QUser): String{
         val sql:SQL = SQL().SELECT("id,username,password,channel_mark,name,phone,email,role_type,start_flag,create_date,create_user,update_date,update_user").FROM(USER)

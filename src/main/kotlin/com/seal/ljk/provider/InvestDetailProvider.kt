@@ -5,7 +5,7 @@ import org.apache.ibatis.jdbc.SQL
 
 class InvestDetailProvider {
 
-    private val INVEST_DETAIL = "invest_detail"
+    private val INVEST_DETAIL = "lc_invest_detail"
 
     fun queryAuthorizeInvestDetail(qInvestDetail: QInvestDetail): String{
         val element = " investor_wallet_addr,  invest_amt, invest_period, expect_day_rate, invest_date, partner_id, partner_wallet_addr, invest_no "

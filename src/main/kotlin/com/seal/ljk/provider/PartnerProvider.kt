@@ -5,7 +5,7 @@ import org.apache.ibatis.jdbc.SQL
 
 class PartnerProvider {
 
-    private val PARTNER = "partner"
+    private val PARTNER = "lc_partner"
 
     fun getPartnerByCondition(qPartner: QPartner): String {
         val element = " * "

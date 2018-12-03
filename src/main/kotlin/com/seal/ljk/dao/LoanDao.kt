@@ -18,12 +18,12 @@ interface LoanDao {
     @SelectProvider(type = LoanProvider::class, method = "queryInvestLoanByConditions")
     fun queryInvestLoanByConditions(qLoan: QLoan): List<InvestLoan>
 
-    @Select("select sum(investor_profit) FROM loan  where invest_no=#{investNo} AND status=2")
+    @Select("select sum(investor_profit) FROM lc_loan  where invest_no=#{investNo} AND status=2")
     fun getInvestorProfitAndStatus2Sum(investNo: String): BigDecimal
 
-    @Select("select sum(repay_amt) FROM loan  where invest_no=#{investNo} AND status=1")
+    @Select("select sum(repay_amt) FROM lc_loan  where invest_no=#{investNo} AND status=1")
     fun getRepayAmtAndStatus1Sum(investNo: String): BigDecimal
 
-    @Select("select investor_profit, seal_profit from loan where invest_no=#{investNo}")
+    @Select("select investor_profit, seal_profit from lc_loan where invest_no=#{investNo}")
     fun getProfit(investNo: String): Map<String, BigDecimal>
 }

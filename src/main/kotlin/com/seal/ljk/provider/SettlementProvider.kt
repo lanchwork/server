@@ -5,7 +5,7 @@ import org.apache.ibatis.jdbc.SQL
 
 class SettlementProvider {
 
-    private val SETTLEMENT = "settlement"
+    private val SETTLEMENT = "lc_settlement"
 
     fun getSettlementListByUserNo(qSettlement: QSettlement): String{
         val sql:SQL = SQL().SELECT("*").FROM(SETTLEMENT)

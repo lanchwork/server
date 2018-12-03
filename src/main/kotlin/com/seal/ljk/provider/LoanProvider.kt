@@ -5,7 +5,7 @@ import org.apache.ibatis.jdbc.SQL
 
 class LoanProvider {
 
-    private val LOAN = "loan"
+    private val LOAN = "lc_loan"
 
     fun getLoanListByInvestNo(qLoan: QLoan): String{
         val sql:SQL = SQL().SELECT("*").FROM(LOAN)
@@ -23,7 +23,7 @@ class LoanProvider {
     }
 
     fun queryInvestLoanByConditions(qLoan: QLoan): String{
-        val sql:SQL = SQL().SELECT("* from invest_detail i LEFT JOIN loan l on i.invest_no=l.invest_no")
+        val sql:SQL = SQL().SELECT("* from lc_invest_detail i LEFT JOIN lc_loan l on i.invest_no=l.invest_no")
 
         /*查询条件*/
         val investorWalletAddr = qLoan.investorWalletAddr
