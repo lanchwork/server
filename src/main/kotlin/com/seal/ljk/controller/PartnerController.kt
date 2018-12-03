@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/partner")
-@Api("合作方相关功能接口")
+@Api(description = "合作方相关功能接口")
 class PartnerController {
 
     @Autowired
     lateinit var partnerService: PartnerService
 
     @PostMapping("/byCondition")
-    @ApiOperation("根据界面条件获取合作方")
+    @ApiOperation(value = "根据界面条件获取合作方")
     fun getPartnerByCondition(@RequestBody qPartner: QPartner): ResVal {
         val resultList: List<Partner>
         try {
@@ -31,8 +31,8 @@ class PartnerController {
         return ResVal(0, resultList)
     }
 
-    @GetMapping("/all")
-    @ApiOperation("获取所有合作方")
+    @PostMapping("/all")
+    @ApiOperation(value = "获取所有合作方")
     fun getAllPartner(): ResVal {
         val resultList: List<Partner>
         try {
@@ -43,8 +43,8 @@ class PartnerController {
         return ResVal(0, resultList)
     }
 
-    @RequestMapping("/add")
-    @ApiOperation("创建合作方")
+    @PostMapping("/add")
+    @ApiOperation(value = "创建合作方")
     fun createPartner(@RequestBody partner: Partner): ResVal {
         try {
             partnerService.createPartner(partner)
@@ -54,8 +54,8 @@ class PartnerController {
         return ResVal(0, "success")
     }
 
-    @GetMapping("/delete")
-    @ApiOperation("根据ID删除合作方")
+    @PostMapping("/delete")
+    @ApiOperation(value = "根据ID删除合作方")
     fun deletePartnerById(@RequestParam partnerId: String): ResVal {
         try {
             val result = partnerService.deletePartnerById(partnerId)
@@ -69,8 +69,8 @@ class PartnerController {
         return ResVal(0, "success")
     }
 
-    @RequestMapping("/update")
-    @ApiOperation("根据ID更新合作方")
+    @PostMapping("/update")
+    @ApiOperation(value = "根据ID更新合作方")
     fun updatePartnerById(@RequestBody partner: Partner): ResVal {
         try {
             partnerService.updatePartnerById(partner)
@@ -80,8 +80,8 @@ class PartnerController {
         return ResVal(0, "success")
     }
 
-    @GetMapping("/getById")
-    @ApiOperation("根据ID获取合作方")
+    @PostMapping("/getById")
+    @ApiOperation(value = "根据ID获取合作方")
     fun getPartnerById(@RequestParam partnerId: String): ResVal {
         val result: Partner
         try {
@@ -92,8 +92,8 @@ class PartnerController {
         return ResVal(0, result)
     }
 
-    @GetMapping("/list")
-    @ApiOperation("获取合作方的列表")
+    @PostMapping("/list")
+    @ApiOperation(value = "获取合作方的列表")
     fun getPartnerList(@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
         val resultList: List<Partner>
         val currentPageNew = (currentPage - 1) * pageSize
@@ -105,8 +105,8 @@ class PartnerController {
         return ResVal(0, resultList)
     }
 
-    @GetMapping("/getCompanyInfo")
-    @ApiOperation("获取合作方公司信息")
+    @PostMapping("/getCompanyInfo")
+    @ApiOperation(value = "获取合作方公司信息")
     fun getCompanyInfo(@RequestParam partner: String): ResVal {
         var info: CompanyInfo
         try {
@@ -119,8 +119,8 @@ class PartnerController {
     /**
      * 选择合作方
      */
-    @RequestMapping("/openPartner")
-    @ApiOperation("获取open状态的合作方")
+    @PostMapping("/openPartner")
+    @ApiOperation(value = "获取open状态的合作方")
     fun getOpenPartner():ResVal{
         val resultList: List<Partner>
         try {

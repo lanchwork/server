@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*
  **/
 @RestController
 @RequestMapping("/partner")
-@Api(description = "合作方统计信息的功能相关接口")
+@Api(description = "合作方统计信息功能相关接口")
 class PartnerStatisticsController {
 
     @Autowired

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*
  * **/
 @RestController
 @RequestMapping("/ljkLoan")
-@Api(description = "xxxx功能相关接口")
+@Api(description = "放款信息功能相关接口")
 class LjkLoanController {
 
     @Autowired

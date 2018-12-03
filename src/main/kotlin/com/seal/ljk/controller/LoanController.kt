@@ -22,7 +22,7 @@ class LoanController {
     /**
      *  根据投资编号查询放款明细
      * */
-    @RequestMapping("/getLoanList")
+    @PostMapping("/getLoanList")
     @ApiOperation(value = "根据投资编号查询放款明细")
     fun getLoanListByInvestNo(@RequestBody qLoan: QLoan): ResVal {
         val resultList: LoanList
@@ -38,7 +38,7 @@ class LoanController {
     /**
      *  实际放款明细条件查询
      * */
-    @RequestMapping("/queryInvestLoanList")
+    @PostMapping("/queryInvestLoanList")
     @ApiOperation(value = "实际放款明细条件查询")
     fun queryInvestLoanByConditions(@RequestBody qLoan: QLoan): ResVal {
         val resultList: List<InvestLoan>

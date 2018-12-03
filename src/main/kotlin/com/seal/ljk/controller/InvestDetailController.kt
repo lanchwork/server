@@ -12,7 +12,7 @@ import java.lang.Exception
 
 @RestController
 @RequestMapping("/investDetail")
-@Api("投资明细相关功能接口")
+@Api(description = "投资明细相关功能接口")
 class InvestDetailController {
 
     @Autowired
@@ -22,7 +22,7 @@ class InvestDetailController {
      * 授权投资明细查询
      */
     @PostMapping("/authorizeInvestDetail")
-    @ApiOperation("授权投资明细查询")
+    @ApiOperation(value = "授权投资明细查询")
     fun queryAuthorizeInvestDetail(@RequestBody qInvestDetail: QInvestDetail): ResVal {
         val resultList: List<InvestDetail>
         try {
@@ -38,7 +38,7 @@ class InvestDetailController {
      * 投资列表
      */
     @PostMapping("/byUser")
-    @ApiOperation("根据用户获取投资列表")
+    @ApiOperation(value = "根据用户获取投资列表")
     fun getInvestDetailByUser(@RequestParam userNo: String): ResVal {
         val resultList: List<InvestDetail>
         try {
@@ -51,8 +51,8 @@ class InvestDetailController {
     }
 
     /*已投资未回款列表*/
-    @GetMapping("/nonReturnList")
-    @ApiOperation("已投资未回款列表")
+    @PostMapping("/nonReturnList")
+    @ApiOperation(value = "已投资未回款列表")
     fun getNonReturnList(@RequestParam investorWalletAddr: String,@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
         val resultList: List<InvestDetail>
         val currentPageNew = (currentPage - 1) * pageSize
