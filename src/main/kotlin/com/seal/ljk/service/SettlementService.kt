@@ -1,6 +1,7 @@
 package com.seal.ljk.service
 
 import com.seal.ljk.common.Constant
+import com.seal.ljk.dao.LoanDao
 import com.seal.ljk.dao.SettlementDao
 import com.seal.ljk.dao.SettlementSumDao
 import com.seal.ljk.model.InvestDetail
@@ -28,6 +29,9 @@ open class SettlementService {
 
     @Autowired
     lateinit var investDetailService: InvestDetailService
+
+    @Autowired
+    lateinit var loanDao: LoanDao
 
     open fun getSettlementListByUserNo(qSettlement: QSettlement): List<Settlement> {
         return settlementDao.getSettlementListByUserNo(qSettlement)
@@ -82,10 +86,12 @@ open class SettlementService {
         settlement.applySettleAmt = BigDecimal(settlementAmt)
         settlement.applyTime = Date()
         settlement.settlePrincipal = BigDecimal(settlePrincipal)
+        // 分润是在新增放款表数据的时候生成的
+        val profitMap = loanDao.getProfit(investNo)
         // 投资人分润=实际放款利息*（1-合作方分润比例）*投资人分润比例
-        settlement.investorProfit
+        settlement.investorProfit = profitMap["investorProfit"]!!
         // Seal分润=实际放款利息*（1-合作方分润比例）*Seal分润比例
-        settlement.sealProfit
+        settlement.sealProfit = profitMap["sealProfit"]!!
         settlement.status = Constant.SETTLE_STATUS.APPLY
         settlement.settleTime
         settlement.chainTransNo

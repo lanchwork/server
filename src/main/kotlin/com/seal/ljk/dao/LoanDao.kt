@@ -24,5 +24,6 @@ interface LoanDao {
     @Select("select sum(repay_amt) FROM loan  where invest_no=#{investNo} AND status=1")
     fun getRepayAmtAndStatus1Sum(investNo: String): BigDecimal
 
-
+    @Select("select investor_profit, seal_profit from loan where invest_no=#{investNo}")
+    fun getProfit(investNo: String): Map<String, BigDecimal>
 }

@@ -4,12 +4,15 @@ import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.InvestDetail
 import com.seal.ljk.query.QInvestDetail
 import com.seal.ljk.service.InvestDetailService
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.lang.Exception
 
 @RestController
 @RequestMapping("/investDetail")
+@Api("投资明细相关功能接口")
 class InvestDetailController {
 
     @Autowired
@@ -19,6 +22,7 @@ class InvestDetailController {
      * 授权投资明细查询
      */
     @PostMapping("/authorizeInvestDetail")
+    @ApiOperation("授权投资明细查询")
     fun queryAuthorizeInvestDetail(@RequestBody qInvestDetail: QInvestDetail): ResVal {
         val resultList: List<InvestDetail>
         try {
@@ -34,6 +38,7 @@ class InvestDetailController {
      * 投资列表
      */
     @PostMapping("/byUser")
+    @ApiOperation("根据用户获取投资列表")
     fun getInvestDetailByUser(@RequestParam userNo: String): ResVal {
         val resultList: List<InvestDetail>
         try {
@@ -47,6 +52,7 @@ class InvestDetailController {
 
     /*已投资未回款列表*/
     @GetMapping("/nonReturnList")
+    @ApiOperation("已投资未回款列表")
     fun getNonReturnList(@RequestParam investorWalletAddr: String,@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
         val resultList: List<InvestDetail>
         val currentPageNew = (currentPage - 1) * pageSize
