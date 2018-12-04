@@ -1,6 +1,7 @@
 package com.seal.ljk.service
 
 import com.seal.ljk.common.Constant
+import com.seal.ljk.common.HttpUtil
 import com.seal.ljk.dao.LoanDao
 import com.seal.ljk.dao.SettlementDao
 import com.seal.ljk.dao.SettlementSumDao
@@ -12,11 +13,12 @@ import com.seal.ljk.query.QSettlement
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.lang.RuntimeException
 import java.math.BigDecimal
 import java.util.*
 
 @Service
-open class SettlementService {
+class SettlementService {
 
     @Autowired
     lateinit var settlementDao: SettlementDao
@@ -33,7 +35,7 @@ open class SettlementService {
     @Autowired
     lateinit var loanDao: LoanDao
 
-    open fun getSettlementListByUserNo(qSettlement: QSettlement): List<Settlement> {
+    fun getSettlementListByUserNo(qSettlement: QSettlement): List<Settlement> {
         return settlementDao.getSettlementListByUserNo(qSettlement)
     }
 
@@ -41,7 +43,7 @@ open class SettlementService {
      * 申请结算
      */
     @Transactional
-    open fun saveApplySettlement(data: Map<String, Any>) {
+    fun saveApplySettlement(data: Map<String, Any>) {
         // 生成结算
         val settlement = this.buildSettlement4Apply(data)
         settlementDao.createSettlement(settlement)
@@ -54,8 +56,11 @@ open class SettlementService {
      * 结算
      */
     @Transactional
-    open fun saveWantSettlement(data: Map<String, Any>) {
-        // 请求主链交易接口
+    fun saveWantSettlement(data: Map<String, Any>) {
+
+        // 调用主链接口
+        // val signedTx = data["signedTx"].toString()
+        // this.doWalletApi(signedTx)
 
         // 更新结算表
         val settlement = this.buildSettlement4Settle(data)
@@ -67,6 +72,16 @@ open class SettlementService {
         // 更新投资表
         val investDetail = this.buildInvestDetail(settlement)
         investDetailService.updateInvestDetailById(investDetail)
+    }
+
+    private fun doWalletApi(signedTx: String) {
+        val data = mutableMapOf<String, Any>()
+        data["signedTx"] = signedTx
+        val request = HttpUtil.postRequest(Constant.IMPORTER_URL, data)
+        val response = HttpUtil.getRawResponse(request)
+        if (!response.isSuccessful) {
+            throw RuntimeException("======== TRANS ERROR! ========")
+        }
     }
 
     private fun buildSettlement4Apply(data: Map<String, Any>): Settlement {
@@ -154,7 +169,7 @@ open class SettlementService {
         }
     }
 
-    open fun querySettlementByConditions(qSettlement: QSettlement): List<InvestSettlement> {
+    fun querySettlementByConditions(qSettlement: QSettlement): List<InvestSettlement> {
         return settlementDao.querySettlementByConditions(qSettlement)
     }
 }

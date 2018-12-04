@@ -2,13 +2,8 @@ package com.seal.ljk.common
 
 object Constant {
 
-    // 交易类型
-    object TRANS_TYPE {
-        const val LOAN = "01"
-        const val INVEST = "02"
-        const val REPAY = "03"
-        const val PAYBACK = "04"
-    }
+    // importer接口地址
+    val IMPORTER_URL = "http://39.104.136.10:6526/api/txs/signed"
 
     // 结算状态
     object SETTLE_STATUS {
