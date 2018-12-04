@@ -18,7 +18,7 @@ class DelegateService {
     }
 
     fun createDelegate(delegate:Delegate) : Int {
-
+        delegate.delegateId = UUID.randomUUID().toString().substring(0, 20) //主键
         delegate.createUser = "System"            //创建人
         delegate.createDate = Date()              //创建时间
         return delegateDao.createDelegate( delegate)

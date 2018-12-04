@@ -84,8 +84,7 @@ class DelegateController {
     fun getList(@RequestParam("currentPage") currentPage : Int, @RequestParam("pageSize") pageSize : Int) : ResVal {
         val delegates : List<Delegate>
         try {
-            val currentPageNew = (currentPage - 1) * pageSize
-            delegates = delegateService.getDelegateList(currentPageNew, pageSize)
+            delegates = delegateService.getDelegateList(currentPage, pageSize)
         }catch (e : Exception){
             return ResVal(1,"Data Access Error!")
         }
