@@ -82,10 +82,10 @@ class PartnerController {
 
     @PostMapping("/getById")
     @ApiOperation(value = "根据ID获取合作方")
-    fun getPartnerById(@RequestParam partnerId: String): ResVal {
+    fun getPartnerById(@RequestBody partner: Partner): ResVal {
         val result: Partner
         try {
-            result = partnerService.getPartnerById(partnerId)
+            result = partnerService.getPartnerById(partner.partnerId)
         } catch (e: Exception) {
             return ResVal(1, "Data Access Error!")
         }
@@ -94,11 +94,11 @@ class PartnerController {
 
     @PostMapping("/list")
     @ApiOperation(value = "获取合作方的列表")
-    fun getPartnerList(@RequestParam currentPage: Int, @RequestParam pageSize: Int): ResVal {
+    fun getPartnerList(@RequestBody qPartner: QPartner): ResVal {
         val resultList: List<Partner>
-        val currentPageNew = (currentPage - 1) * pageSize
+        val currentPageNew = (qPartner.currentPage - 1) * qPartner.pageSize
         try {
-            resultList = partnerService.getPartnerList(currentPageNew, pageSize)
+            resultList = partnerService.getPartnerList(currentPageNew, qPartner.pageSize)
         } catch (e: Exception) {
             return ResVal(1, "Data Access Error!")
         }

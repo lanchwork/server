@@ -26,6 +26,9 @@ interface AllotProfitDao {
     @Delete("delete from lc_allot_profit where partner_Id = #{partnerId}")
     fun deleteByPartnerId(@Param("partnerId") partnerId: String): Int
 
+    @Select("select * from lc_allot_profit limit #{currentPage}, #{pageSize}")
+    fun getAllotProfitList(@Param("currentPage") currentPage : Int, @Param("pageSize") pageSize : Int): List<AllotProfit>
+
 }
 
 

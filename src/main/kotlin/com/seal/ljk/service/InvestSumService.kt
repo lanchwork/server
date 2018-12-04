@@ -7,11 +7,12 @@ import com.seal.ljk.model.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.lang.RuntimeException
 import java.math.BigDecimal
 import java.util.*
 
 @Service
-open class InvestSumService {
+class InvestSumService {
 
     @Autowired
     lateinit var investSumDao: InvestSumDao
@@ -31,10 +32,11 @@ open class InvestSumService {
      * data: 合作方钱包地址/合作方ID/投资金额
      */
     @Transactional
-    open fun saveWantInvest(data: Map<String, Any>) {
+    fun saveWantInvest(data: Map<String, Any>) {
 
         // 调用主链接口
-        // this.doWalletApi()
+        // val signedTx = data["signedTx"].toString()
+        // this.doWalletApi(signedTx)
 
         // 生成投资明细表
         val investDetail = this.buildInvestDetail(data)
@@ -45,10 +47,14 @@ open class InvestSumService {
 
     }
 
-    private fun doWalletApi() {
-        val data = mapOf<String, Any>()
-        val request = HttpUtil.postRequest("", data)
-        val result = HttpUtil.sendRequest(request)
+    private fun doWalletApi(signedTx: String) {
+        val data = mutableMapOf<String, Any>()
+        data["signedTx"] = signedTx
+        val request = HttpUtil.postRequest(Constant.IMPORTER_URL, data)
+        val response = HttpUtil.getRawResponse(request)
+        if (!response.isSuccessful) {
+            throw RuntimeException("======== TRANS ERROR! ========")
+        }
     }
 
     private fun buildInvestDetail(data: Map<String, Any>): InvestDetail {

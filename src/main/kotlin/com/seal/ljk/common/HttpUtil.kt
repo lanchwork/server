@@ -2,12 +2,13 @@ package com.seal.ljk.common
 
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.JSONObject
-import com.seal.ljk.common.HttpUtil.get
-import com.seal.ljk.common.HttpUtil.getRequest
-import com.seal.ljk.common.HttpUtil.post
-import com.seal.ljk.common.HttpUtil.sendRequest
 import okhttp3.*
 import java.io.IOException
+import kotlin.collections.Map
+import kotlin.collections.forEach
+import kotlin.collections.mutableMapOf
+import kotlin.collections.set
+
 
 val client: OkHttpClient = OkHttpClient()
 val JSON_TYPE: MediaType = MediaType.parse("application/json; charset=utf-8")
@@ -54,6 +55,10 @@ object HttpUtil {
         return JSON.parseObject(result)
     }
 
+    fun getRawResponse(request: Request): Response {
+        return client.newCall(request).execute()
+    }
+
     // 带回调函数
     fun sendRequest(request: Request, callback: Callback) {
         client.newCall(request).enqueue(callback)
@@ -74,19 +79,11 @@ interface JsonCallback : Callback {
 
 
 fun main(args: Array<String>) {
-    val getUrl = "http://localhost:9999/partner/all"
-    val postUrl = "http://localhost:9999/investDetail/walletInvestDetail"
-    val postJson = "{\"investorWalletAddr\":\"2\"}"
-    println(get(getUrl))
-    println(post(postUrl, postJson))
-
-    val postParams = mapOf("2" to "investorWalletAddr")
-    val request = getRequest(getUrl, postParams)
-    sendRequest(request, object : JsonCallback {})
-
-    val result = sendRequest(request)
-    val datas = result.getJSONArray("data")
-    datas.forEach {
-        print(it)
+    val data = mutableMapOf<String, Any>()
+    data["signedTx"] = "23242"
+    val request = HttpUtil.postRequest(Constant.IMPORTER_URL, data)
+    val response = HttpUtil.getRawResponse(request)
+    if (!response.isSuccessful) {
+        throw RuntimeException("TRANS ERROR!")
     }
 }

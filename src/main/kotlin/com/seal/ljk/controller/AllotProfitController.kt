@@ -73,4 +73,16 @@ class AllotProfitController {
         return ResVal(0, "success")
     }
 
+    @PostMapping("/list")
+    @ApiOperation(value = "查询第currentPage页的pageSize条分润配置记录")
+    fun getList(@RequestParam("currentPage") currentPage : Int, @RequestParam("pageSize") pageSize : Int) : ResVal {
+        val allotProfit : List<AllotProfit>
+        try {
+            allotProfit = allotProfitService.getAllotProfitList(currentPage, pageSize)
+        }catch (e : Exception){
+            return ResVal(1,"Data Access Error!")
+        }
+        return ResVal(0,allotProfit)
+    }
+
 }
