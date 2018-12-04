@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.SettlementSum
 import com.seal.ljk.service.SettlementSumService
@@ -26,7 +27,7 @@ class SettlementSumController {
         try {
             result = settlementSumService.getSettlementSumByUser(userNo)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, result)

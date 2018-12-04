@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.Role
 import com.seal.ljk.service.RoleService
@@ -29,7 +30,7 @@ class RoleController {
         try {
             roleService.createRole(role)
         } catch (e: Exception){
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -44,7 +45,7 @@ class RoleController {
         try {
             roleService.deleteRoleById(roleId)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -59,7 +60,7 @@ class RoleController {
         try {
             roleService.updateRole(role)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -76,7 +77,7 @@ class RoleController {
         try {
             resultList = roleService.getRoleList(currentPageNew, pageSize)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)

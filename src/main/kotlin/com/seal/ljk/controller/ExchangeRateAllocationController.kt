@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.ExchangeRateAllocation
 import com.seal.ljk.service.ExchangeRateAllocationService
@@ -27,7 +28,7 @@ class ExchangeRateAllocationController {
         try {
             resultList=exchangeRateAllocationService.getAllExchangeRate()
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -43,7 +44,7 @@ class ExchangeRateAllocationController {
         try {
             exchangeRateAllocationService.createExchangeRate(exchangeRateAllocation)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "ok")
@@ -56,7 +57,7 @@ class ExchangeRateAllocationController {
         try {
             exchangeRateAllocationService.updateExchangeRateById(exchangeRateAllocation)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "ok")
@@ -72,7 +73,7 @@ class ExchangeRateAllocationController {
         try {
             resultList = exchangeRateAllocationService.getExchangeRateByCurrency(currency)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)

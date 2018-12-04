@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.InvestDetail
 import com.seal.ljk.query.QInvestDetail
@@ -28,7 +29,7 @@ class InvestDetailController {
         try {
             resultList = investDetailService.queryAuthorizeInvestDetail(qInvestDetail)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -44,7 +45,7 @@ class InvestDetailController {
         try {
             resultList = investDetailService.getInvestDetailByUser(userNo)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -59,7 +60,7 @@ class InvestDetailController {
         try {
             resultList=investDetailService.getNonReturnList(investorWalletAddr,currentPageNew, pageSize)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)

@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.Reconciliation
 import com.seal.ljk.query.QReconciliation
@@ -24,6 +25,7 @@ class ReconciliationController {
         try {
             resultList = reconciliationService.getAllReconciliation()
         } catch (e: Exception) {
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -36,6 +38,7 @@ class ReconciliationController {
         try {
             result = reconciliationService.getReconciliationById(partnerId)
         } catch (e: Exception) {
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, result)
@@ -49,6 +52,7 @@ class ReconciliationController {
         try {
             resultList = reconciliationService.getReconciliationList(currentPageNew, pageSize)
         } catch (e: Exception) {
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -61,7 +65,7 @@ class ReconciliationController {
         try {
             resultList = reconciliationService.getReconciliationByCondition(qReconciliation)
         } catch (e: java.lang.Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)

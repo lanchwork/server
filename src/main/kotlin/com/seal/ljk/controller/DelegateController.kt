@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.Delegate
 import com.seal.ljk.model.Partner
@@ -25,6 +26,7 @@ class DelegateController {
         try {
             delegates = delegateService.getAllDelegate()
         }catch (e : Exception){
+            logger.error("错误信息"+e.toString())
             return ResVal(1,"Data Access Error!")
         }
         return ResVal(0,delegates)
@@ -36,7 +38,7 @@ class DelegateController {
            try {
                delegateService.createDelegate(delegate)
            }catch (e : Exception){
-               e.printStackTrace()
+               logger.error("错误信息"+e.toString())
                return ResVal(1,"Data Access Error!")
            }
         return ResVal(0,"success")
@@ -48,7 +50,7 @@ class DelegateController {
         try {
             delegateService.deleteDelegateById(delegateId)
         }catch (e : Exception){
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1,"Data Access Error!")
         }
         return ResVal(0,"success")
@@ -61,7 +63,7 @@ class DelegateController {
         try {
             delegateService.updateDelegateById(delegate)
         }catch (e : Exception){
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1,"Data Access Error!")
         }
         return ResVal(0,"success")
@@ -74,6 +76,7 @@ class DelegateController {
         try {
             delegate = delegateService.getDelegateById(delegateId)
         }catch (e : Exception){
+            logger.error("错误信息"+e.toString())
             return ResVal(1,"Data Access Error!")
         }
         return ResVal(0,delegate)
@@ -86,6 +89,7 @@ class DelegateController {
         try {
             delegates = delegateService.getDelegateList(currentPage, pageSize)
         }catch (e : Exception){
+            logger.error("错误信息"+e.toString())
             return ResVal(1,"Data Access Error!")
         }
         return ResVal(0,delegates)
@@ -103,7 +107,7 @@ class DelegateController {
 
             delegates = delegateService.getDelegateData(partner)
         }catch (e : Exception){
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1,"Data Access Error!")
         }
         return ResVal(0,delegates)

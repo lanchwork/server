@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.LjkFinApply
 import com.seal.ljk.query.QLjkFinApply
@@ -34,7 +35,7 @@ class LjkFinApplyController {
         try {
             resultList = ljkFinApplyService.queryFinApplyByKey(channelFinApplyId)
         } catch (e: Exception){
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -47,7 +48,7 @@ class LjkFinApplyController {
         try {
             resultList = ljkFinApplyService.queryFinApply(qLjkFinApply)
         } catch (e: Exception){
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)

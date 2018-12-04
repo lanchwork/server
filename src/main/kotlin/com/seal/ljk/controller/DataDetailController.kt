@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.DataDetail
 import com.seal.ljk.model.DataDetailChannel
@@ -27,7 +28,7 @@ class DataDetailController {
         try {
             resultList = dataDetailService.queryLinkDetail(qDataDetail)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -40,7 +41,7 @@ class DataDetailController {
         try {
             resultList = dataDetailService.queryDataDetailChannel(qDataDetailChannel.channelMarkName, qDataDetailChannel.toChainDate)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -60,7 +61,7 @@ class DataDetailController {
             }
             resultList = dataDetailService.queryDataDetailBusiness(qDataDetailBusiness)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -103,7 +104,7 @@ class DataDetailController {
                 return ResVal(1, "没有该 ${qDataDetailVid.businessObject} ")
             }
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
     }

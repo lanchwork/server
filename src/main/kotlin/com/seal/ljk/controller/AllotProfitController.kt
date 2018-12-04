@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.AllotProfit
 import com.seal.ljk.service.AllotProfitService
@@ -34,6 +35,7 @@ class AllotProfitController {
         try {
             allotProfit = allotProfitService.getByPartnerId(partnerId)
         } catch (e: Exception){
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error")
         }
         return ResVal(0, allotProfit)
@@ -45,7 +47,7 @@ class AllotProfitController {
         try {
             allotProfitService.create(allotProfit)
         } catch (e: Exception){
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -57,6 +59,7 @@ class AllotProfitController {
         try {
             allotProfitService.update(allotProfit)
         } catch (e: Exception){
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -68,6 +71,7 @@ class AllotProfitController {
         try {
             allotProfitService.deleteByPartnerId(partnerId)
         } catch (e: Exception){
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -80,6 +84,7 @@ class AllotProfitController {
         try {
             allotProfit = allotProfitService.getAllotProfitList(currentPage, pageSize)
         }catch (e : Exception){
+            logger.error("错误信息"+e.toString())
             return ResVal(1,"Data Access Error!")
         }
         return ResVal(0,allotProfit)

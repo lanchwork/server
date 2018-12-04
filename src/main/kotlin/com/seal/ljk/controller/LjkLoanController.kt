@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.LjkLoan
 import com.seal.ljk.query.QLjkLoan
@@ -30,7 +31,7 @@ class LjkLoanController {
         try {
             resultList = ljkLoanService.queryLjkLoanByConditions(qLjkLoan)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -42,7 +43,7 @@ class LjkLoanController {
         try {
             resultList = ljkLoanService.queryLoanByKey(channelFinApplyId)
         } catch (e: Exception){
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)

@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.LjkStatusChange
 import com.seal.ljk.query.QLjkStatusChange
@@ -33,7 +34,7 @@ class LjkStatusChangeController {
         try {
             resultList = ljkStatusChangeService.queryLjkStatusChangeByConditions(qLjkStatusChange)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)

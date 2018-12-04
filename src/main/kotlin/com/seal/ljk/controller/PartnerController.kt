@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.CompanyInfo
 import com.seal.ljk.model.Partner
@@ -25,7 +26,7 @@ class PartnerController {
         try {
             resultList = partnerService.getPartnerByCondition(qPartner)
         } catch (e: java.lang.Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -38,6 +39,7 @@ class PartnerController {
         try {
             resultList = partnerService.getAllPartner()
         } catch (e: Exception) {
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -49,6 +51,7 @@ class PartnerController {
         try {
             partnerService.createPartner(partner)
         } catch (e: Exception) {
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -64,6 +67,7 @@ class PartnerController {
                 return ResVal(-1, "Partner's products already have transactions")
             }
         } catch (e: Exception) {
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -75,6 +79,7 @@ class PartnerController {
         try {
             partnerService.updatePartnerById(partner)
         } catch (e: Exception) {
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -87,6 +92,7 @@ class PartnerController {
         try {
             result = partnerService.getPartnerById(partner.partnerId)
         } catch (e: Exception) {
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, result)
@@ -100,6 +106,7 @@ class PartnerController {
         try {
             resultList = partnerService.getPartnerList(currentPageNew, qPartner.pageSize)
         } catch (e: Exception) {
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -112,6 +119,7 @@ class PartnerController {
         try {
             info = partnerService.getCompanyInfo(partner)
         } catch (e: Exception) {
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, info)
@@ -126,6 +134,7 @@ class PartnerController {
         try {
             resultList = partnerService.getOpenPartner()
         } catch (e: Exception) {
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)

@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.LjkRisk
 import com.seal.ljk.query.QLjkRisk
@@ -37,7 +38,7 @@ class LjkRiskController {
         try {
             resultList = ljkRiskService.query(qLjkRisk)
         } catch (e: Exception){
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)

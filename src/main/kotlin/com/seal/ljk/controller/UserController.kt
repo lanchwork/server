@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.User
 import com.seal.ljk.query.QUser
@@ -32,7 +33,7 @@ class UserController {
         try {
             userService.createUser(user)
         } catch (e: Exception){
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -47,7 +48,7 @@ class UserController {
         try {
             userService.deleteUserById(userId)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -62,7 +63,7 @@ class UserController {
         try {
             userService.updateUser(user)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -77,7 +78,7 @@ class UserController {
         try {
             userService.updatePasswordById(userId,password)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -93,7 +94,7 @@ class UserController {
         try {
             result = userService.getUserById(userId)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, result)
@@ -109,7 +110,7 @@ class UserController {
         try {
             resultList = userService.queryUser(qUser)
         } catch (e: Exception){
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -130,7 +131,7 @@ class UserController {
                 return ResVal(0, data.get("menu"))
             }
         } catch (e: Exception){
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(1, "账户或密码错误")

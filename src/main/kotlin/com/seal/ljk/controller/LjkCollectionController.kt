@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.LjkCollection
 import com.seal.ljk.query.QLjkCollection
@@ -33,7 +34,7 @@ class LjkCollectionController {
         try {
             resultList = ljkCollectionService.queryLjkCollectionByConditions(qLjkCollection)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)

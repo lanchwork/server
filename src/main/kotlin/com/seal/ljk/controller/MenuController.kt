@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.logger
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.model.Menu
 import com.seal.ljk.model.RoleMenu
@@ -35,7 +36,7 @@ class MenuController {
         try {
             menuService.createMenu(menu)
         } catch (e: Exception){
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -50,7 +51,7 @@ class MenuController {
         try {
             menuService.deleteMenuById(menuId)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -65,7 +66,7 @@ class MenuController {
         try {
             menuService.updateMenu(menu)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -82,7 +83,7 @@ class MenuController {
         try {
             resultList = menuService.getMenuList(currentPageNew, pageSize)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -97,7 +98,7 @@ class MenuController {
         try {
             menuService.updateRoleMenu(roleMenuList)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, "success")
@@ -113,7 +114,7 @@ class MenuController {
         try {
             resultList=menuService.queryRoleMenu(roleId)
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
@@ -128,7 +129,7 @@ class MenuController {
         try {
             resultList= userService.getMenuListByUser(user) as HashMap<String, Any>
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("错误信息"+e.toString())
             return ResVal(1, "Data Access Error!")
         }
         return ResVal(0, resultList)
