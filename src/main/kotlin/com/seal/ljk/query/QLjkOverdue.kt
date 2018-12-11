@@ -9,6 +9,8 @@ data class QLjkOverdue(
         var preRepayDateFrom: String = "",
         var preRepayDateTo: String = "",
 
+        var channelOverdueId:String="",
+
         var pageSize: Int = 10,
         var currentPage: Int = 1
 )
