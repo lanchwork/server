@@ -6,6 +6,10 @@ import ${package.Service}.${table.serviceName}
 import org.springframework.stereotype.Service
 import org.springframework.beans.factory.annotation.Autowired
 import com.github.pagehelper.Page
+import com.seal.ljk.base.AuthException
+import com.seal.ljk.base.loggerFor
+import com.seal.ljk.common.UUIDUtil
+import com.seal.ljk.common.getSessionUser
 
 /**
  * <p>
@@ -16,32 +20,42 @@ import com.github.pagehelper.Page
  * @since ${date}
  */
 @Service(value = "${table.serviceName?substring(1)?uncap_first}")
-open class ${table.serviceImplName} : ${table.serviceName} {
+class ${table.serviceImplName} : ${table.serviceName} {
+
+    val log = loggerFor(this.javaClass)
 
     @Autowired
-    lateinit var mapper: ${table.mapperName}
+    lateinit var ${table.mapperName?uncap_first}: ${table.mapperName}
 
-    override fun get(id: String): ${entity} {
-        return mapper.get(id)
+    override fun get${entity}(id: String): ${entity} {
+        return ${table.mapperName?uncap_first}.get(id)
     }
 
-    override fun getAll(data: ${entity}): Page<${entity}> {
-        return mapper.getAll(data)
-    }
-
-    override fun insert(data: ${entity}) {
-        if(data.id == ""){
-            data.id = UUIDUtil.uuid
+    override fun getAll${entity}(${entity?uncap_first}: ${entity}): Page<${entity}> {
+        val user = getSessionUser() ?: throw AuthException()
+        if (user.isSeal()) {
+           ${entity?uncap_first}.channelMark = ""
+        } else {
+           ${entity?uncap_first}.channelMark = user.channelMark
         }
-        mapper.insert(data)
+        return ${table.mapperName?uncap_first}.getAll(${entity?uncap_first})
     }
 
-    override fun update(data: ${entity}) {
-        mapper.update(data)
+    override fun insert${entity}(${entity?uncap_first}: ${entity}) {
+        if(${entity?uncap_first}.id == ""){
+           ${entity?uncap_first}.id = UUIDUtil.uuid
+        }
+        ${table.mapperName?uncap_first}.insert(${entity?uncap_first})
     }
 
-    override fun delete(id: String) {
-        mapper.delete(id)
+    override fun update${entity}(${entity?uncap_first}: ${entity}) {
+        val user = getSessionUser() ?: throw AuthException()
+        ${entity?uncap_first}.updateUser = user.id
+        ${table.mapperName?uncap_first}.update(${entity?uncap_first})
+    }
+
+    override fun delete${entity}(id: String) {
+        ${table.mapperName?uncap_first}.delete(id)
     }
 
 }

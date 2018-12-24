@@ -91,11 +91,13 @@ object CodeGenerator {
         
         
         mpg.cfg = cfg
-        
+    
         // 配置模板
         val templateConfig = TemplateConfig()
             .setEntityKt("/templates/model.kt")
+            .setService("/templates/service.kt")
             .setServiceImpl("/templates/serviceImpl.kt")
+            .setController("/templates/controller.kt")
         
         // 配置自定义输出模板
         // templateConfig.setEntity();

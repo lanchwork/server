@@ -23,6 +23,7 @@ class GlobalExceptionHandler {
     @ExceptionHandler(value = [Exception::class])
     @ResponseBody
     fun jsonErrorHandler(req: HttpServletRequest, e: Exception): ResponseEntity<ResVal> {
+        logger.error("错误信息" + e.toString())
         if (e is SealException) {
             return ResponseEntity.ok(ResVal(e.code, e.message ?: "接口异常。"))
         }

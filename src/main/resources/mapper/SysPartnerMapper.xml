@@ -37,41 +37,47 @@
               and b.partner_type= #{partnerType}
           </if>
         </where>
+        <if test="orderByInfo != null and orderByInfo.length > 0">
+            <foreach collection="orderByInfo" item="order" open="order by "
+                     separator="," close="  ">
+                ${order}
+            </foreach>
+        </if>
     </select>
 
     <insert id="insert" parameterType="SysPartner">
         INSERT INTO sys_partner (id,channel_mark,partner_name,user_no,wallet_addr,open_flag,remark,partner_type,create_date,create_user,update_date,update_user)
-        VALUES (#{id},#{channelMark},#{partnerName},#{userNo},#{walletAddr},#{openFlag},#{remark},#{partnerType},SYSDATE(),#{createUser},SYSDATE(),#{updateUser});
+        VALUES (#{id},#{channelMark},#{partnerName},#{userNo},#{walletAddr},#{openFlag},#{remark},#{partnerType},SYSDATE(),#{createUser},SYSDATE(),#{create_user});
     </insert>
 
     <update id="update" parameterType="SysPartner">
         update sys_partner
         <set>
-            <if test="id != ''">
+            <if test="id != null  and id != '' ">
                field.name= #{id},
             </if>
-            <if test="channelMark != ''">
+            <if test="channelMark != null  and channelMark != '' ">
                field.name= #{channelMark},
             </if>
-            <if test="partnerName != ''">
+            <if test="partnerName != null  and partnerName != '' ">
                field.name= #{partnerName},
             </if>
-            <if test="userNo != ''">
+            <if test="userNo != null  and userNo != '' ">
                field.name= #{userNo},
             </if>
-            <if test="walletAddr != ''">
+            <if test="walletAddr != null  and walletAddr != '' ">
                field.name= #{walletAddr},
             </if>
-            <if test="openFlag != ''">
+            <if test="openFlag != null  and openFlag != '' ">
                field.name= #{openFlag},
             </if>
-            <if test="remark != ''">
+            <if test="remark != null  and remark != '' ">
                field.name= #{remark},
             </if>
-            <if test="partnerType != ''">
+            <if test="partnerType != null  and partnerType != '' ">
                field.name= #{partnerType},
             </if>
-            <if test="update_user != ''">
+            <if test="update_user != null and update_user != ''">
                 update_user=#{updateUser},
             </if>
             update_date=SYSDATE()

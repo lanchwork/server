@@ -22,10 +22,10 @@ class MapperTest {
     
     @Test
     fun testSelect() {
-        sysPartnerService.insert(SysPartner(partnerName = "partnerName3", userNo = "userNo", channelMark = "mini"))
+        sysPartnerService.insertSysPartner(SysPartner(partnerName = "partnerName3", userNo = "userNo", channelMark = "mini"))
         
         println("----- selectAll method test ------")
-        val userList = sysPartnerService.getAll(SysPartner(channelMark = "mini"))
+        val userList = sysPartnerService.getAllSysPartner(SysPartner(channelMark = "mini"))
         userList.forEach(Consumer<SysPartner> { System.out.println() })
     }
     

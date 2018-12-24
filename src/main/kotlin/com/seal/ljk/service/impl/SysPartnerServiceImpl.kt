@@ -6,7 +6,10 @@ import com.seal.ljk.service.ISysPartnerService
 import org.springframework.stereotype.Service
 import org.springframework.beans.factory.annotation.Autowired
 import com.github.pagehelper.Page
+import com.seal.ljk.base.AuthException
+import com.seal.ljk.base.loggerFor
 import com.seal.ljk.common.UUIDUtil
+import com.seal.ljk.common.getSessionUser
 
 /**
  * <p>
@@ -17,32 +20,42 @@ import com.seal.ljk.common.UUIDUtil
  * @since 2018-12-24
  */
 @Service(value = "sysPartnerService")
-open class SysPartnerServiceImpl : ISysPartnerService {
+class SysPartnerServiceImpl : ISysPartnerService {
+
+    val log = loggerFor(this.javaClass)
 
     @Autowired
-    lateinit var mapper: SysPartnerMapper
+    lateinit var sysPartnerMapper: SysPartnerMapper
 
-    override fun get(id: String): SysPartner {
-        return mapper.get(id)
+    override fun getSysPartner(id: String): SysPartner {
+        return sysPartnerMapper.get(id)
     }
 
-    override fun getAll(data: SysPartner): Page<SysPartner> {
-        return mapper.getAll(data)
-    }
-
-    override fun insert(data: SysPartner) {
-        if(data.id == ""){
-            data.id = UUIDUtil.uuid
+    override fun getAllSysPartner(sysPartner: SysPartner): Page<SysPartner> {
+        val user = getSessionUser() ?: throw AuthException()
+        if (user.isSeal()) {
+           sysPartner.channelMark = ""
+        } else {
+           sysPartner.channelMark = user.channelMark
         }
-        mapper.insert(data)
+        return sysPartnerMapper.getAll(sysPartner)
     }
 
-    override fun update(data: SysPartner) {
-        mapper.update(data)
+    override fun insertSysPartner(sysPartner: SysPartner) {
+        if(sysPartner.id == ""){
+           sysPartner.id = UUIDUtil.uuid
+        }
+        sysPartnerMapper.insert(sysPartner)
     }
 
-    override fun delete(id: String) {
-        mapper.delete(id)
+    override fun updateSysPartner(sysPartner: SysPartner) {
+        val user = getSessionUser() ?: throw AuthException()
+        sysPartner.updateUser = user.id
+        sysPartnerMapper.update(sysPartner)
+    }
+
+    override fun deleteSysPartner(id: String) {
+        sysPartnerMapper.delete(id)
     }
 
 }
