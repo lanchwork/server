@@ -9,22 +9,22 @@ import org.springframework.scheduling.annotation.EnableScheduling
 import java.util.*
 
 
-@MapperScan("com.seal.ljk.dao","com.seal.ljk.service")
+@MapperScan("com.seal.ljk.dao", "com.seal.ljk.service")
 @EnableScheduling
 @SpringBootApplication
-open class MyApplication()
+class MyApplication
 
 fun main(args: Array<String>) {
     SpringApplication.run(MyApplication::class.java, *args)
-
+    
     @Bean
-    fun pageHelper() : PageHelper {
+    fun pageHelper(): PageHelper {
         val pageHelper = PageHelper();
         val p = Properties();
-        p.setProperty("offsetAsPageNum", "true");
-        p.setProperty("rowBoundsWithCount", "true");
-        p.setProperty("reasonable", "true");
-        pageHelper.setProperties(p);
-        return pageHelper;
+        p.setProperty("offsetAsPageNum", "true")
+        p.setProperty("rowBoundsWithCount", "true")
+        p.setProperty("reasonable", "true")
+        pageHelper.setProperties(p)
+        return pageHelper
     }
 }

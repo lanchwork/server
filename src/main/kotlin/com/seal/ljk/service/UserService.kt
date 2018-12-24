@@ -1,5 +1,10 @@
 package com.seal.ljk.service
 
+import com.auth0.jwt.JWT
+import com.auth0.jwt.algorithms.Algorithm
+import com.auth0.jwt.exceptions.JWTDecodeException
+import com.seal.ljk.base.AuthException
+import com.seal.ljk.base.ParamException
 import com.seal.ljk.dao.MenuDao
 import com.seal.ljk.dao.UserDao
 import com.seal.ljk.model.Menu
@@ -10,6 +15,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserService {
+    
 
     @Autowired
     lateinit var userDao: UserDao
@@ -96,5 +102,35 @@ class UserService {
             dataMap.put(item.menuName, list)
         }
         return dataMap
+    }
+    
+    fun getUserToken(user: User): String {
+        return JWT.create().withAudience(user.id)
+            .sign(Algorithm.HMAC256(user.password))
+    }
+    
+    fun verifyUser(token: String?): User {
+        if (token == null) {
+            throw  ParamException()
+        }
+        // 获取 token 中的 user id
+        val userId: String
+        try {
+            userId = JWT.decode(token).audience[0]
+        } catch (j: JWTDecodeException) {
+            throw  AuthException()
+        }
+        
+        val user = getUserById(userId)
+        // 验证 token
+        val jwtVerifier = JWT.require(Algorithm.HMAC256(user.password)).build()
+        
+        try {
+            jwtVerifier.verify(token)
+        } catch (e: Exception) {
+            throw  AuthException()
+        }
+        return user
+        
     }
 }
