@@ -33,7 +33,7 @@ class SysUserController{
     fun getSysUser(@RequestParam id: String): ResVal = ResVal(0, sysUserService.getSysUser(id))
 
     @PostMapping("/list")
-    @ApiOperation(value = "用户表方列表")
+    @ApiOperation(value = "用户列表")
     fun listSysUser(@RequestBody sysUser: SysUser): ResVal = ResVal(0, sysUserService.getAllSysUser(sysUser))
 
 

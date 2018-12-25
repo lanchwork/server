@@ -1,6 +1,7 @@
 package com.seal.ljk.model
 
 import com.baomidou.mybatisplus.annotation.TableField
+import com.seal.ljk.base.PrimaryKey
 import com.seal.ljk.common.Constant
 import com.seal.ljk.model.Base
 import com.seal.ljk.common.using
@@ -15,6 +16,7 @@ data class SysUser(
     /**
      * 主键id
      */
+    @PrimaryKey
     var id: String = "",
 
     /**
@@ -60,9 +62,8 @@ data class SysUser(
 
     override fun verify() {
         this.apply {
-            "主键id 不能为空" using (this.id.isNotEmpty())
             "用户名 不能为空" using (this.username.isNotEmpty())
-            "初始明文密码 不能为空" using (this.initPass.isNotEmpty())
+            "初始密码 不能为空" using (this.initPass.isNotEmpty())
             "渠道标识 不能为空" using (this.channelMark.isNotEmpty())
             "姓名 不能为空" using (this.name.isNotEmpty())
             "手机号 不能为空" using (this.phone.isNotEmpty())

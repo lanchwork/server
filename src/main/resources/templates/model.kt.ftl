@@ -22,6 +22,9 @@ data class ${entity}(
      * ${field.comment}
      */
     </#if>
+    <#if field.propertyName == "id">
+    @PrimaryKey
+    </#if>
     <#if field.propertyType == "Integer">
     var ${field.propertyName}: Int? = null<#if field_has_next>,</#if>
     <#elseif field.propertyType == "String">
