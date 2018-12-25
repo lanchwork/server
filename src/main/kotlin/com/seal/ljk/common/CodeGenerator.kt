@@ -18,7 +18,7 @@ import java.util.Scanner
  * Created by chenjh on 2018/12/24.
  */
 object CodeGenerator {
-    
+
     fun scanner(tip: String): String {
         val scanner = Scanner(System.`in`)
         val help = StringBuilder()
@@ -32,26 +32,27 @@ object CodeGenerator {
         }
         throw MybatisPlusException("请输入正确的$tip！")
     }
-    
+
     @JvmStatic
     fun main(args: Array<String>) {
         // 代码生成器
         val mpg = AutoGenerator()
-        
+
         // 全局配置
         val gc = GlobalConfig()
         gc.isKotlin = true
         gc.isFileOverride = true
         gc.isSwagger2 = true
         gc.dateType = DateType.ONLY_DATE
-        
+
         val projectPath = System.getProperty("user.dir")
-        
+
         gc.outputDir = "$projectPath/src/main/kotlin"
         gc.author = "chenjh"
         gc.isOpen = false
+        gc.mapperName = "%sDao"
         mpg.globalConfig = gc
-        
+
         // 数据源配置
         val dsc = DataSourceConfig()
         dsc.url =
@@ -63,7 +64,7 @@ object CodeGenerator {
         dsc.username = "test"
         dsc.password = "Seal!@#2018"
         mpg.dataSource = dsc
-        
+
         // 包配置
         val pc = PackageConfig()
         // pc.setModuleName(scanner("模块名"));
@@ -72,7 +73,7 @@ object CodeGenerator {
         pc.entity = "model"
         pc.mapper = "dao"
         mpg.packageInfo = pc
-        
+
         // 自定义配置
         val cfg = object : InjectionConfig() {
             override fun initMap() {
@@ -88,25 +89,25 @@ object CodeGenerator {
                 fileOutConfigList = focList
             }
         }
-        
-        
+
+
         mpg.cfg = cfg
-    
+
         // 配置模板
         val templateConfig = TemplateConfig()
             .setEntityKt("/templates/model.kt")
             .setService("/templates/service.kt")
             .setServiceImpl("/templates/serviceImpl.kt")
             .setController("/templates/controller.kt")
-        
+
         // 配置自定义输出模板
         // templateConfig.setEntity();
         // templateConfig.setService();
         // templateConfig.setController();
-        
+
         templateConfig.xml = null
         mpg.template = templateConfig
-        
+
         // 策略配置
         val strategy = StrategyConfig()
         strategy.naming = NamingStrategy.underline_to_camel
@@ -123,5 +124,5 @@ object CodeGenerator {
         mpg.templateEngine = FreemarkerTemplateEngine()
         mpg.execute()
     }
-    
+
 }
