@@ -18,7 +18,7 @@ import com.seal.ljk.common.getSessionUser
  * @author ${author}
  * @since ${date}
  */
-@Service(value = "${table.serviceName?substring(1)?uncap_first}")
+@Service
 class ${table.serviceImplName} : ${table.serviceName} {
 
     val log = loggerFor(this.javaClass)

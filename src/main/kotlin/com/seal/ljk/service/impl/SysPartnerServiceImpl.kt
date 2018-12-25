@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service
  * @author chenjh
  * @since 2018-12-24
  */
-@Service(value = "sysPartnerService")
+@Service
 class SysPartnerServiceImpl : ISysPartnerService {
 
     val log = loggerFor(this.javaClass)

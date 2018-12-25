@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service
  * @author chenjh
  * @since 2018-12-25
  */
-@Service(value = "sysUserService")
+@Service
 class SysUserServiceImpl : ISysUserService {
 
     val log = loggerFor(this.javaClass)
