@@ -36,7 +36,7 @@
         <set>
             <#list table.fields as field>
             <if test="${field.propertyName} != null  and ${field.propertyName} != '' ">
-               field.name= ${r"#{"}${field.propertyName}${r"}"},
+                ${field.name}= ${r"#{"}${field.propertyName}${r"}"},
             </if>
             </#list>
             <if test="update_user != null and update_user != ''">

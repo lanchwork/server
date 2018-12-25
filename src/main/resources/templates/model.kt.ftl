@@ -4,6 +4,7 @@ package ${package.Entity}
 import ${pkg}
 </#list>
 import com.seal.ljk.common.using
+import com.seal.ljk.base.PrimaryKey
 
 /**
  * ${table.comment}
