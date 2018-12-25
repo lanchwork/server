@@ -2,8 +2,8 @@ package com.seal.ljk.controller
 
 
 import com.seal.ljk.common.ResVal
-import com.seal.ljk.common.checkParam
 import com.seal.ljk.common.getSessionUser
+import com.seal.ljk.common.success
 import com.seal.ljk.model.SysPartner
 import com.seal.ljk.model.SysUser
 import com.seal.ljk.service.ISysPartnerService
@@ -25,16 +25,16 @@ import org.springframework.web.bind.annotation.*
 class SysUserController{
 
     lateinit var sysUserService: ISysUserService
-    lateinit var sysPartenerService: ISysPartnerService
+    lateinit var sysPartnerService: ISysPartnerService
 
 
     @PostMapping("/get")
     @ApiOperation(value = "获取用户表")
-    fun getSysUser(@RequestParam id: String): ResVal = ResVal(0, sysUserService.getSysUser(id))
+    fun getSysUser(@RequestParam id: String): ResVal = success(sysUserService.getSysUser(id))
 
     @PostMapping("/list")
     @ApiOperation(value = "用户列表")
-    fun listSysUser(@RequestBody sysUser: SysUser): ResVal = ResVal(0, sysUserService.getAllSysUser(sysUser))
+    fun listSysUser(@RequestBody sysUser: SysUser): ResVal = success( sysUserService.getAllSysUser(sysUser))
 
 
     @PostMapping("/save")
@@ -46,14 +46,14 @@ class SysUserController{
         } else {
             sysUserService.updateSysUser(sysUser)
         }
-        return ResVal(0, mapOf("id" to sysUser.id))
+        return success(mapOf("id" to sysUser.id))
     }
 
     @PostMapping("/delete")
     @ApiOperation(value = "删除用户表")
     fun deleteSysUser(@RequestParam id: String): ResVal {
         sysUserService.deleteSysUser(id)
-        return ResVal(0, "success")
+        return success("success")
     }
 
     @PostMapping("/changePass")
@@ -61,7 +61,7 @@ class SysUserController{
     fun changePass(@RequestParam oldPass: String,
                    @RequestParam newPass: String): ResVal {
         sysUserService.changePass(oldPass, newPass)
-        return ResVal(0, "success")
+        return success( "success")
     }
 
     @PostMapping("/login")
@@ -70,7 +70,7 @@ class SysUserController{
               @RequestParam userName: String,
               @RequestParam password: String): ResVal {
         sysUserService.login(channelMark, userName, password)
-        return ResVal(0, "success")
+        return success("success")
     }
 
     @PostMapping("/dict")
@@ -80,23 +80,21 @@ class SysUserController{
         val user = getSessionUser()!!
         val channelMark = mutableListOf<Map<String, String>>()
         if (user.isSeal()) {
-            val allSysPartner = sysPartenerService.getAllSysPartner(SysPartner())
+            val allSysPartner = sysPartnerService.getAllSysPartner(SysPartner())
             allSysPartner.forEach {
                 channelMark.add(
-                    mapOf(
-                        "key" to it.id,
-                        "vaule" to it.partnerName
-                    )
+                        mapOf(
+                                "key" to it.channelMark,
+                                "vaule" to it.partnerName
+                        )
                 )
             }
         }
 
 
-        return ResVal(
-            0, mapOf(
+        return success(mapOf(
                 "channelMark" to channelMark
-            )
-        )
+        ))
     }
 
 

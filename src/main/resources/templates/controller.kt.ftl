@@ -1,10 +1,11 @@
 package ${package.Controller}
 
-
-import org.springframework.web.bind.annotation.RequestMapping
-
-import org.springframework.web.bind.annotation.RestController
 import ${package.Service}.${table.serviceName}
+import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.success
+import ${package.Entity}.${entity}
+import io.swagger.annotations.ApiOperation
+import org.springframework.web.bind.annotation.*
 /**
  * <p>
  * ${table.comment!} 前端控制器
@@ -22,11 +23,11 @@ class ${table.controllerName}<#if superControllerClass??> : ${superControllerCla
 
     @PostMapping("/get")
     @ApiOperation(value = "获取${table.comment!}")
-    fun get${entity}(@RequestParam id: String): ResVal = ResVal(0, ${table.serviceName?substring(1)?uncap_first}.get${entity}(id))
+    fun get${entity}(@RequestParam id: String): ResVal = success(${table.serviceName?substring(1)?uncap_first}.get${entity}(id))
 
     @PostMapping("/list")
     @ApiOperation(value = "${table.comment!}方列表")
-    fun list${entity}(@RequestBody ${entity?uncap_first}: ${entity}): ResVal = ResVal(0, ${table.serviceName?substring(1)?uncap_first}.getAll${entity}(${entity?uncap_first}))
+    fun list${entity}(@RequestBody ${entity?uncap_first}: ${entity}): ResVal = success(${table.serviceName?substring(1)?uncap_first}.getAll${entity}(${entity?uncap_first}))
 
 
     @PostMapping("/save")
@@ -38,14 +39,14 @@ class ${table.controllerName}<#if superControllerClass??> : ${superControllerCla
         } else {
             ${table.serviceName?substring(1)?uncap_first}.update${entity}(${entity?uncap_first})
         }
-        return ResVal(0, mapOf("id" to ${entity?uncap_first}.id))
+        return success(mapOf("id" to ${entity?uncap_first}.id))
     }
 
     @PostMapping("/delete")
     @ApiOperation(value = "删除${table.comment!}")
     fun delete${entity}(@RequestParam id: String): ResVal {
         ${table.serviceName?substring(1)?uncap_first}.delete${entity}(id)
-        return ResVal(0, "success")
+        return success("success")
     }
 
 }

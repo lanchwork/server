@@ -14,3 +14,11 @@ fun checkParam(vararg params: String) {
         if (it.isEmpty()) throw ParamException()
     }
 }
+
+fun success(data: Any?): ResVal {
+    return ResVal(0, data)
+}
+
+fun error(data: Any?, code: Int = 1): ResVal {
+    return ResVal(code, data)
+}

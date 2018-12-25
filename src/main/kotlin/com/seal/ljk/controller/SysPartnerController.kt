@@ -2,6 +2,7 @@ package com.seal.ljk.controller
 
 
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.success
 import com.seal.ljk.model.SysPartner
 
 import com.seal.ljk.service.ISysPartnerService
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.*
  * @since 2018-12-24
  */
 @RestController
-@RequestMapping("/ljk/sys-partner")
+@RequestMapping("/sys/partner")
 class SysPartnerController{
 
     lateinit var sysPartnerService: ISysPartnerService
@@ -25,11 +26,11 @@ class SysPartnerController{
 
     @PostMapping("/get")
     @ApiOperation(value = "获取合作方表")
-    fun getSysPartner(@RequestParam id: String): ResVal = ResVal(0, sysPartnerService.getSysPartner(id))
+    fun getSysPartner(@RequestParam id: String): ResVal = success(sysPartnerService.getSysPartner(id))
 
     @PostMapping("/list")
     @ApiOperation(value = "合作方表方列表")
-    fun listSysPartner(@RequestBody sysPartner: SysPartner): ResVal = ResVal(0, sysPartnerService.getAllSysPartner(sysPartner))
+    fun listSysPartner(@RequestBody sysPartner: SysPartner): ResVal = success( sysPartnerService.getAllSysPartner(sysPartner))
 
 
     @PostMapping("/save")
@@ -41,14 +42,14 @@ class SysPartnerController{
         } else {
             sysPartnerService.updateSysPartner(sysPartner)
         }
-        return ResVal(0, mapOf("id" to sysPartner.id))
+        return success( mapOf("id" to sysPartner.id))
     }
 
     @PostMapping("/delete")
     @ApiOperation(value = "删除合作方表")
     fun deleteSysPartner(@RequestParam id: String): ResVal {
         sysPartnerService.deleteSysPartner(id)
-        return ResVal(0, "success")
+        return success("success")
     }
 
 }
