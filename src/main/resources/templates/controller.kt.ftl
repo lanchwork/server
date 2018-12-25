@@ -23,15 +23,18 @@ class ${table.controllerName}<#if superControllerClass??> : ${superControllerCla
 
     @PostMapping("/get")
     @ApiOperation(value = "获取${table.comment!}")
+    @VerifyToken
     fun get${entity}(@RequestParam id: String): ResVal = success(${table.serviceName?substring(1)?uncap_first}.get${entity}(id))
 
     @PostMapping("/list")
     @ApiOperation(value = "${table.comment!}方列表")
+    @VerifyToken
     fun list${entity}(@RequestBody ${entity?uncap_first}: ${entity}): ResVal = success(${table.serviceName?substring(1)?uncap_first}.getAll${entity}(${entity?uncap_first}))
 
 
     @PostMapping("/save")
     @ApiOperation(value = "新增或修改${table.comment!}")
+    @VerifyToken
     fun save${entity}(@RequestBody ${entity?uncap_first}: ${entity}): ResVal {
         ${entity?uncap_first}.verify()
         if (${entity?uncap_first}.id.isEmpty()) {
@@ -44,6 +47,7 @@ class ${table.controllerName}<#if superControllerClass??> : ${superControllerCla
 
     @PostMapping("/delete")
     @ApiOperation(value = "删除${table.comment!}")
+    @VerifyToken
     fun delete${entity}(@RequestParam id: String): ResVal {
         ${table.serviceName?substring(1)?uncap_first}.delete${entity}(id)
         return success("success")
