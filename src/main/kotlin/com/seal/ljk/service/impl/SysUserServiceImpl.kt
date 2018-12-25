@@ -36,7 +36,7 @@ class SysUserServiceImpl : ISysUserService {
     @Autowired
     lateinit var sysUserMapper: SysUserMapper
     @Autowired
-    lateinit var sysPartenerService: ISysPartnerService
+    lateinit var sysPartnerService: ISysPartnerService
 
 
     override fun getSysUser(id: String): SysUser {
@@ -78,7 +78,7 @@ class SysUserServiceImpl : ISysUserService {
     }
 
     override fun login(channelMark: String, userName: String, password: String): Map<String, Any> {
-        val partner = sysPartenerService.getByChannelMark(channelMark)
+        val partner = sysPartnerService.getByChannelMark(channelMark)
                 ?: throw SealException(message = "合作方不存在。")
         if (partner.openFlag != "1") {
             throw SealException(message = "该合作方已被禁用，请管理员。")
