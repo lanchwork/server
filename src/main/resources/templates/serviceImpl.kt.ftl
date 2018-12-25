@@ -26,7 +26,7 @@ class ${table.serviceImplName} : ${table.serviceName} {
     @Autowired
     lateinit var ${table.mapperName?uncap_first}: ${table.mapperName}
 
-    override fun get${entity}(id: String): ${entity} {
+    override fun get${entity}(id: String): ${entity}? {
         return ${table.mapperName?uncap_first}.get(id)
     }
 

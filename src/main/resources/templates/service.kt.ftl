@@ -12,7 +12,7 @@ import com.github.pagehelper.Page
  * @since ${date}
  */
 interface ${table.serviceName}{
-    fun get${entity}(id: String): ${entity}
+    fun get${entity}(id: String): ${entity}?
     fun getAll${entity}(${entity?uncap_first}: ${entity}): Page<${entity}>
     fun insert${entity}(${entity?uncap_first}: ${entity})
     fun update${entity}(${entity?uncap_first}: ${entity})
