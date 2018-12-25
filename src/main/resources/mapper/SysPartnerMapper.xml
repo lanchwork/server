@@ -8,6 +8,12 @@
         where b.id =#{id}
     </select>
 
+    <select id="getByChannelMark" resultType="SysPartner">
+        select b.id,b.channel_mark,b.partner_name,b.user_no,b.wallet_addr,b.open_flag,b.remark,b.partner_type,b.create_date,b.create_user,b.update_date,b.update_user
+        from sys_partner b
+        where b.channel_mark =#{channelMark}
+    </select>
+
     <select id="getAll" resultType="SysPartner">
         select b.id,b.channel_mark,b.partner_name,b.user_no,b.wallet_addr,b.open_flag,b.remark,b.partner_type,b.create_date,b.create_user,b.update_date,b.update_user
         from sys_partner b

@@ -1,7 +1,8 @@
 package com.seal.ljk.base
 
+import com.seal.ljk.common.setRequest
 import com.seal.ljk.common.setSessionUser
-import com.seal.ljk.service.UserService
+import com.seal.ljk.service.ISysUserService
 import org.springframework.web.method.HandlerMethod
 import org.springframework.web.servlet.HandlerInterceptor
 import javax.servlet.http.HttpServletRequest
@@ -25,20 +26,20 @@ annotation class IgnoreToken(val required: Boolean = true)
 annotation class VerifyToken(val required: Boolean = true)
 
 class AuthenticationInterceptor : HandlerInterceptor {
-    
-    lateinit var userService: UserService
-    
+
+    lateinit var sysUserService: ISysUserService
+
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         // OPTIONS或不是映射到方法直接通过
         if (request.method == "OPTIONS" || handler !is HandlerMethod) {
             return true
         }
-        
+        setRequest(request)
         // 从 http 请求头中取出 token
         val token = request.getHeader("token")
-        
+
         val method = handler.method
-        
+
         //检查是否有IgnoreToken注释，有则跳过认证
         if (method.isAnnotationPresent(IgnoreToken::class.java)) {
             val passToken = method.getAnnotation(IgnoreToken::class.java)
@@ -51,7 +52,7 @@ class AuthenticationInterceptor : HandlerInterceptor {
             val userLoginToken = method.getAnnotation(VerifyToken::class.java)
             if (userLoginToken.required) {
                 // 执行认证
-                val user = userService.verifyUser(token)
+                val user = sysUserService.verifyUser(token)
                 setSessionUser(user)
                 return true
             }

@@ -62,7 +62,6 @@ class UserService {
             if (data.password.equals(user.password)) {
                 map.put("user", data)
                 dataMap= getMenuListByUser(data) as HashMap<String, Any>
-
             }
             map.put("menu", dataMap)
             return map

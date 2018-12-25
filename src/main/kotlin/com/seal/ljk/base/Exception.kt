@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest
 /**
  * Created by chenjh on 2018/12/22.
  */
-open class SealException(var code: Int = 1) : RuntimeException()
+open class SealException(override val message: String, var code: Int = 1) : RuntimeException(message)
 
-class AuthException(override val message: String? = "用户验证失败，请重新登录！") : SealException()
+class AuthException(override val message: String = "用户验证失败，请重新登录！") : SealException(message)
 
-class ParamException(override val message: String? = "存在参数为空或有误，请核对！") : SealException()
+class ParamException(override val message: String = "存在参数为空或有误，请核对！") : SealException(message)
 
 
 @ControllerAdvice
 class GlobalExceptionHandler {
-    
+
     @ExceptionHandler(value = [Exception::class])
     @ResponseBody
     fun jsonErrorHandler(req: HttpServletRequest, e: Exception): ResponseEntity<ResVal> {
@@ -29,5 +29,5 @@ class GlobalExceptionHandler {
         }
         return ResponseEntity.ok(ResVal(1, e.message ?: "接口异常。"))
     }
-    
+
 }

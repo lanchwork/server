@@ -51,8 +51,7 @@
 
     <typeAliases>
         <typeAlias alias="SysPartner" type="com.seal.ljk.model.SysPartner"/>
-        <!--<typeAlias alias="FundAccountDto" type="com.mini.api.dto.FundAccountDto"/>-->
-        <!--<typeAlias alias="OverdueReportDto" type="com.mini.api.dto.OverdueReportDto"/>-->
+        <typeAlias alias="SysUser" type="com.seal.ljk.model.SysUser"/>
     </typeAliases>
 
     <plugins>

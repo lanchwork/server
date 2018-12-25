@@ -11,4 +11,6 @@ import com.seal.ljk.dao.BaseMapper;
  * @author chenjh
  * @since 2018-12-24
  */
-interface SysPartnerMapper : BaseMapper<SysPartner>
+interface SysPartnerMapper : BaseMapper<SysPartner> {
+    fun getByChannelMark(channelMark: String): SysPartner?
+}

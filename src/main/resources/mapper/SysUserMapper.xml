@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seal.ljk.dao.SysUserMapper">
+
+    <select id="get" resultType="SysUser">
+        select b.id,b.username,b.initPass,b.password,b.channel_mark,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
+        from sys_user b
+        where b.id =#{id}
+    </select>
+
+    <select id="getUser" resultType="SysUser">
+        select b.id,b.username,b.initPass,b.password,b.channel_mark,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
+        from sys_user b
+        where b.channel_mark = #{channelMark}
+          and b.username = #{userName}
+    </select>
+
+    <select id="getAll" resultType="SysUser">
+        select b.id,b.username,b.initPass,b.password,b.channel_mark,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
+        from sys_user b
+        <where>
+          <if test="id != null  and id != '' ">
+              and b.id= #{id}
+          </if>
+          <if test="username != null  and username != '' ">
+              and b.username= #{username}
+          </if>
+          <if test="initPass != null  and initPass != '' ">
+              and b.initPass= #{initPass}
+          </if>
+          <if test="password != null  and password != '' ">
+              and b.password= #{password}
+          </if>
+          <if test="channelMark != null  and channelMark != '' ">
+              and b.channel_mark= #{channelMark}
+          </if>
+          <if test="name != null  and name != '' ">
+              and b.name= #{name}
+          </if>
+          <if test="phone != null  and phone != '' ">
+              and b.phone= #{phone}
+          </if>
+          <if test="email != null  and email != '' ">
+              and b.email= #{email}
+          </if>
+          <if test="openFlag != null  and openFlag != '' ">
+              and b.open_flag= #{openFlag}
+          </if>
+        </where>
+        <if test="orderByInfo != null and orderByInfo.length > 0">
+            <foreach collection="orderByInfo" item="order" open="order by "
+                     separator="," close="  ">
+                ${order}
+            </foreach>
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="SysUser">
+        INSERT INTO sys_user (id,username,initPass,password,channel_mark,name,phone,email,open_flag,create_date,create_user,update_date,update_user)
+        VALUES (#{id},#{username},#{initPass},#{password},#{channelMark},#{name},#{phone},#{email},#{openFlag},SYSDATE(),#{createUser},SYSDATE(),#{createUser});
+    </insert>
+
+    <update id="update" parameterType="SysUser">
+        update sys_user
+        <set>
+            <if test="id != null  and id != '' ">
+               field.name= #{id},
+            </if>
+            <if test="username != null  and username != '' ">
+               field.name= #{username},
+            </if>
+            <if test="initPass != null  and initPass != '' ">
+               field.name= #{initPass},
+            </if>
+            <if test="password != null  and password != '' ">
+               field.name= #{password},
+            </if>
+            <if test="channelMark != null  and channelMark != '' ">
+               field.name= #{channelMark},
+            </if>
+            <if test="name != null  and name != '' ">
+               field.name= #{name},
+            </if>
+            <if test="phone != null  and phone != '' ">
+               field.name= #{phone},
+            </if>
+            <if test="email != null  and email != '' ">
+               field.name= #{email},
+            </if>
+            <if test="openFlag != null  and openFlag != '' ">
+               field.name= #{openFlag},
+            </if>
+            <if test="update_user != null and update_user != ''">
+                update_user=#{updateUser},
+            </if>
+            update_date=SYSDATE()
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from sys_user where id=#{id}
+    </delete>
+
+</mapper>

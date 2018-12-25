@@ -26,8 +26,12 @@ class SysPartnerServiceImpl : ISysPartnerService {
     @Autowired
     lateinit var sysPartnerMapper: SysPartnerMapper
 
-    override fun getSysPartner(id: String): SysPartner {
+    override fun getSysPartner(id: String): SysPartner? {
         return sysPartnerMapper.get(id)
+    }
+
+    override fun getByChannelMark(channelMark: String): SysPartner? {
+        return sysPartnerMapper.getByChannelMark(channelMark)
     }
 
     override fun getAllSysPartner(sysPartner: SysPartner): Page<SysPartner> {
