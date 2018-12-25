@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServletResponse
 @Target(
     AnnotationTarget.CLASS, AnnotationTarget.FUNCTION
 )
-@Retention(AnnotationRetention.SOURCE)
+@Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
 annotation class IgnoreToken(val required: Boolean = true)
 
 @Target(
     AnnotationTarget.CLASS, AnnotationTarget.FUNCTION
 )
-@Retention(AnnotationRetention.SOURCE)
+@Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
 annotation class VerifyToken(val required: Boolean = true)
 

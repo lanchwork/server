@@ -1,15 +1,14 @@
 package com.seal.ljk.service.impl
 
-import com.seal.ljk.model.SysPartner
-import com.seal.ljk.dao.SysPartnerMapper
-import com.seal.ljk.service.ISysPartnerService
-import org.springframework.stereotype.Service
-import org.springframework.beans.factory.annotation.Autowired
 import com.github.pagehelper.Page
 import com.seal.ljk.base.AuthException
 import com.seal.ljk.base.loggerFor
-import com.seal.ljk.common.UUIDUtil
 import com.seal.ljk.common.getSessionUser
+import com.seal.ljk.dao.SysPartnerMapper
+import com.seal.ljk.model.SysPartner
+import com.seal.ljk.service.ISysPartnerService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
 /**
  * <p>
@@ -42,15 +41,10 @@ class SysPartnerServiceImpl : ISysPartnerService {
     }
 
     override fun insertSysPartner(sysPartner: SysPartner) {
-        if(sysPartner.id == ""){
-           sysPartner.id = UUIDUtil.uuid
-        }
         sysPartnerMapper.insert(sysPartner)
     }
 
     override fun updateSysPartner(sysPartner: SysPartner) {
-        val user = getSessionUser() ?: throw AuthException()
-        sysPartner.updateUser = user.id
         sysPartnerMapper.update(sysPartner)
     }
 

@@ -1,6 +1,8 @@
 package com.seal.ljk
 
+import com.seal.ljk.common.setSessionUser
 import com.seal.ljk.model.SysPartner
+import com.seal.ljk.model.User
 import com.seal.ljk.service.ISysPartnerService
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -22,6 +24,9 @@ class MapperTest {
     
     @Test
     fun testSelect() {
+        var user = User(id = "12345678",username = "admin",channelMark = "seal",name = "admin")
+        setSessionUser(user)
+        
         sysPartnerService.insertSysPartner(SysPartner(partnerName = "partnerName3", userNo = "userNo", channelMark = "mini"))
         
         println("----- selectAll method test ------")

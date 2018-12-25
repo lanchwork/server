@@ -1,5 +1,6 @@
 package com.seal.ljk.model
 
+import com.seal.ljk.base.PrimaryKey
 import com.seal.ljk.common.using
 
 /**
@@ -12,6 +13,7 @@ data class SysPartner(
     /**
      * 主键id
      */
+    @PrimaryKey
     var id: String = "",
     
     /**
@@ -47,7 +49,7 @@ data class SysPartner(
     /**
      * 合作类型，0为最高级别（seal）
      */
-    var partnerType: Int? = null
+    var partnerType: String = ""
 ) : Base(), IVerify {
     
     override fun verify() {
@@ -55,7 +57,7 @@ data class SysPartner(
             "渠道标识 不能为空" using (this.channelMark.isNotEmpty())
             "合作方名称 不能为空" using (this.partnerName.isNotEmpty())
             "是否开启 不能为空" using (this.openFlag != null)
-            "合作类型 不能为空" using (this.partnerType != null)
+            "合作类型 不能为空" using (this.partnerType.isNotEmpty())
         }
     }
 }

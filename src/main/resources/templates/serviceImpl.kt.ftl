@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import com.github.pagehelper.Page
 import com.seal.ljk.base.AuthException
 import com.seal.ljk.base.loggerFor
-import com.seal.ljk.common.UUIDUtil
 import com.seal.ljk.common.getSessionUser
 
 /**
@@ -42,15 +41,10 @@ class ${table.serviceImplName} : ${table.serviceName} {
     }
 
     override fun insert${entity}(${entity?uncap_first}: ${entity}) {
-        if(${entity?uncap_first}.id == ""){
-           ${entity?uncap_first}.id = UUIDUtil.uuid
-        }
         ${table.mapperName?uncap_first}.insert(${entity?uncap_first})
     }
 
     override fun update${entity}(${entity?uncap_first}: ${entity}) {
-        val user = getSessionUser() ?: throw AuthException()
-        ${entity?uncap_first}.updateUser = user.id
         ${table.mapperName?uncap_first}.update(${entity?uncap_first})
     }
 

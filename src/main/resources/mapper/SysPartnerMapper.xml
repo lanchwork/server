@@ -47,7 +47,7 @@
 
     <insert id="insert" parameterType="SysPartner">
         INSERT INTO sys_partner (id,channel_mark,partner_name,user_no,wallet_addr,open_flag,remark,partner_type,create_date,create_user,update_date,update_user)
-        VALUES (#{id},#{channelMark},#{partnerName},#{userNo},#{walletAddr},#{openFlag},#{remark},#{partnerType},SYSDATE(),#{createUser},SYSDATE(),#{create_user});
+        VALUES (#{id},#{channelMark},#{partnerName},#{userNo},#{walletAddr},#{openFlag},#{remark},#{partnerType},SYSDATE(),#{createUser},SYSDATE(),#{createUser});
     </insert>
 
     <update id="update" parameterType="SysPartner">

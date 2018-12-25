@@ -28,7 +28,7 @@
 
     <insert id="insert" parameterType="${entity}">
         INSERT INTO ${table.name} (<#list table.fields as field>${field.name},</#list><#list table.commonFields as field>${field.name}<#if field_has_next>,</#if></#list>)
-        VALUES (<#list table.fields as field>${r"#{"}${field.propertyName}${r"}"},</#list><#list table.commonFields as field><#if field.name == "create_date" || field.name == "update_date">SYSDATE()<#elseif field.name == "update_user">${r"#{create_user}"}<#else>${r"#{"}${field.propertyName}${r"}"}</#if><#if field_has_next>,</#if></#list>);
+        VALUES (<#list table.fields as field>${r"#{"}${field.propertyName}${r"}"},</#list><#list table.commonFields as field><#if field.name == "create_date" || field.name == "update_date">SYSDATE()<#elseif field.name == "update_user">${r"#{createUser}"}<#else>${r"#{"}${field.propertyName}${r"}"}</#if><#if field_has_next>,</#if></#list>);
     </insert>
 
     <update id="update" parameterType="${entity}">
