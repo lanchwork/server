@@ -57,8 +57,22 @@ data class SysUser(
     /**
      * 是否开启   0为是 1为否
      */
-    var openFlag: String = ""
+    var openFlag: String = "",
+    /**
+     * 用户类型 0超级管理员用户 1合作方管理员，2普通用户
+     * 管理员用户只能由 seal 创建及删除
+     */
+    var userType: String = ""
+
 ) : Base(), IVerify {
+
+    companion object {
+        val USER_TYPE_SUPER = "0"
+        val USER_TYPE_ADMIN = "1"
+        val USER_TYPE_NORMAL = "2"
+    }
+
+    var partner: SysPartner? = null
 
     override fun verify() {
         this.apply {
@@ -68,12 +82,16 @@ data class SysUser(
             "姓名 不能为空" using (this.name.isNotEmpty())
             "手机号 不能为空" using (this.phone.isNotEmpty())
             "邮箱 不能为空" using (this.email.isNotEmpty())
-            "是否开启   0为是 1为否 不能为空" using (this.openFlag.isNotEmpty())
+            "是否开启 不能为空" using (this.openFlag.isNotEmpty())
         }
     }
 
     fun isSeal(): Boolean {
         return Constant.SEAL == channelMark
+    }
+
+    fun isAdmin(): Boolean {
+        return USER_TYPE_SUPER == userType || USER_TYPE_ADMIN == userType
     }
 }
 

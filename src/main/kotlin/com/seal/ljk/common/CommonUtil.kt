@@ -22,3 +22,12 @@ fun success(data: Any?): ResVal {
 fun error(data: Any?, code: Int = 1): ResVal {
     return ResVal(code, data)
 }
+
+inline fun <K, V> MutableMap<K, MutableList<V>>.getOrCreate(key: K): MutableList<V> {
+    var list = this[key]
+    if (list == null) {
+        list = mutableListOf()
+        this[key] = list
+    }
+    return list
+}

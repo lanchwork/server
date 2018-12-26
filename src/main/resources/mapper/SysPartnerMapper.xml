@@ -60,28 +60,28 @@
         update sys_partner
         <set>
             <if test="id != null  and id != '' ">
-               field.name= #{id},
+                id= #{id},
             </if>
             <if test="channelMark != null  and channelMark != '' ">
-               field.name= #{channelMark},
+                channelMark= #{channelMark},
             </if>
             <if test="partnerName != null  and partnerName != '' ">
-               field.name= #{partnerName},
+                partnerName= #{partnerName},
             </if>
             <if test="userNo != null  and userNo != '' ">
-               field.name= #{userNo},
+                userNo= #{userNo},
             </if>
             <if test="walletAddr != null  and walletAddr != '' ">
-               field.name= #{walletAddr},
+                walletAddr= #{walletAddr},
             </if>
             <if test="openFlag != null  and openFlag != '' ">
-               field.name= #{openFlag},
+                openFlag= #{openFlag},
             </if>
             <if test="remark != null  and remark != '' ">
-               field.name= #{remark},
+                remark= #{remark},
             </if>
             <if test="partnerType != null  and partnerType != '' ">
-               field.name= #{partnerType},
+                partnerType= #{partnerType},
             </if>
             <if test="update_user != null and update_user != ''">
                 update_user=#{updateUser},

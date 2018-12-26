@@ -1,6 +1,8 @@
 package com.seal.ljk.controller
 
 
+import com.seal.ljk.base.IgnoreToken
+import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.common.getSessionUser
 import com.seal.ljk.common.success
@@ -30,15 +32,18 @@ class SysUserController{
 
     @PostMapping("/get")
     @ApiOperation(value = "获取用户表")
+    @VerifyToken
     fun getSysUser(@RequestParam id: String): ResVal = success(sysUserService.getSysUser(id))
 
     @PostMapping("/list")
     @ApiOperation(value = "用户列表")
+    @VerifyToken
     fun listSysUser(@RequestBody sysUser: SysUser): ResVal = success( sysUserService.getAllSysUser(sysUser))
 
 
     @PostMapping("/save")
     @ApiOperation(value = "新增或修改用户表")
+    @VerifyToken
     fun saveSysUser(@RequestBody sysUser: SysUser): ResVal {
         sysUser.verify()
         if (sysUser.id.isEmpty()) {
@@ -51,6 +56,7 @@ class SysUserController{
 
     @PostMapping("/delete")
     @ApiOperation(value = "删除用户表")
+    @VerifyToken
     fun deleteSysUser(@RequestParam id: String): ResVal {
         sysUserService.deleteSysUser(id)
         return success("success")
@@ -58,6 +64,7 @@ class SysUserController{
 
     @PostMapping("/changePass")
     @ApiOperation(value = "用户修改密码")
+    @VerifyToken
     fun changePass(@RequestParam oldPass: String,
                    @RequestParam newPass: String): ResVal {
         sysUserService.changePass(oldPass, newPass)
@@ -66,6 +73,7 @@ class SysUserController{
 
     @PostMapping("/login")
     @ApiOperation(value = "用户登录")
+    @IgnoreToken
     fun login(@RequestParam channelMark: String,
               @RequestParam userName: String,
               @RequestParam password: String): ResVal {
@@ -75,6 +83,7 @@ class SysUserController{
 
     @PostMapping("/dict")
     @ApiOperation(value = "用户字典")
+    @VerifyToken
     fun dicSysUser(@RequestParam id: String): ResVal {
         //todo 返回渠道标识，角色类型，状态字典
         val user = getSessionUser()!!

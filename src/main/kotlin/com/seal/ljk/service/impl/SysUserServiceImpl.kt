@@ -13,8 +13,8 @@ import com.seal.ljk.common.MessageDigetUtil
 import com.seal.ljk.common.checkParam
 import com.seal.ljk.common.getSessionUser
 import com.seal.ljk.dao.SysUserMapper
-import com.seal.ljk.model.SysPartner
 import com.seal.ljk.model.SysUser
+import com.seal.ljk.service.ISysMenuService
 import com.seal.ljk.service.ISysPartnerService
 import com.seal.ljk.service.ISysUserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -37,9 +37,11 @@ class SysUserServiceImpl : ISysUserService {
     lateinit var sysUserMapper: SysUserMapper
     @Autowired
     lateinit var sysPartnerService: ISysPartnerService
+    @Autowired
+    lateinit var sysMenuService: ISysMenuService
 
 
-    override fun getSysUser(id: String): SysUser {
+    override fun getSysUser(id: String): SysUser? {
         return sysUserMapper.get(id)
     }
 
@@ -54,6 +56,13 @@ class SysUserServiceImpl : ISysUserService {
     }
 
     override fun insertSysUser(sysUser: SysUser) {
+        val user = getSessionUser() ?: throw AuthException()
+
+        if (sysUser.userType == "0") {//管理员账户
+            if (!user.isSeal()) {
+                throw SealException(message = "权限不足，无法新增管理员")
+            }
+        }
         if (sysUser.initPass.isNotEmpty()) {
             sysUser.password = MessageDigetUtil.md5Pass(sysUser.initPass)
         }
@@ -65,6 +74,14 @@ class SysUserServiceImpl : ISysUserService {
     }
 
     override fun deleteSysUser(id: String) {
+        val sysUser = getSysUser(id) ?: throw SealException("用户不存在")
+        val user = getSessionUser() ?: throw AuthException()
+
+        if (sysUser.userType == "0") {//管理员账户
+            if (!user.isSeal()) {
+                throw SealException(message = "权限不足，无法删除管理员")
+            }
+        }
         sysUserMapper.delete(id)
     }
 
@@ -93,16 +110,18 @@ class SysUserServiceImpl : ISysUserService {
         }
         val token = getUserToken(user)
 
-        partner.walletAddr = null
-        user.password = ""
-        user.initPass = ""
+        user.partner = partner
 
         //todo 查询首页权限并返回
+        val menuList = sysMenuService.getAllSysMenuByUser(user)
 
         return mapOf(
-                "partner" to partner,
-                "user" to user,
-                "token" to token
+                "token" to token,
+                "username" to user.username,
+                "channelMark" to user.channelMark,
+                "phone" to user.phone,
+                "email" to user.email,
+                "menuList" to menuList
         )
     }
 
@@ -123,7 +142,6 @@ class SysUserServiceImpl : ISysUserService {
             throw  AuthException()
         }
 
-        val user = getSysUser(userId)
         // 验证 token
         val jwtVerifier = JWT.require(Algorithm.HMAC256(Constant.SEAL_SALT)).build()
 
@@ -132,8 +150,11 @@ class SysUserServiceImpl : ISysUserService {
         } catch (e: Exception) {
             throw  AuthException()
         }
-        return user
-
+        val sysUser = getSysUser(userId) ?: throw SealException("用户不存在。")
+        val partner = sysPartnerService.getByChannelMark(sysUser.channelMark)
+                ?: throw SealException(message = "合作方不存在。")
+        sysUser.partner = partner
+        return sysUser
     }
 
 }

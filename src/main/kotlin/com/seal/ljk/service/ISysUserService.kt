@@ -13,7 +13,7 @@ import com.seal.ljk.model.User
  * @since 2018-12-25
  */
 interface ISysUserService{
-    fun getSysUser(id: String): SysUser
+    fun getSysUser(id: String): SysUser?
     fun getAllSysUser(sysUser: SysUser): Page<SysUser>
     fun insertSysUser(sysUser: SysUser)
     fun updateSysUser(sysUser: SysUser)

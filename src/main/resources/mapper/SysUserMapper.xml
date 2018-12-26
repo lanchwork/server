@@ -64,31 +64,31 @@
         update sys_user
         <set>
             <if test="id != null  and id != '' ">
-               field.name= #{id},
+                id= #{id},
             </if>
             <if test="username != null  and username != '' ">
-               field.name= #{username},
+                username= #{username},
             </if>
             <if test="initPass != null  and initPass != '' ">
-               field.name= #{initPass},
+                initPass= #{initPass},
             </if>
             <if test="password != null  and password != '' ">
-               field.name= #{password},
+                password= #{password},
             </if>
             <if test="channelMark != null  and channelMark != '' ">
-               field.name= #{channelMark},
+                channelMark= #{channelMark},
             </if>
             <if test="name != null  and name != '' ">
-               field.name= #{name},
+                name= #{name},
             </if>
             <if test="phone != null  and phone != '' ">
-               field.name= #{phone},
+                phone= #{phone},
             </if>
             <if test="email != null  and email != '' ">
-               field.name= #{email},
+                email= #{email},
             </if>
             <if test="openFlag != null  and openFlag != '' ">
-               field.name= #{openFlag},
+                openFlag= #{openFlag},
             </if>
             <if test="update_user != null and update_user != ''">
                 update_user=#{updateUser},
