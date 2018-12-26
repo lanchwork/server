@@ -112,7 +112,6 @@ class SysUserServiceImpl : ISysUserService {
 
         user.partner = partner
 
-        //todo 查询首页权限并返回
         val menuList = sysMenuService.getAllSysMenuByUser(user)
 
         return mapOf(
@@ -126,6 +125,7 @@ class SysUserServiceImpl : ISysUserService {
     }
 
     override fun getUserToken(user: SysUser): String {
+        //todo 后续需要处理下加密问题
         return JWT.create().withAudience(user.id)
                 .sign(Algorithm.HMAC256(Constant.SEAL_SALT))
     }
