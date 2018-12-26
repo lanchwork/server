@@ -1,37 +1,39 @@
 package com.seal.ljk.base
 
+import com.google.common.base.CaseFormat
 import com.seal.ljk.common.UUIDUtil
 import com.seal.ljk.common.getSessionUser
 import com.seal.ljk.model.Base
+import org.apache.ibatis.cache.CacheKey
 import org.apache.ibatis.mapping.MappedStatement
 import org.apache.ibatis.mapping.SqlCommandType
 import org.apache.ibatis.executor.Executor
+import org.apache.ibatis.mapping.BoundSql
 import org.apache.ibatis.plugin.*
+import org.apache.ibatis.session.ResultHandler
+import org.apache.ibatis.session.RowBounds
 import java.util.*
 import java.lang.reflect.Field
 
 
 /**
+ * 插入及更新的拦截器，主要是更新主键及用户id
  * Created by chenjh on 2018/12/25.
  */
 @Intercepts(
-    Signature(
-        type = Executor::class,
-        method = "update",
-        args = arrayOf(MappedStatement::class, Any::class)
-    )
+        Signature(type = Executor::class, method = "update", args = arrayOf(MappedStatement::class, Any::class))
 )
 class SealSqlInterceptor : Interceptor {
     override fun intercept(invocation: Invocation): Any {
-        
+
         val mappedStatement = invocation.args[0] as MappedStatement
-        
+
         // 获取 SQL 命令
         val sqlCommandType = mappedStatement.sqlCommandType
-        
+
         // 获取参数
         val parameter = invocation.args[1]
-    
+
         val declaredFields = mutableListOf<Field>()
         var tempClass = parameter.javaClass
         while (true) {
@@ -45,7 +47,7 @@ class SealSqlInterceptor : Interceptor {
             }
         }
         // 获取私有成员变量
-        
+
         for (field in declaredFields) {
             if (field.getAnnotation(CreateUser::class.java) != null) {
                 if (SqlCommandType.INSERT == sqlCommandType) { // insert 语句插入 createUser
@@ -56,7 +58,7 @@ class SealSqlInterceptor : Interceptor {
                     }
                 }
             }
-            
+
             if (field.getAnnotation(UpdateUser::class.java) != null) { // insert 或 update 语句插入 updateUser
                 if (SqlCommandType.INSERT == sqlCommandType || SqlCommandType.UPDATE == sqlCommandType) {
                     val user = getSessionUser()
@@ -66,6 +68,7 @@ class SealSqlInterceptor : Interceptor {
                     }
                 }
             }
+
             if (field.getAnnotation(PrimaryKey::class.java) != null) { // insert 语句插入 主键
                 field.isAccessible = true
                 val id = field.get(parameter)
@@ -78,36 +81,74 @@ class SealSqlInterceptor : Interceptor {
                 }
             }
         }
-        
+
         return invocation.proceed()
     }
-    
+
     override fun setProperties(properties: Properties?) {
-    
+
     }
-    
+
     override fun plugin(target: Any?): Any {
         return Plugin.wrap(target, this)
     }
-    
+
 }
 
+/**
+ *  查询的拦截器，主要将前端自动排序字段的驼峰转换为转换下滑线
+ */
+@Intercepts(
+        Signature(type = Executor::class, method = "query", args = arrayOf(MappedStatement::class, Any::class, RowBounds::class, ResultHandler::class)),
+        Signature(type = Executor::class, method = "query", args = arrayOf(MappedStatement::class, Any::class, RowBounds::class, ResultHandler::class, CacheKey::class, BoundSql::class))
+)
+class SealOrderInterceptor : Interceptor {
+
+    override fun intercept(invocation: Invocation): Any {
+        val mappedStatement = invocation.args[0] as MappedStatement
+
+        // 获取 SQL 命令
+        val sqlCommandType = mappedStatement.sqlCommandType
+
+        if (SqlCommandType.SELECT == sqlCommandType) {
+            // 获取参数
+            val parameter = invocation.args[1]
+            if (parameter is Base) {
+                parameter.orderByInfo?.apply {
+                    parameter.orderByInfo = this.map {
+                        CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, it)
+                    }.toTypedArray()
+                }
+            }
+        }
+        return invocation.proceed()
+    }
+
+    override fun setProperties(properties: Properties?) {
+    }
+
+    override fun plugin(target: Any?): Any {
+        return Plugin.wrap(target, this)
+    }
+}
+
+
 @Target(
-    AnnotationTarget.FIELD
+        AnnotationTarget.FIELD
 )
 @Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
 annotation class PrimaryKey
 
 @Target(
-    AnnotationTarget.FIELD
+        AnnotationTarget.FIELD
 )
 @Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
 annotation class CreateUser
 
 @Target(
-    AnnotationTarget.FIELD
+        AnnotationTarget.FIELD
 )
 @Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
