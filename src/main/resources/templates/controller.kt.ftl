@@ -1,6 +1,7 @@
 package ${package.Controller}
 
 import ${package.Service}.${table.serviceName}
+import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.common.success
 import ${package.Entity}.${entity}

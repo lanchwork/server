@@ -1,0 +1,57 @@
+package com.seal.ljk.controller
+
+import com.seal.ljk.service.ISysRoleService
+import com.seal.ljk.base.VerifyToken
+import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.success
+import com.seal.ljk.model.SysRole
+import io.swagger.annotations.ApiOperation
+import org.springframework.web.bind.annotation.*
+/**
+ * <p>
+ * 角色表 前端控制器
+ * </p>
+ *
+ * @author chenjh
+ * @since 2018-12-26
+ */
+@RestController
+@RequestMapping("/ljk/sys-role")
+class SysRoleController{
+
+    lateinit var sysRoleService: ISysRoleService
+
+
+    @PostMapping("/get")
+    @ApiOperation(value = "获取角色表")
+    @VerifyToken
+    fun getSysRole(@RequestParam id: String): ResVal = success(sysRoleService.getSysRole(id))
+
+    @PostMapping("/list")
+    @ApiOperation(value = "角色表方列表")
+    @VerifyToken
+    fun listSysRole(@RequestBody sysRole: SysRole): ResVal = success(sysRoleService.getAllSysRole(sysRole))
+
+
+    @PostMapping("/save")
+    @ApiOperation(value = "新增或修改角色表")
+    @VerifyToken
+    fun saveSysRole(@RequestBody sysRole: SysRole): ResVal {
+        sysRole.verify()
+        if (sysRole.id.isEmpty()) {
+            sysRoleService.insertSysRole(sysRole)
+        } else {
+            sysRoleService.updateSysRole(sysRole)
+        }
+        return success(mapOf("id" to sysRole.id))
+    }
+
+    @PostMapping("/delete")
+    @ApiOperation(value = "删除角色表")
+    @VerifyToken
+    fun deleteSysRole(@RequestParam id: String): ResVal {
+        sysRoleService.deleteSysRole(id)
+        return success()
+    }
+
+}

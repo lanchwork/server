@@ -53,6 +53,7 @@
         <typeAlias alias="SysPartner" type="com.seal.ljk.model.SysPartner"/>
         <typeAlias alias="SysUser" type="com.seal.ljk.model.SysUser"/>
         <typeAlias alias="SysMenu" type="com.seal.ljk.model.SysMenu"/>
+        <typeAlias alias="SysRole" type="com.seal.ljk.model.SysRole"/>
     </typeAliases>
 
     <plugins>

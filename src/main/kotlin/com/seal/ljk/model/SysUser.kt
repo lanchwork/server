@@ -78,7 +78,6 @@ data class SysUser(
         this.apply {
             "用户名 不能为空" using (this.username.isNotEmpty())
             "初始密码 不能为空" using (this.initPass.isNotEmpty())
-            "渠道标识 不能为空" using (this.channelMark.isNotEmpty())
             "姓名 不能为空" using (this.name.isNotEmpty())
             "手机号 不能为空" using (this.phone.isNotEmpty())
             "邮箱 不能为空" using (this.email.isNotEmpty())

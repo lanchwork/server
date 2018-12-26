@@ -58,6 +58,10 @@ class SysUserServiceImpl : ISysUserService {
     override fun insertSysUser(sysUser: SysUser) {
         val user = getSessionUser() ?: throw AuthException()
 
+        if (sysUser.channelMark.isEmpty()) {
+            sysUser.channelMark = user.channelMark
+        }
+
         if (sysUser.userType == "0") {//管理员账户
             if (!user.isSeal()) {
                 throw SealException(message = "权限不足，无法新增管理员")
