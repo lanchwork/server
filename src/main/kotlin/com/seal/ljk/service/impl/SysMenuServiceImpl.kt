@@ -11,6 +11,8 @@ import com.seal.ljk.base.loggerFor
 import com.seal.ljk.common.getOrCreate
 import com.seal.ljk.common.getSessionUser
 import com.seal.ljk.model.SysUser
+import com.seal.ljk.model.SysUserRole
+import com.seal.ljk.service.ISysUserRoleService
 
 /**
  * <p>
@@ -27,6 +29,8 @@ class SysMenuServiceImpl : ISysMenuService {
 
     @Autowired
     lateinit var sysMenuDao: SysMenuDao
+    @Autowired
+    lateinit var sysUserRoleService: ISysUserRoleService
 
     override fun getSysMenu(id: String): SysMenu? {
         return sysMenuDao.get(id)
@@ -63,6 +67,10 @@ class SysMenuServiceImpl : ISysMenuService {
         val menu = SysMenu()
         if (!user.isSeal()) {
             menu.partnerTypes = user.partner!!.partnerType
+        }
+        if (!user.isAdmin()) {
+            val roleIds = sysUserRoleService.getAllSysUserRole(SysUserRole(userId = user.id)).map { it.roleId }.toTypedArray()
+            menu.roleIds = roleIds
         }
         menu.orderByInfo = arrayOf("type", "sort")
         menu.currentPage = 1

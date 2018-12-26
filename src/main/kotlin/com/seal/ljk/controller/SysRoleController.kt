@@ -6,6 +6,7 @@ import com.seal.ljk.common.ResVal
 import com.seal.ljk.common.success
 import com.seal.ljk.model.SysRole
 import io.swagger.annotations.ApiOperation
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 /**
  * <p>
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/sys/role")
 class SysRoleController{
 
+    @Autowired
     lateinit var sysRoleService: ISysRoleService
 
 

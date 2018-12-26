@@ -39,6 +39,12 @@
             <if test="partnerTypes != null  and partnerTypes != '' ">
                 and b.partner_types = #{partnerTypes}
             </if>
+            <if test="roleIds != null and roleIds.length > 0">
+                <foreach collection="roleIds" item="roleId" open="b.id in (select menu_id from sys_role_menu where role_id in ("
+                         separator="," close=" )) ">
+                    ${roleId}
+                </foreach>
+            </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "

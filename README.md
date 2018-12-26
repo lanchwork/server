@@ -3,8 +3,9 @@
 sql 部分
 
 - 所有创建或更新的sql语句，都需要存放在./script文件夹下，以 yyyyMMddhhmm.sql 方式命名
-- 主键id通一采用32位UUID
-- 在数据库中创建表，通过运行 com.seal.ljk.common.CodeGenerator 程序，自动生成通用代码
+- 在数据库中创建表，通过运行 CodeGenerator 程序，自动生成通用代码
+- 主键id通一采用32位UUID，插入执行插入方法时可以不主动设置，SealInsertInterceptor 拦截器中会主动设置（包括 Base 类中的通用字段）
+- 分页，Dao 中方法以 ByPage 结尾的，会自动执行分页查询，详见 SealPageInterceptor 拦截器代码
 
 service 部分
 - service 业务代码进行接口、实现分层隔离
@@ -15,3 +16,9 @@ service 部分
 
 异常处理
 - com.seal.ljk.base.Exception 中定义了 AuthException（用户验证异常）和 ParamException（参数异常）,加入了全局异常处理
+
+
+业务
+- 业务表中需要定义 channelMark (渠道标识，如mini)字段，其中 seal 本身也是一个合作方，在业务中做特殊处理，拥有最高权限
+- SysPartner 中有 partnerType 合作方类型字段，根据这个标识可以过滤一些权限方面的控制
+- SysUser 中有 userType 字段，0超级管理员用户 1合作方管理员 2普通用户，管理员通过合作方类型过滤权限，普通用户通过用户所属角色读取权限

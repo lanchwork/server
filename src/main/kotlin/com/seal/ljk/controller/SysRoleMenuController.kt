@@ -7,6 +7,7 @@ import com.seal.ljk.common.checkParam
 import com.seal.ljk.common.success
 import com.seal.ljk.model.SysRoleMenu
 import io.swagger.annotations.ApiOperation
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 /**
  * <p>
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/sys/roleMenu")
 class SysRoleMenuController {
-
+    @Autowired
     lateinit var sysRoleMenuService: ISysRoleMenuService
 
 

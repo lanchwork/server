@@ -47,7 +47,7 @@ class ${table.serviceImplName} : ${table.serviceName} {
         } else {
            ${entity?uncap_first}.channelMark = user.channelMark
         }
-        return ${table.mapperName?uncap_first}.getAll(${entity?uncap_first})
+        return ${table.mapperName?uncap_first}.getAllByPage(${entity?uncap_first})
     }
 
     override fun insert${entity}(${entity?uncap_first}: ${entity}) {

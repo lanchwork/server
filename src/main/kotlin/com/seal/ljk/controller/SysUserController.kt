@@ -12,6 +12,7 @@ import com.seal.ljk.service.ISysPartnerService
 
 import com.seal.ljk.service.ISysUserService
 import io.swagger.annotations.ApiOperation
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 /**
@@ -26,7 +27,9 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/sys/user")
 class SysUserController{
 
+    @Autowired
     lateinit var sysUserService: ISysUserService
+    @Autowired
     lateinit var sysPartnerService: ISysPartnerService
 
 

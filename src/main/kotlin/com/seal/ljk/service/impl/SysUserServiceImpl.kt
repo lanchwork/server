@@ -16,6 +16,7 @@ import com.seal.ljk.dao.SysUserMapper
 import com.seal.ljk.model.SysUser
 import com.seal.ljk.service.ISysMenuService
 import com.seal.ljk.service.ISysPartnerService
+import com.seal.ljk.service.ISysUserRoleService
 import com.seal.ljk.service.ISysUserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

@@ -6,6 +6,7 @@ import com.seal.ljk.common.ResVal
 import com.seal.ljk.common.success
 import ${package.Entity}.${entity}
 import io.swagger.annotations.ApiOperation
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 /**
  * <p>
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>")
 class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>{
 
+    @Autowired
     lateinit var ${table.serviceName?substring(1)?uncap_first}: ${table.serviceName}
 
 

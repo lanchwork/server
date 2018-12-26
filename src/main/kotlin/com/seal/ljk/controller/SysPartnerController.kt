@@ -8,6 +8,7 @@ import com.seal.ljk.model.SysPartner
 
 import com.seal.ljk.service.ISysPartnerService
 import io.swagger.annotations.ApiOperation
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 /**
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/sys/partner")
 class SysPartnerController{
 
+    @Autowired
     lateinit var sysPartnerService: ISysPartnerService
 
 
