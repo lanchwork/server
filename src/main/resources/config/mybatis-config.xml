@@ -55,6 +55,7 @@
         <typeAlias alias="SysMenu" type="com.seal.ljk.model.SysMenu"/>
         <typeAlias alias="SysRole" type="com.seal.ljk.model.SysRole"/>
         <typeAlias alias="SysRoleMenu" type="com.seal.ljk.model.SysRoleMenu"/>
+        <typeAlias alias="SysUserRole" type="com.seal.ljk.model.SysUserRole"/>
     </typeAliases>
 
     <plugins>
