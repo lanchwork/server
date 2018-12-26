@@ -15,12 +15,12 @@ fun checkParam(vararg params: String) {
     }
 }
 
-fun success(data: Any?): ResVal {
-    return ResVal(0, data)
+fun success(data: Any? = null): ResVal {
+    return ResValMsg(0, data, "操作成功")
 }
 
-fun error(data: Any?, code: Int = 1): ResVal {
-    return ResVal(code, data)
+fun error(msg: String?, code: Int = 1): ResVal {
+    return ResValMsg(code = code, data = null, msg = msg)
 }
 
 inline fun <K, V> MutableMap<K, MutableList<V>>.getOrCreate(key: K): MutableList<V> {

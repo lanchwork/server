@@ -59,7 +59,7 @@ class SysUserController{
     @VerifyToken
     fun deleteSysUser(@RequestParam id: String): ResVal {
         sysUserService.deleteSysUser(id)
-        return success("success")
+        return success()
     }
 
     @PostMapping("/changePass")
@@ -68,7 +68,7 @@ class SysUserController{
     fun changePass(@RequestParam oldPass: String,
                    @RequestParam newPass: String): ResVal {
         sysUserService.changePass(oldPass, newPass)
-        return success( "success")
+        return success()
     }
 
     @PostMapping("/login")
@@ -78,7 +78,7 @@ class SysUserController{
               @RequestParam userName: String,
               @RequestParam password: String): ResVal {
         sysUserService.login(channelMark, userName, password)
-        return success("success")
+        return success()
     }
 
     @PostMapping("/dict")

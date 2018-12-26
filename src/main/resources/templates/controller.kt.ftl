@@ -50,7 +50,7 @@ class ${table.controllerName}<#if superControllerClass??> : ${superControllerCla
     @VerifyToken
     fun delete${entity}(@RequestParam id: String): ResVal {
         ${table.serviceName?substring(1)?uncap_first}.delete${entity}(id)
-        return success("success")
+        return success()
     }
 
 }

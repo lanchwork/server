@@ -1,6 +1,7 @@
 package com.seal.ljk.base
 
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.error
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -25,9 +26,9 @@ class GlobalExceptionHandler {
     fun jsonErrorHandler(req: HttpServletRequest, e: Exception): ResponseEntity<ResVal> {
         logger.error("错误信息" + e.toString())
         if (e is SealException) {
-            return ResponseEntity.ok(ResVal(e.code, e.message ?: "接口异常。"))
+            return ResponseEntity.ok(error(e.message, e.code))
         }
-        return ResponseEntity.ok(ResVal(1, e.message ?: "接口异常。"))
+        return ResponseEntity.ok(error(e.message ?: "接口异常。", 1))
     }
 
 }

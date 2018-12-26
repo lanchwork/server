@@ -1,12 +1,12 @@
 package com.seal.ljk.common
 
-data class ResVal(
-        val code: Int, // 0-success, 1-error
-        val data: Any?
+open class ResVal(
+        open val code: Int, // 0-success, 1-error
+        open val data: Any?
 )
 
 data class ResValMsg(
-        val code: Int, // 0-success, 1-error
-        val data: Any?,
+        override val code: Int, // 0-success, 1-error
+        override val data: Any? = null,
         val msg: String?
-)
+) : ResVal(code, data)
