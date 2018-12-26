@@ -30,7 +30,7 @@ class ${table.controllerName}<#if superControllerClass??> : ${superControllerCla
     @PostMapping("/list")
     @ApiOperation(value = "${table.comment!}方列表")
     @VerifyToken
-    fun list${entity}(@RequestBody ${entity?uncap_first}: ${entity}): ResVal = success(${table.serviceName?substring(1)?uncap_first}.getAll${entity}(${entity?uncap_first}))
+    fun list${entity}(@RequestBody ${entity?uncap_first}: ${entity}): ResVal = success(${table.serviceName?substring(1)?uncap_first}.getAll${entity}ByPage(${entity?uncap_first}))
 
 
     @PostMapping("/save")

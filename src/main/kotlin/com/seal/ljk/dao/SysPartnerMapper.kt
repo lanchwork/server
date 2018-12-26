@@ -1,7 +1,6 @@
 package com.seal.ljk.dao;
 
-import com.seal.ljk.model.SysPartner;
-import com.seal.ljk.dao.BaseMapper;
+import com.seal.ljk.model.SysPartner
 
 /**
  * <p>

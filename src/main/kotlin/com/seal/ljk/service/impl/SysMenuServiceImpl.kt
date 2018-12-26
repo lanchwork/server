@@ -32,10 +32,16 @@ class SysMenuServiceImpl : ISysMenuService {
         return sysMenuDao.get(id)
     }
 
-    override fun getAllSysMenu(sysMenu: SysMenu): Page<SysMenu> {
+    override fun getAllSysMenu(sysMenu: SysMenu): List<SysMenu> {
         val user = getSessionUser() ?: throw AuthException()
         sysMenu.partnerTypes = if (user.isSeal()) "" else user.partner!!.partnerType
         return sysMenuDao.getAll(sysMenu)
+    }
+
+    override fun getAllSysMenuByPage(sysMenu: SysMenu): Page<SysMenu> {
+        val user = getSessionUser() ?: throw AuthException()
+        sysMenu.partnerTypes = if (user.isSeal()) "" else user.partner!!.partnerType
+        return sysMenuDao.getAllByPage(sysMenu)
     }
 
     override fun insertSysMenu(sysMenu: SysMenu) {
@@ -59,7 +65,14 @@ class SysMenuServiceImpl : ISysMenuService {
             menu.partnerTypes = user.partner!!.partnerType
         }
         menu.orderByInfo = arrayOf("type", "sort")
+        menu.currentPage = 1
+        menu.pageSize = 5
         val all = sysMenuDao.getAll(menu)
+
+        return getMenuTreeList(all)
+    }
+
+    override fun getMenuTreeList(all: List<SysMenu>): MutableList<SysMenu> {
         val result = mutableListOf<SysMenu>()
 
         val menuMap = linkedMapOf<String, MutableList<SysMenu>>()

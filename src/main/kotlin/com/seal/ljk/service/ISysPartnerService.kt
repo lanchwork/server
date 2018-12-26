@@ -11,9 +11,10 @@ import com.github.pagehelper.Page
  * @author chenjh
  * @since 2018-12-24
  */
-interface ISysPartnerService{
+interface ISysPartnerService : IBaseService {
     fun getSysPartner(id: String): SysPartner?
-    fun getAllSysPartner(sysPartner: SysPartner): Page<SysPartner>
+    fun getAllSysPartner(sysPartner: SysPartner): List<SysPartner>
+    fun getAllSysPartnerByPage(sysPartner: SysPartner): Page<SysPartner>
     fun insertSysPartner(sysPartner: SysPartner)
     fun updateSysPartner(sysPartner: SysPartner)
     fun deleteSysPartner(id: String)

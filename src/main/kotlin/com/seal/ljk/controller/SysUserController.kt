@@ -38,7 +38,7 @@ class SysUserController{
     @PostMapping("/list")
     @ApiOperation(value = "用户列表")
     @VerifyToken
-    fun listSysUser(@RequestBody sysUser: SysUser): ResVal = success( sysUserService.getAllSysUser(sysUser))
+    fun listSysUser(@RequestBody sysUser: SysUser): ResVal = success(sysUserService.getAllSysUserByPage(sysUser))
 
 
     @PostMapping("/save")
@@ -99,8 +99,6 @@ class SysUserController{
                 )
             }
         }
-
-
         return success(mapOf(
                 "channelMark" to channelMark
         ))

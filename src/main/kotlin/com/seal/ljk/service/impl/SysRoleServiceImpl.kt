@@ -30,10 +30,16 @@ class SysRoleServiceImpl : ISysRoleService {
         return sysRoleDao.get(id)
     }
 
-    override fun getAllSysRole(sysRole: SysRole): Page<SysRole> {
+    override fun getAllSysRole(sysRole: SysRole): List<SysRole> {
         val user = getSessionUser() ?: throw AuthException()
         sysRole.channelMark = user.channelMark
         return sysRoleDao.getAll(sysRole)
+    }
+
+    override fun getAllSysRoleByPage(sysRole: SysRole): Page<SysRole> {
+        val user = getSessionUser() ?: throw AuthException()
+        sysRole.channelMark = user.channelMark
+        return sysRoleDao.getAllByPage(sysRole)
     }
 
     override fun insertSysRole(sysRole: SysRole) {

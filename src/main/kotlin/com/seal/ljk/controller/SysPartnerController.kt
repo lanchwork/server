@@ -33,7 +33,7 @@ class SysPartnerController{
     @PostMapping("/list")
     @ApiOperation(value = "合作方表方列表")
     @VerifyToken
-    fun listSysPartner(@RequestBody sysPartner: SysPartner): ResVal = success( sysPartnerService.getAllSysPartner(sysPartner))
+    fun listSysPartner(@RequestBody sysPartner: SysPartner): ResVal = success( sysPartnerService.getAllSysPartnerByPage(sysPartner))
 
 
     @PostMapping("/save")

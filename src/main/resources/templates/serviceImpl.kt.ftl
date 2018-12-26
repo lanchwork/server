@@ -30,7 +30,17 @@ class ${table.serviceImplName} : ${table.serviceName} {
         return ${table.mapperName?uncap_first}.get(id)
     }
 
-    override fun getAll${entity}(${entity?uncap_first}: ${entity}): Page<${entity}> {
+    override fun getAll${entity}(${entity?uncap_first}: ${entity}): List<${entity}> {
+        val user = getSessionUser() ?: throw AuthException()
+        if (user.isSeal()) {
+           ${entity?uncap_first}.channelMark = ""
+        } else {
+           ${entity?uncap_first}.channelMark = user.channelMark
+        }
+        return ${table.mapperName?uncap_first}.getAll(${entity?uncap_first})
+    }
+
+    override fun getAll${entity}ByPage(${entity?uncap_first}: ${entity}): Page<${entity}> {
         val user = getSessionUser() ?: throw AuthException()
         if (user.isSeal()) {
            ${entity?uncap_first}.channelMark = ""

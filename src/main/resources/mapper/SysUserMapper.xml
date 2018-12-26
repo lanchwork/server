@@ -55,6 +55,46 @@
         </if>
     </select>
 
+    <select id="getAllByPage" resultType="SysUser">
+        select b.id,b.username,b.initPass,b.password,b.channel_mark,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
+        from sys_user b
+        <where>
+          <if test="id != null  and id != '' ">
+              and b.id= #{id}
+          </if>
+          <if test="username != null  and username != '' ">
+              and b.username= #{username}
+          </if>
+          <if test="initPass != null  and initPass != '' ">
+              and b.initPass= #{initPass}
+          </if>
+          <if test="password != null  and password != '' ">
+              and b.password= #{password}
+          </if>
+          <if test="channelMark != null  and channelMark != '' ">
+              and b.channel_mark= #{channelMark}
+          </if>
+          <if test="name != null  and name != '' ">
+              and b.name= #{name}
+          </if>
+          <if test="phone != null  and phone != '' ">
+              and b.phone= #{phone}
+          </if>
+          <if test="email != null  and email != '' ">
+              and b.email= #{email}
+          </if>
+          <if test="openFlag != null  and openFlag != '' ">
+              and b.open_flag= #{openFlag}
+          </if>
+        </where>
+        <if test="orderByInfo != null and orderByInfo.length > 0">
+            <foreach collection="orderByInfo" item="order" open="order by "
+                     separator="," close="  ">
+                ${order}
+            </foreach>
+        </if>
+    </select>
+
     <insert id="insert" parameterType="SysUser">
         INSERT INTO sys_user (id,username,initPass,password,channel_mark,name,phone,email,open_flag,create_date,create_user,update_date,update_user)
         VALUES (#{id},#{username},#{initPass},#{password},#{channelMark},#{name},#{phone},#{email},#{openFlag},SYSDATE(),#{createUser},SYSDATE(),#{createUser});

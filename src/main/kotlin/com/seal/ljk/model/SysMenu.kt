@@ -59,6 +59,7 @@ data class SysMenu(
 ) : Base(), IVerify {
 
     var children: Array<SysMenu>? = null
+    var checked: String? = null
 
     override fun verify() {
         this.apply {

@@ -11,9 +11,10 @@ import com.github.pagehelper.Page
  * @author chenjh
  * @since 2018-12-26
  */
-interface ISysRoleService{
+interface ISysRoleService : IBaseService {
     fun getSysRole(id: String): SysRole?
-    fun getAllSysRole(sysRole: SysRole): Page<SysRole>
+    fun getAllSysRole(sysRole: SysRole): List<SysRole>
+    fun getAllSysRoleByPage(sysRole: SysRole): Page<SysRole>
     fun insertSysRole(sysRole: SysRole)
     fun updateSysRole(sysRole: SysRole)
     fun deleteSysRole(id: String)

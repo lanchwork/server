@@ -37,6 +37,45 @@
               and b.type= #{type}
           </if>
             <if test="partnerTypes != null  and partnerTypes != '' ">
+                and b.partner_types = #{partnerTypes}
+            </if>
+        </where>
+        <if test="orderByInfo != null and orderByInfo.length > 0">
+            <foreach collection="orderByInfo" item="order" open="order by "
+                     separator="," close="  ">
+                ${order}
+            </foreach>
+        </if>
+    </select>
+    <select id="getAllByPage" resultType="SysMenu">
+        select b.id,b.parent_id,b.menu_name,b.url,b.sort,b.flag,b.icon,b.type,b.partner_types,b.create_date,b.create_user,b.update_date,b.update_user
+        from sys_menu b
+        <where>
+          <if test="id != null  and id != '' ">
+              and b.id= #{id}
+          </if>
+          <if test="parentId != null  and parentId != '' ">
+              and b.parent_id= #{parentId}
+          </if>
+          <if test="menuName != null  and menuName != '' ">
+              and b.menu_name= #{menuName}
+          </if>
+          <if test="url != null  and url != '' ">
+              and b.url= #{url}
+          </if>
+          <if test="sort != null  and sort != '' ">
+              and b.sort= #{sort}
+          </if>
+          <if test="flag != null  and flag != '' ">
+              and b.flag= #{flag}
+          </if>
+          <if test="icon != null  and icon != '' ">
+              and b.icon= #{icon}
+          </if>
+          <if test="type != null  and type != '' ">
+              and b.type= #{type}
+          </if>
+            <if test="partnerTypes != null  and partnerTypes != '' ">
                 and b.partner_types like concat('%', #{partnerTypes},'%')
             </if>
         </where>

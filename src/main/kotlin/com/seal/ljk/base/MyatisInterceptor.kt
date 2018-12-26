@@ -1,5 +1,6 @@
 package com.seal.ljk.base
 
+import com.github.pagehelper.PageInterceptor
 import com.google.common.base.CaseFormat
 import com.seal.ljk.common.UUIDUtil
 import com.seal.ljk.common.getSessionUser
@@ -23,7 +24,7 @@ import java.lang.reflect.Field
 @Intercepts(
         Signature(type = Executor::class, method = "update", args = arrayOf(MappedStatement::class, Any::class))
 )
-class SealSqlInterceptor : Interceptor {
+class SealInsertInterceptor : Interceptor {
     override fun intercept(invocation: Invocation): Any {
 
         val mappedStatement = invocation.args[0] as MappedStatement
@@ -102,11 +103,11 @@ class SealSqlInterceptor : Interceptor {
         Signature(type = Executor::class, method = "query", args = arrayOf(MappedStatement::class, Any::class, RowBounds::class, ResultHandler::class)),
         Signature(type = Executor::class, method = "query", args = arrayOf(MappedStatement::class, Any::class, RowBounds::class, ResultHandler::class, CacheKey::class, BoundSql::class))
 )
-class SealOrderInterceptor : Interceptor {
+class SealPageInterceptor : PageInterceptor() {
 
     override fun intercept(invocation: Invocation): Any {
         val mappedStatement = invocation.args[0] as MappedStatement
-
+        val byPage = mappedStatement.id.endsWith("ByPage", true)
         // 获取 SQL 命令
         val sqlCommandType = mappedStatement.sqlCommandType
 
@@ -119,16 +120,21 @@ class SealOrderInterceptor : Interceptor {
                         CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, it)
                     }.toTypedArray()
                 }
+                if (byPage) {
+                    if (parameter.pageSize == null) {
+                        parameter.pageSize = 10
+                    }
+                    if (parameter.currentPage == null) {
+                        parameter.currentPage = 1
+                    }
+                }
             }
         }
+
+        if (byPage) {
+            return super.intercept(invocation)
+        }
         return invocation.proceed()
-    }
-
-    override fun setProperties(properties: Properties?) {
-    }
-
-    override fun plugin(target: Any?): Any {
-        return Plugin.wrap(target, this)
     }
 }
 

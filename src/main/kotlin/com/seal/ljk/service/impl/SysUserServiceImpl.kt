@@ -45,7 +45,7 @@ class SysUserServiceImpl : ISysUserService {
         return sysUserMapper.get(id)
     }
 
-    override fun getAllSysUser(sysUser: SysUser): Page<SysUser> {
+    override fun getAllSysUser(sysUser: SysUser): List<SysUser> {
         val user = getSessionUser() ?: throw AuthException()
         if (user.isSeal()) {
             sysUser.channelMark = ""
@@ -53,6 +53,16 @@ class SysUserServiceImpl : ISysUserService {
             sysUser.channelMark = user.channelMark
         }
         return sysUserMapper.getAll(sysUser)
+    }
+
+    override fun getAllSysUserByPage(sysUser: SysUser): Page<SysUser> {
+        val user = getSessionUser() ?: throw AuthException()
+        if (user.isSeal()) {
+            sysUser.channelMark = ""
+        } else {
+            sysUser.channelMark = user.channelMark
+        }
+        return sysUserMapper.getAllByPage(sysUser)
     }
 
     override fun insertSysUser(sysUser: SysUser) {

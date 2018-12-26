@@ -26,6 +26,24 @@
         </if>
     </select>
 
+    <select id="getAllByPage" resultType="${entity}">
+        select <#list table.fields as field>b.${field.name},</#list><#list table.commonFields as field>b.${field.name}<#if field_has_next>,</#if></#list>
+        from ${table.name} b
+        <where>
+        <#list table.fields as field>
+          <if test="${field.propertyName} != null  and ${field.propertyName} != '' ">
+              and b.${field.name}= ${r"#{"}${field.propertyName}${r"}"}
+          </if>
+        </#list>
+        </where>
+        <if test="orderByInfo != null and orderByInfo.length > 0">
+            <foreach collection="orderByInfo" item="order" open="order by "
+                     separator="," close="  ">
+                ${r"${order}"}
+            </foreach>
+        </if>
+    </select>
+
     <insert id="insert" parameterType="${entity}">
         INSERT INTO ${table.name} (<#list table.fields as field>${field.name},</#list><#list table.commonFields as field>${field.name}<#if field_has_next>,</#if></#list>)
         VALUES (<#list table.fields as field>${r"#{"}${field.propertyName}${r"}"},</#list><#list table.commonFields as field><#if field.name == "create_date" || field.name == "update_date">SYSDATE()<#elseif field.name == "update_user">${r"#{createUser}"}<#else>${r"#{"}${field.propertyName}${r"}"}</#if><#if field_has_next>,</#if></#list>);

@@ -13,7 +13,8 @@ import com.github.pagehelper.Page
  */
 interface ${table.serviceName}{
     fun get${entity}(id: String): ${entity}?
-    fun getAll${entity}(${entity?uncap_first}: ${entity}): Page<${entity}>
+    fun getAll${entity}(${entity?uncap_first}: ${entity}): List<${entity}>
+    fun getAll${entity}ByPage(${entity?uncap_first}: ${entity}): Page<${entity}>
     fun insert${entity}(${entity?uncap_first}: ${entity})
     fun update${entity}(${entity?uncap_first}: ${entity})
     fun delete${entity}(id: String)

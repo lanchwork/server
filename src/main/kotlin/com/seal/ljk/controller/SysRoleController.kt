@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*
  * @since 2018-12-26
  */
 @RestController
-@RequestMapping("/ljk/sys-role")
+@RequestMapping("/sys/role")
 class SysRoleController{
 
     lateinit var sysRoleService: ISysRoleService
@@ -30,7 +30,7 @@ class SysRoleController{
     @PostMapping("/list")
     @ApiOperation(value = "角色表方列表")
     @VerifyToken
-    fun listSysRole(@RequestBody sysRole: SysRole): ResVal = success(sysRoleService.getAllSysRole(sysRole))
+    fun listSysRole(@RequestBody sysRole: SysRole): ResVal = success(sysRoleService.getAllSysRoleByPage(sysRole))
 
 
     @PostMapping("/save")

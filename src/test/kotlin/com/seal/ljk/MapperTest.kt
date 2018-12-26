@@ -1,5 +1,6 @@
 package com.seal.ljk
 
+import com.alibaba.fastjson.JSON
 import com.seal.ljk.common.setSessionUser
 import com.seal.ljk.model.SysPartner
 import com.seal.ljk.model.SysUser
@@ -27,10 +28,19 @@ class MapperTest {
         var user = SysUser(id = "12345678",username = "admin",channelMark = "seal",name = "admin")
         setSessionUser(user)
 
-        sysPartnerService.insertSysPartner(SysPartner(partnerName = "partnerName3", userNo = "userNo", channelMark = "mini"))
+//        sysPartnerService.insertSysPartner(SysPartner(partnerName = "partnerName3", userNo = "userNo", channelMark = "mini"))
 
         println("----- selectAll method test ------")
         val userList = sysPartnerService.getAllSysPartner(SysPartner(channelMark = "mini"))
+        println(JSON.toJSONString(userList))
+
+        println("----- selectAllByPage method test ------")
+        val sysPartner = SysPartner(channelMark = "mini")
+        sysPartner.currentPage = 1
+        sysPartner.pageSize = 5
+        val page = sysPartnerService.getAllSysPartnerByPage(sysPartner)
+        println(JSON.toJSONString(page))
+
         userList.forEach(Consumer<SysPartner> { System.out.println() })
     }
 

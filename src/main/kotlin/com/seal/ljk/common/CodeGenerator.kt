@@ -67,7 +67,7 @@ object CodeGenerator {
 
         // 包配置
         val pc = PackageConfig()
-        // pc.setModuleName(scanner("模块名"));
+//        pc.moduleName = scanner("模块名")
         pc.moduleName = "ljk"
         pc.parent = "com.seal"
         pc.entity = "model"
