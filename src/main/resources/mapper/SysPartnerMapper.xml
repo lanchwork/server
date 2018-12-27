@@ -90,7 +90,7 @@
 
     <insert id="insert" parameterType="SysPartner">
         INSERT INTO sys_partner (id,channel_mark,partner_name,user_no,wallet_addr,open_flag,remark,partner_type,create_date,create_user,update_date,update_user)
-        VALUES (#{id},#{channelMark},#{partnerName},#{userNo},#{walletAddr},#{openFlag},#{remark},#{partnerType},SYSDATE(),#{createUser},SYSDATE(),#{createUser});
+        VALUES (#{id},#{channelMark},#{partnerName},#{userNo},#{walletAddr},#{openFlag},#{remark},#{partnerType},NOW(),#{createUser},NOW(),#{createUser});
     </insert>
 
     <update id="update" parameterType="SysPartner">
@@ -123,7 +123,7 @@
             <if test="update_user != null and update_user != ''">
                 update_user=#{updateUser},
             </if>
-            update_date=SYSDATE()
+            update_date=NOW()
         </set>
         where id=#{id}
     </update>

@@ -61,7 +61,7 @@
     <plugins>
         <plugin interceptor="com.seal.ljk.base.SealInsertInterceptor"/>
         <plugin interceptor="com.seal.ljk.base.SealPageInterceptor">
-            <property name="helperDialect" value="mysql"/>
+            <property name="helperDialect" value="postgresql"/>
             <property name="reasonable" value="true"/>
             <property name="rowBoundsWithCount" value="true"/>
             <property name="supportMethodsArguments" value="true"/>

@@ -60,7 +60,7 @@
 
     <insert id="insert" parameterType="SysRole">
         INSERT INTO sys_role (id,role_name,role_desc,channel_mark,create_date,create_user,update_date,update_user)
-        VALUES (#{id},#{roleName},#{roleDesc},#{channelMark},SYSDATE(),#{createUser},SYSDATE(),#{createUser});
+        VALUES (#{id},#{roleName},#{roleDesc},#{channelMark},NOW(),#{createUser},NOW(),#{createUser});
     </insert>
 
     <update id="update" parameterType="SysRole">
@@ -81,7 +81,7 @@
             <if test="update_user != null and update_user != ''">
                 update_user=#{updateUser},
             </if>
-            update_date=SYSDATE()
+            update_date=NOW()
         </set>
         where id=#{id}
     </update>

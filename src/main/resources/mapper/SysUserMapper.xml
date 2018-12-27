@@ -97,7 +97,7 @@
 
     <insert id="insert" parameterType="SysUser">
         INSERT INTO sys_user (id,username,initPass,password,channel_mark,name,phone,email,open_flag,create_date,create_user,update_date,update_user)
-        VALUES (#{id},#{username},#{initPass},#{password},#{channelMark},#{name},#{phone},#{email},#{openFlag},SYSDATE(),#{createUser},SYSDATE(),#{createUser});
+        VALUES (#{id},#{username},#{initPass},#{password},#{channelMark},#{name},#{phone},#{email},#{openFlag},NOW(),#{createUser},NOW(),#{createUser});
     </insert>
 
     <update id="update" parameterType="SysUser">
@@ -133,7 +133,7 @@
             <if test="update_user != null and update_user != ''">
                 update_user=#{updateUser},
             </if>
-            update_date=SYSDATE()
+            update_date=NOW()
         </set>
         where id=#{id}
     </update>

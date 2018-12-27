@@ -95,7 +95,7 @@
 
     <insert id="insert" parameterType="SysMenu">
         INSERT INTO sys_menu (id,parent_id,menu_name,url,sort,flag,icon,type,partner_types,create_date,create_user,update_date,update_user)
-        VALUES (#{id},ifnull(#{parentId},'0'),#{menuName},#{url},#{sort},#{flag},#{icon},#{type},#{partnerTypes},SYSDATE(),#{createUser},SYSDATE(),#{createUser});
+        VALUES (#{id},nullif(#{parentId},'0'),#{menuName},#{url},#{sort},#{flag},#{icon},#{type},#{partnerTypes},NOW(),#{createUser},NOW(),#{createUser});
     </insert>
 
     <update id="update" parameterType="SysMenu">
@@ -131,7 +131,7 @@
             <if test="update_user != null and update_user != ''">
                 update_user=#{updateUser},
             </if>
-            update_date=SYSDATE()
+            update_date=NOW()
         </set>
         where id=#{id}
     </update>
