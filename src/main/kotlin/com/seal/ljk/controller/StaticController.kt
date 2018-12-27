@@ -24,7 +24,7 @@ import java.io.*
 class StaticController {
 
     @PostMapping("/upload")
-    @ApiOperation(value = "查询合作方ID为参数partnerId的分润配置")
+    @ApiOperation(value = "上传文件")
     fun upload(@RequestParam("file") file: MultipartFile,
                @RequestParam("path", required = false, defaultValue = "") path: String): ResVal {
 
