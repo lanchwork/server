@@ -1,7 +1,6 @@
 package com.seal.ljk.common
 
 import com.seal.ljk.model.SysUser
-import com.seal.ljk.model.User
 import javax.servlet.http.HttpServletRequest
 
 /**

@@ -2,7 +2,6 @@ package com.seal.ljk.service
 
 import com.seal.ljk.model.SysUser
 import com.github.pagehelper.Page
-import com.seal.ljk.model.User
 
 /**
  * <p>
