@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*
  * @author ${author}
  * @since ${date}
  */
+@Api(description = "${table.comment!} 功能相关接口")
 @RestController
 @RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>")
 class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>{
