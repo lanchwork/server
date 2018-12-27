@@ -7,6 +7,7 @@ import com.seal.ljk.common.success
 import com.seal.ljk.model.SysPartner
 
 import com.seal.ljk.service.ISysPartnerService
+import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*
  * @author chenjh
  * @since 2018-12-24
  */
+@Api(description = "合作方 功能相关接口")
 @RestController
 @RequestMapping("/sys/partner")
 class SysPartnerController{

@@ -11,6 +11,7 @@ import com.seal.ljk.model.SysUser
 import com.seal.ljk.service.ISysPartnerService
 
 import com.seal.ljk.service.ISysUserService
+import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*
  * @author chenjh
  * @since 2018-12-25
  */
+@Api(description = "用户表 功能相关接口")
 @RestController
 @RequestMapping("/sys/user")
 class SysUserController{

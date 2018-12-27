@@ -5,6 +5,8 @@ import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.common.success
 import com.seal.ljk.model.SysUserRole
+import com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table
+import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*
  * @author chenjh
  * @since 2018-12-26
  */
+@Api(description = "用户与角色对应关系 功能相关接口")
 @RestController
 @RequestMapping("/ljk/sys-user-role")
 class SysUserRoleController{
