@@ -31,22 +31,30 @@ class ${table.serviceImplName} : ${table.serviceName} {
     }
 
     override fun getAll${entity}(${entity?uncap_first}: ${entity}): List<${entity}> {
+        <#list table.fields as field>
+        <#if field.propertyName == "channelMark">
         val user = getSessionUser() ?: throw AuthException()
         if (user.isSeal()) {
-           ${entity?uncap_first}.channelMark = ""
+            ${entity?uncap_first}.channelMark = ""
         } else {
-           ${entity?uncap_first}.channelMark = user.channelMark
+            ${entity?uncap_first}.channelMark = user.channelMark
         }
+        </#if>
+        </#list>
         return ${table.mapperName?uncap_first}.getAll(${entity?uncap_first})
     }
 
     override fun getAll${entity}ByPage(${entity?uncap_first}: ${entity}): Page<${entity}> {
+        <#list table.fields as field>
+        <#if field.propertyName == "channelMark">
         val user = getSessionUser() ?: throw AuthException()
         if (user.isSeal()) {
-           ${entity?uncap_first}.channelMark = ""
+            ${entity?uncap_first}.channelMark = ""
         } else {
-           ${entity?uncap_first}.channelMark = user.channelMark
+            ${entity?uncap_first}.channelMark = user.channelMark
         }
+        </#if>
+        </#list>
         return ${table.mapperName?uncap_first}.getAllByPage(${entity?uncap_first})
     }
 

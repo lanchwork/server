@@ -5,6 +5,7 @@ import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.common.success
 import ${package.Entity}.${entity}
+import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*

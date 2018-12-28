@@ -1,5 +1,6 @@
 package com.seal.ljk.common
 
+import com.baomidou.mybatisplus.annotation.DbType
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException
 import com.baomidou.mybatisplus.core.toolkit.StringPool
 import com.baomidou.mybatisplus.core.toolkit.StringUtils
@@ -55,14 +56,15 @@ object CodeGenerator {
 
         // 数据源配置
         val dsc = DataSourceConfig()
-        dsc.url =
-                "jdbc:mysql://139.159.188.206:3306/seal-ljk?verifyServerCertificate=false&useSSL=false&requireSSL=false&characterEncoding=UTF-8"
+        dsc.url ="jdbc:postgresql://192.168.1.71:5432/seal_ljk"
         // dsc.setSchemaName("public");
-        dsc.driverName = "com.mysql.jdbc.Driver"
+        dsc.driverName = "org.postgresql.Driver"
+        dsc.schemaName = "public"
+        dsc.dbType = DbType.POSTGRE_SQL
         //        dsc.username = "root"
         //        dsc.password = ""
-        dsc.username = "test"
-        dsc.password = "Seal!@#2018"
+        dsc.username = "postgres"
+        dsc.password = "123"
         mpg.dataSource = dsc
 
         // 包配置

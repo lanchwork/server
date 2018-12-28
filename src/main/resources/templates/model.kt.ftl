@@ -7,7 +7,9 @@ import com.seal.ljk.common.using
 import com.seal.ljk.base.PrimaryKey
 
 /**
- * ${table.comment}
+ * <p>
+ * ${table.comment!} 数据类
+ * </p>
  * @author ${author}
  * @since ${date}
  */
@@ -46,11 +48,10 @@ data class ${entity}(
     override fun verify() {
         this.apply {
     <#list table.fields as field>
-        <#if field.propertyType == "Integer">
-            "${field.comment} 不能为空" using (this.${field.propertyName} != null)
-        <#elseif field.propertyType == "String">
-            "${field.comment} 不能为空" using (this.${field.propertyName}.isNotEmpty())
+        <#if field.propertyType == "String">
+            "${field.comment!} 不能为空" using (this.${field.propertyName}.isNotEmpty())
         <#else>
+            "${field.comment!} 不能为空" using (this.${field.propertyName} != null)
         </#if>
     </#list>
         }
