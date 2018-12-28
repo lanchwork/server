@@ -73,7 +73,7 @@
                 ${field.name}= ${r"#{"}${field.propertyName}${r"}"},
             </if>
             </#list>
-            <if test="update_user != null and update_user != ''">
+            <if test="updateUser != null and updateUser != ''">
                 update_user=${r"#{updateUser}"},
             </if>
             update_date=NOW()
