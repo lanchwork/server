@@ -1,6 +1,7 @@
 package com.seal.ljk.service.impl
 
 import com.alibaba.fastjson.JSON
+import com.seal.ljk.common.setSessionUser
 import com.seal.ljk.model.SysMenu
 import com.seal.ljk.model.SysUser
 import com.seal.ljk.service.ISysMenuService
@@ -22,9 +23,10 @@ class SysMenuServiceImplTest {
 
     @Test
     fun getAllSysMenuByUser() {
-        val user = SysUser(channelMark = "seal")
+        val user = SysUser(channelMark = "seal", userType = "1")
+        setSessionUser(user)
 
-        val menuList = sysMenuService.getAllSysMenuByUser(user)
+        val menuList = sysMenuService.getAllSysMenuByPage(SysMenu())
         println(JSON.toJSON(menuList))
 
     }

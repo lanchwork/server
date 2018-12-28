@@ -36,17 +36,23 @@ data class ${entity}(
 </#list>
 <#-- ----------  END 字段循环遍历  ---------->
 ) : Base(), IVerify {
+<#list table.fields as field>
+    <#if field.propertyType == "Date">
+            var ${field.propertyName}Begin: ${field.propertyType}? = null
+            var ${field.propertyName}End: ${field.propertyType}? = null
+    </#if>
+</#list>
 
     override fun verify() {
         this.apply {
-<#list table.fields as field>
+    <#list table.fields as field>
         <#if field.propertyType == "Integer">
             "${field.comment} 不能为空" using (this.${field.propertyName} != null)
         <#elseif field.propertyType == "String">
             "${field.comment} 不能为空" using (this.${field.propertyName}.isNotEmpty())
         <#else>
         </#if>
-</#list>
+    </#list>
         }
     }
 }
