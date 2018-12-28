@@ -8,7 +8,7 @@ import com.seal.ljk.dao.BaseMapper;
  * 公告 Mapper 接口
  * </p>
  *
- * @author chenjh
+ * @author Tingyx
  * @since 2018-12-28
  */
 interface TzNoticeInfoDao : BaseMapper<TzNoticeInfo>

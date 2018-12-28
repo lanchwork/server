@@ -15,7 +15,7 @@ import com.seal.ljk.common.getSessionUser
  * 公告 服务实现类
  * </p>
  *
- * @author chenjh
+ * @author Tingyx
  * @since 2018-12-28
  */
 @Service

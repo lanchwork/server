@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*
  * 公告 前端控制器
  * </p>
  *
- * @author chenjh
+ * @author Tingyx
  * @since 2018-12-28
  */
 @Api(description = "公告 功能相关接口")

@@ -8,7 +8,7 @@ import com.github.pagehelper.Page
  * 公告 服务类
  * </p>
  *
- * @author chenjh
+ * @author Tingyx
  * @since 2018-12-28
  */
 interface ITzNoticeInfoService{

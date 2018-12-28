@@ -8,7 +8,7 @@ import com.seal.ljk.base.PrimaryKey
  * <p>
  * 公告 数据类
  * </p>
- * @author chenjh
+ * @author Tingyx
  * @since 2018-12-28
  */
 data class TzNoticeInfo(
