@@ -138,6 +138,7 @@ data class TzInvestItem(
             "token名称 不能为空" using (this.tokenName.isNotEmpty())
             "token简称 不能为空" using (this.tokenShortName.isNotEmpty())
             "图片地址 不能为空" using (this.imgPath.isNotEmpty())
+            "合约账户 不能为空" using (this.contractAccount.isNotEmpty())
             "预期收益 不能小于0" using (BigDecimal.ZERO.compareTo(this.expectedVenue)==-1)
             "发行总量 不能小于0" using (BigDecimal.ZERO.compareTo(this.issueAmount)==-1)
             "余量 不能小于0" using (BigDecimal.ZERO.compareTo(this.allowance)==-1)
@@ -145,6 +146,7 @@ data class TzInvestItem(
             "总房产数量 不能小于0" using (BigDecimal.ZERO.compareTo(this.totalHouseNumber)==-1)
             "已出租房产数量 不能小于0" using (BigDecimal.ZERO.compareTo(this.rentOutNumber)==-1)
             "已出售房产数量 不能小于0" using (BigDecimal.ZERO.compareTo(this.sellNumber)==-1)
+
         }
     }
 }
