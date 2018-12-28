@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seal.ljk.dao.TzInvestInfoDao">
+
+    <select id="get" resultType="TzInvestInfo">
+        select b.id,b.item_id,b.area_code,b.mobile,b.buy_number,b.buy_amount,b.status,b.remarks,b.type,b.create_date,b.create_user,b.update_date,b.update_user
+        from tz_invest_info b
+        where b.id =#{id}
+    </select>
+
+    <select id="getAll" resultType="TzInvestInfo">
+        select b.id,b.item_id,b.area_code,b.mobile,b.buy_number,b.buy_amount,b.status,b.remarks,b.type,b.create_date,b.create_user,b.update_date,b.update_user
+        from tz_invest_info b
+        <where>
+            <if test="id != null  and id != '' ">
+                and b.id= #{id}
+            </if>
+            <if test="itemId != null  and itemId != '' ">
+                and b.item_id= #{itemId}
+            </if>
+            <if test="areaCode != null  and areaCode != '' ">
+                and b.area_code= #{areaCode}
+            </if>
+            <if test="mobile != null  and mobile != '' ">
+                and b.mobile= #{mobile}
+            </if>
+            <if test="buyNumber != null  and buyNumber != '' ">
+                and b.buy_number= #{buyNumber}
+            </if>
+            <if test="buyAmount != null  and buyAmount != '' ">
+                and b.buy_amount= #{buyAmount}
+            </if>
+            <if test="status != null  and status != '' ">
+                and b.status= #{status}
+            </if>
+            <if test="remarks != null  and remarks != '' ">
+                and b.remarks= #{remarks}
+            </if>
+            <if test="type != null  and type != '' ">
+                and b.type= #{type}
+            </if>
+        </where>
+        <if test="orderByInfo != null and orderByInfo.length > 0">
+            <foreach collection="orderByInfo" item="order" open="order by "
+                     separator="," close="  ">
+                ${order}
+            </foreach>
+        </if>
+    </select>
+
+    <!-- 不传参数时, 获取全部的TzInvestInfo信息 -->
+    <!-- 传入参数时根据类型 , 电话, token名称, 状态查询 -->
+    <!-- 返回一个List<TzInvestInfo> -->
+    <select id="getAllByPage" resultType="TzInvestInfo">
+        select b.id,b.item_id,b.area_code,b.mobile,b.buy_number,b.buy_amount,b.status,b.remarks,b.type,b.create_date,b.create_user,b.update_date,b.update_user,i.token_name,i.contract_account
+        from tz_invest_info b
+        join tz_invest_item i on i.id = b.item_id
+        <where>
+            <if test="mobile != null  and mobile != '' ">
+                and b.mobile= #{mobile}
+            </if>
+            <if test="status != null  and status != '' ">
+                and b.status= #{status}
+            </if>
+            <if test="type != null  and type != '' ">
+                and b.type= #{type}
+            </if>
+            <if test=" tokenName != null  and tokenName != '' ">
+                and i.token_name= #{tokenName}
+            </if>
+        </where>
+        <if test="orderByInfo != null and orderByInfo.length > 0">
+            <foreach collection="orderByInfo" item="order" open="order by "
+                     separator="," close="  ">
+                ${order}
+            </foreach>
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="TzInvestInfo">
+        INSERT INTO tz_invest_info (id,item_id,area_code,mobile,buy_number,buy_amount,status,remarks,type,create_date,create_user,update_date,update_user)
+        VALUES (#{id},#{itemId},#{areaCode},#{mobile},#{buyNumber},#{buyAmount},#{status},#{remarks},#{type},NOW(),#{createUser},NOW(),#{createUser});
+    </insert>
+
+    <update id="update" parameterType="TzInvestInfo">
+        update tz_invest_info
+        <set>
+            <if test="status != null  and status != '' ">
+                status= #{status},
+            </if>
+            <if test="remarks != null  and remarks != '' ">
+                remarks= #{remarks},
+            </if>
+            update_date=NOW()
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from tz_invest_info where id=#{id}
+    </delete>
+
+</mapper>
