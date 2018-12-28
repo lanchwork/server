@@ -87,7 +87,7 @@
             <if test="roleCode != null  and roleCode != '' ">
                 role_code= #{roleCode},
             </if>
-            <if test="update_user != null and update_user != ''">
+            <if test="updateUser != null and updateUser != ''">
                 update_user=#{updateUser},
             </if>
             update_date=NOW()
