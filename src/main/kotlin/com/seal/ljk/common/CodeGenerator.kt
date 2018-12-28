@@ -49,7 +49,7 @@ object CodeGenerator {
         val projectPath = System.getProperty("user.dir")
 
         gc.outputDir = "$projectPath/src/main/kotlin"
-        gc.author = "chenjh"
+        gc.author = "lanch"
         gc.isOpen = false
         gc.mapperName = "%sDao"
         mpg.globalConfig = gc

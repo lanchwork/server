@@ -33,13 +33,13 @@ class TzInvestInfoController{
 
     @PostMapping("/list")
     @ApiOperation(value = "投资信息方列表")
-//    @VerifyToken
+    @VerifyToken
     fun listTzInvestInfo(@RequestBody tzInvestInfo: TzInvestInfo): ResVal = success(tzInvestInfoService.getAllTzInvestInfoByPage(tzInvestInfo))
 
 
     @PostMapping("/save")
     @ApiOperation(value = "新增或修改投资信息")
-//    @VerifyToken
+    @VerifyToken
     fun saveTzInvestInfo(@RequestBody tzInvestInfo: TzInvestInfo): ResVal {
         tzInvestInfo.verify()
         if (tzInvestInfo.id.isEmpty()) {
