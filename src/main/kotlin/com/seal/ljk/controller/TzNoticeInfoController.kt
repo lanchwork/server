@@ -28,18 +28,18 @@ class TzNoticeInfoController{
 
     @PostMapping("/get")
     @ApiOperation(value = "获取公告")
-//    @VerifyToken
+    @VerifyToken
     fun getTzNoticeInfo(@RequestParam id: String): ResVal = success(tzNoticeInfoService.getTzNoticeInfo(id))
 
     @PostMapping("/list")
     @ApiOperation(value = "公告方列表")
-//    @VerifyToken
+    @VerifyToken
     fun listTzNoticeInfo(@RequestBody tzNoticeInfo: TzNoticeInfo): ResVal = success(tzNoticeInfoService.getAllTzNoticeInfoByPage(tzNoticeInfo))
 
 
     @PostMapping("/save")
     @ApiOperation(value = "新增或修改公告")
-//    @VerifyToken
+    @VerifyToken
     fun saveTzNoticeInfo(@RequestBody tzNoticeInfo: TzNoticeInfo): ResVal {
         tzNoticeInfo.verify()
         if (tzNoticeInfo.id.isEmpty()) {
@@ -52,7 +52,7 @@ class TzNoticeInfoController{
 
     @PostMapping("/delete")
     @ApiOperation(value = "删除公告")
-//    @VerifyToken
+    @VerifyToken
     fun deleteTzNoticeInfo(@RequestParam id: String): ResVal {
         tzNoticeInfoService.deleteTzNoticeInfo(id)
         return success()
