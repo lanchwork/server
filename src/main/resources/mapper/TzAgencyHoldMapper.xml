@@ -144,4 +144,23 @@
         delete from tz_agency_hold where id=#{id}
     </delete>
 
+    <select id="queryConditionsTzAgencyHoldByPage" resultType="TzAgencyHold">
+        select b.id,b.item_id,b.mobile,b.token_number,b.price,b.account,b.area_code,b.type,b.current_holdings,b.remark,b.create_date,b.create_user,b.update_date,b.update_user
+        from tz_agency_hold b
+        <where>
+            <if test="mobile != null  and mobile != '' ">
+                and b.mobile= #{mobile}
+            </if>
+            <if test="type != null  and type != '' ">
+                and b.type= #{type}
+            </if>
+        </where>
+        <if test="orderByInfo != null and orderByInfo.length > 0">
+            <foreach collection="orderByInfo" item="order" open="order by "
+                     separator="," close="  ">
+                ${order}
+            </foreach>
+        </if>
+    </select>
+
 </mapper>

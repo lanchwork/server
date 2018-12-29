@@ -1,14 +1,16 @@
 package com.seal.ljk.dao;
 
 import com.seal.ljk.model.TzAgencyHold;
-import com.seal.ljk.dao.BaseMapper;
+import com.github.pagehelper.Page
 
 /**
  * <p>
- *  Mapper 接口
+ * 代持 Mapper 接口
  * </p>
  *
  * @author kangxj
  * @since 2018-12-29
  */
-interface TzAgencyHoldDao : BaseMapper<TzAgencyHold>
+interface TzAgencyHoldDao : BaseMapper<TzAgencyHold> {
+    fun queryConditionsTzAgencyHoldByPage(tzAgencyHold: TzAgencyHold): Page<TzAgencyHold>
+}

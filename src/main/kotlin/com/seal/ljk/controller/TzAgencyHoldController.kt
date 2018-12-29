@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 /**
  * <p>
- *  前端控制器
+ * 代持 前端控制器
  * </p>
  *
  * @author kangxj
@@ -58,5 +58,10 @@ class TzAgencyHoldController{
         tzAgencyHoldService.deleteTzAgencyHold(id)
         return success()
     }
+
+    @PostMapping("/queryConditions")
+    @ApiOperation(value = "代持方条件查询")
+    @VerifyToken
+    fun queryConditionsTzAgencyHold(@RequestBody tzAgencyHold: TzAgencyHold): ResVal = success(tzAgencyHoldService.queryConditionsTzAgencyHoldByPage(tzAgencyHold).getPageInfo())
 
 }

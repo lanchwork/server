@@ -12,7 +12,7 @@ import com.seal.ljk.common.getSessionUser
 
 /**
  * <p>
- *  服务实现类
+ * 代持 服务实现类
  * </p>
  *
  * @author kangxj
@@ -48,6 +48,10 @@ class TzAgencyHoldServiceImpl : ITzAgencyHoldService {
 
     override fun deleteTzAgencyHold(id: String) {
         tzAgencyHoldDao.delete(id)
+    }
+
+    override fun queryConditionsTzAgencyHoldByPage(tzAgencyHold: TzAgencyHold): Page<TzAgencyHold> {
+        return tzAgencyHoldDao.queryConditionsTzAgencyHoldByPage(tzAgencyHold)
     }
 
 }

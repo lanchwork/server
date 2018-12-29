@@ -5,7 +5,7 @@ import com.github.pagehelper.Page
 
 /**
  * <p>
- *  服务类
+ * 代持 服务类
  * </p>
  *
  * @author kangxj
@@ -18,4 +18,5 @@ interface ITzAgencyHoldService{
     fun insertTzAgencyHold(tzAgencyHold: TzAgencyHold)
     fun updateTzAgencyHold(tzAgencyHold: TzAgencyHold)
     fun deleteTzAgencyHold(id: String)
+    fun queryConditionsTzAgencyHoldByPage(tzAgencyHold: TzAgencyHold): Page<TzAgencyHold>
 }
