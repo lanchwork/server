@@ -56,14 +56,14 @@ data class TzInvestInfo(
      */
         var type: Char? = null,
         /**
-         * token名
+         * 项目管理表中 token名
          */
         var tokenName:String = "",
 
         /**
          * 项目管理表中 发行单价
          */
-        var price : BigDecimal = BigDecimal.ZERO,
+        var issuePrice : BigDecimal = BigDecimal.ZERO,
 
         /**
          * 主链账号
