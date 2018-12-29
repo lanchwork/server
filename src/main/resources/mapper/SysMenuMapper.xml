@@ -128,7 +128,7 @@
             <if test="partner_types != null  and partner_types != '' ">
                 partner_types= #{partnerTypes},
             </if>
-            <if test="update_user != null and update_user != ''">
+            <if test="updateUser != null and updateUser != ''">
                 update_user=#{updateUser},
             </if>
             update_date=NOW()

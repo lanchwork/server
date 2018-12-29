@@ -3,20 +3,20 @@
 <mapper namespace="com.seal.ljk.dao.SysUserMapper">
 
     <select id="get" resultType="SysUser">
-        select b.id,b.username,b.initPass,b.password,b.channel_mark,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.username,b.init_pass,b.password,b.channel_mark,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
         from sys_user b
         where b.id =#{id}
     </select>
 
     <select id="getUser" resultType="SysUser">
-        select b.id,b.username,b.initPass,b.password,b.channel_mark,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.username,b.init_pass,b.password,b.channel_mark,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
         from sys_user b
         where b.channel_mark = #{channelMark}
           and b.username = #{userName}
     </select>
 
     <select id="getAll" resultType="SysUser">
-        select b.id,b.username,b.initPass,b.password,b.channel_mark,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.username,b.init_pass,b.password,b.channel_mark,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
         from sys_user b
         <where>
           <if test="id != null  and id != '' ">
@@ -26,7 +26,7 @@
               and b.username= #{username}
           </if>
           <if test="initPass != null  and initPass != '' ">
-              and b.initPass= #{initPass}
+              and b.init_pass= #{initPass}
           </if>
           <if test="password != null  and password != '' ">
               and b.password= #{password}
@@ -56,7 +56,7 @@
     </select>
 
     <select id="getAllByPage" resultType="SysUser">
-        select b.id,b.username,b.initPass,b.password,b.channel_mark,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.username,b.init_pass,b.password,b.channel_mark,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
         from sys_user b
         <where>
           <if test="id != null  and id != '' ">
@@ -66,7 +66,7 @@
               and b.username= #{username}
           </if>
           <if test="initPass != null  and initPass != '' ">
-              and b.initPass= #{initPass}
+              and b.init_pass= #{initPass}
           </if>
           <if test="password != null  and password != '' ">
               and b.password= #{password}
@@ -96,7 +96,7 @@
     </select>
 
     <insert id="insert" parameterType="SysUser">
-        INSERT INTO sys_user (id,username,initPass,password,channel_mark,name,phone,email,open_flag,create_date,create_user,update_date,update_user)
+        INSERT INTO sys_user (id,username,init_pass,password,channel_mark,name,phone,email,open_flag,create_date,create_user,update_date,update_user)
         VALUES (#{id},#{username},#{initPass},#{password},#{channelMark},#{name},#{phone},#{email},#{openFlag},NOW(),#{createUser},NOW(),#{createUser});
     </insert>
 
@@ -110,7 +110,7 @@
                 username= #{username},
             </if>
             <if test="initPass != null  and initPass != '' ">
-                initPass= #{initPass},
+                init_pass= #{initPass},
             </if>
             <if test="password != null  and password != '' ">
                 password= #{password},
@@ -130,7 +130,7 @@
             <if test="openFlag != null  and openFlag != '' ">
                 openFlag= #{openFlag},
             </if>
-            <if test="update_user != null and update_user != ''">
+            <if test="updateUser != null and updateUser != ''">
                 update_user=#{updateUser},
             </if>
             update_date=NOW()
