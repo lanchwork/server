@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*
  * @author kangxj
  * @since 2018-12-29
  */
-@Api(description = " 功能相关接口")
+@Api(description = "代持功能相关接口")
 @RestController
 @RequestMapping("/ljk/tz-agency-hold")
 class TzAgencyHoldController{
