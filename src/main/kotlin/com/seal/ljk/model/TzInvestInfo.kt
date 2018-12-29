@@ -59,14 +59,21 @@ data class TzInvestInfo(
          * token名
          */
         var tokenName:String = "",
+
         /**
-         * 合约账户
+         * 项目管理表中 发行单价
          */
-        var contractAccount:String = "",
+        var price : BigDecimal = BigDecimal.ZERO,
+
         /**
-         * 单价
+         * 主链账号
          */
-        var price : BigDecimal = BigDecimal.ZERO
+        var account :String = "",
+
+        /**
+         * 语言
+         */
+        var lang :String = ""
 ) : Base(), IVerify {
 
     override fun verify() {
@@ -78,6 +85,7 @@ data class TzInvestInfo(
             "购买金额 不能小于0" using (BigDecimal.ZERO.compareTo(this.buyAmount)==-1)
             "状态 不能为空" using (this.status !=null)
             "备注 不能为空" using (this.remarks.isNotEmpty())
+            "主链账号 不能为空" using (this.account.isNotEmpty())
             "类型 不能为空" using (this.type !=null)
         }
     }

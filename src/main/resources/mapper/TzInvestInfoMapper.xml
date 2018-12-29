@@ -3,14 +3,16 @@
 <mapper namespace="com.seal.ljk.dao.TzInvestInfoDao">
 
     <select id="get" resultType="TzInvestInfo">
-        select b.id,b.item_id,b.area_code,b.mobile,b.buy_number,b.buy_amount,b.status,b.remarks,b.type,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.item_id,b.area_code,b.mobile,b.buy_number,b.buy_amount,b.status,b.remarks,b.type,b.create_date,b.create_user,b.update_date,b.update_user,i.token_name,b.account,b.lang
         from tz_invest_info b
+        join tz_invest_item i on i.id = b.item_id
         where b.id =#{id}
     </select>
 
     <select id="getAll" resultType="TzInvestInfo">
-        select b.id,b.item_id,b.area_code,b.mobile,b.buy_number,b.buy_amount,b.status,b.remarks,b.type,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.item_id,b.area_code,b.mobile,b.buy_number,b.buy_amount,b.status,b.remarks,b.type,b.create_date,b.create_user,b.update_date,b.update_user,i.token_name,b.account,b.lang
         from tz_invest_info b
+        join tz_invest_item i on i.id = b.item_id
         <where>
             <if test="id != null  and id != '' ">
                 and b.id= #{id}
@@ -52,7 +54,7 @@
     <!-- 传入参数时根据类型 , 电话, token名称, 状态查询 -->
     <!-- 返回一个List<TzInvestInfo> -->
     <select id="getAllByPage" resultType="TzInvestInfo">
-        select b.id,b.item_id,b.area_code,b.mobile,b.buy_number,b.buy_amount,b.status,b.remarks,b.type,b.create_date,b.create_user,b.update_date,b.update_user,i.token_name,i.contract_account
+        select b.id,b.item_id,b.area_code,b.mobile,b.buy_number,b.buy_amount,b.status,b.remarks,b.type,b.create_date,b.create_user,b.update_date,b.update_user,i.token_name,b.account,b.lang
         from tz_invest_info b
         join tz_invest_item i on i.id = b.item_id
         <where>
@@ -78,8 +80,8 @@
     </select>
 
     <insert id="insert" parameterType="TzInvestInfo">
-        INSERT INTO tz_invest_info (id,item_id,area_code,mobile,buy_number,buy_amount,status,remarks,type,create_date,create_user,update_date,update_user)
-        VALUES (#{id},#{itemId},#{areaCode},#{mobile},#{buyNumber},#{buyAmount},#{status},#{remarks},#{type},NOW(),#{createUser},NOW(),#{createUser});
+        INSERT INTO tz_invest_info (id,item_id,area_code,mobile,buy_number,buy_amount,status,remarks,type,create_date,create_user,update_date,update_user,account,lang)
+        VALUES (#{id},#{itemId},#{areaCode},#{mobile},#{buyNumber},#{buyAmount},#{status},#{remarks},#{type},NOW(),#{createUser},NOW(),#{createUser},#{account},#{lang});
     </insert>
 
     <update id="update" parameterType="TzInvestInfo">
