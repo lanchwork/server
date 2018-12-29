@@ -3,6 +3,7 @@ package com.seal.ljk.controller
 import com.seal.ljk.service.ITzAgencyHoldService
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.common.success
 import com.seal.ljk.model.TzAgencyHold
 import io.swagger.annotations.Api
@@ -34,7 +35,7 @@ class TzAgencyHoldController{
     @PostMapping("/list")
     @ApiOperation(value = "代持方列表")
     @VerifyToken
-    fun listTzAgencyHold(@RequestBody tzAgencyHold: TzAgencyHold): ResVal = success(tzAgencyHoldService.getAllTzAgencyHoldByPage(tzAgencyHold))
+    fun listTzAgencyHold(@RequestBody tzAgencyHold: TzAgencyHold): ResVal = success(tzAgencyHoldService.getAllTzAgencyHoldByPage(tzAgencyHold).getPageInfo())
 
 
     @PostMapping("/save")
