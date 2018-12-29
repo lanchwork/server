@@ -62,7 +62,11 @@ data class TzInvestInfo(
         /**
          * 合约账户
          */
-        var contractAccount:String = ""
+        var contractAccount:String = "",
+        /**
+         * 单价
+         */
+        var price : BigDecimal = BigDecimal.ZERO
 ) : Base(), IVerify {
 
     override fun verify() {

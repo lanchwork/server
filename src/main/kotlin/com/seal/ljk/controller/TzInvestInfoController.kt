@@ -3,6 +3,7 @@ package com.seal.ljk.controller
 import com.seal.ljk.service.ITzInvestInfoService
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.common.success
 import com.seal.ljk.model.TzInvestInfo
 import io.swagger.annotations.Api
@@ -34,7 +35,7 @@ class TzInvestInfoController{
     @PostMapping("/list")
     @ApiOperation(value = "投资信息方列表")
     @VerifyToken
-    fun listTzInvestInfo(@RequestBody tzInvestInfo: TzInvestInfo): ResVal = success(tzInvestInfoService.getAllTzInvestInfoByPage(tzInvestInfo))
+    fun listTzInvestInfo(@RequestBody tzInvestInfo: TzInvestInfo): ResVal = success(tzInvestInfoService.getAllTzInvestInfoByPage(tzInvestInfo).getPageInfo())
 
 
     @PostMapping("/save")
