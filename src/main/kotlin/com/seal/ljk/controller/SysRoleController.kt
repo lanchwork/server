@@ -3,6 +3,7 @@ package com.seal.ljk.controller
 import com.seal.ljk.service.ISysRoleService
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.common.success
 import com.seal.ljk.model.SysRole
 import io.swagger.annotations.Api
@@ -34,7 +35,7 @@ class SysRoleController{
     @PostMapping("/list")
     @ApiOperation(value = "角色表方列表")
     @VerifyToken
-    fun listSysRole(@RequestBody sysRole: SysRole): ResVal = success(sysRoleService.getAllSysRoleByPage(sysRole))
+    fun listSysRole(@RequestBody sysRole: SysRole): ResVal = success(sysRoleService.getAllSysRoleByPage(sysRole).getPageInfo())
 
 
     @PostMapping("/save")

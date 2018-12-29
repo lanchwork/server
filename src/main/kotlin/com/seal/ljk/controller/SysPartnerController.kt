@@ -3,6 +3,7 @@ package com.seal.ljk.controller
 
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.common.success
 import com.seal.ljk.model.SysPartner
 
@@ -37,7 +38,7 @@ class SysPartnerController{
     @PostMapping("/list")
     @ApiOperation(value = "合作方表方列表")
     @VerifyToken
-    fun listSysPartner(@RequestBody sysPartner: SysPartner): ResVal = success( sysPartnerService.getAllSysPartnerByPage(sysPartner))
+    fun listSysPartner(@RequestBody sysPartner: SysPartner): ResVal = success( sysPartnerService.getAllSysPartnerByPage(sysPartner).getPageInfo())
 
 
     @PostMapping("/save")

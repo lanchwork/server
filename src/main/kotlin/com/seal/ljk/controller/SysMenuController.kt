@@ -3,6 +3,7 @@ package com.seal.ljk.controller
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.service.ISysMenuService
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.common.success
 import com.seal.ljk.model.SysMenu
 import io.swagger.annotations.Api
@@ -34,7 +35,7 @@ class SysMenuController{
     @PostMapping("/list")
     @ApiOperation(value = "菜单表方列表")
     @VerifyToken
-    fun listSysMenu(@RequestBody sysMenu: SysMenu): ResVal = success(sysMenuService.getAllSysMenu(sysMenu))
+    fun listSysMenu(@RequestBody sysMenu: SysMenu): ResVal = success(sysMenuService.getAllSysMenuByPage(sysMenu).getPageInfo())
 
 
     @PostMapping("/save")

@@ -4,6 +4,7 @@ package com.seal.ljk.controller
 import com.seal.ljk.base.IgnoreToken
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.common.getSessionUser
 import com.seal.ljk.common.success
 import com.seal.ljk.model.SysPartner
@@ -43,7 +44,7 @@ class SysUserController{
     @PostMapping("/list")
     @ApiOperation(value = "用户列表")
     @VerifyToken
-    fun listSysUser(@RequestBody sysUser: SysUser): ResVal = success(sysUserService.getAllSysUserByPage(sysUser))
+    fun listSysUser(@RequestBody sysUser: SysUser): ResVal = success(sysUserService.getAllSysUserByPage(sysUser).getPageInfo())
 
 
     @PostMapping("/save")

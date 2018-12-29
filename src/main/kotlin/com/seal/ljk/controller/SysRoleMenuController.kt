@@ -4,6 +4,7 @@ import com.seal.ljk.service.ISysRoleMenuService
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
 import com.seal.ljk.common.checkParam
+import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.common.success
 import com.seal.ljk.model.SysRoleMenu
 import io.swagger.annotations.Api
@@ -34,7 +35,7 @@ class SysRoleMenuController {
     @PostMapping("/list")
     @ApiOperation(value = "角色菜单表方列表")
     @VerifyToken
-    fun listSysRoleMenu(@RequestBody sysRoleMenu: SysRoleMenu): ResVal = success(sysRoleMenuService.getAllSysRoleMenuByPage(sysRoleMenu))
+    fun listSysRoleMenu(@RequestBody sysRoleMenu: SysRoleMenu): ResVal = success(sysRoleMenuService.getAllSysRoleMenuByPage(sysRoleMenu).getPageInfo())
 
     @PostMapping("/treeList")
     @ApiOperation(value = "角色菜单树状列表")

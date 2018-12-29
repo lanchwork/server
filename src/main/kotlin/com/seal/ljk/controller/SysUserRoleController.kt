@@ -3,6 +3,7 @@ package com.seal.ljk.controller
 import com.seal.ljk.service.ISysUserRoleService
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.common.success
 import com.seal.ljk.model.SysUserRole
 import com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.*
  */
 @Api(description = "用户与角色对应关系 功能相关接口")
 @RestController
-@RequestMapping("/ljk/sys-user-role")
+@RequestMapping("/sys/userRole")
 class SysUserRoleController{
 
     @Autowired
@@ -35,7 +36,7 @@ class SysUserRoleController{
     @PostMapping("/list")
     @ApiOperation(value = "用户与角色对应关系方列表")
     @VerifyToken
-    fun listSysUserRole(@RequestBody sysUserRole: SysUserRole): ResVal = success(sysUserRoleService.getAllSysUserRoleByPage(sysUserRole))
+    fun listSysUserRole(@RequestBody sysUserRole: SysUserRole): ResVal = success(sysUserRoleService.getAllSysUserRoleByPage(sysUserRole).getPageInfo())
 
 
     @PostMapping("/save")
