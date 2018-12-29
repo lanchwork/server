@@ -38,7 +38,9 @@ data class TzNoticeInfo(
 
     var noticeTitleEn: String = "",
 
-    var noticeContentEn: String = ""
+    var noticeContentEn: String = "",
+
+    var typeEn: String = ""
 ) : Base(), IVerify {
 
     override fun verify() {
@@ -47,6 +49,9 @@ data class TzNoticeInfo(
             "公告内容 不能为空" using (this.noticeContent.isNotEmpty())
             "公告类型 不能为空" using (this.type.isNotEmpty())
             "是否启用 不能为空" using (this.usingFlag.isNotEmpty())
+            "英文公告标题 不能为空" using (this.noticeTitleEn.isNotEmpty())
+            "英文公告内容 不能为空" using (this.noticeContentEn.isNotEmpty())
+            "英文公告类型 不能为空" using (this.typeEn.isNotEmpty())
         }
     }
 }

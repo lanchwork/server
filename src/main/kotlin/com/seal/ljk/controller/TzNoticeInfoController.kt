@@ -32,9 +32,25 @@ class TzNoticeInfoController{
     fun getTzNoticeInfo(@RequestParam id: String): ResVal = success(tzNoticeInfoService.getTzNoticeInfo(id))
 
     @PostMapping("/list")
-    @ApiOperation(value = "公告方列表")
+    @ApiOperation(value = "公告列表")
     @VerifyToken
     fun listTzNoticeInfo(@RequestBody tzNoticeInfo: TzNoticeInfo): ResVal = success(tzNoticeInfoService.getAllTzNoticeInfoByPage(tzNoticeInfo))
+
+    @PostMapping("/allUsing")
+    @ApiOperation(value = "所有公告方")
+    @VerifyToken
+    fun allUsingTzNoticeInfo(@RequestParam language: String): ResVal {
+        val tzNoticeInfo = TzNoticeInfo()
+        tzNoticeInfo.usingFlag = "1"
+        val allList = tzNoticeInfoService.getAllTzNoticeInfo(tzNoticeInfo)
+        val mapList = if("zh_cn" == language){
+            allList.asSequence().map { mapOf("title" to it.noticeTitle, "content" to it.noticeContent, "time" to it.updateDate) }.toList()
+        } else {
+            allList.asSequence().map { mapOf("title" to it.noticeTitleEn, "content" to it.noticeContentEn, "time" to it.updateDate) }.toList()
+        }
+
+        return success(mapList)
+    }
 
 
     @PostMapping("/save")
