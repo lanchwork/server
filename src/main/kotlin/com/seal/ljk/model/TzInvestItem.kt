@@ -15,120 +15,133 @@ import java.math.BigDecimal
  */
 data class TzInvestItem(
 
-        @PrimaryKey
+    @PrimaryKey
     var id: String = "",
 
-        /**
+    /**
      * token名称
      */
     var tokenName: String = "",
 
-        /**
+    /**
      * token简称
      */
     var tokenShortName: String = "",
 
-        /**
+    /**
      * 图片地址
      */
     var imgPath: String = "",
 
-        /**
+    /**
      * 预期收益
      */
     var expectedVenue: BigDecimal = BigDecimal.ZERO,
 
-        /**
+    /**
      * 发行总量
      */
     var issueAmount: BigDecimal = BigDecimal.ZERO,
 
-        /**
+    /**
      * 余量
      */
     var allowance: BigDecimal = BigDecimal.ZERO,
 
-        /**
+    /**
      * 发行单价
      */
     var issuePrice: BigDecimal = BigDecimal.ZERO,
 
-        /**
+    /**
      * 发行时间
      */
     var issueTime: Date? = null,
 
-        /**
+    /**
      * 总房产数量
      */
     var totalHouseNumber: BigDecimal = BigDecimal.ZERO,
 
-        /**
+    /**
      * 已出租房产数量
      */
     var rentOutNumber: BigDecimal = BigDecimal.ZERO,
 
-        /**
+    /**
      * 已出售房产数量
      */
     var sellNumber: BigDecimal = BigDecimal.ZERO,
 
-        /**
+    /**
      * 是否启用
      */
     var usingFlag: String = "",
 
-        /**
+    /**
      * 合约账户
      */
     var contractAccount: String = "",
 
-        /**
+    /**
      * 发行公司
      */
     var issueCompany: String = "",
 
-        /**
+    /**
      * token特点
      */
     var tokenIdentity: String = "",
 
-        /**
+    /**
      * 交易及收益规则
      */
     var txRule: String = "",
 
-        /**
+    /**
      * 资产详情
      */
     var assetDetails: String = "",
 
-        /**
+    /**
      * 公司介绍
      */
     var companyInfo: String = "",
 
-        /**
+    /**
      * 发行公司en
      */
     var issueCompanyEn: String = "",
 
-        var tokenIdentityEn: String = "",
+    /**
+     * token特点en
+     */
+    var tokenIdentityEn: String = "",
 
-        /**
+    /**
      * 交易及收益规则en
      */
     var txRuleEn: String = "",
 
-        /**
+    /**
      * 资产详情en
      */
     var assetDetailsEn: String = "",
 
-        /**
+    /**
      * 公司介绍en
      */
-    var companyInfoEn: String = ""
+    var companyInfoEn: String = "",
+
+    /**
+     * 资产简称
+     */
+    var assetShort:String = "",
+
+    /**
+     * 资产简称en
+     */
+    var assetShortEn:String = ""
 ) : Base(), IVerify {
             var issueTimeBegin: Date? = null
             var issueTimeEnd: Date? = null
