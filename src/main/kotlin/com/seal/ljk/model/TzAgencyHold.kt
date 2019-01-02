@@ -30,12 +30,12 @@ data class TzAgencyHold(
         /**
      * token数量
      */
-    var tokenNumber: BigDecimal = BigDecimal.ZERO,
+    var tokenNumber: BigDecimal? = null,
 
         /**
      * 单价
      */
-    var price: BigDecimal = BigDecimal.ZERO,
+    var price: BigDecimal? = null,
 
         /**
      * account账户
@@ -55,7 +55,7 @@ data class TzAgencyHold(
         /**
      * 当前持有量 
      */
-    var currentHoldings: BigDecimal = BigDecimal.ZERO,
+    var currentHoldings: BigDecimal? = null,
 
         /**
      * 备注
