@@ -36,22 +36,22 @@ data class TzInvestItem(
     /**
      * 预期收益
      */
-    var expectedVenue: BigDecimal = BigDecimal.ZERO,
+    var expectedVenue: BigDecimal? = null,
 
     /**
      * 发行总量
      */
-    var issueAmount: BigDecimal = BigDecimal.ZERO,
+    var issueAmount: BigDecimal? = null,
 
     /**
      * 余量
      */
-    var allowance: BigDecimal = BigDecimal.ZERO,
+    var allowance: BigDecimal? = null,
 
     /**
      * 发行单价
      */
-    var issuePrice: BigDecimal = BigDecimal.ZERO,
+    var issuePrice: BigDecimal? = null,
 
     /**
      * 发行时间
@@ -61,17 +61,17 @@ data class TzInvestItem(
     /**
      * 总房产数量
      */
-    var totalHouseNumber: BigDecimal = BigDecimal.ZERO,
+    var totalHouseNumber: BigDecimal? = null,
 
     /**
      * 已出租房产数量
      */
-    var rentOutNumber: BigDecimal = BigDecimal.ZERO,
+    var rentOutNumber: BigDecimal? = null,
 
     /**
      * 已出售房产数量
      */
-    var sellNumber: BigDecimal = BigDecimal.ZERO,
+    var sellNumber: BigDecimal? = null,
 
     /**
      * 是否启用
