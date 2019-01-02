@@ -30,7 +30,7 @@ class TzNoticeInfoController{
     @PostMapping("/get")
     @ApiOperation(value = "获取公告")
     @VerifyToken
-    fun getTzNoticeInfo(@RequestParam id: String): ResVal = success(tzNoticeInfoService.getTzNoticeInfo(id))
+    fun getTzNoticeInfo(@RequestBody tzNoticeInfo: TzNoticeInfo): ResVal = success(tzNoticeInfoService.getTzNoticeInfo(tzNoticeInfo.id))
 
     @PostMapping("/list")
     @ApiOperation(value = "公告列表")
@@ -41,8 +41,8 @@ class TzNoticeInfoController{
     @ApiOperation(value = "新增或修改公告")
     @VerifyToken
     fun saveTzNoticeInfo(@RequestBody tzNoticeInfo: TzNoticeInfo): ResVal {
-        tzNoticeInfo.verify()
         if (tzNoticeInfo.id.isEmpty()) {
+            tzNoticeInfo.verify()
             tzNoticeInfoService.insertTzNoticeInfo(tzNoticeInfo)
         } else {
             tzNoticeInfoService.updateTzNoticeInfo(tzNoticeInfo)
