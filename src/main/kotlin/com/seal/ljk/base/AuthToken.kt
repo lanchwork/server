@@ -41,7 +41,8 @@ class AuthenticationInterceptor : HandlerInterceptor {
             return true
         }
         setRequest(request)
-        if (environment.activeProfiles[0] == "dev") {
+        val env = environment.activeProfiles[0]
+        if (env == "dev" || env == "test") {
             setSessionUser(SysUser(id = "2776cd3a081011e9bd39fa163e168207", username = "admin", userType = "0", openFlag = "1", channelMark = "seal"))
             return true
         }
