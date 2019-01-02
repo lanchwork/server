@@ -1,6 +1,5 @@
 package com.seal.ljk.schedule
 
-import com.seal.ljk.service.ReconciliationService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.scheduling.annotation.Scheduled
@@ -14,8 +13,7 @@ import java.util.Date
 class ScheduledTasks {
     val logger = LoggerFactory.getLogger(javaClass)
 
-    @Autowired
-    lateinit var reconciliationService: ReconciliationService
+
 
     /**
      * 定时  获取合作方放款数据
@@ -30,6 +28,5 @@ class ScheduledTasks {
      */
     @Scheduled(cron = "0 30 0 1/1 * ?")
     fun calculateReconciliation(){
-        reconciliationService.calculateReconciliation()
     }
 }

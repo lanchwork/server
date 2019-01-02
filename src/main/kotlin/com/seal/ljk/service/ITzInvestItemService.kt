@@ -5,11 +5,11 @@ import com.github.pagehelper.Page
 
 /**
  * <p>
- * 投资项目 服务类
+ * 项目管理服务类
  * </p>
  *
  * @author kangxj
- * @since 2018-12-28
+ * @since 2019-01-02
  */
 interface ITzInvestItemService{
     fun getTzInvestItem(id: String): TzInvestItem?

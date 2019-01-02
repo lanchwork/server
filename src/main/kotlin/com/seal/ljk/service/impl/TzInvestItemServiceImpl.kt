@@ -12,11 +12,11 @@ import com.seal.ljk.common.getSessionUser
 
 /**
  * <p>
- * 投资项目 服务实现类
+ * 项目管理服务实现类
  * </p>
  *
  * @author kangxj
- * @since 2018-12-28
+ * @since 2019-01-02
  */
 @Service
 class TzInvestItemServiceImpl : ITzInvestItemService {

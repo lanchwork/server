@@ -8,10 +8,10 @@ import java.math.BigDecimal
 
 /**
  * <p>
- * 投资项目 数据类
+ *  数据类
  * </p>
  * @author kangxj
- * @since 2018-12-28
+ * @since 2019-01-02
  */
 data class TzInvestItem(
 
@@ -79,9 +79,9 @@ data class TzInvestItem(
     var usingFlag: String = "",
 
     /**
-     * 合约账户
+     * 钱包账户
      */
-    var contractAccount: String = "",
+    var account: String = "",
 
     /**
      * 发行公司
@@ -136,30 +136,34 @@ data class TzInvestItem(
     /**
      * 资产简称
      */
-    var assetShort:String = "",
+    var assetShort: String = "",
 
     /**
      * 资产简称en
      */
-    var assetShortEn:String = ""
+    var assetShortEn: String = "",
+
+    /**
+     * token编号
+     */
+    var tokenNo: String = ""
 ) : Base(), IVerify {
             var issueTimeBegin: Date? = null
             var issueTimeEnd: Date? = null
 
     override fun verify() {
         this.apply {
-            "token名称 不能为空" using (this.tokenName.isNotEmpty())
-            "token简称 不能为空" using (this.tokenShortName.isNotEmpty())
-            "图片地址 不能为空" using (this.imgPath.isNotEmpty())
-            "合约账户 不能为空" using (this.contractAccount.isNotEmpty())
-            "预期收益 不能小于0" using (BigDecimal.ZERO.compareTo(this.expectedVenue)==-1)
-            "发行总量 不能小于0" using (BigDecimal.ZERO.compareTo(this.issueAmount)==-1)
-            "余量 不能小于0" using (BigDecimal.ZERO.compareTo(this.allowance)==-1)
-            "发行单价 不能小于0" using (BigDecimal.ZERO.compareTo(this.issuePrice)==-1)
-            "总房产数量 不能小于0" using (BigDecimal.ZERO.compareTo(this.totalHouseNumber)==-1)
-            "已出租房产数量 不能小于0" using (BigDecimal.ZERO.compareTo(this.rentOutNumber)==-1)
-            "已出售房产数量 不能小于0" using (BigDecimal.ZERO.compareTo(this.sellNumber)==-1)
+            "token编号不能为空" using (this.tokenNo.isNotEmpty())
+            "token名称不能为空" using (this.tokenName.isNotEmpty())
+            "token简称不能为空" using (this.tokenShortName.isNotEmpty())
+            "图片地址不能为空" using (this.imgPath.isNotEmpty())
 
+            "预期收益不能小于0" using (BigDecimal.ZERO.compareTo(this.expectedVenue)==-1)
+            "总房产数量不能小于0" using (BigDecimal.ZERO.compareTo(this.totalHouseNumber)==-1)
+            "已出租房产数量不能小于0" using (BigDecimal.ZERO.compareTo(this.rentOutNumber)==-1)
+            "已出售房产数量不能小于0" using (BigDecimal.ZERO.compareTo(this.sellNumber)==-1)
+
+            "钱包账户不能为空" using (this.account.isNotEmpty())
         }
     }
 }

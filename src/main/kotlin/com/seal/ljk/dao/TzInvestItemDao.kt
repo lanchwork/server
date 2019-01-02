@@ -5,10 +5,10 @@ import com.seal.ljk.dao.BaseMapper;
 
 /**
  * <p>
- * 投资项目 Mapper 接口
+ * 项目管理Mapper 接口
  * </p>
  *
  * @author kangxj
- * @since 2018-12-28
+ * @since 2019-01-02
  */
 interface TzInvestItemDao : BaseMapper<TzInvestItem>

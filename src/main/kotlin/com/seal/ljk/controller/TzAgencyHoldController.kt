@@ -3,8 +3,8 @@ package com.seal.ljk.controller
 import com.seal.ljk.service.ITzAgencyHoldService
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
-import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.common.success
+import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.model.TzAgencyHold
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 /**
  * <p>
- * 代持 前端控制器
+ * 代持前端控制器
  * </p>
  *
  * @author kangxj
- * @since 2018-12-29
+ * @since 2019-01-02
  */
 @Api(description = "代持功能相关接口")
 @RestController
@@ -28,18 +28,18 @@ class TzAgencyHoldController{
 
 
     @PostMapping("/get")
-    @ApiOperation(value = "获取代持")
+    @ApiOperation(value = "代持获取")
     @VerifyToken
     fun getTzAgencyHold(@RequestParam id: String): ResVal = success(tzAgencyHoldService.getTzAgencyHold(id))
 
     @PostMapping("/list")
-    @ApiOperation(value = "代持方列表")
+    @ApiOperation(value = "代持列表")
     @VerifyToken
     fun listTzAgencyHold(@RequestBody tzAgencyHold: TzAgencyHold): ResVal = success(tzAgencyHoldService.getAllTzAgencyHoldByPage(tzAgencyHold).getPageInfo())
 
 
     @PostMapping("/save")
-    @ApiOperation(value = "新增或修改代持")
+    @ApiOperation(value = "代持新增或修改")
     @VerifyToken
     fun saveTzAgencyHold(@RequestBody tzAgencyHold: TzAgencyHold): ResVal {
         tzAgencyHold.verify()
@@ -52,7 +52,7 @@ class TzAgencyHoldController{
     }
 
     @PostMapping("/delete")
-    @ApiOperation(value = "删除代持")
+    @ApiOperation(value = "代持删除")
     @VerifyToken
     fun deleteTzAgencyHold(@RequestParam id: String): ResVal {
         tzAgencyHoldService.deleteTzAgencyHold(id)
@@ -60,7 +60,7 @@ class TzAgencyHoldController{
     }
 
     @PostMapping("/queryConditions")
-    @ApiOperation(value = "代持方条件查询")
+    @ApiOperation(value = "代持条件查询")
     @VerifyToken
     fun queryConditionsTzAgencyHold(@RequestBody tzAgencyHold: TzAgencyHold): ResVal = success(tzAgencyHoldService.queryConditionsTzAgencyHoldByPage(tzAgencyHold).getPageInfo())
 

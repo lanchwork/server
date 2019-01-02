@@ -5,11 +5,11 @@ import com.github.pagehelper.Page
 
 /**
  * <p>
- * 代持 服务类
+ * 代持服务类
  * </p>
  *
  * @author kangxj
- * @since 2018-12-29
+ * @since 2019-01-02
  */
 interface ITzAgencyHoldService{
     fun getTzAgencyHold(id: String): TzAgencyHold?

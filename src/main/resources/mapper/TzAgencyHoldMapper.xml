@@ -3,13 +3,13 @@
 <mapper namespace="com.seal.ljk.dao.TzAgencyHoldDao">
 
     <select id="get" resultType="TzAgencyHold">
-        select b.id,b.item_id,b.mobile,b.token_number,b.price,b.account,b.area_code,b.type,b.current_holdings,b.remark,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.item_id,b.mobile,b.token_number,b.price,b.account,b.area_code,b.type,b.current_holdings,b.remark,b.token_name,b.seal_account,b.create_date,b.create_user,b.update_date,b.update_user
         from tz_agency_hold b
         where b.id =#{id}
     </select>
 
     <select id="getAll" resultType="TzAgencyHold">
-        select b.id,b.item_id,b.mobile,b.token_number,b.price,b.account,b.area_code,b.type,b.current_holdings,b.remark,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.item_id,b.mobile,b.token_number,b.price,b.account,b.area_code,b.type,b.current_holdings,b.remark,b.token_name,b.seal_account,b.create_date,b.create_user,b.update_date,b.update_user
         from tz_agency_hold b
         <where>
             <if test="id != null  and id != '' ">
@@ -42,6 +42,12 @@
             <if test="remark != null  and remark != '' ">
                 and b.remark= #{remark}
             </if>
+            <if test="tokenName != null  and tokenName != '' ">
+                and b.token_name= #{tokenName}
+            </if>
+            <if test="sealAccount != null  and sealAccount != '' ">
+                and b.seal_account= #{sealAccount}
+            </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -52,7 +58,7 @@
     </select>
 
     <select id="getAllByPage" resultType="TzAgencyHold">
-        select b.id,b.item_id,b.mobile,b.token_number,b.price,b.account,b.area_code,b.type,b.current_holdings,b.remark,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.item_id,b.mobile,b.token_number,b.price,b.account,b.area_code,b.type,b.current_holdings,b.remark,b.token_name,b.seal_account,b.create_date,b.create_user,b.update_date,b.update_user
         from tz_agency_hold b
         <where>
           <if test="id != null  and id != '' ">
@@ -85,6 +91,12 @@
           <if test="remark != null  and remark != '' ">
               and b.remark= #{remark}
           </if>
+          <if test="tokenName != null  and tokenName != '' ">
+              and b.token_name= #{tokenName}
+          </if>
+          <if test="sealAccount != null  and sealAccount != '' ">
+              and b.seal_account= #{sealAccount}
+          </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -95,8 +107,8 @@
     </select>
 
     <insert id="insert" parameterType="TzAgencyHold">
-        INSERT INTO tz_agency_hold (id,item_id,mobile,token_number,price,account,area_code,type,current_holdings,remark,create_date,create_user,update_date,update_user)
-        VALUES (#{id},#{itemId},#{mobile},#{tokenNumber},#{price},#{account},#{areaCode},#{type},#{currentHoldings},#{remark},NOW(),#{createUser},NOW(),#{createUser});
+        INSERT INTO tz_agency_hold (id,item_id,mobile,token_number,price,account,area_code,type,current_holdings,remark,token_name,seal_account,create_date,create_user,update_date,update_user)
+        VALUES (#{id},#{itemId},#{mobile},#{tokenNumber},#{price},#{account},#{areaCode},#{type},#{currentHoldings},#{remark},#{tokenName},#{sealAccount},NOW(),#{createUser},NOW(),#{createUser});
     </insert>
 
     <update id="update" parameterType="TzAgencyHold">
@@ -132,6 +144,12 @@
             <if test="remark != null  and remark != '' ">
                 remark= #{remark},
             </if>
+            <if test="tokenName != null  and tokenName != '' ">
+                token_name= #{tokenName},
+            </if>
+            <if test="sealAccount != null  and sealAccount != '' ">
+                seal_account= #{sealAccount},
+            </if>
             <if test="updateUser != null and updateUser != ''">
                 update_user=#{updateUser},
             </if>
@@ -144,8 +162,9 @@
         delete from tz_agency_hold where id=#{id}
     </delete>
 
+
     <select id="queryConditionsTzAgencyHoldByPage" resultType="TzAgencyHold">
-        select b.id,b.item_id,b.mobile,b.token_number,b.price,b.account,b.area_code,b.type,b.current_holdings,b.remark,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.item_id,b.mobile,b.token_number,b.price,b.account,b.area_code,b.type,b.current_holdings,b.remark,b.token_name,b.seal_account,b.create_date,b.create_user,b.update_date,b.update_user
         from tz_agency_hold b
         <where>
             <if test="mobile != null  and mobile != '' ">
@@ -162,5 +181,4 @@
             </foreach>
         </if>
     </select>
-
 </mapper>

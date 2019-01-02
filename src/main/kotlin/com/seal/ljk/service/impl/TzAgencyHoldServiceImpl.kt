@@ -12,11 +12,11 @@ import com.seal.ljk.common.getSessionUser
 
 /**
  * <p>
- * 代持 服务实现类
+ * 代持服务实现类
  * </p>
  *
  * @author kangxj
- * @since 2018-12-29
+ * @since 2019-01-02
  */
 @Service
 class TzAgencyHoldServiceImpl : ITzAgencyHoldService {
