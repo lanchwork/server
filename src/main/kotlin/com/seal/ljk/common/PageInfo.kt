@@ -87,7 +87,7 @@ class PageInfo<T>(
 }
 
 fun <T> Page<T>.getPageInfo(): PageInfo<T> {
-    return PageInfo(this, total.toInt(), pageSize, pages)
+    return PageInfo(this, total.toInt(), pageSize, pages, pageNum)
 }
 
 fun <T> List<T>.getPageInfo(pageSize: Int, pageNum: Int, total: Int): PageInfo<T> {
