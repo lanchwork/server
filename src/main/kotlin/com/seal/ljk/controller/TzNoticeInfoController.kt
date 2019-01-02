@@ -30,7 +30,7 @@ class TzNoticeInfoController{
     @PostMapping("/get")
     @ApiOperation(value = "获取公告")
     @VerifyToken
-    fun getTzNoticeInfo(@RequestBody tzNoticeInfo: TzNoticeInfo): ResVal = success(tzNoticeInfoService.getTzNoticeInfo(tzNoticeInfo.id))
+    fun getTzNoticeInfo(@RequestParam id: String): ResVal = success(tzNoticeInfoService.getTzNoticeInfo(id))
 
     @PostMapping("/list")
     @ApiOperation(value = "公告列表")
