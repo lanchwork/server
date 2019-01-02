@@ -54,7 +54,6 @@ data class TzRevenue(
 
     override fun verify() {
         this.apply {
-            " 不能为空" using (this.id.isNotEmpty())
             "投资项目id 不能为空" using (this.itemId.isNotEmpty())
             "总收益 不能为空" using (this.totalRevenue != null)
             "每份收益 不能为空" using (this.preRevenue != null)
