@@ -42,8 +42,8 @@ class TzInvestItemController{
     @ApiOperation(value = "项目管理新增或修改")
     @VerifyToken
     fun saveTzInvestItem(@RequestBody tzInvestItem: TzInvestItem): ResVal {
-        tzInvestItem.verify()
         if (tzInvestItem.id.isEmpty()) {
+            tzInvestItem.verify()
             tzInvestItemService.insertTzInvestItem(tzInvestItem)
         } else {
             tzInvestItemService.updateTzInvestItem(tzInvestItem)
@@ -58,5 +58,10 @@ class TzInvestItemController{
         tzInvestItemService.deleteTzInvestItem(id)
         return success()
     }
+
+    @PostMapping("/popList")
+    @ApiOperation(value = "项目管理弹窗摘要信息列表")
+    @VerifyToken
+    fun popList(): ResVal = success(tzInvestItemService.getAllTzInvestItemInfo())
 
 }

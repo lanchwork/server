@@ -10,6 +10,7 @@ import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+
 /**
  * <p>
  * 总收益 前端控制器
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.*
 @Api(description = "总收益 功能相关接口")
 @RestController
 @RequestMapping("/ljk/tz-revenue")
-class TzRevenueController{
+class TzRevenueController {
 
     @Autowired
     lateinit var tzRevenueService: ITzRevenueService
@@ -42,8 +43,8 @@ class TzRevenueController{
     @ApiOperation(value = "新增或修改总收益")
     @VerifyToken
     fun saveTzRevenue(@RequestBody tzRevenue: TzRevenue): ResVal {
-        tzRevenue.verify()
         if (tzRevenue.id.isEmpty()) {
+            tzRevenue.verify()
             tzRevenueService.insertTzRevenue(tzRevenue)
         } else {
             tzRevenueService.updateTzRevenue(tzRevenue)

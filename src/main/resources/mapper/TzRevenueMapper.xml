@@ -3,13 +3,13 @@
 <mapper namespace="com.seal.ljk.dao.TzRevenueDao">
 
     <select id="get" resultType="TzRevenue">
-        select b.id,b.item_id,b.total_revenue,b.revenue_type,b.revenue_date,b.status,b.create_time,b.update_time,b.create_user,b.update_user
+        select b.id,b.item_id,b.total_revenue,b.pre_revenue,b.revenue_type,b.revenue_date,b.status,b.create_date,b.update_date,b.create_user,b.update_user
         from tz_revenue b
         where b.id =#{id}
     </select>
 
     <select id="getAll" resultType="TzRevenue">
-        select b.id,b.item_id,b.total_revenue,b.revenue_type,b.revenue_date,b.status,b.create_time,b.update_time,b.create_user,b.update_user
+        select b.id,b.item_id,b.total_revenue,b.pre_revenue,b.revenue_type,b.revenue_date,b.status,b.create_date,b.update_date,b.create_user,b.update_user
         from tz_revenue b
         <where>
             <if test="id != null  and id != '' ">
@@ -36,24 +36,6 @@
             <if test="status != null  and status != '' ">
                 and b.status= #{status}
             </if>
-            <if test="createTime != null  and createTime != '' ">
-                and b.create_time= #{createTime}
-            </if>
-            <if test="createTimeBegin != null ">
-                <![CDATA[and b.create_time  >= #{createTimeBegin}]]>
-            </if>
-            <if test="createTimeEnd != null  ">
-                <![CDATA[and b.create_time  <= #{createTimeEnd}]]>
-            </if>
-            <if test="updateTime != null  and updateTime != '' ">
-                and b.update_time= #{updateTime}
-            </if>
-            <if test="updateTimeBegin != null ">
-                <![CDATA[and b.update_time  >= #{updateTimeBegin}]]>
-            </if>
-            <if test="updateTimeEnd != null  ">
-                <![CDATA[and b.update_time  <= #{updateTimeEnd}]]>
-            </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -64,7 +46,7 @@
     </select>
 
     <select id="getAllByPage" resultType="TzRevenue">
-        select b.id,b.item_id,b.total_revenue,b.revenue_type,b.revenue_date,b.status,b.create_time,b.update_time,b.create_user,b.update_user
+        select b.id,b.item_id,b.total_revenue,b.pre_revenue,b.revenue_type,b.revenue_date,b.status,b.create_date,b.update_date,b.create_user,b.update_user
         from tz_revenue b
         <where>
           <if test="id != null  and id != '' ">
@@ -91,24 +73,6 @@
           <if test="status != null  and status != '' ">
               and b.status= #{status}
           </if>
-          <if test="createTime != null  and createTime != '' ">
-              and b.create_time= #{createTime}
-          </if>
-            <if test="createTimeBegin != null ">
-                <![CDATA[and b.create_time  >= #{createTimeBegin}]]>
-            </if>
-            <if test="createTimeEnd != null ">
-                <![CDATA[and b.create_time  <= #{createTimeEnd}]]>
-            </if>
-          <if test="updateTime != null  and updateTime != '' ">
-              and b.update_time= #{updateTime}
-          </if>
-            <if test="updateTimeBegin != null ">
-                <![CDATA[and b.update_time  >= #{updateTimeBegin}]]>
-            </if>
-            <if test="updateTimeEnd != null ">
-                <![CDATA[and b.update_time  <= #{updateTimeEnd}]]>
-            </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -119,8 +83,8 @@
     </select>
 
     <insert id="insert" parameterType="TzRevenue">
-        INSERT INTO tz_revenue (id,item_id,total_revenue,revenue_type,revenue_date,status,create_time,update_time,create_user,update_user)
-        VALUES (#{id},#{itemId},#{totalRevenue},#{revenueType},#{revenueDate},#{status},#{createTime},#{updateTime},#{createUser},#{createUser});
+        INSERT INTO tz_revenue (id,item_id,total_revenue,pre_revenue,revenue_type,revenue_date,status,create_date,update_date,create_user,update_user)
+        VALUES (#{id},#{itemId},#{totalRevenue},#{preRevenue},#{revenueType},#{revenueDate},#{status},#{createDate},#{updateDate},#{createUser},#{createUser});
     </insert>
 
     <update id="update" parameterType="TzRevenue">
@@ -131,6 +95,9 @@
             </if>
             <if test="itemId != null  and itemId != '' ">
                 item_id= #{itemId},
+            </if>
+            <if test="preRevenue != null  and preRevenue != '' ">
+                pre_revenue= #{preRevenue},
             </if>
             <if test="totalRevenue != null  and totalRevenue != '' ">
                 total_revenue= #{totalRevenue},
@@ -143,12 +110,6 @@
             </if>
             <if test="status != null  and status != '' ">
                 status= #{status},
-            </if>
-            <if test="createTime != null  and createTime != '' ">
-                create_time= #{createTime},
-            </if>
-            <if test="updateTime != null  and updateTime != '' ">
-                update_time= #{updateTime},
             </if>
             <if test="updateUser != null and updateUser != ''">
                 update_user=#{updateUser},

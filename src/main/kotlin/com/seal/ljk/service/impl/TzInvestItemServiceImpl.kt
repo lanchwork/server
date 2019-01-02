@@ -34,6 +34,10 @@ class TzInvestItemServiceImpl : ITzInvestItemService {
         return tzInvestItemDao.getAll(tzInvestItem)
     }
 
+    override fun getAllTzInvestItemInfo(): List<TzInvestItem> {
+        return tzInvestItemDao.getAllInfo()
+    }
+
     override fun getAllTzInvestItemByPage(tzInvestItem: TzInvestItem): Page<TzInvestItem> {
         return tzInvestItemDao.getAllByPage(tzInvestItem)
     }

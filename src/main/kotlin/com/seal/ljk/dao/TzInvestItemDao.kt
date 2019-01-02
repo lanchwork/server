@@ -11,4 +11,6 @@ import com.seal.ljk.dao.BaseMapper;
  * @author kangxj
  * @since 2019-01-02
  */
-interface TzInvestItemDao : BaseMapper<TzInvestItem>
+interface TzInvestItemDao : BaseMapper<TzInvestItem> {
+    fun getAllInfo(): List<TzInvestItem>
+}

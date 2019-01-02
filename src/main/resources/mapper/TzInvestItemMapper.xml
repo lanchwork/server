@@ -108,6 +108,31 @@
         </if>
     </select>
 
+    <select id="getAllInfo" resultType="TzInvestItem">
+        select b.id,b.token_name,b.account,b.token_no
+        from tz_invest_item b
+        <where>
+            <if test="id != null  and id != '' ">
+                and b.id= #{id}
+            </if>
+            <if test="tokenName != null  and tokenName != '' ">
+                and b.token_name= #{tokenName}
+            </if>
+            <if test="account != null  and account != '' ">
+                and b.account= #{account}
+            </if>
+            <if test="tokenNo != null  and tokenNo != '' ">
+                and b.token_no= #{tokenNo}
+            </if>
+        </where>
+        <if test="orderByInfo != null and orderByInfo.length > 0">
+            <foreach collection="orderByInfo" item="order" open="order by "
+                     separator="," close="  ">
+                ${order}
+            </foreach>
+        </if>
+    </select>
+
     <select id="getAllByPage" resultType="TzInvestItem">
         select b.id,b.token_name,b.token_short_name,b.img_path,b.expected_venue,b.issue_amount,b.allowance,b.issue_price,b.issue_time,b.total_house_number,b.rent_out_number,b.sell_number,b.using_flag,b.account,b.issue_company,b.token_identity,b.tx_rule,b.asset_details,b.company_info,b.issue_company_en,b.token_identity_en,b.tx_rule_en,b.asset_details_en,b.company_info_en,b.asset_short,b.asset_short_en,b.token_no,b.create_date,b.create_user,b.update_date,b.update_user
         from tz_invest_item b
