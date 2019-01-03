@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seal.ljk.dao.GfManageMiseDao">
+
+    <select id="get" resultType="GfManageMise">
+        select b.id,b.gf_code,b.address,b.remark,b.create_user,b.create_date,b.update_user,b.update_date
+        from gf_manage_mise b
+        where b.id =#{id}
+    </select>
+
+    <select id="getAll" resultType="GfManageMise">
+        select b.id,b.gf_code,b.address,b.remark,b.create_user,b.create_date,b.update_user,b.update_date
+        from gf_manage_mise b
+        <where>
+            <if test="id != null  and id != '' ">
+                and b.id= #{id}
+            </if>
+            <if test="gfCode != null  and gfCode != '' ">
+                and b.gf_code= #{gfCode}
+            </if>
+            <if test="address != null  and address != '' ">
+                and b.address= #{address}
+            </if>
+            <if test="remark != null  and remark != '' ">
+                and b.remark= #{remark}
+            </if>
+        </where>
+        <if test="orderByInfo != null and orderByInfo.length > 0">
+            <foreach collection="orderByInfo" item="order" open="order by "
+                     separator="," close="  ">
+                ${order}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="getAllByPage" resultType="GfManageMise">
+        select b.id,b.gf_code,b.address,b.remark,b.create_user,b.create_date,b.update_user,b.update_date
+        from gf_manage_mise b
+        <where>
+          <if test="id != null  and id != '' ">
+              and b.id= #{id}
+          </if>
+          <if test="gfCode != null  and gfCode != '' ">
+              and b.gf_code= #{gfCode}
+          </if>
+          <if test="address != null  and address != '' ">
+              and b.address= #{address}
+          </if>
+          <if test="remark != null  and remark != '' ">
+              and b.remark= #{remark}
+          </if>
+        </where>
+        <if test="orderByInfo != null and orderByInfo.length > 0">
+            <foreach collection="orderByInfo" item="order" open="order by "
+                     separator="," close="  ">
+                ${order}
+            </foreach>
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="GfManageMise">
+        INSERT INTO gf_manage_mise (id,gf_code,address,remark,create_user,create_date,update_user,update_date)
+        VALUES (#{id},#{gfCode},#{address},#{remark},#{createUser},NOW(),#{createUser},NOW());
+    </insert>
+
+    <update id="update" parameterType="GfManageMise">
+        update gf_manage_mise
+        <set>
+            <if test="id != null  and id != '' ">
+                id= #{id},
+            </if>
+            <if test="gfCode != null  and gfCode != '' ">
+                gf_code= #{gfCode},
+            </if>
+            <if test="address != null  and address != '' ">
+                address= #{address},
+            </if>
+            <if test="remark != null  and remark != '' ">
+                remark= #{remark},
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                update_user=#{updateUser},
+            </if>
+            update_date=NOW()
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from gf_manage_mise where id=#{id}
+    </delete>
+
+</mapper>
