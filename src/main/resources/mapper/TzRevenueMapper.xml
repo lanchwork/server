@@ -46,8 +46,9 @@
     </select>
 
     <select id="getAllByPage" resultType="TzRevenue">
-        select b.id,b.item_id,b.total_revenue,b.pre_revenue,b.revenue_type,b.revenue_date,b.status,b.create_date,b.update_date,b.create_user,b.update_user
+        select b.id,b.item_id,c.token_name,c.token_short_name,c.account,c.token_no,b.total_revenue,b.pre_revenue,b.revenue_type,b.revenue_date,b.status,b.create_date,b.update_date,b.create_user,b.update_user
         from tz_revenue b
+        inner join tz_invest_item c on b.item_id = c.id
         <where>
           <if test="id != null  and id != '' ">
               and b.id= #{id}

@@ -7,10 +7,7 @@ import com.seal.ljk.common.UUIDUtil
 import com.seal.ljk.common.success
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import java.io.*
 
@@ -26,7 +23,7 @@ class StaticController {
     @PostMapping("/upload")
     @ApiOperation(value = "上传文件")
     fun upload(@RequestParam("file") file: MultipartFile,
-               @RequestParam("path", required = false, defaultValue = "") path: String): ResVal {
+               @RequestHeader("path", required = false, defaultValue = "") path: String): ResVal {
 
         var localFilePath: String? = null
         if (!file.isEmpty) {
