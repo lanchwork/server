@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.SealException
 import com.seal.ljk.service.ISysDictTypeService
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
@@ -60,15 +61,11 @@ class SysDictTypeController{
     @ApiOperation(value = "删除数据字典类型")
     @VerifyToken
     fun deleteSysDictType(@RequestParam id: String): ResVal {
-        val sysDictType = sysDictTypeService.getSysDictType(id)
-        return if(sysDictType != null){
-            //删除，置删除标识位为1
-            sysDictType?.delFlag = "1"
-            sysDictTypeService.updateSysDictType(sysDictType)
-            success()
-        } else{
-            error("dictType does not exist!")
-        }
+        val sysDictType = sysDictTypeService.getSysDictType(id) ?: throw SealException(message = "dictType does not exist!")
+        //删除，置删除标识位为1
+        sysDictType.delFlag = "1"
+        sysDictTypeService.updateSysDictType(sysDictType)
+        return success()
     }
 
 }
