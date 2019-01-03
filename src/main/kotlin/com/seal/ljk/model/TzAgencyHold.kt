@@ -48,7 +48,7 @@ data class TzAgencyHold(
     var areaCode: String = "",
 
         /**
-     * 类型(1代持转入2代持转出)
+     * 类型(0代持转入1代持转出)
      */
     var type: String = "",
 
