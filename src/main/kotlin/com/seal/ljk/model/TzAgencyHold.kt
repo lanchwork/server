@@ -7,7 +7,7 @@ import java.math.BigDecimal
 
 /**
  * <p>
- *  数据类
+ * 代持数据类
  * </p>
  * @author kangxj
  * @since 2019-01-02

@@ -8,7 +8,7 @@ import java.math.BigDecimal
 
 /**
  * <p>
- *  数据类
+ * 项目管理数据类
  * </p>
  * @author kangxj
  * @since 2019-01-02
