@@ -51,6 +51,10 @@ data class TzRevenue(
 
     var revenueDateBegin: Date? = null
     var revenueDateEnd: Date? = null
+    var tokenName: String? = null
+    var tokenShortName: String? = null
+    var account: String? = null
+    var tokenNo: String? = null
 
     override fun verify() {
         this.apply {
