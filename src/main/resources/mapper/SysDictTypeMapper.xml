@@ -90,4 +90,12 @@
         delete from sys_dict_type where id=#{id}
     </delete>
 
+    <select id="getAllSysDict" resultType="java.util.HashMap">
+        select sdt.code, sdi.value, sdi.show_val, sdi.sort
+        from "sys_dict_type" sdt
+        join "sys_dict_item" sdi
+        on sdt.id = sdi.type_id
+        where sdt.del_flag='0' and sdi.del_flag='0'
+    </select>
+
 </mapper>
