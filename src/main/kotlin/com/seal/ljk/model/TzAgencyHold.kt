@@ -80,7 +80,6 @@ data class TzAgencyHold(
             "单价不能为空" using (BigDecimal.ZERO.compareTo(this.price)==-1)
             "区号不能为空" using (this.areaCode.isNotEmpty())
             "类型(1代持转入2代持转出) 不能为空" using (this.type.isNotEmpty())
-            "当前持有量不能为空" using (BigDecimal.ZERO.compareTo(this.currentHoldings)==-1)
             "token名称不能为空" using (this.tokenName.isNotEmpty())
             "账户(Seal代持)不能为空" using (this.sealAccount.isNotEmpty())
         }
