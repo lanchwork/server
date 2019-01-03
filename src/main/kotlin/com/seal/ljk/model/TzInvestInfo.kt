@@ -34,12 +34,12 @@ data class TzInvestInfo(
         /**
      * 购买数量
      */
-        var buyNumber: BigDecimal = BigDecimal.ZERO,
+        var buyNumber: BigDecimal? = null,
 
         /**
      * 购买金额
      */
-        var buyAmount: BigDecimal = BigDecimal.ZERO,
+        var buyAmount: BigDecimal? = null,
 
         /**
      * 状态
@@ -63,7 +63,7 @@ data class TzInvestInfo(
         /**
          * 项目管理表中 发行单价
          */
-        var issuePrice : BigDecimal = BigDecimal.ZERO,
+        var issuePrice : BigDecimal? = null,
 
         /**
          * 主链账号
