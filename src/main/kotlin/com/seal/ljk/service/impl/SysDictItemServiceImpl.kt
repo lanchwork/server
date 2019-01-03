@@ -42,6 +42,7 @@ class SysDictItemServiceImpl : ISysDictItemService {
 
     override fun insertSysDictItem(sysDictItem: SysDictItem) {
         sysDictItem.delFlag = "0"
+        sysDictItem.sort = 0
         sysDictItemDao.insert(sysDictItem)
     }
 
