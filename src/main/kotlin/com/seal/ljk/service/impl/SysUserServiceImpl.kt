@@ -117,7 +117,7 @@ class SysUserServiceImpl : ISysUserService {
         }
         val user = sysUserMapper.getUser(channelMark, userName)
                 ?: throw SealException(message = "该用户不存在。")
-        if (!user.password.equals(password, true)) {
+        if (!user.password.equals(MessageDigetUtil.md5Pass(password), true)) {
             throw SealException(message = "密码错误。")
         }
         if (user.openFlag != "1") {
