@@ -168,10 +168,10 @@ data class TzInvestItem(
             "token简称不能为空" using (this.tokenShortName.isNotEmpty())
             "图片地址不能为空" using (this.imgPath.isNotEmpty())
 
-            "预期收益不能为空或小于0" using (this.expectedVenue != null && BigDecimal.ZERO.compareTo(this.expectedVenue)==-1)
-            "总房产数量不能为空或小于0" using (this.totalHouseNumber != null && BigDecimal.ZERO.compareTo(this.totalHouseNumber)==-1)
-            "已出租房产数量不能为空或小于0" using (this.rentOutNumber != null && BigDecimal.ZERO.compareTo(this.rentOutNumber)==-1)
-            "已出售房产数量不能为空或小于0" using (this.sellNumber != null && BigDecimal.ZERO.compareTo(this.sellNumber)==-1)
+            "预期收益不能为空" using (this.expectedVenue != null)
+            "总房产数量不能为空" using (this.totalHouseNumber != null)
+            "已出租房产数量不能为空" using (this.rentOutNumber != null)
+            "已出售房产数量不能为空" using (this.sellNumber != null)
 
             "钱包账户不能为空" using (this.account.isNotEmpty())
         }
