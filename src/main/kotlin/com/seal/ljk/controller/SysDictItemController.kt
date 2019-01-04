@@ -37,7 +37,7 @@ class SysDictItemController{
     @VerifyToken
     fun listSysDictItem(@RequestBody sysDictItem: SysDictItem): ResVal {
         if (sysDictItem.orderByInfo == null) {
-            sysDictItem.orderByInfo = arrayOf("sort")
+            sysDictItem.orderByInfo = arrayOf("value")
         }
         return success(sysDictItemService.getAllSysDictItemByPage(sysDictItem).getPageInfo())
     }
