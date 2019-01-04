@@ -3,6 +3,7 @@ package com.seal.ljk.controller
 import com.seal.ljk.service.IGfManageMiseService
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.SysDictUtil
 import com.seal.ljk.common.success
 import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.model.GfManageMise
@@ -58,5 +59,10 @@ class GfManageMiseController{
         gfManageMiseService.deleteGfManageMise(id)
         return success()
     }
+
+    @PostMapping("/dict")
+    @ApiOperation(value = "管理员字典")
+    @VerifyToken
+    fun dicTzNoticeInfo(): ResVal = success(mapOf("gfManageMiseFunctionalModule" to SysDictUtil.sysDict["gfManageMiseFunctionalModule"]))
 
 }

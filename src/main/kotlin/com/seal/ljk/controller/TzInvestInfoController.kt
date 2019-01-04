@@ -3,6 +3,7 @@ package com.seal.ljk.controller
 import com.seal.ljk.service.ITzInvestInfoService
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.SysDictUtil
 import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.common.success
 import com.seal.ljk.model.TzInvestInfo
@@ -50,5 +51,11 @@ class TzInvestInfoController{
         }
         return success(mapOf("id" to tzInvestInfo.id))
     }
+
+    @PostMapping("/dict")
+    @ApiOperation(value = "投资信息字典")
+    @VerifyToken
+    fun dicTzNoticeInfo(): ResVal = success(mapOf("investInfoType" to SysDictUtil.sysDict["investInfoType"], "investInfoStatus" to SysDictUtil.sysDict["investInfoStatus"]))
+
 
 }
