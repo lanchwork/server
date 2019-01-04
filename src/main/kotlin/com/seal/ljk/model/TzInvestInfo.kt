@@ -61,9 +61,9 @@ data class TzInvestInfo(
         var tokenName:String = "",
 
         /**
-         * 项目管理表中 发行单价
+         * 下单时的价格
          */
-        var issuePrice : BigDecimal? = null,
+        var currPrice : BigDecimal? = null,
 
         /**
          * 主链账号
@@ -83,6 +83,7 @@ data class TzInvestInfo(
             "联系电话 不能为空" using (this.mobile.isNotEmpty())
             "购买数量 不能小于0" using (this.buyNumber !=null && BigDecimal.ZERO.compareTo(this.buyNumber)==-1)
             "购买金额 不能小于0" using (this.buyAmount != null && BigDecimal.ZERO.compareTo(this.buyAmount)==-1)
+            "下单时价格 不能小于0" using (this.currPrice != null && BigDecimal.ZERO.compareTo(this.currPrice)==-1)
             "状态 不能为空" using (this.status !=null)
             "主链账号 不能为空" using (this.account.isNotEmpty())
             "类型 不能为空" using (this.type !=null)
