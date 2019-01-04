@@ -81,10 +81,9 @@ data class TzInvestInfo(
             "投资项目id 不能为空" using (this.itemId.isNotEmpty())
             "区号 不能为空" using (this.areaCode.isNotEmpty())
             "联系电话 不能为空" using (this.mobile.isNotEmpty())
-            "购买数量 不能小于0" using (BigDecimal.ZERO.compareTo(this.buyNumber)==-1)
-            "购买金额 不能小于0" using (BigDecimal.ZERO.compareTo(this.buyAmount)==-1)
+            "购买数量 不能小于0" using (this.buyNumber !=null && BigDecimal.ZERO.compareTo(this.buyNumber)==-1)
+            "购买金额 不能小于0" using (this.buyAmount != null && BigDecimal.ZERO.compareTo(this.buyAmount)==-1)
             "状态 不能为空" using (this.status !=null)
-            "备注 不能为空" using (this.remarks.isNotEmpty())
             "主链账号 不能为空" using (this.account.isNotEmpty())
             "类型 不能为空" using (this.type !=null)
         }
