@@ -1,12 +1,11 @@
 package com.seal.ljk.model
 
-import com.seal.ljk.model.Base
 import com.seal.ljk.common.using
 import com.seal.ljk.base.PrimaryKey
 
 /**
  * <p>
- *  数据类
+ * 管理员数据类
  * </p>
  * @author kangxj
  * @since 2019-01-04

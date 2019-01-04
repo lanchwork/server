@@ -5,7 +5,7 @@ import com.seal.ljk.dao.BaseMapper;
 
 /**
  * <p>
- *  Mapper 接口
+ * 管理员Mapper接口
  * </p>
  *
  * @author kangxj

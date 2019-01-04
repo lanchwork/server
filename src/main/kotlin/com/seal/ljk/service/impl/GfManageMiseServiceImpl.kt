@@ -12,7 +12,7 @@ import com.seal.ljk.common.getSessionUser
 
 /**
  * <p>
- *  服务实现类
+ * 管理员服务实现类
  * </p>
  *
  * @author kangxj

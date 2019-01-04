@@ -5,7 +5,7 @@ import com.github.pagehelper.Page
 
 /**
  * <p>
- *  服务类
+ * 管理员服务类
  * </p>
  *
  * @author kangxj
