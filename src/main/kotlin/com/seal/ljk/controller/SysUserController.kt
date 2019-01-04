@@ -83,8 +83,7 @@ class SysUserController{
     fun login(@RequestParam channelMark: String,
               @RequestParam userName: String,
               @RequestParam password: String): ResVal {
-        sysUserService.login(channelMark, userName, password)
-        return success()
+        return success(sysUserService.login(channelMark, userName, password))
     }
 
     @PostMapping("/dict")
@@ -100,7 +99,7 @@ class SysUserController{
                 channelMark.add(
                         mapOf(
                                 "key" to it.channelMark,
-                                "vaule" to it.partnerName
+                                "value" to it.partnerName
                         )
                 )
             }

@@ -50,4 +50,8 @@ class SysDictTypeServiceImpl : ISysDictTypeService {
         sysDictTypeDao.delete(id)
     }
 
+    override fun getAllSysDict(): List<Map<String, String>> {
+        return sysDictTypeDao.getAllSysDict()
+    }
+
 }

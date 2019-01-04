@@ -11,4 +11,6 @@ import com.seal.ljk.dao.BaseMapper;
  * @author tingyx
  * @since 2019-01-03
  */
-interface SysDictTypeDao : BaseMapper<SysDictType>
+interface SysDictTypeDao : BaseMapper<SysDictType>{
+    fun getAllSysDict(): List<Map<String,String>>
+}

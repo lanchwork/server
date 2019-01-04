@@ -18,4 +18,5 @@ interface ISysDictTypeService{
     fun insertSysDictType(sysDictType: SysDictType)
     fun updateSysDictType(sysDictType: SysDictType)
     fun deleteSysDictType(id: String)
+    fun getAllSysDict(): List<Map<String,String>>
 }
