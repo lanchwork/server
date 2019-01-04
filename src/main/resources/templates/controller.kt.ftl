@@ -33,7 +33,7 @@ class ${table.controllerName}<#if superControllerClass??> : ${superControllerCla
     fun get${entity}(@RequestParam id: String): ResVal = success(${table.serviceName?substring(1)?uncap_first}.get${entity}(id))
 
     @PostMapping("/list")
-    @ApiOperation(value = "${table.comment!}方列表")
+    @ApiOperation(value = "${table.comment!}列表")
     @VerifyToken
     fun list${entity}(@RequestBody ${entity?uncap_first}: ${entity}): ResVal = success(${table.serviceName?substring(1)?uncap_first}.getAll${entity}ByPage(${entity?uncap_first}).getPageInfo())
 

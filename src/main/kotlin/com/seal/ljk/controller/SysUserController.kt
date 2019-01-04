@@ -1,6 +1,7 @@
 package com.seal.ljk.controller
 
 
+import com.seal.ljk.base.AuthException
 import com.seal.ljk.base.IgnoreToken
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
@@ -9,6 +10,7 @@ import com.seal.ljk.common.getSessionUser
 import com.seal.ljk.common.success
 import com.seal.ljk.model.SysPartner
 import com.seal.ljk.model.SysUser
+import com.seal.ljk.service.ISysMenuService
 import com.seal.ljk.service.ISysPartnerService
 
 import com.seal.ljk.service.ISysUserService
@@ -34,6 +36,8 @@ class SysUserController{
     lateinit var sysUserService: ISysUserService
     @Autowired
     lateinit var sysPartnerService: ISysPartnerService
+    @Autowired
+    lateinit var sysMenuService:ISysMenuService
 
 
     @PostMapping("/get")
@@ -86,6 +90,15 @@ class SysUserController{
         return success(sysUserService.login(channelMark, userName, password))
     }
 
+    @PostMapping("/menuList")
+    @ApiOperation(value = "用户权限列表")
+    @IgnoreToken
+    fun menuList(): ResVal {
+        val user = getSessionUser() ?: throw AuthException()
+        val menuList = sysMenuService.getAllSysMenuByUser(user)
+        return success(menuList)
+    }
+
     @PostMapping("/dict")
     @ApiOperation(value = "用户字典")
     @VerifyToken
@@ -98,12 +111,14 @@ class SysUserController{
             allSysPartner.forEach {
                 channelMark.add(
                         mapOf(
-                                "key" to it.channelMark,
-                                "value" to it.partnerName
+                                "value" to it.channelMark,
+                                "showVal" to it.partnerName
                         )
                 )
             }
         }
+
+
         return success(mapOf(
                 "channelMark" to channelMark
         ))

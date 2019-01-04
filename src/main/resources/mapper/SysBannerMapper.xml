@@ -3,13 +3,13 @@
 <mapper namespace="com.seal.ljk.dao.SysBannerDao">
 
     <select id="get" resultType="SysBanner">
-        select b.title,b.id,b.img_path,b.link_url,b.type,b.status,b.create_user,b.create_date,b.update_user,b.update_date
+        select b.title,b.id,b.img_path,b.link_url,b.type,b.status,b.lang,b.create_user,b.create_date,b.update_user,b.update_date
         from sys_banner b
         where b.id =#{id}
     </select>
 
     <select id="getAll" resultType="SysBanner">
-        select b.title,b.id,b.img_path,b.link_url,b.type,b.status,b.create_user,b.create_date,b.update_user,b.update_date
+        select b.title,b.id,b.img_path,b.link_url,b.type,b.status,b.lang,b.create_user,b.create_date,b.update_user,b.update_date
         from sys_banner b
         <where>
             <if test="title != null  and title != '' ">
@@ -27,6 +27,9 @@
             <if test="type != null  and type != '' ">
                 and b.type= #{type}
             </if>
+            <if test="lang != null  and lang != '' ">
+                and b.lang= #{lang}
+            </if>
             <if test="status != null  and status != '' ">
                 and b.status= #{status}
             </if>
@@ -40,7 +43,7 @@
     </select>
 
     <select id="getAllByPage" resultType="SysBanner">
-        select b.title,b.id,b.img_path,b.link_url,b.type,b.status,b.create_user,b.create_date,b.update_user,b.update_date
+        select b.title,b.id,b.img_path,b.link_url,b.type,b.status,b.lang
         from sys_banner b
         <where>
           <if test="title != null  and title != '' ">
@@ -61,6 +64,9 @@
           <if test="status != null  and status != '' ">
               and b.status= #{status}
           </if>
+            <if test="lang != null  and lang != '' ">
+                and b.lang= #{lang}
+            </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -71,8 +77,8 @@
     </select>
 
     <insert id="insert" parameterType="SysBanner">
-        INSERT INTO sys_banner (title,id,img_path,link_url,type,status,create_user,create_date,update_user,update_date)
-        VALUES (#{title},#{id},#{imgPath},#{linkUrl},nullif(#{type},'0'),#{status},#{createUser},NOW(),#{createUser},NOW());
+        INSERT INTO sys_banner (title,id,img_path,link_url,type,status,lang,create_user,create_date,update_user,update_date)
+        VALUES (#{title},#{id},#{imgPath},#{linkUrl},nullif(#{type},'0'),nullif(#{status},'1'),#{lang},#{createUser},NOW(),#{createUser},NOW());
     </insert>
 
     <update id="update" parameterType="SysBanner">
@@ -95,6 +101,9 @@
             </if>
             <if test="status != null  and status != '' ">
                 status= #{status},
+            </if>
+            <if test="lang != null  and lang != '' ">
+                lang= #{lang},
             </if>
             <if test="updateUser != null and updateUser != ''">
                 update_user=#{updateUser},

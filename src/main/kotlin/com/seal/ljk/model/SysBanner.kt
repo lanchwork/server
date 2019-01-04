@@ -41,15 +41,17 @@ data class SysBanner(
         /**
          * 状态，1启用，0禁用
          */
-        var status: String = ""
+        var status: String = "",
+        /**
+         * 语言，ch 中文，en 英文
+         */
+        var lang: String = ""
 ) : Base(), IVerify {
 
     override fun verify() {
         this.apply {
             "标题 不能为空" using (this.title.isNotEmpty())
             "路径 不能为空" using (this.imgPath.isNotEmpty())
-            "业务类型，0:通证 不能为空" using (this.type.isNotEmpty())
-            "状态，1启用，0禁用 不能为空" using (this.status.isNotEmpty())
         }
     }
 }

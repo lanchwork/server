@@ -3,13 +3,13 @@
 <mapper namespace="com.seal.ljk.dao.GfManageMiseDao">
 
     <select id="get" resultType="GfManageMise">
-        select b.id,b.gf_code,b.address,b.remark,b.create_user,b.create_date,b.update_user,b.update_date
+        select b.id,b.gf_code,b.address,b.remark,b.functional_module,b.create_user,b.create_date,b.update_user,b.update_date
         from gf_manage_mise b
         where b.id =#{id}
     </select>
 
     <select id="getAll" resultType="GfManageMise">
-        select b.id,b.gf_code,b.address,b.remark,b.create_user,b.create_date,b.update_user,b.update_date
+        select b.id,b.gf_code,b.address,b.remark,b.functional_module,b.create_user,b.create_date,b.update_user,b.update_date
         from gf_manage_mise b
         <where>
             <if test="id != null  and id != '' ">
@@ -24,6 +24,9 @@
             <if test="remark != null  and remark != '' ">
                 and b.remark= #{remark}
             </if>
+            <if test="functionalModule != null  and functionalModule != '' ">
+                and b.functional_module= #{functionalModule}
+            </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -34,7 +37,7 @@
     </select>
 
     <select id="getAllByPage" resultType="GfManageMise">
-        select b.id,b.gf_code,b.address,b.remark,b.create_user,b.create_date,b.update_user,b.update_date
+        select b.id,b.gf_code,b.address,b.remark,b.functional_module,b.create_user,b.create_date,b.update_user,b.update_date
         from gf_manage_mise b
         <where>
           <if test="id != null  and id != '' ">
@@ -49,6 +52,9 @@
           <if test="remark != null  and remark != '' ">
               and b.remark= #{remark}
           </if>
+          <if test="functionalModule != null  and functionalModule != '' ">
+              and b.functional_module= #{functionalModule}
+          </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -59,8 +65,8 @@
     </select>
 
     <insert id="insert" parameterType="GfManageMise">
-        INSERT INTO gf_manage_mise (id,gf_code,address,remark,create_user,create_date,update_user,update_date)
-        VALUES (#{id},#{gfCode},#{address},#{remark},#{createUser},NOW(),#{createUser},NOW());
+        INSERT INTO gf_manage_mise (id,gf_code,address,remark,functional_module,create_user,create_date,update_user,update_date)
+        VALUES (#{id},#{gfCode},#{address},#{remark},#{functionalModule},#{createUser},NOW(),#{createUser},NOW());
     </insert>
 
     <update id="update" parameterType="GfManageMise">
@@ -77,6 +83,9 @@
             </if>
             <if test="remark != null  and remark != '' ">
                 remark= #{remark},
+            </if>
+            <if test="functionalModule != null  and functionalModule != '' ">
+                functional_module= #{functionalModule},
             </if>
             <if test="updateUser != null and updateUser != ''">
                 update_user=#{updateUser},
