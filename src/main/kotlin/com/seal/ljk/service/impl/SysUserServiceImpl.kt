@@ -127,15 +127,15 @@ class SysUserServiceImpl : ISysUserService {
 
         user.partner = partner
 
-        val menuList = sysMenuService.getAllSysMenuByUser(user)
+//        val menuList = sysMenuService.getAllSysMenuByUser(user)
 
         return mapOf(
                 "token" to token,
                 "username" to user.username,
                 "channelMark" to user.channelMark,
                 "phone" to user.phone,
-                "email" to user.email,
-                "menuList" to menuList
+                "email" to user.email
+//                "menuList" to menuList
         )
     }
 

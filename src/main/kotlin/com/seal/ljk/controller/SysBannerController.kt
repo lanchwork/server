@@ -3,6 +3,7 @@ package com.seal.ljk.controller
 import com.seal.ljk.service.ISysBannerService
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.getOrCreate
 import com.seal.ljk.common.success
 import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.model.SysBanner
@@ -36,6 +37,19 @@ class SysBannerController{
     @ApiOperation(value = "banner方列表")
     @VerifyToken
     fun listSysBanner(@RequestBody sysBanner: SysBanner): ResVal = success(sysBannerService.getAllSysBannerByPage(sysBanner).getPageInfo())
+
+    @PostMapping("/listByLang")
+    @ApiOperation(value = "banner方列表 根据语言分组")
+    @VerifyToken
+    fun listByLang(): ResVal {
+        val data = sysBannerService.getAllSysBanner(SysBanner())
+        val map = mutableMapOf<String, MutableList<SysBanner>>()
+        data.forEach {
+            val list = map.getOrCreate(it.lang)
+            list.add(it)
+        }
+        return success(map)
+    }
 
 
     @PostMapping("/save")
