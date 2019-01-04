@@ -12,11 +12,11 @@ import com.seal.ljk.common.getSessionUser
 
 /**
  * <p>
- * GF管理员 服务实现类
+ *  服务实现类
  * </p>
  *
  * @author kangxj
- * @since 2019-01-03
+ * @since 2019-01-04
  */
 @Service
 class GfManageMiseServiceImpl : IGfManageMiseService {

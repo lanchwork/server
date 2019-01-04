@@ -5,11 +5,11 @@ import com.github.pagehelper.Page
 
 /**
  * <p>
- * GF管理员 服务类
+ *  服务类
  * </p>
  *
  * @author kangxj
- * @since 2019-01-03
+ * @since 2019-01-04
  */
 interface IGfManageMiseService{
     fun getGfManageMise(id: String): GfManageMise?

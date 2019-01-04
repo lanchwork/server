@@ -12,13 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 /**
  * <p>
- * GF管理员 前端控制器
+ *  前端控制器
  * </p>
  *
  * @author kangxj
- * @since 2019-01-03
+ * @since 2019-01-04
  */
-@Api(description = "GF管理员 功能相关接口")
+@Api(description = " 功能相关接口")
 @RestController
 @RequestMapping("/ljk/gf-manage-mise")
 class GfManageMiseController{
@@ -28,18 +28,18 @@ class GfManageMiseController{
 
 
     @PostMapping("/get")
-    @ApiOperation(value = "获取GF管理员")
+    @ApiOperation(value = "获取")
     @VerifyToken
     fun getGfManageMise(@RequestParam id: String): ResVal = success(gfManageMiseService.getGfManageMise(id))
 
     @PostMapping("/list")
-    @ApiOperation(value = "GF管理员方列表")
+    @ApiOperation(value = "方列表")
     @VerifyToken
     fun listGfManageMise(@RequestBody gfManageMise: GfManageMise): ResVal = success(gfManageMiseService.getAllGfManageMiseByPage(gfManageMise).getPageInfo())
 
 
     @PostMapping("/save")
-    @ApiOperation(value = "新增或修改GF管理员")
+    @ApiOperation(value = "新增或修改")
     @VerifyToken
     fun saveGfManageMise(@RequestBody gfManageMise: GfManageMise): ResVal {
         if (gfManageMise.id.isEmpty()) {
@@ -52,7 +52,7 @@ class GfManageMiseController{
     }
 
     @PostMapping("/delete")
-    @ApiOperation(value = "删除GF管理员")
+    @ApiOperation(value = "删除")
     @VerifyToken
     fun deleteGfManageMise(@RequestParam id: String): ResVal {
         gfManageMiseService.deleteGfManageMise(id)
