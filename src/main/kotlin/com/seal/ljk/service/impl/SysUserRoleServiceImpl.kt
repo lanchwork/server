@@ -31,22 +31,10 @@ class SysUserRoleServiceImpl : ISysUserRoleService {
     }
 
     override fun getAllSysUserRole(sysUserRole: SysUserRole): List<SysUserRole> {
-//        val user = getSessionUser() ?: throw AuthException()
-//        if (user.isSeal()) {
-//           sysUserRole.channelMark = ""
-//        } else {
-//           sysUserRole.channelMark = user.channelMark
-//        }
         return sysUserRoleDao.getAll(sysUserRole)
     }
 
     override fun getAllSysUserRoleByPage(sysUserRole: SysUserRole): Page<SysUserRole> {
-//        val user = getSessionUser() ?: throw AuthException()
-//        if (user.isSeal()) {
-//           sysUserRole.channelMark = ""
-//        } else {
-//           sysUserRole.channelMark = user.channelMark
-//        }
         return sysUserRoleDao.getAllByPage(sysUserRole)
     }
 

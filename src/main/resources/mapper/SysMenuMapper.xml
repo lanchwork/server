@@ -9,7 +9,7 @@
     </select>
 
     <select id="getAll" resultType="SysMenu">
-        select b.id,b.parent_id,b.menu_name,b.url,b.sort,b.flag,b.icon,b.type,b.partner_types,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.parent_id,b.menu_name,b.url,b.sort,b.flag,b.icon,b.type,b.partner_types
         from sys_menu b
         <where>
           <if test="id != null  and id != '' ">
