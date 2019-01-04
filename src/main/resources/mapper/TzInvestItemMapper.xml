@@ -3,13 +3,13 @@
 <mapper namespace="com.seal.ljk.dao.TzInvestItemDao">
 
     <select id="get" resultType="TzInvestItem">
-        select b.id,b.token_name,b.token_short_name,b.img_path,b.expected_venue,b.issue_amount,b.allowance,b.issue_price,b.issue_time,b.total_house_number,b.rent_out_number,b.sell_number,b.using_flag,b.account,b.issue_company,b.token_identity,b.tx_rule,b.asset_details,b.company_info,b.issue_company_en,b.token_identity_en,b.tx_rule_en,b.asset_details_en,b.company_info_en,b.asset_short,b.asset_short_en,b.token_no,b.income_statement,b.income_statement_en,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.token_name,b.token_short_name,b.img_path,b.expected_venue,b.issue_time,b.total_house_number,b.rent_out_number,b.sell_number,b.using_flag,b.account,b.issue_company,b.token_identity,b.tx_rule,b.asset_details,b.company_info,b.issue_company_en,b.token_identity_en,b.tx_rule_en,b.asset_details_en,b.company_info_en,b.asset_short,b.asset_short_en,b.token_no,b.income_statement,b.income_statement_en,b.create_date,b.create_user,b.update_date,b.update_user
         from tz_invest_item b
         where b.id =#{id}
     </select>
 
     <select id="getAll" resultType="TzInvestItem">
-        select b.id,b.token_name,b.token_short_name,b.img_path,b.expected_venue,b.issue_amount,b.allowance,b.issue_price,b.issue_time,b.total_house_number,b.rent_out_number,b.sell_number,b.using_flag,b.account,b.issue_company,b.token_identity,b.tx_rule,b.asset_details,b.company_info,b.issue_company_en,b.token_identity_en,b.tx_rule_en,b.asset_details_en,b.company_info_en,b.asset_short,b.asset_short_en,b.token_no,b.income_statement,b.income_statement_en,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.token_name,b.token_short_name,b.img_path,b.expected_venue,b.issue_time,b.total_house_number,b.rent_out_number,b.sell_number,b.using_flag,b.account,b.issue_company,b.token_identity,b.tx_rule,b.asset_details,b.company_info,b.issue_company_en,b.token_identity_en,b.tx_rule_en,b.asset_details_en,b.company_info_en,b.asset_short,b.asset_short_en,b.token_no,b.income_statement,b.income_statement_en,b.create_date,b.create_user,b.update_date,b.update_user
         from tz_invest_item b
         <where>
             <if test="id != null  and id != '' ">
@@ -26,15 +26,6 @@
             </if>
             <if test="expectedVenue != null  and expectedVenue != '' ">
                 and b.expected_venue= #{expectedVenue}
-            </if>
-            <if test="issueAmount != null  and issueAmount != '' ">
-                and b.issue_amount= #{issueAmount}
-            </if>
-            <if test="allowance != null  and allowance != '' ">
-                and b.allowance= #{allowance}
-            </if>
-            <if test="issuePrice != null  and issuePrice != '' ">
-                and b.issue_price= #{issuePrice}
             </if>
             <if test="issueTime != null  and issueTime != '' ">
                 and b.issue_time= #{issueTime}
@@ -140,7 +131,7 @@
     </select>
 
     <select id="getAllByPage" resultType="TzInvestItem">
-        select b.id,b.token_name,b.token_short_name,b.img_path,b.expected_venue,b.issue_amount,b.allowance,b.issue_price,b.issue_time,b.total_house_number,b.rent_out_number,b.sell_number,b.using_flag,b.account,b.issue_company,b.token_identity,b.tx_rule,b.asset_details,b.company_info,b.issue_company_en,b.token_identity_en,b.tx_rule_en,b.asset_details_en,b.company_info_en,b.asset_short,b.asset_short_en,b.token_no,b.income_statement,b.income_statement_en,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.token_name,b.token_short_name,b.img_path,b.expected_venue,b.issue_time,b.total_house_number,b.rent_out_number,b.sell_number,b.using_flag,b.account,b.issue_company,b.token_identity,b.tx_rule,b.asset_details,b.company_info,b.issue_company_en,b.token_identity_en,b.tx_rule_en,b.asset_details_en,b.company_info_en,b.asset_short,b.asset_short_en,b.token_no,b.income_statement,b.income_statement_en,b.create_date,b.create_user,b.update_date,b.update_user
         from tz_invest_item b
         <where>
           <if test="id != null  and id != '' ">
@@ -157,15 +148,6 @@
           </if>
           <if test="expectedVenue != null  and expectedVenue != '' ">
               and b.expected_venue= #{expectedVenue}
-          </if>
-          <if test="issueAmount != null  and issueAmount != '' ">
-              and b.issue_amount= #{issueAmount}
-          </if>
-          <if test="allowance != null  and allowance != '' ">
-              and b.allowance= #{allowance}
-          </if>
-          <if test="issuePrice != null  and issuePrice != '' ">
-              and b.issue_price= #{issuePrice}
           </if>
           <if test="issueTime != null  and issueTime != '' ">
               and b.issue_time= #{issueTime}
