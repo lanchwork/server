@@ -146,7 +146,17 @@ data class TzInvestItem(
     /**
      * token编号
      */
-    var tokenNo: String = ""
+    var tokenNo: String = "",
+
+    /**
+     * 一句话收益说明
+     */
+    var incomeStatement: String = "",
+
+    /**
+     * 一句话收益说明en
+     */
+    var incomeStatementEn: String = ""
 ) : Base(), IVerify {
             var issueTimeBegin: Date? = null
             var issueTimeEnd: Date? = null

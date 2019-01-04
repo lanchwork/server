@@ -3,13 +3,13 @@
 <mapper namespace="com.seal.ljk.dao.TzInvestItemDao">
 
     <select id="get" resultType="TzInvestItem">
-        select b.id,b.token_name,b.token_short_name,b.img_path,b.expected_venue,b.issue_amount,b.allowance,b.issue_price,b.issue_time,b.total_house_number,b.rent_out_number,b.sell_number,b.using_flag,b.account,b.issue_company,b.token_identity,b.tx_rule,b.asset_details,b.company_info,b.issue_company_en,b.token_identity_en,b.tx_rule_en,b.asset_details_en,b.company_info_en,b.asset_short,b.asset_short_en,b.token_no,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.token_name,b.token_short_name,b.img_path,b.expected_venue,b.issue_amount,b.allowance,b.issue_price,b.issue_time,b.total_house_number,b.rent_out_number,b.sell_number,b.using_flag,b.account,b.issue_company,b.token_identity,b.tx_rule,b.asset_details,b.company_info,b.issue_company_en,b.token_identity_en,b.tx_rule_en,b.asset_details_en,b.company_info_en,b.asset_short,b.asset_short_en,b.token_no,b.income_statement,b.income_statement_en,b.create_date,b.create_user,b.update_date,b.update_user
         from tz_invest_item b
         where b.id =#{id}
     </select>
 
     <select id="getAll" resultType="TzInvestItem">
-        select b.id,b.token_name,b.token_short_name,b.img_path,b.expected_venue,b.issue_amount,b.allowance,b.issue_price,b.issue_time,b.total_house_number,b.rent_out_number,b.sell_number,b.using_flag,b.account,b.issue_company,b.token_identity,b.tx_rule,b.asset_details,b.company_info,b.issue_company_en,b.token_identity_en,b.tx_rule_en,b.asset_details_en,b.company_info_en,b.asset_short,b.asset_short_en,b.token_no,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.token_name,b.token_short_name,b.img_path,b.expected_venue,b.issue_amount,b.allowance,b.issue_price,b.issue_time,b.total_house_number,b.rent_out_number,b.sell_number,b.using_flag,b.account,b.issue_company,b.token_identity,b.tx_rule,b.asset_details,b.company_info,b.issue_company_en,b.token_identity_en,b.tx_rule_en,b.asset_details_en,b.company_info_en,b.asset_short,b.asset_short_en,b.token_no,b.income_statement,b.income_statement_en,b.create_date,b.create_user,b.update_date,b.update_user
         from tz_invest_item b
         <where>
             <if test="id != null  and id != '' ">
@@ -99,6 +99,12 @@
             <if test="tokenNo != null  and tokenNo != '' ">
                 and b.token_no= #{tokenNo}
             </if>
+            <if test="incomeStatement != null  and incomeStatement != '' ">
+                and b.income_statement= #{incomeStatement}
+            </if>
+            <if test="incomeStatementEn != null  and incomeStatementEn != '' ">
+                and b.income_statement_en= #{incomeStatementEn}
+            </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -134,7 +140,7 @@
     </select>
 
     <select id="getAllByPage" resultType="TzInvestItem">
-        select b.id,b.token_name,b.token_short_name,b.img_path,b.expected_venue,b.issue_amount,b.allowance,b.issue_price,b.issue_time,b.total_house_number,b.rent_out_number,b.sell_number,b.using_flag,b.account,b.issue_company,b.token_identity,b.tx_rule,b.asset_details,b.company_info,b.issue_company_en,b.token_identity_en,b.tx_rule_en,b.asset_details_en,b.company_info_en,b.asset_short,b.asset_short_en,b.token_no,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.token_name,b.token_short_name,b.img_path,b.expected_venue,b.issue_amount,b.allowance,b.issue_price,b.issue_time,b.total_house_number,b.rent_out_number,b.sell_number,b.using_flag,b.account,b.issue_company,b.token_identity,b.tx_rule,b.asset_details,b.company_info,b.issue_company_en,b.token_identity_en,b.tx_rule_en,b.asset_details_en,b.company_info_en,b.asset_short,b.asset_short_en,b.token_no,b.income_statement,b.income_statement_en,b.create_date,b.create_user,b.update_date,b.update_user
         from tz_invest_item b
         <where>
           <if test="id != null  and id != '' ">
@@ -224,6 +230,12 @@
           <if test="tokenNo != null  and tokenNo != '' ">
               and b.token_no= #{tokenNo}
           </if>
+            <if test="incomeStatement != null  and incomeStatement != '' ">
+                and b.income_statement= #{incomeStatement}
+            </if>
+            <if test="incomeStatementEn != null  and incomeStatementEn != '' ">
+                and b.income_statement_en= #{incomeStatementEn}
+            </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -234,8 +246,8 @@
     </select>
 
     <insert id="insert" parameterType="TzInvestItem">
-        INSERT INTO tz_invest_item (id,token_name,token_short_name,img_path,expected_venue,issue_amount,allowance,issue_price,issue_time,total_house_number,rent_out_number,sell_number,using_flag,account,issue_company,token_identity,tx_rule,asset_details,company_info,issue_company_en,token_identity_en,tx_rule_en,asset_details_en,company_info_en,asset_short,asset_short_en,token_no,create_date,create_user,update_date,update_user)
-        VALUES (#{id},#{tokenName},#{tokenShortName},#{imgPath},#{expectedVenue},#{issueAmount},#{allowance},#{issuePrice},#{issueTime},#{totalHouseNumber},#{rentOutNumber},#{sellNumber},#{usingFlag},#{account},#{issueCompany},#{tokenIdentity},#{txRule},#{assetDetails},#{companyInfo},#{issueCompanyEn},#{tokenIdentityEn},#{txRuleEn},#{assetDetailsEn},#{companyInfoEn},#{assetShort},#{assetShortEn},#{tokenNo},NOW(),#{createUser},NOW(),#{createUser});
+        INSERT INTO tz_invest_item (id,token_name,token_short_name,img_path,expected_venue,issue_amount,allowance,issue_price,issue_time,total_house_number,rent_out_number,sell_number,using_flag,account,issue_company,token_identity,tx_rule,asset_details,company_info,issue_company_en,token_identity_en,tx_rule_en,asset_details_en,company_info_en,asset_short,asset_short_en,token_no,income_statement,income_statement_en,create_date,create_user,update_date,update_user)
+        VALUES (#{id},#{tokenName},#{tokenShortName},#{imgPath},#{expectedVenue},#{issueAmount},#{allowance},#{issuePrice},#{issueTime},#{totalHouseNumber},#{rentOutNumber},#{sellNumber},#{usingFlag},#{account},#{issueCompany},#{tokenIdentity},#{txRule},#{assetDetails},#{companyInfo},#{issueCompanyEn},#{tokenIdentityEn},#{txRuleEn},#{assetDetailsEn},#{companyInfoEn},#{assetShort},#{assetShortEn},#{tokenNo},#{incomeStatement},#{incomeStatementEn},NOW(),#{createUser},NOW(),#{createUser});
     </insert>
 
     <update id="update" parameterType="TzInvestItem">
@@ -321,6 +333,12 @@
             </if>
             <if test="tokenNo != null  and tokenNo != '' ">
                 token_no= #{tokenNo},
+            </if>
+            <if test="incomeStatement != null  and incomeStatement != '' ">
+                income_statement= #{incomeStatement},
+            </if>
+            <if test="incomeStatementEn != null  and incomeStatementEn != '' ">
+                income_statement_en= #{incomeStatementEn},
             </if>
             <if test="updateUser != null and updateUser != ''">
                 update_user=#{updateUser},
