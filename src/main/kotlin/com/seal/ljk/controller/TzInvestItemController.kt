@@ -32,7 +32,13 @@ class TzInvestItemController{
     @PostMapping("/get")
     @ApiOperation(value = "项目管理获取")
     @VerifyToken
-    fun getTzInvestItem(@RequestParam id: String): ResVal = success(tzInvestItemService.getTzInvestItem(id))
+    fun getTzInvestItem(@RequestBody tzInvestItem: TzInvestItem): ResVal{
+        val data=tzInvestItemService.getTzInvestItem(tzInvestItem.id)
+        data?.issueAmount =tzInvestItem.issueAmount
+        data?.allowance=tzInvestItem.allowance
+        data?.issuePrice=tzInvestItem.issuePrice
+        return success(data)
+    }
 
     @PostMapping("/list")
     @ApiOperation(value = "项目管理列表")
