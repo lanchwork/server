@@ -156,7 +156,12 @@ data class TzInvestItem(
     /**
      * 一句话收益说明en
      */
-    var incomeStatementEn: String = ""
+    var incomeStatementEn: String = "",
+
+    /**
+     * 汇率
+     */
+    var exchangeRate:BigDecimal? = null
 ) : Base(), IVerify {
             var issueTimeBegin: Date? = null
             var issueTimeEnd: Date? = null
