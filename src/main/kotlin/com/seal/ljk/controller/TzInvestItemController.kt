@@ -3,9 +3,11 @@ package com.seal.ljk.controller
 import com.seal.ljk.service.ITzInvestItemService
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.WalletUtil
 import com.seal.ljk.common.success
 import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.model.TzInvestItem
+import com.seal.ljk.model.TzTokenMeta
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
@@ -35,8 +37,24 @@ class TzInvestItemController{
     @PostMapping("/list")
     @ApiOperation(value = "项目管理列表")
     @VerifyToken
-    fun listTzInvestItem(@RequestBody tzInvestItem: TzInvestItem): ResVal = success(tzInvestItemService.getAllTzInvestItemByPage(tzInvestItem).getPageInfo())
-
+    fun listTzInvestItem(@RequestBody tzInvestItem: TzInvestItem): ResVal {
+        val data = tzInvestItemService.getAllTzInvestItemByPage(tzInvestItem)
+        val metaMap = mutableMapOf<String, TzTokenMeta>()
+        WalletUtil.getTokenMetaByNos(data.map { it.tokenNo }.toTypedArray())?.forEach {
+            metaMap[it.id] = it
+        }
+        if (metaMap.isNotEmpty()) {
+            data.forEach {
+                val meta = metaMap[it.tokenNo]
+                meta?.apply {
+                    it.issueAmount = this.total_shares?.toBigDecimal()
+                    it.allowance = this.available_shares?.toBigDecimal()
+                    it.issuePrice = this.curr_price
+                }
+            }
+        }
+        return success(data.getPageInfo())
+    }
 
     @PostMapping("/save")
     @ApiOperation(value = "项目管理新增或修改")
