@@ -3,6 +3,7 @@ package com.seal.ljk.controller
 import com.seal.ljk.service.ITzNoticeInfoService
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.SysDictUtil
 import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.common.success
 import com.seal.ljk.model.TzNoticeInfo
@@ -57,5 +58,10 @@ class TzNoticeInfoController{
         tzNoticeInfoService.deleteTzNoticeInfo(id)
         return success()
     }
+
+    @PostMapping("/dict")
+    @ApiOperation(value = "公告字典")
+    @VerifyToken
+    fun dicTzNoticeInfo(): ResVal = success(mapOf("notice" to SysDictUtil.sysDict["notice"]))
 
 }
