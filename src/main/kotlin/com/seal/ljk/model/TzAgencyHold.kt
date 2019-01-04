@@ -53,7 +53,7 @@ data class TzAgencyHold(
     var type: String = "",
 
         /**
-     * 当前持有量 
+     * 当前持有量
      */
     var currentHoldings: BigDecimal? = null,
 
@@ -76,11 +76,11 @@ data class TzAgencyHold(
     override fun verify() {
         this.apply {
             "用户手机号不能为空" using (this.mobile.isNotEmpty())
-            "token数量不能为空" using (BigDecimal.ZERO.compareTo(this.tokenNumber)==-1)
-            "单价不能为空" using (BigDecimal.ZERO.compareTo(this.price)==-1)
+            "token数量不能为空" using (this.tokenNumber != null && BigDecimal.ZERO.compareTo(this.tokenNumber) == -1)
+            "单价不能为空" using (this.price != null && BigDecimal.ZERO.compareTo(this.price) == -1)
             "区号不能为空" using (this.areaCode.isNotEmpty())
             "类型不能为空" using (this.type.isNotEmpty())
-            "当前持有量不能为空" using (BigDecimal.ZERO.compareTo(this.currentHoldings)==-1)
+            "当前持有量不能为空" using (this.currentHoldings != null && BigDecimal.ZERO.compareTo(this.currentHoldings) == -1)
             "token名称不能为空" using (this.tokenName.isNotEmpty())
             "账户(Seal代持)不能为空" using (this.sealAccount.isNotEmpty())
         }
