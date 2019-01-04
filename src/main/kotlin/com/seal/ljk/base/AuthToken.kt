@@ -41,15 +41,17 @@ class AuthenticationInterceptor : HandlerInterceptor {
             return true
         }
         setRequest(request)
-        val env = environment.activeProfiles[0]
-        if (env == "dev" || env == "test") {
-            setSessionUser(SysUser(id = "2776cd3a081011e9bd39fa163e168207", username = "admin", userType = "0", openFlag = "1", channelMark = "seal"))
-            return true
-        }
 
         // 从 http 请求头中取出 token
-        val token = request.getHeader("token")
+        val token: String? = request.getHeader("token")
 
+        if (token == null || token.isEmpty()) {
+            val env = environment.activeProfiles[0]
+            if (env == "dev" || env == "test") {
+                setSessionUser(SysUser(id = "2776cd3a081011e9bd39fa163e168207", username = "admin", userType = "0", openFlag = "1", channelMark = "seal"))
+                return true
+            }
+        }
         val method = handler.method
 
         //检查是否有IgnoreToken注释，有则跳过认证
