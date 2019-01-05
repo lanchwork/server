@@ -9,7 +9,7 @@ import java.util.*
 /**
  * Created by chenjh on 2018/12/24.
  */
-fun String.using(expr: Boolean) {
+infix fun String.using(expr: Boolean) {
     if (!expr) throw ParamException(message = this)
 }
 
