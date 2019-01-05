@@ -2,7 +2,9 @@ package com.seal.ljk.base
 
 import com.seal.ljk.common.SysDictUtil
 import com.seal.ljk.model.SysDictType
+import com.seal.ljk.model.SysPartner
 import com.seal.ljk.service.ISysDictTypeService
+import com.seal.ljk.service.ISysPartnerService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.context.event.ApplicationStartedEvent
 import org.springframework.context.ApplicationListener
@@ -22,11 +24,15 @@ import javax.annotation.Resource
 @Component
 class ApplicationStartedEventListener : ApplicationListener<ApplicationStartedEvent> {
 
+    var log = loggerFor(this.javaClass)
+
     @Autowired
-    private lateinit var sysDictTypeService: ISysDictTypeService
+    lateinit var sysDictTypeService: ISysDictTypeService
+    @Autowired
+    lateinit var sysPartnerService: ISysPartnerService
 
     override fun onApplicationEvent(event: ApplicationStartedEvent) {
-        println("application started .....")
+        log.debug("application started .....")
         //取出所有字典类型及其数据项
         val sysDictTypes = sysDictTypeService.getAllSysDict()
         val sysDictTypesSeq = sysDictTypes.asSequence()
@@ -35,7 +41,7 @@ class ApplicationStartedEventListener : ApplicationListener<ApplicationStartedEv
         sysDictTypesSeq.forEach {
             it["code"]?.let { it1 -> dictCodeSet.add(it1) }
         }
-        dictCodeSet.asSequence().forEach {
+        dictCodeSet.forEach {
             //先过滤出code相同的所有数据项
             val items = sysDictTypesSeq.filter { item -> item["code"].equals(it) }.map { item ->
                 //重新组织数据项内容
@@ -46,5 +52,17 @@ class ApplicationStartedEventListener : ApplicationListener<ApplicationStartedEv
             }.toList()
             SysDictUtil.sysDict[it] = items
         }
+
+        val partners = sysPartnerService.getAllSysPartner(SysPartner())
+        SysDictUtil.sysDict["partner"] = partners.map {
+            mapOf(
+                    "value" to it.channelMark,
+                    "showVal" to it.partnerName
+            )
+        }
+
+
+
+
     }
 }

@@ -4,10 +4,8 @@ package com.seal.ljk.controller
 import com.seal.ljk.base.AuthException
 import com.seal.ljk.base.IgnoreToken
 import com.seal.ljk.base.VerifyToken
-import com.seal.ljk.common.ResVal
-import com.seal.ljk.common.getPageInfo
-import com.seal.ljk.common.getSessionUser
-import com.seal.ljk.common.success
+import com.seal.ljk.common.*
+import com.seal.ljk.model.SysMenu
 import com.seal.ljk.model.SysPartner
 import com.seal.ljk.model.SysUser
 import com.seal.ljk.service.ISysMenuService
@@ -30,14 +28,14 @@ import org.springframework.web.bind.annotation.*
 @Api(description = "用户表 功能相关接口")
 @RestController
 @RequestMapping("/sys/user")
-class SysUserController{
+class SysUserController {
 
     @Autowired
     lateinit var sysUserService: ISysUserService
     @Autowired
     lateinit var sysPartnerService: ISysPartnerService
     @Autowired
-    lateinit var sysMenuService:ISysMenuService
+    lateinit var sysMenuService: ISysMenuService
 
 
     @PostMapping("/get")
@@ -96,7 +94,18 @@ class SysUserController{
     fun menuList(): ResVal {
         val user = getSessionUser() ?: throw AuthException()
         val menuList = sysMenuService.getAllSysMenuByUser(user)
-        return success(menuList)
+
+        return success(sysMenuToMapList(menuList))
+    }
+
+    fun sysMenuToMapList(menuList: List<SysMenu>): List<MutableMap<String, Any>> {
+        return menuList.map {
+            val map = it.toMap(arrayOf("id", "parentId", "menuName", "url"))
+            it.children?.apply {
+                map["children"] = sysMenuToMapList(this.toList())
+            }
+            map
+        }
     }
 
     @PostMapping("/dict")
@@ -107,15 +116,8 @@ class SysUserController{
         val user = getSessionUser()!!
         val channelMark = mutableListOf<Map<String, String>>()
         if (user.isSeal()) {
-            val allSysPartner = sysPartnerService.getAllSysPartner(SysPartner())
-            allSysPartner.forEach {
-                channelMark.add(
-                        mapOf(
-                                "value" to it.channelMark,
-                                "showVal" to it.partnerName
-                        )
-                )
-            }
+
+
         }
 
 
@@ -123,7 +125,6 @@ class SysUserController{
                 "channelMark" to channelMark
         ))
     }
-
 
 
 }

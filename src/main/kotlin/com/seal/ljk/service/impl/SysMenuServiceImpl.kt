@@ -63,7 +63,6 @@ class SysMenuServiceImpl : ISysMenuService {
 
 
     override fun getAllSysMenuByUser(user: SysUser): List<SysMenu> {
-        //fixme 权限部分未完成，先不做用户权限过滤
         val menu = SysMenu()
         if (!user.isSeal()) {
             menu.partnerTypes = user.partner!!.partnerType
@@ -96,15 +95,15 @@ class SysMenuServiceImpl : ISysMenuService {
         }
 
         result.forEach {
-            findAllChildMneu(it, menuMap)
+            findAllChildMenu(it, menuMap)
         }
         return result
     }
 
-    fun findAllChildMneu(pMenu: SysMenu, menuMap: Map<String, List<SysMenu>>) {
+    fun findAllChildMenu(pMenu: SysMenu, menuMap: Map<String, List<SysMenu>>) {
         val list = menuMap[pMenu.id]
         list?.forEach {
-            findAllChildMneu(it, menuMap)
+            findAllChildMenu(it, menuMap)
         }
         pMenu.children = list?.toTypedArray()
     }

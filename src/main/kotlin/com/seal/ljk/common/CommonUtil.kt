@@ -1,11 +1,15 @@
 package com.seal.ljk.common
 
+import com.github.pagehelper.Page
 import com.seal.ljk.base.ParamException
+import com.seal.ljk.model.Base
+import java.lang.reflect.Field
+import java.util.*
 
 /**
  * Created by chenjh on 2018/12/24.
  */
-inline infix fun String.using(expr: Boolean) {
+fun String.using(expr: Boolean) {
     if (!expr) throw ParamException(message = this)
 }
 
@@ -23,11 +27,55 @@ fun error(msg: String?, code: Int = 1): ResVal {
     return ResValMsg(code = code, data = null, msg = msg)
 }
 
-inline fun <K, V> MutableMap<K, MutableList<V>>.getOrCreate(key: K): MutableList<V> {
+fun <K, V> MutableMap<K, MutableList<V>>.getOrCreate(key: K): MutableList<V> {
     var list = this[key]
     if (list == null) {
         list = mutableListOf()
         this[key] = list
     }
     return list
+}
+
+fun <T : Base> Page<T>.toMapListPage(fields: Array<String>): PageInfo<MutableMap<String, Any>> {
+    return PageInfo(this.toMapList(fields), total.toInt(), pageSize, pages, pageNum)
+}
+
+fun <T : Base> List<T>.toMapList(fields: Array<String>): MutableList<MutableMap<String, Any>> {
+    val result = mutableListOf<MutableMap<String, Any>>()
+    this.forEach {
+        result.add(it.toMap(fields))
+    }
+    return result
+}
+
+fun Base.toMap(fields: Array<String>): MutableMap<String, Any> {
+    val map = mutableMapOf<String, Any>()
+    if (fields.isEmpty()) {
+        return map
+    }
+    val fieldList = mutableListOf<Field>()
+    var tempClass: Class<*>? = this.javaClass
+    while (tempClass != null) {
+        fieldList.addAll(Arrays.asList(*tempClass.declaredFields))
+        tempClass = tempClass.superclass
+        if (tempClass == Base::class.java) {
+            fieldList.addAll(Arrays.asList(*tempClass.declaredFields))
+            break
+        }
+    }
+
+
+    for (field in fieldList) {
+        field.isAccessible = true
+        val modelField = field.name
+        if (fields.contains(modelField)) {
+            try {
+                val value = field.get(this)
+                map[modelField] = value
+            } catch (e: IllegalAccessException) {
+                e.printStackTrace()
+            }
+        }
+    }
+    return map
 }

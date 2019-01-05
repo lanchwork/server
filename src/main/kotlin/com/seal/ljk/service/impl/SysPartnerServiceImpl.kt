@@ -4,6 +4,7 @@ import com.github.pagehelper.Page
 import com.seal.ljk.base.AuthException
 import com.seal.ljk.base.SealException
 import com.seal.ljk.base.loggerFor
+import com.seal.ljk.common.SysDictUtil
 import com.seal.ljk.common.getSessionUser
 import com.seal.ljk.dao.SysPartnerMapper
 import com.seal.ljk.model.SysPartner
@@ -40,12 +41,6 @@ class SysPartnerServiceImpl : ISysPartnerService {
     }
 
     override fun getAllSysPartner(sysPartner: SysPartner): List<SysPartner> {
-        val user = getSessionUser() ?: throw AuthException()
-        if (user.isSeal()) {
-            sysPartner.channelMark = ""
-        } else {
-            sysPartner.channelMark = user.channelMark
-        }
         return sysPartnerMapper.getAll(sysPartner)
     }
 
@@ -68,6 +63,9 @@ class SysPartnerServiceImpl : ISysPartnerService {
         // 添加合作方同时添加管理员账户
         sysUserService.insertSysUser(SysUser(username = "admin", initPass = "${sysPartner.channelMark}@2018", channelMark = sysPartner.channelMark, name = "管理员", openFlag = "1", userType = "1"))
 
+//        更新缓存
+        SysDictUtil.addSysPartner(sysPartner)
+
     }
 
     override fun updateSysPartner(sysPartner: SysPartner) {
@@ -76,6 +74,8 @@ class SysPartnerServiceImpl : ISysPartnerService {
             throw SealException(message = "权限不足")
         }
         sysPartnerMapper.update(sysPartner)
+//        更新缓存
+        SysDictUtil.updateSysPartner(sysPartner)
     }
 
     override fun deleteSysPartner(id: String) {

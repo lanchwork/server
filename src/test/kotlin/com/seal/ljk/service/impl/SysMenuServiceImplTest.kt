@@ -33,24 +33,24 @@ class SysMenuServiceImplTest {
 
     @Test
     fun insertSysMenu() {
-        val menu0 = SysMenu(parentId = "0", menuName = "首页", sort = 0,type = 0)
-        insertSysChildMenu(menu0)
-        val menu1 = SysMenu(parentId = "0", menuName = "链上数据", sort = 1,type = 0)
-        insertSysChildMenu(menu1)
-        val menu2 = SysMenu(parentId = "0", menuName = "投资理财", sort = 2,type = 0)
-        insertSysChildMenu(menu2)
-        val menu3 = SysMenu(parentId = "0", menuName = "系统管理", sort = 3,type = 0)
-        insertSysChildMenu(menu3)
+//        val menu0 = SysMenu(parentId = "0", menuName = "首页", sort = 0,type = 0)
+//        insertSysChildMenu(menu0)
+//        val menu1 = SysMenu(parentId = "0", menuName = "链上数据", sort = 1,type = 0)
+//        insertSysChildMenu(menu1)
+//        val menu2 = SysMenu(parentId = "0", menuName = "投资理财", sort = 2,type = 0)
+//        insertSysChildMenu(menu2)
+//        val menu3 = SysMenu(parentId = "0", menuName = "系统管理", sort = 3,type = 0)
+//        insertSysChildMenu(menu3)
     }
 
     fun insertSysChildMenu(menu: SysMenu, num: Int = 2) {
-        sysMenuService.insertSysMenu(menu)
-        if (num == 0) {
-            return
-        }
-        for (i in 0..5) {
-            val child = SysMenu(parentId = menu.id, menuName = menu.menuName + "-$i", sort = i,type = num)
-            insertSysChildMenu(child, num - 1)
-        }
+//        sysMenuService.insertSysMenu(menu)
+//        if (num == 0) {
+//            return
+//        }
+//        for (i in 0..5) {
+//            val child = SysMenu(parentId = menu.id, menuName = menu.menuName + "-$i", sort = i,type = num)
+//            insertSysChildMenu(child, num - 1)
+//        }
     }
 }
