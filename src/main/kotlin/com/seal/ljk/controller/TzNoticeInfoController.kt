@@ -62,6 +62,6 @@ class TzNoticeInfoController{
     @PostMapping("/dict")
     @ApiOperation(value = "公告字典")
     @VerifyToken
-    fun dicTzNoticeInfo(): ResVal = success(mapOf("notice" to SysDictUtil.sysDict["notice"]))
+    fun dicTzNoticeInfo(): ResVal = success(SysDictUtil.mapOf("notice"))
 
 }

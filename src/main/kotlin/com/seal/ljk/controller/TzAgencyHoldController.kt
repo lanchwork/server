@@ -68,5 +68,5 @@ class TzAgencyHoldController{
     @PostMapping("/dict")
     @ApiOperation(value = "代持字典")
     @VerifyToken
-    fun dicTzNoticeInfo(): ResVal = success(mapOf("agencyHoldType" to SysDictUtil.sysDict["agencyHoldType"]))
+    fun dicTzNoticeInfo(): ResVal = success(SysDictUtil.mapOf("agencyHoldType"))
 }

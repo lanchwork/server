@@ -112,21 +112,16 @@ class SysUserController {
     }
 
     @PostMapping("/dict")
-    @ApiOperation(value = "用户字典")
+    @ApiOperation(value = "用户 数据字典")
     @VerifyToken
     fun dicSysUser(@RequestParam id: String): ResVal {
         //todo 返回渠道标识，角色类型，状态字典
         val user = getSessionUser()!!
-        val channelMark = mutableListOf<Map<String, String>>()
-        if (user.isSeal()) {
-
-
+        return if (user.isSeal()) {
+            success(SysDictUtil.mapOf("partner", "userType", "openFlag"))
+        } else {
+            success(SysDictUtil.mapOf("userType", "openFlag"))
         }
-
-
-        return success(mapOf(
-                "channelMark" to channelMark
-        ))
     }
 
 

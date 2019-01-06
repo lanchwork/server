@@ -55,7 +55,7 @@ class TzInvestInfoController{
     @PostMapping("/dict")
     @ApiOperation(value = "投资信息字典")
     @VerifyToken
-    fun dicTzNoticeInfo(): ResVal = success(mapOf("investInfoType" to SysDictUtil.sysDict["investInfoType"], "investInfoStatus" to SysDictUtil.sysDict["investInfoStatus"]))
+    fun dicTzNoticeInfo(): ResVal = success(SysDictUtil.mapOf("investInfoType", "investInfoStatus"))
 
 
 }

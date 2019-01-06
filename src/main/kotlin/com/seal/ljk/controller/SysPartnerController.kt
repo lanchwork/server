@@ -2,9 +2,7 @@ package com.seal.ljk.controller
 
 
 import com.seal.ljk.base.VerifyToken
-import com.seal.ljk.common.ResVal
-import com.seal.ljk.common.getPageInfo
-import com.seal.ljk.common.success
+import com.seal.ljk.common.*
 import com.seal.ljk.model.SysPartner
 
 import com.seal.ljk.service.ISysPartnerService
@@ -60,5 +58,12 @@ class SysPartnerController{
 //        sysPartnerService.deleteSysPartner(id)
 //        return success("success")
 //    }
+
+    @PostMapping("/dict")
+    @ApiOperation(value = "合作方 数据字典")
+    @VerifyToken
+    fun dicSysUser(@RequestParam id: String): ResVal {
+        return success(SysDictUtil.mapOf("partnerType", "openFlag"))
+    }
 
 }

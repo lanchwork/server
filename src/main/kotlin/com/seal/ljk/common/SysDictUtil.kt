@@ -6,6 +6,12 @@ object SysDictUtil {
 
     var sysDict: MutableMap<String, List<Map<String, Any?>>> = mutableMapOf()
 
+    fun mapOf(vararg keys: String): MutableMap<String, List<Map<String, Any?>>> {
+        val result = mutableMapOf<String, List<Map<String, Any?>>>()
+        keys.forEach { sysDict[it]?.apply { result[it] = this } }
+        return result
+    }
+
     fun updateSysPartner(sysPartner: SysPartner) {
         sysDict["partner"]?.apply {
             SysDictUtil.sysDict["partner"] = this.map {
@@ -36,7 +42,7 @@ object SysDictUtil {
         val dicMap = sysDictTypes.groupBy { it["code"] }
 
         dicMap.forEach { code, list ->
-            code?.let {
+            code?.apply {
                 sysDict[code] = list.map {
                     mapOf(
                             "value" to it["value"],
