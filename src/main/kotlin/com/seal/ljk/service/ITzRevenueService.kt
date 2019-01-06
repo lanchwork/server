@@ -12,7 +12,7 @@ import com.github.pagehelper.Page
  * @since 2018-12-28
  */
 interface ITzRevenueService{
-    fun getTzRevenue(id: String): TzRevenue?
+    fun getTzRevenue(id: String): TzRevenue
     fun getAllTzRevenue(tzRevenue: TzRevenue): List<TzRevenue>
     fun getAllTzRevenueByPage(tzRevenue: TzRevenue): Page<TzRevenue>
     fun insertTzRevenue(tzRevenue: TzRevenue)

@@ -32,8 +32,8 @@ class SysPartnerServiceImpl : ISysPartnerService {
     @Autowired
     lateinit var sysUserService: ISysUserService
 
-    override fun getSysPartner(id: String): SysPartner? {
-        return sysPartnerMapper.get(id)
+    override fun getSysPartner(id: String): SysPartner {
+        return sysPartnerMapper.get(id) ?: throw SealException(message = "id 数据项不存在。")
     }
 
     override fun getByChannelMark(channelMark: String): SysPartner? {

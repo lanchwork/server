@@ -122,7 +122,7 @@
                 password= #{password},
             </if>
             <if test="channelMark != null  and channelMark != '' ">
-                channelMark= #{channelMark},
+                channel_mark= #{channelMark},
             </if>
             <if test="userType != null  and userType != '' ">
                 user_type= #{userType},
@@ -137,7 +137,7 @@
                 email= #{email},
             </if>
             <if test="openFlag != null  and openFlag != '' ">
-                openFlag= #{openFlag},
+                open_flag= #{openFlag},
             </if>
             <if test="updateUser != null and updateUser != ''">
                 update_user=#{updateUser},

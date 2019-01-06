@@ -12,7 +12,7 @@ import com.github.pagehelper.Page
  * @since 2019-01-02
  */
 interface ITzInvestItemService {
-    fun getTzInvestItem(id: String): TzInvestItem?
+    fun getTzInvestItem(id: String): TzInvestItem
     fun getAllTzInvestItem(tzInvestItem: TzInvestItem): List<TzInvestItem>
     fun getAllTzInvestItemByPage(tzInvestItem: TzInvestItem): Page<TzInvestItem>
     fun insertTzInvestItem(tzInvestItem: TzInvestItem)

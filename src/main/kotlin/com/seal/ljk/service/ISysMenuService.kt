@@ -13,12 +13,12 @@ import com.seal.ljk.model.SysUser
  * @since 2018-12-25
  */
 interface ISysMenuService : IBaseService {
-    fun getSysMenu(id: String): SysMenu?
+    fun getSysMenu(id: String): SysMenu
     fun getAllSysMenu(sysMenu: SysMenu): List<SysMenu>
     fun getAllSysMenuByPage(sysMenu: SysMenu): Page<SysMenu>
     fun insertSysMenu(sysMenu: SysMenu)
     fun updateSysMenu(sysMenu: SysMenu)
     fun deleteSysMenu(id: String)
     fun getAllSysMenuByUser(user: SysUser): List<SysMenu>
-    fun getMenuTreeList(all: List<SysMenu>): MutableList<SysMenu>
+    fun getMenuTreeList(all: List<SysMenu>): List<SysMenu>
 }

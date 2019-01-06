@@ -12,7 +12,7 @@ import com.github.pagehelper.Page
  * @since 2019-01-04
  */
 interface IGfManageMiseService{
-    fun getGfManageMise(id: String): GfManageMise?
+    fun getGfManageMise(id: String): GfManageMise
     fun getAllGfManageMise(gfManageMise: GfManageMise): List<GfManageMise>
     fun getAllGfManageMiseByPage(gfManageMise: GfManageMise): Page<GfManageMise>
     fun insertGfManageMise(gfManageMise: GfManageMise)

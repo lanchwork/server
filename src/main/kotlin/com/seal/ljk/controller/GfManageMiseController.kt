@@ -43,8 +43,8 @@ class GfManageMiseController{
     @ApiOperation(value = "管理员新增或修改")
     @VerifyToken
     fun saveGfManageMise(@RequestBody gfManageMise: GfManageMise): ResVal {
+        gfManageMise.verify()
         if (gfManageMise.id.isEmpty()) {
-            gfManageMise.verify()
             gfManageMiseService.insertGfManageMise(gfManageMise)
         } else {
             gfManageMiseService.updateGfManageMise(gfManageMise)

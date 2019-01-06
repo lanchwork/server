@@ -48,8 +48,8 @@ class SysDictTypeController{
     @VerifyToken
     fun saveSysDictType(@RequestBody sysDictType: SysDictType): ResVal {
         if (sysDictType.id.isEmpty()) {
-            sysDictType.delFlag = "0"
             sysDictType.verify()
+            sysDictType.delFlag = "0"
             sysDictTypeService.insertSysDictType(sysDictType)
         } else {
             sysDictTypeService.updateSysDictType(sysDictType)
@@ -61,7 +61,7 @@ class SysDictTypeController{
     @ApiOperation(value = "删除数据字典类型")
     @VerifyToken
     fun deleteSysDictType(@RequestParam id: String): ResVal {
-        val sysDictType = sysDictTypeService.getSysDictType(id) ?: throw SealException(message = "dictType does not exist!")
+        val sysDictType = sysDictTypeService.getSysDictType(id)
         //删除，置删除标识位为1
         sysDictType.delFlag = "1"
         sysDictTypeService.updateSysDictType(sysDictType)

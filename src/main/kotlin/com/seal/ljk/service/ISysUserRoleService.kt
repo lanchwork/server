@@ -12,7 +12,7 @@ import com.github.pagehelper.Page
  * @since 2018-12-26
  */
 interface ISysUserRoleService{
-    fun getSysUserRole(id: String): SysUserRole?
+    fun getSysUserRole(id: String): SysUserRole
     fun getAllSysUserRole(sysUserRole: SysUserRole): List<SysUserRole>
     fun getAllSysUserRoleByPage(sysUserRole: SysUserRole): Page<SysUserRole>
     fun insertSysUserRole(sysUserRole: SysUserRole)

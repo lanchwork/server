@@ -3,13 +3,13 @@
 <mapper namespace="com.seal.ljk.dao.SysMenuDao">
 
     <select id="get" resultType="SysMenu">
-        select b.id,b.parent_id,b.menu_name,b.url,b.sort,b.flag,b.icon,b.type,b.partner_types,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.parent_id,b.menu_name,b.url,b.sort,b.flag,b.icon,b.type,b.partner_types,b.menu_id,b.create_date,b.create_user,b.update_date,b.update_user
         from sys_menu b
         where b.id =#{id}
     </select>
 
     <select id="getAll" resultType="SysMenu">
-        select b.id,b.parent_id,b.menu_name,b.url,b.sort,b.flag,b.icon,b.type,b.partner_types
+        select b.id,b.parent_id,b.menu_name,b.url,b.sort,b.flag,b.icon,b.type,b.partner_types,b.menu_id
         from sys_menu b
         <where>
           <if test="id != null  and id != '' ">
@@ -36,6 +36,9 @@
           <if test="type != null  and type != '' ">
               and b.type= #{type}
           </if>
+            <if test="menuId != null  and menuId != '' ">
+                and b.menu_id= #{menuId}
+            </if>
             <if test="partnerTypes != null  and partnerTypes != '' ">
                 and b.partner_types = #{partnerTypes}
             </if>
@@ -54,7 +57,7 @@
         </if>
     </select>
     <select id="getAllByPage" resultType="SysMenu">
-        select b.id,b.parent_id,b.menu_name,b.url,b.sort,b.flag,b.icon,b.type,b.partner_types,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.parent_id,b.menu_name,b.url,b.sort,b.flag,b.icon,b.type,b.partner_types,b.menu_id,b.create_date,b.create_user,b.update_date,b.update_user
         from sys_menu b
         <where>
           <if test="id != null  and id != '' ">
@@ -81,6 +84,9 @@
           <if test="type != null  and type != '' ">
               and b.type= #{type}
           </if>
+          <if test="menuId != null  and menuId != '' ">
+              and b.menu_id= #{menuId}
+          </if>
             <if test="partnerTypes != null  and partnerTypes != '' ">
                 and b.partner_types like concat('%', #{partnerTypes},'%')
             </if>
@@ -94,8 +100,8 @@
     </select>
 
     <insert id="insert" parameterType="SysMenu">
-        INSERT INTO sys_menu (id,parent_id,menu_name,url,sort,flag,icon,type,partner_types,create_date,create_user,update_date,update_user)
-        VALUES (#{id},nullif(#{parentId},'0'),#{menuName},#{url},#{sort},#{flag},#{icon},#{type},#{partnerTypes},NOW(),#{createUser},NOW(),#{createUser});
+        INSERT INTO sys_menu (id,parent_id,menu_name,url,sort,flag,icon,type,partner_types,menu_id,create_date,create_user,update_date,update_user)
+        VALUES (#{id},nullif(#{parentId},'0'),#{menuName},#{url},#{sort},#{flag},#{icon},#{type},#{partnerTypes},#{menuId},NOW(),#{createUser},NOW(),#{createUser});
     </insert>
 
     <update id="update" parameterType="SysMenu">
@@ -105,10 +111,13 @@
                 id= #{id},
             </if>
             <if test="parentId != null  and parentId != '' ">
-                parentId= #{parentId},
+                parent_id= #{parentId},
             </if>
             <if test="menuName != null  and menuName != '' ">
-                menuName= #{menuName},
+                menu_name= #{menuName},
+            </if>
+            <if test="menuId != null  and menuId != '' ">
+                menu_name= #{menuId},
             </if>
             <if test="url != null  and url != '' ">
                 url= #{url},

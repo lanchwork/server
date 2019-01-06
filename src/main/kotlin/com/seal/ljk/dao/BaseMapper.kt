@@ -8,7 +8,7 @@ import com.seal.ljk.model.Base
  */
 interface BaseMapper<T : Base> {
 
-    fun get(id: String): T
+    fun get(id: String): T?
     fun insert(data: T)
     fun update(data: T)
     fun delete(id: String)

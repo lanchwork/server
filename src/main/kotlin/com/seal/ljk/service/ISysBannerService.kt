@@ -12,7 +12,7 @@ import com.github.pagehelper.Page
  * @since 2019-01-03
  */
 interface ISysBannerService{
-    fun getSysBanner(id: String): SysBanner?
+    fun getSysBanner(id: String): SysBanner
     fun getAllSysBanner(sysBanner: SysBanner): List<SysBanner>
     fun getAllSysBannerByPage(sysBanner: SysBanner): Page<SysBanner>
     fun insertSysBanner(sysBanner: SysBanner)

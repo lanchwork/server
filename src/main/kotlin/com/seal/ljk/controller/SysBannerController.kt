@@ -43,11 +43,7 @@ class SysBannerController{
     @VerifyToken
     fun listByLang(): ResVal {
         val data = sysBannerService.getAllSysBanner(SysBanner())
-        val map = mutableMapOf<String, MutableList<SysBanner>>()
-        data.forEach {
-            val list = map.getOrCreate(it.lang)
-            list.add(it)
-        }
+        val map = data.groupBy { it.lang }
         return success(map)
     }
 

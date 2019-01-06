@@ -33,8 +33,6 @@ class SysUserController {
     @Autowired
     lateinit var sysUserService: ISysUserService
     @Autowired
-    lateinit var sysPartnerService: ISysPartnerService
-    @Autowired
     lateinit var sysMenuService: ISysMenuService
 
 
@@ -98,9 +96,14 @@ class SysUserController {
         return success(sysMenuToMapList(menuList))
     }
 
-    fun sysMenuToMapList(menuList: List<SysMenu>): List<MutableMap<String, Any>> {
+    fun sysMenuToMapList(menuList: List<SysMenu>): List<MutableMap<String, Any?>> {
         return menuList.map {
-            val map = it.toMap(arrayOf("id", "parentId", "menuName", "url"))
+            val map = mutableMapOf<String, Any?>(
+                    "menuName" to it.menuName,
+                    "url" to it.url,
+                    "id" to it.menuId,
+                    "parentId" to it.parentMenuId
+            )
             it.children?.apply {
                 map["children"] = sysMenuToMapList(this.toList())
             }

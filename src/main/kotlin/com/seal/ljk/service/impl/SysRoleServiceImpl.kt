@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service
 import org.springframework.beans.factory.annotation.Autowired
 import com.github.pagehelper.Page
 import com.seal.ljk.base.AuthException
+import com.seal.ljk.base.SealException
 import com.seal.ljk.base.loggerFor
 import com.seal.ljk.common.getSessionUser
 
@@ -26,8 +27,8 @@ class SysRoleServiceImpl : ISysRoleService {
     @Autowired
     lateinit var sysRoleDao: SysRoleDao
 
-    override fun getSysRole(id: String): SysRole? {
-        return sysRoleDao.get(id)
+    override fun getSysRole(id: String): SysRole {
+        return sysRoleDao.get(id) ?: throw SealException(message = "id 数据项不存在。")
     }
 
     override fun getAllSysRole(sysRole: SysRole): List<SysRole> {

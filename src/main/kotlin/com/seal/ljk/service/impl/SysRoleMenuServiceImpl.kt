@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service
 import org.springframework.beans.factory.annotation.Autowired
 import com.github.pagehelper.Page
 import com.seal.ljk.base.AuthException
+import com.seal.ljk.base.SealException
 import com.seal.ljk.base.loggerFor
 import com.seal.ljk.common.getSessionUser
 import com.seal.ljk.model.SysMenu
@@ -31,8 +32,8 @@ class SysRoleMenuServiceImpl : ISysRoleMenuService {
     @Autowired
     lateinit var sysMenuService: ISysMenuService
 
-    override fun getSysRoleMenu(id: String): SysRoleMenu? {
-        return sysRoleMenuDao.get(id)
+    override fun getSysRoleMenu(id: String): SysRoleMenu {
+        return sysRoleMenuDao.get(id) ?: throw SealException(message = "id 数据项不存在。")
     }
 
     override fun getAllSysRoleMenu(sysRoleMenu: SysRoleMenu): List<SysRoleMenu> {

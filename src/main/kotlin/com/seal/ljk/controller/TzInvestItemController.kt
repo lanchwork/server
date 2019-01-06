@@ -1,5 +1,6 @@
 package com.seal.ljk.controller
 
+import com.seal.ljk.base.SealException
 import com.seal.ljk.service.ITzInvestItemService
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
@@ -32,11 +33,17 @@ class TzInvestItemController{
     @PostMapping("/get")
     @ApiOperation(value = "项目管理获取")
     @VerifyToken
-    fun getTzInvestItem(@RequestBody tzInvestItem: TzInvestItem): ResVal{
-        val data=tzInvestItemService.getTzInvestItem(tzInvestItem.id)
-        data?.issueAmount =tzInvestItem.issueAmount
-        data?.allowance=tzInvestItem.allowance
-        data?.issuePrice=tzInvestItem.issuePrice
+    fun getTzInvestItem(@RequestBody id: String): ResVal {
+        val data = tzInvestItemService.getTzInvestItem(id)
+        if (data.tokenNo.isNotEmpty()) {
+            WalletUtil.getTokenMetaByNos(arrayOf(data.tokenNo))?.apply {
+                if (this.isNotEmpty()) {
+                    data.issueAmount = this[0].total_shares?.toBigDecimal()
+                    data.allowance = this[0].available_shares?.toBigDecimal()
+                    data.issuePrice = this[0].curr_price
+                }
+            }
+        }
         return success(data)
     }
 
@@ -66,8 +73,8 @@ class TzInvestItemController{
     @ApiOperation(value = "项目管理新增或修改")
     @VerifyToken
     fun saveTzInvestItem(@RequestBody tzInvestItem: TzInvestItem): ResVal {
+        tzInvestItem.verify()
         if (tzInvestItem.id.isEmpty()) {
-            tzInvestItem.verify()
             tzInvestItemService.insertTzInvestItem(tzInvestItem)
         } else {
             tzInvestItemService.updateTzInvestItem(tzInvestItem)

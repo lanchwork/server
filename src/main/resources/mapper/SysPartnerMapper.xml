@@ -100,25 +100,25 @@
                 id= #{id},
             </if>
             <if test="channelMark != null  and channelMark != '' ">
-                channelMark= #{channelMark},
+                channel_mark= #{channelMark},
             </if>
             <if test="partnerName != null  and partnerName != '' ">
-                partnerName= #{partnerName},
+                partner_name= #{partnerName},
             </if>
             <if test="userNo != null  and userNo != '' ">
-                userNo= #{userNo},
+                user_no= #{userNo},
             </if>
             <if test="walletAddr != null  and walletAddr != '' ">
-                walletAddr= #{walletAddr},
+                wallet_addr= #{walletAddr},
             </if>
             <if test="openFlag != null  and openFlag != '' ">
-                openFlag= #{openFlag},
+                open_flag= #{openFlag},
             </if>
             <if test="remark != null  and remark != '' ">
                 remark= #{remark},
             </if>
             <if test="partnerType != null  and partnerType != '' ">
-                partnerType= #{partnerType},
+                partner_type= #{partnerType},
             </if>
             <if test="updateUser != null and updateUser != ''">
                 update_user=#{updateUser},

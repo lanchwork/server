@@ -12,7 +12,7 @@ import com.github.pagehelper.Page
  * @since 2018-12-28
  */
 interface ITzNoticeInfoService{
-    fun getTzNoticeInfo(id: String): TzNoticeInfo?
+    fun getTzNoticeInfo(id: String): TzNoticeInfo
     fun getAllTzNoticeInfo(tzNoticeInfo: TzNoticeInfo): List<TzNoticeInfo>
     fun getAllTzNoticeInfoByPage(tzNoticeInfo: TzNoticeInfo): Page<TzNoticeInfo>
     fun insertTzNoticeInfo(tzNoticeInfo: TzNoticeInfo)

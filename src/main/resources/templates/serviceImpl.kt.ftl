@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service
 import org.springframework.beans.factory.annotation.Autowired
 import com.github.pagehelper.Page
 import com.seal.ljk.base.AuthException
+import com.seal.ljk.base.SealException
 import com.seal.ljk.base.loggerFor
 import com.seal.ljk.common.getSessionUser
 
@@ -27,7 +28,7 @@ class ${table.serviceImplName} : ${table.serviceName} {
     lateinit var ${table.mapperName?uncap_first}: ${table.mapperName}
 
     override fun get${entity}(id: String): ${entity}? {
-        return ${table.mapperName?uncap_first}.get(id)
+        return ${table.mapperName?uncap_first}.get(id) ?: throw SealException(message = "id 数据项不存在。")
     }
 
     override fun getAll${entity}(${entity?uncap_first}: ${entity}): List<${entity}> {

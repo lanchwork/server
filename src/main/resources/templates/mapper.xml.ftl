@@ -9,7 +9,7 @@
     </select>
 
     <select id="getAll" resultType="${entity}">
-        select <#list table.fields as field>b.${field.name},</#list><#list table.commonFields as field>b.${field.name}<#if field_has_next>,</#if></#list>
+        select <#list table.fields as field>b.${field.name}<#if field_has_next>,</#if></#list>
         from ${table.name} b
         <where>
         <#list table.fields as field>

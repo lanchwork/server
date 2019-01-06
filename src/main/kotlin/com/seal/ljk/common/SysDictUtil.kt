@@ -4,7 +4,7 @@ import com.seal.ljk.model.SysPartner
 
 object SysDictUtil {
 
-    var sysDict: MutableMap<String, List<Map<String, String>>> = mutableMapOf()
+    var sysDict: MutableMap<String, List<Map<String, Any?>>> = mutableMapOf()
 
     fun updateSysPartner(sysPartner: SysPartner) {
         sysDict["partner"]?.apply {
@@ -29,6 +29,30 @@ object SysDictUtil {
                     "showVal" to sysPartner.partnerName
             ))
             SysDictUtil.sysDict["partner"] = list
+        }
+    }
+
+    fun initDict(sysDictTypes: List<Map<String, String>>) {
+        val dicMap = sysDictTypes.groupBy { it["code"] }
+
+        dicMap.forEach { code, list ->
+            code?.let {
+                sysDict[code] = list.map {
+                    mapOf(
+                            "value" to it["value"],
+                            "showVal" to it["show_val"]
+                    )
+                }
+            }
+        }
+    }
+
+    fun initPartner(partners: List<SysPartner>) {
+        sysDict["partner"] = partners.map {
+            mapOf(
+                    "value" to it.channelMark,
+                    "showVal" to it.partnerName
+            )
         }
     }
 

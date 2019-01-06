@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service
 import org.springframework.beans.factory.annotation.Autowired
 import com.github.pagehelper.Page
 import com.seal.ljk.base.AuthException
+import com.seal.ljk.base.SealException
 import com.seal.ljk.base.loggerFor
 import com.seal.ljk.common.getOrCreate
 import com.seal.ljk.common.getSessionUser
@@ -32,8 +33,8 @@ class SysMenuServiceImpl : ISysMenuService {
     @Autowired
     lateinit var sysUserRoleService: ISysUserRoleService
 
-    override fun getSysMenu(id: String): SysMenu? {
-        return sysMenuDao.get(id)
+    override fun getSysMenu(id: String): SysMenu {
+        return sysMenuDao.get(id) ?: throw SealException(message = "id 数据项不存在。")
     }
 
     override fun getAllSysMenu(sysMenu: SysMenu): List<SysMenu> {
@@ -72,27 +73,15 @@ class SysMenuServiceImpl : ISysMenuService {
             menu.roleIds = roleIds
         }
         menu.orderByInfo = arrayOf("type", "sort")
-        menu.currentPage = 1
-        menu.pageSize = 5
         val all = sysMenuDao.getAll(menu)
 
         return getMenuTreeList(all)
     }
 
-    override fun getMenuTreeList(all: List<SysMenu>): MutableList<SysMenu> {
-        val result = mutableListOf<SysMenu>()
+    override fun getMenuTreeList(all: List<SysMenu>): List<SysMenu> {
 
-        val menuMap = linkedMapOf<String, MutableList<SysMenu>>()
-
-        all.forEach {
-            val pid = if (it.parentId.isEmpty()) "0" else it.parentId
-            if (pid == "0") {
-                result.add(it)
-            } else {
-                val list = menuMap.getOrCreate(pid)
-                list.add(it)
-            }
-        }
+        val menuMap = all.groupBy { if (it.parentId.isEmpty()) "0" else it.parentId }
+        val result = menuMap["0"] ?: emptyList()
 
         result.forEach {
             findAllChildMenu(it, menuMap)
@@ -103,6 +92,7 @@ class SysMenuServiceImpl : ISysMenuService {
     fun findAllChildMenu(pMenu: SysMenu, menuMap: Map<String, List<SysMenu>>) {
         val list = menuMap[pMenu.id]
         list?.forEach {
+            it.parentMenuId = pMenu.menuId
             findAllChildMenu(it, menuMap)
         }
         pMenu.children = list?.toTypedArray()

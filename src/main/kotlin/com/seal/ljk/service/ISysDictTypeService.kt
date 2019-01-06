@@ -12,7 +12,7 @@ import com.github.pagehelper.Page
  * @since 2019-01-03
  */
 interface ISysDictTypeService{
-    fun getSysDictType(id: String): SysDictType?
+    fun getSysDictType(id: String): SysDictType
     fun getAllSysDictType(sysDictType: SysDictType): List<SysDictType>
     fun getAllSysDictTypeByPage(sysDictType: SysDictType): Page<SysDictType>
     fun insertSysDictType(sysDictType: SysDictType)

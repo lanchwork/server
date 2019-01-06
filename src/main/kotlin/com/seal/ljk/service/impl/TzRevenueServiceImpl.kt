@@ -1,14 +1,13 @@
 package com.seal.ljk.service.impl
 
-import com.seal.ljk.model.TzRevenue
-import com.seal.ljk.dao.TzRevenueDao
-import com.seal.ljk.service.ITzRevenueService
-import org.springframework.stereotype.Service
-import org.springframework.beans.factory.annotation.Autowired
 import com.github.pagehelper.Page
-import com.seal.ljk.base.AuthException
+import com.seal.ljk.base.SealException
 import com.seal.ljk.base.loggerFor
-import com.seal.ljk.common.getSessionUser
+import com.seal.ljk.dao.TzRevenueDao
+import com.seal.ljk.model.TzRevenue
+import com.seal.ljk.service.ITzRevenueService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
 /**
  * <p>
@@ -26,8 +25,8 @@ class TzRevenueServiceImpl : ITzRevenueService {
     @Autowired
     lateinit var tzRevenueDao: TzRevenueDao
 
-    override fun getTzRevenue(id: String): TzRevenue? {
-        return tzRevenueDao.get(id)
+    override fun getTzRevenue(id: String): TzRevenue {
+        return tzRevenueDao.get(id) ?: throw SealException(message = "id 数据项不存在。")
     }
 
     override fun getAllTzRevenue(tzRevenue: TzRevenue): List<TzRevenue> {

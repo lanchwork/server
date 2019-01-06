@@ -12,7 +12,7 @@ import com.github.pagehelper.Page
  * @since 2018-12-24
  */
 interface ISysPartnerService : IBaseService {
-    fun getSysPartner(id: String): SysPartner?
+    fun getSysPartner(id: String): SysPartner
     fun getAllSysPartner(sysPartner: SysPartner): List<SysPartner>
     fun getAllSysPartnerByPage(sysPartner: SysPartner): Page<SysPartner>
     fun insertSysPartner(sysPartner: SysPartner)

@@ -12,7 +12,7 @@ import com.github.pagehelper.Page
  * @since 2019-01-02
  */
 interface ITzAgencyHoldService{
-    fun getTzAgencyHold(id: String): TzAgencyHold?
+    fun getTzAgencyHold(id: String): TzAgencyHold
     fun getAllTzAgencyHold(tzAgencyHold: TzAgencyHold): List<TzAgencyHold>
     fun getAllTzAgencyHoldByPage(tzAgencyHold: TzAgencyHold): Page<TzAgencyHold>
     fun insertTzAgencyHold(tzAgencyHold: TzAgencyHold)

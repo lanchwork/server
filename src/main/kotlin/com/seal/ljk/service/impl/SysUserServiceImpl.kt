@@ -42,8 +42,8 @@ class SysUserServiceImpl : ISysUserService {
     lateinit var sysMenuService: ISysMenuService
 
 
-    override fun getSysUser(id: String): SysUser? {
-        return sysUserMapper.get(id)
+    override fun getSysUser(id: String): SysUser {
+        return sysUserMapper.get(id) ?: throw SealException(message = "id 数据项不存在。")
     }
 
     override fun getAllSysUser(sysUser: SysUser): List<SysUser> {

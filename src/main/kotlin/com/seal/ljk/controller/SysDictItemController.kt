@@ -47,8 +47,8 @@ class SysDictItemController{
     @ApiOperation(value = "新增或修改")
     @VerifyToken
     fun saveSysDictItem(@RequestBody sysDictItem: SysDictItem): ResVal {
+        sysDictItem.verify()
         if (sysDictItem.id.isEmpty()) {
-            sysDictItem.verify()
             sysDictItemService.insertSysDictItem(sysDictItem)
         } else {
             sysDictItemService.updateSysDictItem(sysDictItem)

@@ -36,20 +36,20 @@ fun <K, V> MutableMap<K, MutableList<V>>.getOrCreate(key: K): MutableList<V> {
     return list
 }
 
-fun <T : Base> Page<T>.toMapListPage(fields: Array<String>): PageInfo<MutableMap<String, Any>> {
+fun <T : Base> Page<T>.toMapListPage(fields: Array<String>): PageInfo<MutableMap<String, Any?>> {
     return PageInfo(this.toMapList(fields), total.toInt(), pageSize, pages, pageNum)
 }
 
-fun <T : Base> List<T>.toMapList(fields: Array<String>): MutableList<MutableMap<String, Any>> {
-    val result = mutableListOf<MutableMap<String, Any>>()
+fun <T : Base> List<T>.toMapList(fields: Array<String>): MutableList<MutableMap<String, Any?>> {
+    val result = mutableListOf<MutableMap<String, Any?>>()
     this.forEach {
         result.add(it.toMap(fields))
     }
     return result
 }
 
-fun Base.toMap(fields: Array<String>): MutableMap<String, Any> {
-    val map = mutableMapOf<String, Any>()
+fun Base.toMap(fields: Array<String>): MutableMap<String, Any?> {
+    val map = mutableMapOf<String, Any?>()
     if (fields.isEmpty()) {
         return map
     }
@@ -70,7 +70,7 @@ fun Base.toMap(fields: Array<String>): MutableMap<String, Any> {
         val modelField = field.name
         if (fields.contains(modelField)) {
             try {
-                val value = field.get(this)
+                val value: Any? = field.get(this)
                 map[modelField] = value
             } catch (e: IllegalAccessException) {
                 e.printStackTrace()

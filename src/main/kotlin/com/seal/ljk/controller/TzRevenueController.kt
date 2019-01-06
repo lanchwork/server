@@ -43,8 +43,8 @@ class TzRevenueController {
     @ApiOperation(value = "新增或修改总收益")
     @VerifyToken
     fun saveTzRevenue(@RequestBody tzRevenue: TzRevenue): ResVal {
+        tzRevenue.verify()
         if (tzRevenue.id.isEmpty()) {
-            tzRevenue.verify()
             tzRevenueService.insertTzRevenue(tzRevenue)
         } else {
             tzRevenueService.updateTzRevenue(tzRevenue)

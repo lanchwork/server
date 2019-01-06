@@ -13,7 +13,7 @@ import com.seal.ljk.model.SysMenu
  * @since 2018-12-26
  */
 interface ISysRoleMenuService : IBaseService {
-    fun getSysRoleMenu(id: String): SysRoleMenu?
+    fun getSysRoleMenu(id: String): SysRoleMenu
     fun getAllSysRoleMenu(sysRoleMenu: SysRoleMenu): List<SysRoleMenu>
     fun getAllSysRoleMenuByPage(sysRoleMenu: SysRoleMenu): Page<SysRoleMenu>
     fun insertSysRoleMenu(sysRoleMenu: SysRoleMenu)
