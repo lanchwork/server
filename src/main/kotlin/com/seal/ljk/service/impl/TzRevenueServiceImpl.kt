@@ -1,7 +1,7 @@
 package com.seal.ljk.service.impl
 
 import com.github.pagehelper.Page
-import com.seal.ljk.base.SealException
+import com.seal.ljk.base.IdNotFoundException
 import com.seal.ljk.base.loggerFor
 import com.seal.ljk.dao.TzRevenueDao
 import com.seal.ljk.model.TzRevenue
@@ -26,7 +26,7 @@ class TzRevenueServiceImpl : ITzRevenueService {
     lateinit var tzRevenueDao: TzRevenueDao
 
     override fun getTzRevenue(id: String): TzRevenue {
-        return tzRevenueDao.get(id) ?: throw SealException(message = "id 数据项不存在。")
+        return tzRevenueDao.get(id) ?: throw IdNotFoundException()
     }
 
     override fun getAllTzRevenue(tzRevenue: TzRevenue): List<TzRevenue> {

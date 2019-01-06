@@ -2,6 +2,7 @@ package com.seal.ljk.service.impl
 
 import com.github.pagehelper.Page
 import com.seal.ljk.base.AuthException
+import com.seal.ljk.base.IdNotFoundException
 import com.seal.ljk.base.SealException
 import com.seal.ljk.base.loggerFor
 import com.seal.ljk.common.SysDictUtil
@@ -33,7 +34,7 @@ class SysPartnerServiceImpl : ISysPartnerService {
     lateinit var sysUserService: ISysUserService
 
     override fun getSysPartner(id: String): SysPartner {
-        return sysPartnerMapper.get(id) ?: throw SealException(message = "id 数据项不存在。")
+        return sysPartnerMapper.get(id) ?: throw IdNotFoundException()
     }
 
     override fun getByChannelMark(channelMark: String): SysPartner? {

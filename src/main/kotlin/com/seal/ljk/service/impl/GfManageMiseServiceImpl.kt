@@ -1,15 +1,13 @@
 package com.seal.ljk.service.impl
 
-import com.seal.ljk.model.GfManageMise
-import com.seal.ljk.dao.GfManageMiseDao
-import com.seal.ljk.service.IGfManageMiseService
-import org.springframework.stereotype.Service
-import org.springframework.beans.factory.annotation.Autowired
 import com.github.pagehelper.Page
-import com.seal.ljk.base.AuthException
-import com.seal.ljk.base.SealException
+import com.seal.ljk.base.IdNotFoundException
 import com.seal.ljk.base.loggerFor
-import com.seal.ljk.common.getSessionUser
+import com.seal.ljk.dao.GfManageMiseDao
+import com.seal.ljk.model.GfManageMise
+import com.seal.ljk.service.IGfManageMiseService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
 /**
  * <p>
@@ -28,7 +26,7 @@ class GfManageMiseServiceImpl : IGfManageMiseService {
     lateinit var gfManageMiseDao: GfManageMiseDao
 
     override fun getGfManageMise(id: String): GfManageMise {
-        return gfManageMiseDao.get(id) ?: throw SealException(message = "id 数据项不存在。")
+        return gfManageMiseDao.get(id) ?: throw IdNotFoundException()
     }
 
     override fun getAllGfManageMise(gfManageMise: GfManageMise): List<GfManageMise> {

@@ -1,15 +1,13 @@
 package com.seal.ljk.service.impl
 
-import com.seal.ljk.model.TzInvestItem
-import com.seal.ljk.dao.TzInvestItemDao
-import com.seal.ljk.service.ITzInvestItemService
-import org.springframework.stereotype.Service
-import org.springframework.beans.factory.annotation.Autowired
 import com.github.pagehelper.Page
-import com.seal.ljk.base.AuthException
-import com.seal.ljk.base.SealException
+import com.seal.ljk.base.IdNotFoundException
 import com.seal.ljk.base.loggerFor
-import com.seal.ljk.common.getSessionUser
+import com.seal.ljk.dao.TzInvestItemDao
+import com.seal.ljk.model.TzInvestItem
+import com.seal.ljk.service.ITzInvestItemService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
 /**
  * <p>
@@ -28,7 +26,7 @@ class TzInvestItemServiceImpl : ITzInvestItemService {
     lateinit var tzInvestItemDao: TzInvestItemDao
 
     override fun getTzInvestItem(id: String): TzInvestItem {
-        return tzInvestItemDao.get(id) ?: throw SealException(message = "id 数据项不存在。")
+        return tzInvestItemDao.get(id) ?: throw IdNotFoundException()
     }
 
     override fun getAllTzInvestItem(tzInvestItem: TzInvestItem): List<TzInvestItem> {

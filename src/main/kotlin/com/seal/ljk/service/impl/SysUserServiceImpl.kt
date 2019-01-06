@@ -4,19 +4,14 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.JWTDecodeException
 import com.github.pagehelper.Page
-import com.seal.ljk.base.AuthException
-import com.seal.ljk.base.ParamException
-import com.seal.ljk.base.SealException
-import com.seal.ljk.base.loggerFor
+import com.seal.ljk.base.*
 import com.seal.ljk.common.Constant
 import com.seal.ljk.common.MessageDigetUtil
 import com.seal.ljk.common.checkParam
 import com.seal.ljk.common.getSessionUser
 import com.seal.ljk.dao.SysUserMapper
 import com.seal.ljk.model.SysUser
-import com.seal.ljk.service.ISysMenuService
 import com.seal.ljk.service.ISysPartnerService
-import com.seal.ljk.service.ISysUserRoleService
 import com.seal.ljk.service.ISysUserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -38,12 +33,10 @@ class SysUserServiceImpl : ISysUserService {
     lateinit var sysUserMapper: SysUserMapper
     @Autowired
     lateinit var sysPartnerService: ISysPartnerService
-    @Autowired
-    lateinit var sysMenuService: ISysMenuService
 
 
     override fun getSysUser(id: String): SysUser {
-        return sysUserMapper.get(id) ?: throw SealException(message = "id 数据项不存在。")
+        return sysUserMapper.get(id) ?: throw IdNotFoundException()
     }
 
     override fun getAllSysUser(sysUser: SysUser): List<SysUser> {

@@ -1,15 +1,13 @@
 package com.seal.ljk.service.impl
 
-import com.seal.ljk.model.SysDictType
-import com.seal.ljk.dao.SysDictTypeDao
-import com.seal.ljk.service.ISysDictTypeService
-import org.springframework.stereotype.Service
-import org.springframework.beans.factory.annotation.Autowired
 import com.github.pagehelper.Page
-import com.seal.ljk.base.AuthException
-import com.seal.ljk.base.SealException
+import com.seal.ljk.base.IdNotFoundException
 import com.seal.ljk.base.loggerFor
-import com.seal.ljk.common.getSessionUser
+import com.seal.ljk.dao.SysDictTypeDao
+import com.seal.ljk.model.SysDictType
+import com.seal.ljk.service.ISysDictTypeService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
 /**
  * <p>
@@ -28,7 +26,7 @@ class SysDictTypeServiceImpl : ISysDictTypeService {
     lateinit var sysDictTypeDao: SysDictTypeDao
 
     override fun getSysDictType(id: String): SysDictType {
-        return sysDictTypeDao.get(id) ?: throw SealException(message = "id 数据项不存在。")
+        return sysDictTypeDao.get(id) ?: throw IdNotFoundException()
     }
 
     override fun getAllSysDictType(sysDictType: SysDictType): List<SysDictType> {

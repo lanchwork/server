@@ -1,19 +1,18 @@
 package com.seal.ljk.service.impl
 
-import com.seal.ljk.model.SysMenu
-import com.seal.ljk.dao.SysMenuDao
-import com.seal.ljk.service.ISysMenuService
-import org.springframework.stereotype.Service
-import org.springframework.beans.factory.annotation.Autowired
 import com.github.pagehelper.Page
 import com.seal.ljk.base.AuthException
-import com.seal.ljk.base.SealException
+import com.seal.ljk.base.IdNotFoundException
 import com.seal.ljk.base.loggerFor
-import com.seal.ljk.common.getOrCreate
 import com.seal.ljk.common.getSessionUser
+import com.seal.ljk.dao.SysMenuDao
+import com.seal.ljk.model.SysMenu
 import com.seal.ljk.model.SysUser
 import com.seal.ljk.model.SysUserRole
+import com.seal.ljk.service.ISysMenuService
 import com.seal.ljk.service.ISysUserRoleService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
 /**
  * <p>
@@ -34,7 +33,7 @@ class SysMenuServiceImpl : ISysMenuService {
     lateinit var sysUserRoleService: ISysUserRoleService
 
     override fun getSysMenu(id: String): SysMenu {
-        return sysMenuDao.get(id) ?: throw SealException(message = "id 数据项不存在。")
+        return sysMenuDao.get(id) ?: throw IdNotFoundException()
     }
 
     override fun getAllSysMenu(sysMenu: SysMenu): List<SysMenu> {

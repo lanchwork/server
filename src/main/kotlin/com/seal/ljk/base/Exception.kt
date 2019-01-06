@@ -17,6 +17,8 @@ class AuthException(override val message: String = "用户验证失败，请重�
 
 class ParamException(override val message: String = "存在参数为空或有误，请核对！") : SealException(message)
 
+class IdNotFoundException(override val message: String = "Id 数据项不存在，请核对！") : SealException(message)
+
 
 @ControllerAdvice
 class GlobalExceptionHandler {
