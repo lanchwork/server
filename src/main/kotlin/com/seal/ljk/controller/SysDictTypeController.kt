@@ -49,7 +49,9 @@ class SysDictTypeController{
     fun saveSysDictType(@RequestBody sysDictType: SysDictType): ResVal {
         if (sysDictType.id.isEmpty()) {
             sysDictType.verify()
-            sysDictType.delFlag = "0"
+            if(sysDictType.delFlag.isEmpty()){
+                sysDictType.delFlag = "0"
+            }
             sysDictTypeService.insertSysDictType(sysDictType)
         } else {
             sysDictTypeService.updateSysDictType(sysDictType)

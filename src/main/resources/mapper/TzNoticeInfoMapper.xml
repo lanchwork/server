@@ -3,13 +3,13 @@
 <mapper namespace="com.seal.ljk.dao.TzNoticeInfoDao">
 
     <select id="get" resultType="TzNoticeInfo">
-        select b.id,b.notice_title,b.notice_content,b.type,b.using_flag,b.notice_title_en,b.notice_content_en,b.type_en,b.create_user,b.create_date,b.update_user,b.update_date
+        select b.id,b.notice_title,b.notice_content,b.type,b.using_flag,b.notice_title_en,b.notice_content_en,b.type_en,b.remark,b.create_user,b.create_date,b.update_user,b.update_date
         from tz_notice_info b
         where b.id =#{id}
     </select>
 
     <select id="getAll" resultType="TzNoticeInfo">
-        select b.id,b.notice_title,b.notice_content,b.type,b.using_flag,b.notice_title_en,b.notice_content_en,b.type_en,b.create_user,b.create_date,b.update_user,b.update_date
+        select b.id,b.notice_title,b.notice_content,b.type,b.using_flag,b.notice_title_en,b.notice_content_en,b.type_en,b.remark,b.create_user,b.create_date,b.update_user,b.update_date
         from tz_notice_info b
         <where>
             <if test="id != null  and id != '' ">
@@ -36,6 +36,9 @@
             <if test="typeEn != null  and typeEn != '' ">
                 and b.type_en= #{typeEn}
             </if>
+            <if test="remark != null  and remark != '' ">
+                and b.remark= #{remark}
+            </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -46,7 +49,7 @@
     </select>
 
     <select id="getAllByPage" resultType="TzNoticeInfo">
-        select b.id,b.notice_title,b.notice_content,b.type,b.using_flag,b.notice_title_en,b.notice_content_en,b.type_en,b.create_user,b.create_date,b.update_user,b.update_date
+        select b.id,b.notice_title,b.notice_content,b.type,b.using_flag,b.notice_title_en,b.notice_content_en,b.type_en,b.remark,b.create_user,b.create_date,b.update_user,b.update_date
         from tz_notice_info b
         <where>
           <if test="id != null  and id != '' ">
@@ -70,9 +73,12 @@
           <if test="noticeContentEn != null  and noticeContentEn != '' ">
               and b.notice_content_en= #{noticeContentEn}
           </if>
-            <if test="typeEn != null  and typeEn != '' ">
-                and b.type_en= #{typeEn}
-            </if>
+          <if test="typeEn != null  and typeEn != '' ">
+              and b.type_en= #{typeEn}
+          </if>
+          <if test="remark != null  and remark != '' ">
+              and b.remark= #{remark}
+          </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -83,8 +89,8 @@
     </select>
 
     <insert id="insert" parameterType="TzNoticeInfo">
-        INSERT INTO tz_notice_info (id,notice_title,notice_content,type,using_flag,notice_title_en,notice_content_en,type_en,create_user,create_date,update_user,update_date)
-        VALUES (#{id},#{noticeTitle},#{noticeContent},#{type},#{usingFlag},#{noticeTitleEn},#{noticeContentEn},#{typeEn},#{createUser},NOW(),#{createUser},NOW());
+        INSERT INTO tz_notice_info (id,notice_title,notice_content,type,using_flag,notice_title_en,notice_content_en,type_en,remark,create_user,create_date,update_user,update_date)
+        VALUES (#{id},#{noticeTitle},#{noticeContent},#{type},#{usingFlag},#{noticeTitleEn},#{noticeContentEn},#{typeEn},#{remark},#{createUser},NOW(),#{createUser},NOW());
     </insert>
 
     <update id="update" parameterType="TzNoticeInfo">
@@ -113,6 +119,9 @@
             </if>
             <if test="typeEn != null  and typeEn != '' ">
                 type_en= #{typeEn},
+            </if>
+            <if test="remark != null  and remark != '' ">
+                remark= #{remark},
             </if>
             <if test="updateUser != null and updateUser != ''">
                 update_user=#{updateUser},

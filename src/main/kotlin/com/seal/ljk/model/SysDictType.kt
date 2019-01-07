@@ -29,14 +29,19 @@ data class SysDictType(
     /**
      * 删除标识
      */
-    var delFlag: String = ""
+    var delFlag: String = "",
+
+    /**
+     * 描述
+     */
+    var remark: String = ""
 ) : Base(), IVerify {
 
     override fun verify() {
         this.apply {
             "编码 不能为空" using (this.code.isNotEmpty())
             "字典名称 不能为空" using (this.name.isNotEmpty())
-            "删除标识 不能为空" using (this.delFlag.isNotEmpty())
+            "描述 不能为空" using (this.remark.isNotEmpty())
         }
     }
 }

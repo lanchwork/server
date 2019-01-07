@@ -78,7 +78,7 @@ dependencies {
     compile "com.google.guava:guava:27.0-jre"
 
     //pagehelper
-    compile 'com.github.pagehelper:pagehelper-spring-boot-starter:1.2.10'
+    compile 'com.github.pagehelper:pagehelper:5.1.8'
     //JWT token 验证
     compile "com.auth0:java-jwt:3.4.1"
 

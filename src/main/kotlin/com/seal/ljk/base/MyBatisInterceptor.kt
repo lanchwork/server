@@ -1,5 +1,6 @@
 package com.seal.ljk.base
 
+import com.github.pagehelper.PageHelper
 import com.github.pagehelper.PageInterceptor
 import com.google.common.base.CaseFormat
 import com.seal.ljk.common.UUIDUtil
@@ -129,6 +130,7 @@ class SealPageInterceptor : PageInterceptor() {
                     }
                 }
             }
+            invocation.args[1] = parameter
         }
 
         if (byPage) {
