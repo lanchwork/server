@@ -3,13 +3,13 @@
 <mapper namespace="com.seal.ljk.dao.SysDictTypeDao">
 
     <select id="get" resultType="SysDictType">
-        select b.id,b.code,b.name,b.del_flag,b.create_user,b.create_date,b.update_user,b.update_date
+        select b.id,b.code,b.name,b.del_flag,b.remark,b.create_user,b.create_date,b.update_user,b.update_date
         from sys_dict_type b
         where b.id =#{id}
     </select>
 
     <select id="getAll" resultType="SysDictType">
-        select b.id,b.code,b.name,b.del_flag,b.create_user,b.create_date,b.update_user,b.update_date
+        select b.id,b.code,b.name,b.del_flag,b.remark,b.create_user,b.create_date,b.update_user,b.update_date
         from sys_dict_type b
         <where>
             <if test="id != null  and id != '' ">
@@ -24,6 +24,9 @@
             <if test="delFlag != null  and delFlag != '' ">
                 and b.del_flag= #{delFlag}
             </if>
+            <if test="remark != null  and remark != '' ">
+                and b.remark= #{remark}
+            </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -34,7 +37,7 @@
     </select>
 
     <select id="getAllByPage" resultType="SysDictType">
-        select b.id,b.code,b.name,b.del_flag,b.create_user,b.create_date,b.update_user,b.update_date
+        select b.id,b.code,b.name,b.del_flag,b.remark,b.create_user,b.create_date,b.update_user,b.update_date
         from sys_dict_type b
         <where>
           <if test="id != null  and id != '' ">
@@ -49,6 +52,9 @@
           <if test="delFlag != null  and delFlag != '' ">
               and b.del_flag= #{delFlag}
           </if>
+            <if test="remark != null  and remark != '' ">
+                and b.remark= #{remark}
+            </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -59,8 +65,8 @@
     </select>
 
     <insert id="insert" parameterType="SysDictType">
-        INSERT INTO sys_dict_type (id,code,name,del_flag,create_user,create_date,update_user,update_date)
-        VALUES (#{id},#{code},#{name},#{delFlag},#{createUser},NOW(),#{createUser},NOW());
+        INSERT INTO sys_dict_type (id,code,name,del_flag,remark,create_user,create_date,update_user,update_date)
+        VALUES (#{id},#{code},#{name},#{delFlag},#{remark},#{createUser},NOW(),#{createUser},NOW());
     </insert>
 
     <update id="update" parameterType="SysDictType">
@@ -77,6 +83,9 @@
             </if>
             <if test="delFlag != null  and delFlag != '' ">
                 del_flag= #{delFlag},
+            </if>
+            <if test="remark != null  and remark != '' ">
+                remark= #{remark},
             </if>
             <if test="updateUser != null and updateUser != ''">
                 update_user=#{updateUser},
