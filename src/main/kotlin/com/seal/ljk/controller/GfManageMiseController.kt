@@ -63,6 +63,6 @@ class GfManageMiseController{
     @PostMapping("/dict")
     @ApiOperation(value = "管理员字典")
     @VerifyToken
-    fun dicTzNoticeInfo(): ResVal = success(SysDictUtil.mapOf("gfManageMiseFunctionalModule"))
+    fun dicTzNoticeInfo(): ResVal = success(SysDictUtil.mapOf("gfMagMiseFuncMod"))
 
 }
