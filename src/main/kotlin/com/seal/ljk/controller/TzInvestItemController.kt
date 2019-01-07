@@ -33,7 +33,7 @@ class TzInvestItemController{
     @PostMapping("/get")
     @ApiOperation(value = "项目管理获取")
     @VerifyToken
-    fun getTzInvestItem(@RequestBody id: String): ResVal {
+    fun getTzInvestItem(@RequestParam id: String): ResVal {
         val data = tzInvestItemService.getTzInvestItem(id)
         if (data.tokenNo.isNotEmpty()) {
             WalletUtil.getTokenMetaByNos(arrayOf(data.tokenNo))?.apply {
