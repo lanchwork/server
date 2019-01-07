@@ -36,19 +36,19 @@ fun <K, V> MutableMap<K, MutableList<V>>.getOrCreate(key: K): MutableList<V> {
     return list
 }
 
-fun <T : Base> Page<T>.toMapListPage(fields: Array<String>): PageInfo<MutableMap<String, Any?>> {
-    return PageInfo(this.toMapList(fields), total.toInt(), pageSize, pages, pageNum)
+fun <T : Base> Page<T>.toMapListPage(vararg fields: String): PageInfo<MutableMap<String, Any?>> {
+    return PageInfo(this.toMapList(*fields), total.toInt(), pageSize, pages, pageNum)
 }
 
-fun <T : Base> List<T>.toMapList(fields: Array<String>): MutableList<MutableMap<String, Any?>> {
+fun <T : Base> List<T>.toMapList(vararg fields: String): MutableList<MutableMap<String, Any?>> {
     val result = mutableListOf<MutableMap<String, Any?>>()
     this.forEach {
-        result.add(it.toMap(fields))
+        result.add(it.toMap(*fields))
     }
     return result
 }
 
-fun Base.toMap(fields: Array<String>): MutableMap<String, Any?> {
+fun Base.toMap(vararg fields: String): MutableMap<String, Any?> {
     val map = mutableMapOf<String, Any?>()
     if (fields.isEmpty()) {
         return map

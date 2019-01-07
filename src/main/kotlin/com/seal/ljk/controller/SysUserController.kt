@@ -86,9 +86,21 @@ class SysUserController {
         return success(sysUserService.login(channelMark, userName, password))
     }
 
+    @PostMapping("/userInfo")
+    @ApiOperation(value = "获取用户信息")
+    @VerifyToken
+    fun userInfo(): ResVal {
+        val user = getSessionUser() ?: throw AuthException()
+        val data = user.toMap("id", "username", "channelMark", "name", "phone", "email", "userType")
+        user.partner?.apply {
+            data["partner"] = this.toMap("id", "channelMark", "partnerName", "partnerType")
+        }
+        return success(data)
+    }
+
     @PostMapping("/menuList")
     @ApiOperation(value = "用户权限列表")
-    @IgnoreToken
+    @VerifyToken
     fun menuList(): ResVal {
         val user = getSessionUser() ?: throw AuthException()
         val menuList = sysMenuService.getAllSysMenuByUser(user)

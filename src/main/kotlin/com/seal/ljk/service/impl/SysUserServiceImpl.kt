@@ -15,6 +15,7 @@ import com.seal.ljk.service.ISysPartnerService
 import com.seal.ljk.service.ISysUserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.*
 
 /**
  * <p>
@@ -123,11 +124,11 @@ class SysUserServiceImpl : ISysUserService {
 //        val menuList = sysMenuService.getAllSysMenuByUser(user)
 
         return mapOf(
-                "token" to token,
-                "username" to user.username,
-                "channelMark" to user.channelMark,
-                "phone" to user.phone,
-                "email" to user.email
+                "token" to token
+//                "username" to user.username,
+//                "channelMark" to user.channelMark,
+//                "phone" to user.phone,
+//                "email" to user.email
 //                "menuList" to menuList
         )
     }
@@ -135,6 +136,7 @@ class SysUserServiceImpl : ISysUserService {
     override fun getUserToken(user: SysUser): String {
         //todo 后续需要处理下加密问题
         return JWT.create().withAudience(user.id)
+                .withIssuedAt(Date())
                 .sign(Algorithm.HMAC256(Constant.SEAL_SALT))
     }
 
@@ -142,27 +144,20 @@ class SysUserServiceImpl : ISysUserService {
         if (token == null) {
             throw  ParamException()
         }
-        // 获取 token 中的 user id
-        val userId: String
-        try {
-            userId = JWT.decode(token).audience[0]
-        } catch (j: JWTDecodeException) {
-            throw  AuthException()
-        }
-
-        // 验证 token
-        val jwtVerifier = JWT.require(Algorithm.HMAC256(Constant.SEAL_SALT)).build()
 
         try {
+            val userId = JWT.decode(token).audience[0]
+            // 验证 token
+            val jwtVerifier = JWT.require(Algorithm.HMAC256(Constant.SEAL_SALT)).build()
             jwtVerifier.verify(token)
+            val sysUser = getSysUser(userId)
+            val partner = sysPartnerService.getByChannelMark(sysUser.channelMark)
+                    ?: throw SealException(message = "合作方不存在。")
+            sysUser.partner = partner
+            return sysUser
         } catch (e: Exception) {
             throw  AuthException()
         }
-        val sysUser = getSysUser(userId) ?: throw SealException("用户不存在。")
-        val partner = sysPartnerService.getByChannelMark(sysUser.channelMark)
-                ?: throw SealException(message = "合作方不存在。")
-        sysUser.partner = partner
-        return sysUser
     }
 
 }
