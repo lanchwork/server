@@ -178,6 +178,7 @@ data class TzInvestItem(
             "已出租房产数量不能为空" using (this.rentOutNumber != null)
             "已出售房产数量不能为空" using (this.sellNumber != null)
 
+            "汇率不能为空" using (this.exchangeRate != null)
             "钱包账户不能为空" using (this.account.isNotEmpty())
         }
     }
