@@ -42,8 +42,8 @@ class TzNoticeInfoController{
     @ApiOperation(value = "新增或修改公告")
     @VerifyToken
     fun saveTzNoticeInfo(@RequestBody tzNoticeInfo: TzNoticeInfo): ResVal {
-        tzNoticeInfo.verify()
         if (tzNoticeInfo.id.isEmpty()) {
+            tzNoticeInfo.verify()
             tzNoticeInfoService.insertTzNoticeInfo(tzNoticeInfo)
         } else {
             tzNoticeInfoService.updateTzNoticeInfo(tzNoticeInfo)
@@ -62,6 +62,6 @@ class TzNoticeInfoController{
     @PostMapping("/dict")
     @ApiOperation(value = "公告字典")
     @VerifyToken
-    fun dicTzNoticeInfo(): ResVal = success(SysDictUtil.mapOf("notice"))
+    fun dicTzNoticeInfo(): ResVal = success(SysDictUtil.mapOf("noticeType"))
 
 }
