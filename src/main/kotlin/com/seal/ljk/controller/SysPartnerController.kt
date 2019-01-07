@@ -62,7 +62,7 @@ class SysPartnerController{
     @PostMapping("/dict")
     @ApiOperation(value = "合作方 数据字典")
     @VerifyToken
-    fun dicSysUser(@RequestParam id: String): ResVal {
+    fun dicSysUser(): ResVal {
         return success(SysDictUtil.mapOf("partnerType", "openFlag"))
     }
 

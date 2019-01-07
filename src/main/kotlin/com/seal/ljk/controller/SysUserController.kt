@@ -126,7 +126,7 @@ class SysUserController {
     @PostMapping("/dict")
     @ApiOperation(value = "用户 数据字典")
     @VerifyToken
-    fun dicSysUser(@RequestParam id: String): ResVal {
+    fun dicSysUser(): ResVal {
         //todo 返回渠道标识，角色类型，状态字典
         val user = getSessionUser()!!
         return if (user.isSeal()) {
