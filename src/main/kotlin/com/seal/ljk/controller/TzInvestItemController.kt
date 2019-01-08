@@ -40,7 +40,7 @@ class TzInvestItemController{
                 if (this.isNotEmpty()) {
                     data.issueAmount = this[0].total_shares?.toBigDecimal()
                     data.allowance = this[0].available_shares?.toBigDecimal()
-                    data.issuePrice = this[0].curr_price
+                    data.issuePrice = this[0].issue_price
                 }
             }
         }
