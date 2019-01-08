@@ -59,8 +59,12 @@ data class SysMenu(
         /**
          * 菜单id（前端需要）
          */
-        var menuId: Int? = null
+        var menuId: Int? = null,
 
+        /**
+         * 模块名称
+         */
+        var menuAs: String = ""
 
 ) : Base(), IVerify {
 
