@@ -123,7 +123,7 @@
                 menu_name= #{menuName},
             </if>
             <if test="menuId != null  and menuId != '' ">
-                menu_name= #{menuId},
+                menu_id= #{menuId},
             </if>
             <if test="url != null  and url != '' ">
                 url= #{url},

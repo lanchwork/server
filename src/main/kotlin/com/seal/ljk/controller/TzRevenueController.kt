@@ -3,6 +3,7 @@ package com.seal.ljk.controller
 import com.seal.ljk.service.ITzRevenueService
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.ResVal
+import com.seal.ljk.common.SysDictUtil
 import com.seal.ljk.common.getPageInfo
 import com.seal.ljk.common.success
 import com.seal.ljk.model.TzRevenue
@@ -60,4 +61,8 @@ class TzRevenueController {
         return success()
     }
 
+    @PostMapping("/dict")
+    @ApiOperation(value = "总收益 数据字典")
+    @VerifyToken
+    fun dicTzNoticeInfo(): ResVal = success(SysDictUtil.mapOf("revenueType"))
 }
