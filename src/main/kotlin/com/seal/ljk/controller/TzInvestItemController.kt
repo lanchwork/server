@@ -73,8 +73,8 @@ class TzInvestItemController{
     @ApiOperation(value = "项目管理新增或修改")
     @VerifyToken
     fun saveTzInvestItem(@RequestBody tzInvestItem: TzInvestItem): ResVal {
-        tzInvestItem.verify()
         if (tzInvestItem.id.isEmpty()) {
+            tzInvestItem.verify()
             tzInvestItemService.insertTzInvestItem(tzInvestItem)
         } else {
             tzInvestItemService.updateTzInvestItem(tzInvestItem)
