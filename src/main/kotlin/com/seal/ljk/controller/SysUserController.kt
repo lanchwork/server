@@ -92,7 +92,7 @@ class SysUserController {
     fun userInfo(): ResVal {
         val user = getSessionUser() ?: throw AuthException()
         val data = user.toMap("id", "username", "channelMark", "name", "phone", "email", "userType")
-        val menuList = menuList()
+        val menuList = sysMenuToMapList(sysMenuService.getAllSysMenuByUser(user))
         data["menuList"] = menuList
         user.partner?.apply {
             data["partner"] = this.toMap("id", "channelMark", "partnerName", "partnerType")
