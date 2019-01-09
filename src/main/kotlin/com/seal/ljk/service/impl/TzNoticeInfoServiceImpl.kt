@@ -34,9 +34,6 @@ class TzNoticeInfoServiceImpl : ITzNoticeInfoService {
     }
 
     override fun getAllTzNoticeInfoByPage(tzNoticeInfo: TzNoticeInfo): Page<TzNoticeInfo> {
-        if(tzNoticeInfo.orderByInfo == null) {
-            tzNoticeInfo.orderByInfo = arrayOf("update_date")
-        }
         return tzNoticeInfoDao.getAllByPage(tzNoticeInfo)
     }
 
