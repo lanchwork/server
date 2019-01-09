@@ -29,7 +29,6 @@ data class SysRoleMenu(
 
     override fun verify() {
         this.apply {
-            " 不能为空" using (this.id.isNotEmpty())
             "角色id 不能为空" using (this.roleId.isNotEmpty())
             "菜单id 不能为空" using (this.menuId.isNotEmpty())
         }
