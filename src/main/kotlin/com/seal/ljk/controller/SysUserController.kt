@@ -116,7 +116,8 @@ class SysUserController {
                     "menuName" to it.menuName,
                     "url" to it.url,
                     "id" to it.menuId,
-                    "parentId" to it.parentMenuId
+                    "parentId" to it.parentMenuId,
+                    "menuAs" to it.menuAs
             )
             it.children?.apply {
                 map["children"] = sysMenuToMapList(this.toList())
