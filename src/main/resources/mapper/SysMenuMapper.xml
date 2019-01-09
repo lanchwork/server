@@ -43,7 +43,7 @@
                 and b.menu_as= #{menuAs}
             </if>
             <if test="partnerTypes != null  and partnerTypes != '' ">
-                and b.partner_types = #{partnerTypes}
+                and b.partner_types like concat('%', #{partnerTypes},'%')
             </if>
             <if test="roleIds != null and roleIds.length > 0">
                 <foreach collection="roleIds" item="roleId" open="b.id in (select menu_id from sys_role_menu where role_id in ("
