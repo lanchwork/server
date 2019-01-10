@@ -60,6 +60,7 @@ class SysPartnerServiceImpl : ISysPartnerService {
         if (!user.isSeal()) {
             throw SealException(message = "权限不足")
         }
+        sysPartner.partnerType = "1"
         sysPartnerMapper.insert(sysPartner)
         // 添加合作方同时添加管理员账户
         sysUserService.insertSysUser(SysUser(username = "admin", initPass = "${sysPartner.channelMark}@2018", channelMark = sysPartner.channelMark, name = "管理员", openFlag = "1", userType = "1"))
