@@ -3,13 +3,13 @@
 <mapper namespace="com.seal.ljk.dao.SysUserMapper">
 
     <select id="get" resultType="SysUser">
-        select b.id,b.username,b.init_pass,b.password,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.username,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
         from sys_user b
         where b.id =#{id}
     </select>
 
     <select id="getUser" resultType="SysUser">
-        select b.id,b.username,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.username,b.init_pass,b.password,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
         from sys_user b
         where b.channel_mark = #{channelMark}
           and b.username = #{userName}
