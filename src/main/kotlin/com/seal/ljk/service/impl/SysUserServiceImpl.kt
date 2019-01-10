@@ -100,10 +100,10 @@ class SysUserServiceImpl : ISysUserService {
     override fun changePass(oldPass: String, newPass: String) {
         checkParam(oldPass, newPass)
         val user = getSessionUser() ?: throw AuthException()
-        if (!user.password.equals(oldPass, true)) {
+        if (!user.password.equals(MessageDigetUtil.md5Pass(oldPass), true)) {
             throw SealException("原密码不正确。")
         }
-        updateSysUser(SysUser(id = user.id, password = newPass))
+        updateSysUser(SysUser(id = user.id, password = MessageDigetUtil.md5Pass(newPass)))
     }
 
     override fun login(channelMark: String, userName: String, password: String): Map<String, Any> {
