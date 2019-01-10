@@ -79,11 +79,14 @@ class SysUserServiceImpl : ISysUserService {
     }
 
     override fun updateSysUser(sysUser: SysUser) {
+        if (sysUser.initPass.isNotEmpty()) {
+            sysUser.password = MessageDigetUtil.md5Pass(sysUser.initPass)
+        }
         sysUserMapper.update(sysUser)
     }
 
     override fun deleteSysUser(id: String) {
-        val sysUser = getSysUser(id) ?: throw SealException("用户不存在")
+        val sysUser = getSysUser(id)
         val user = getSessionUser() ?: throw AuthException()
 
         if (sysUser.userType == "0") {//管理员账户

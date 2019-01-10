@@ -39,7 +39,11 @@ class SysUserController {
     @PostMapping("/get")
     @ApiOperation(value = "获取用户表")
     @VerifyToken
-    fun getSysUser(@RequestParam id: String): ResVal = success(sysUserService.getSysUser(id))
+    fun getSysUser(@RequestParam id: String): ResVal = success(sysUserService.getSysUser(id).let {
+        it.initPass = ""
+        it.password = ""
+        it
+    })
 
     @PostMapping("/list")
     @ApiOperation(value = "用户列表")
@@ -51,8 +55,8 @@ class SysUserController {
     @ApiOperation(value = "新增或修改用户表")
     @VerifyToken
     fun saveSysUser(@RequestBody sysUser: SysUser): ResVal {
-        sysUser.verify()
         if (sysUser.id.isEmpty()) {
+            sysUser.verify()
             sysUserService.insertSysUser(sysUser)
         } else {
             sysUserService.updateSysUser(sysUser)
