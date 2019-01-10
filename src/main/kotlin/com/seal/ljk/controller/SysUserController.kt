@@ -39,7 +39,11 @@ class SysUserController {
     @PostMapping("/get")
     @ApiOperation(value = "获取用户表")
     @VerifyToken
-    fun getSysUser(@RequestParam id: String): ResVal = success(sysUserService.getSysUser(id))
+    fun getSysUser(@RequestParam id: String): ResVal = success(sysUserService.getSysUser(id).let {
+        it.initPass = ""
+        it.password = ""
+        it
+    })
 
     @PostMapping("/list")
     @ApiOperation(value = "用户列表")

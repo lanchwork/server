@@ -72,6 +72,7 @@ class SysMenuServiceImpl : ISysMenuService {
             menu.roleIds = roleIds
         }
         menu.orderByInfo = arrayOf("type", "sort")
+        menu.flag = 1
         val all = sysMenuDao.getAll(menu)
 
         return getMenuTreeList(all)

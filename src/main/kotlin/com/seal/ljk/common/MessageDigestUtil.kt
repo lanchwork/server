@@ -9,8 +9,8 @@ import java.security.MessageDigest
 /**
  * Created by cjh on 2018/12/10.
  */
-object MessageDigetUtil {
-    
+object MessageDigestUtil {
+
     fun md5Pass(pass: String): String {
         return md5(pass + Constant.SEAL_SALT)
     }
@@ -22,13 +22,13 @@ object MessageDigetUtil {
         val result = digest.digest(input.toByteArray())
         return toHex(result)
     }
-    
+
     fun sha256(input: String): String {
         val digest = MessageDigest.getInstance("SHA-256")
         val result = digest.digest(input.toByteArray())
         return toHex(result)
     }
-    
+
     fun sha256(input: Serializable): String {
         val baos = ByteArrayOutputStream()
         val oos = ObjectOutputStream(baos)
@@ -38,7 +38,7 @@ object MessageDigetUtil {
         val result = digest.digest(baos.toByteArray())
         return toHex(result)
     }
-    
+
     //转成16进制
     private fun toHex(byteArray: ByteArray): String {
         return with(StringBuilder()) {
@@ -54,10 +54,11 @@ object MessageDigetUtil {
             }
             toString()
         }
-        
+
     }
-    
+
 }
 
 fun main(args: Array<String>) {
+    println(MessageDigestUtil.md5Pass("mini@2018"))
 }

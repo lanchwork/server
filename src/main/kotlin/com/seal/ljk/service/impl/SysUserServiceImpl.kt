@@ -2,11 +2,10 @@ package com.seal.ljk.service.impl
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
-import com.auth0.jwt.exceptions.JWTDecodeException
 import com.github.pagehelper.Page
 import com.seal.ljk.base.*
 import com.seal.ljk.common.Constant
-import com.seal.ljk.common.MessageDigetUtil
+import com.seal.ljk.common.MessageDigestUtil
 import com.seal.ljk.common.checkParam
 import com.seal.ljk.common.getSessionUser
 import com.seal.ljk.dao.SysUserMapper
@@ -42,9 +41,7 @@ class SysUserServiceImpl : ISysUserService {
 
     override fun getAllSysUser(sysUser: SysUser): List<SysUser> {
         val user = getSessionUser() ?: throw AuthException()
-        if (user.isSeal()) {
-            sysUser.channelMark = ""
-        } else {
+        if (!user.isSeal()) {
             sysUser.channelMark = user.channelMark
         }
         return sysUserMapper.getAll(sysUser)
@@ -52,9 +49,7 @@ class SysUserServiceImpl : ISysUserService {
 
     override fun getAllSysUserByPage(sysUser: SysUser): Page<SysUser> {
         val user = getSessionUser() ?: throw AuthException()
-        if (user.isSeal()) {
-            sysUser.channelMark = ""
-        } else {
+        if (!user.isSeal()) {
             sysUser.channelMark = user.channelMark
         }
         return sysUserMapper.getAllByPage(sysUser)
@@ -73,14 +68,14 @@ class SysUserServiceImpl : ISysUserService {
             }
         }
         if (sysUser.initPass.isNotEmpty()) {
-            sysUser.password = MessageDigetUtil.md5Pass(sysUser.initPass)
+            sysUser.password = MessageDigestUtil.md5Pass(sysUser.initPass)
         }
         sysUserMapper.insert(sysUser)
     }
 
     override fun updateSysUser(sysUser: SysUser) {
         if (sysUser.initPass.isNotEmpty()) {
-            sysUser.password = MessageDigetUtil.md5Pass(sysUser.initPass)
+            sysUser.password = MessageDigestUtil.md5Pass(sysUser.initPass)
         }
         sysUserMapper.update(sysUser)
     }
@@ -100,10 +95,10 @@ class SysUserServiceImpl : ISysUserService {
     override fun changePass(oldPass: String, newPass: String) {
         checkParam(oldPass, newPass)
         val user = getSessionUser() ?: throw AuthException()
-        if (!user.password.equals(MessageDigetUtil.md5Pass(oldPass), true)) {
+        if (!user.password.equals(MessageDigestUtil.md5Pass(oldPass), true)) {
             throw SealException("原密码不正确。")
         }
-        updateSysUser(SysUser(id = user.id, password = MessageDigetUtil.md5Pass(newPass)))
+        updateSysUser(SysUser(id = user.id, password = MessageDigestUtil.md5Pass(newPass)))
     }
 
     override fun login(channelMark: String, userName: String, password: String): Map<String, Any> {
@@ -114,7 +109,7 @@ class SysUserServiceImpl : ISysUserService {
         }
         val user = sysUserMapper.getUser(channelMark, userName)
                 ?: throw SealException(message = "该用户不存在。")
-        if (!user.password.equals(MessageDigetUtil.md5Pass(password), true)) {
+        if (!user.password.equals(MessageDigestUtil.md5Pass(password), true)) {
             throw SealException(message = "密码错误。")
         }
         if (user.openFlag != "1") {

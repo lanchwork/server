@@ -47,9 +47,7 @@ class SysPartnerServiceImpl : ISysPartnerService {
 
     override fun getAllSysPartnerByPage(sysPartner: SysPartner): Page<SysPartner> {
         val user = getSessionUser() ?: throw AuthException()
-        if (user.isSeal()) {
-            sysPartner.channelMark = ""
-        } else {
+        if (!user.isSeal()) {
             sysPartner.channelMark = user.channelMark
         }
         return sysPartnerMapper.getAllByPage(sysPartner)

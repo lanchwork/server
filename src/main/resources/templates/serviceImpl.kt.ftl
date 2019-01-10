@@ -35,9 +35,7 @@ class ${table.serviceImplName} : ${table.serviceName} {
         <#list table.fields as field>
         <#if field.propertyName == "channelMark">
         val user = getSessionUser() ?: throw AuthException()
-        if (user.isSeal()) {
-            ${entity?uncap_first}.channelMark = ""
-        } else {
+        if (!user.isSeal()) {
             ${entity?uncap_first}.channelMark = user.channelMark
         }
         </#if>
