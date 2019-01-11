@@ -74,13 +74,11 @@ data class SysMenu(
     var checked: String? = null
 
     override fun verify() {
-        this.apply {
-            "父菜单ID 不能为空" using (this.parentId.isNotEmpty())
-            "菜单名称 不能为空" using (this.menuName.isNotEmpty())
-//            "菜单对应的页面url 不能为空" using (this.url.isNotEmpty())
-            "显示顺序 不能为空" using (this.sort != null)
-            "是否有效 不能为空" using (this.flag != null)
-        }
+        "父菜单ID 不能为空" using (parentId.isNotEmpty())
+        "菜单名称 不能为空" using (menuName.isNotEmpty())
+//            "菜单对应的页面url 不能为空" using (url.isNotEmpty())
+        "显示顺序 不能为空" using (sort != null)
+        "是否有效 不能为空" using (flag != null)
     }
 }
 

@@ -11,27 +11,25 @@ import com.seal.ljk.base.PrimaryKey
  */
 data class SysRoleMenu(
 
-    @PrimaryKey
-    var id: String = "",
+        @PrimaryKey
+        var id: String = "",
 
-    /**
-     * 角色id
-     */
-    var roleId: String = "",
+        /**
+         * 角色id
+         */
+        var roleId: String = "",
 
-    /**
-     * 菜单id
-     */
-    var menuId: String = ""
+        /**
+         * 菜单id
+         */
+        var menuId: String = ""
 ) : Base(), IVerify {
 
     var checkedIds: Array<String>? = null
 
     override fun verify() {
-        this.apply {
-            "角色id 不能为空" using (this.roleId.isNotEmpty())
-            "菜单id 不能为空" using (this.menuId.isNotEmpty())
-        }
+        "角色id 不能为空" using (roleId.isNotEmpty())
+        "菜单id 不能为空" using (menuId.isNotEmpty())
     }
 }
 

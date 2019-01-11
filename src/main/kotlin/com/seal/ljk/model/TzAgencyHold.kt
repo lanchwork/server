@@ -15,75 +15,73 @@ import java.math.BigDecimal
 data class TzAgencyHold(
 
         @PrimaryKey
-    var id: String = "",
+        var id: String = "",
 
         /**
-     * 投资项目id
-     */
-    var itemId: String = "",
+         * 投资项目id
+         */
+        var itemId: String = "",
 
         /**
-     * 用户手机号
-     */
-    var mobile: String = "",
+         * 用户手机号
+         */
+        var mobile: String = "",
 
         /**
-     * token数量
-     */
-    var tokenNumber: BigDecimal? = null,
+         * token数量
+         */
+        var tokenNumber: BigDecimal? = null,
 
         /**
-     * 单价
-     */
-    var price: BigDecimal? = null,
+         * 单价
+         */
+        var price: BigDecimal? = null,
 
         /**
-     * account账户
-     */
-    var account: String = "",
+         * account账户
+         */
+        var account: String = "",
 
         /**
-     * 区号
-     */
-    var areaCode: String = "",
+         * 区号
+         */
+        var areaCode: String = "",
 
         /**
-     * 类型(0代持转入1代持转出)
-     */
-    var type: String = "",
+         * 类型(0代持转入1代持转出)
+         */
+        var type: String = "",
 
         /**
-     * 当前持有量
-     */
-    var currentHoldings: BigDecimal? = null,
+         * 当前持有量
+         */
+        var currentHoldings: BigDecimal? = null,
 
         /**
-     * 备注
-     */
-    var remark: String = "",
+         * 备注
+         */
+        var remark: String = "",
 
         /**
-     * token名称
-     */
-    var tokenName: String = "",
+         * token名称
+         */
+        var tokenName: String = "",
 
         /**
-     * 账户(Seal代持)
-     */
-    var sealAccount: String = ""
+         * 账户(Seal代持)
+         */
+        var sealAccount: String = ""
 ) : Base(), IVerify {
 
     override fun verify() {
-        this.apply {
-            "用户手机号不能为空" using (this.mobile.isNotEmpty())
-            "token数量不能为空" using (this.tokenNumber != null)
-            "单价不能为空" using (this.price != null)
-            "区号不能为空" using (this.areaCode.isNotEmpty())
-            "类型不能为空" using (this.type.isNotEmpty())
-            "当前持有量不能为空" using (this.currentHoldings != null)
-            "token名称不能为空" using (this.tokenName.isNotEmpty())
-            "账户(Seal代持)不能为空" using (this.sealAccount.isNotEmpty())
-        }
+        "用户手机号不能为空" using (mobile.isNotEmpty())
+        "token数量不能为空" using (tokenNumber != null)
+        "单价不能为空" using (price != null)
+        "区号不能为空" using (areaCode.isNotEmpty())
+        "类型不能为空" using (type.isNotEmpty())
+        "当前持有量不能为空" using (currentHoldings != null)
+        "token名称不能为空" using (tokenName.isNotEmpty())
+        "账户(Seal代持)不能为空" using (sealAccount.isNotEmpty())
     }
 }
 

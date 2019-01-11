@@ -37,10 +37,8 @@ data class GfManageMise(
 ) : Base(), IVerify {
 
     override fun verify() {
-        this.apply {
-            "钱包地址 不能为空" using (this.address.isNotEmpty())
-            "功能模块 不能为空" using (this.functionalModule.isNotEmpty())
-        }
+        "钱包地址 不能为空" using (this.address.isNotEmpty())
+        "功能模块 不能为空" using (this.functionalModule.isNotEmpty())
     }
 }
 

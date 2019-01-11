@@ -57,14 +57,12 @@ data class TzRevenue(
     var tokenNo: String? = null
 
     override fun verify() {
-        this.apply {
-            "投资项目id 不能为空" using (this.itemId.isNotEmpty())
-            "总收益 不能为空" using (this.totalRevenue != null)
-            "每份收益 不能为空" using (this.preRevenue != null)
-            "收益类型 不能为空" using (this.revenueType.isNotEmpty())
-            "日期 不能为空" using (this.revenueDate != null)
-            "状态 不能为空" using (this.status.isNotEmpty())
-        }
+        "投资项目id 不能为空" using (itemId.isNotEmpty())
+        "总收益 不能为空" using (totalRevenue != null)
+        "每份收益 不能为空" using (preRevenue != null)
+        "收益类型 不能为空" using (revenueType.isNotEmpty())
+        "日期 不能为空" using (revenueDate != null)
+        "状态 不能为空" using (status.isNotEmpty())
     }
 }
 

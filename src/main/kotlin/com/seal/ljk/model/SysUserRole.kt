@@ -11,35 +11,33 @@ import com.seal.ljk.base.PrimaryKey
  */
 data class SysUserRole(
 
-    @PrimaryKey
-    var id: String = "",
+        @PrimaryKey
+        var id: String = "",
 
-    /**
-     * 合作方id
-     */
-    var partnerId: String = "",
+        /**
+         * 合作方id
+         */
+        var partnerId: String = "",
 
-    /**
-     * 用户ID
-     */
-    var userId: String = "",
+        /**
+         * 用户ID
+         */
+        var userId: String = "",
 
-    /**
-     * 角色ID
-     */
-    var roleId: String = "",
+        /**
+         * 角色ID
+         */
+        var roleId: String = "",
 
-    /**
-     * 角色编码
-     */
-    var roleCode: String = ""
+        /**
+         * 角色编码
+         */
+        var roleCode: String = ""
 ) : Base(), IVerify {
 
     override fun verify() {
-        this.apply {
-            "用户ID 不能为空" using (this.userId.isNotEmpty())
-            "角色ID 不能为空" using (this.roleId.isNotEmpty())
-        }
+        "用户ID 不能为空" using (userId.isNotEmpty())
+        "角色ID 不能为空" using (roleId.isNotEmpty())
     }
 }
 

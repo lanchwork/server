@@ -38,11 +38,9 @@ data class SysDictType(
 ) : Base(), IVerify {
 
     override fun verify() {
-        this.apply {
-            "编码 不能为空" using (this.code.isNotEmpty())
-            "字典名称 不能为空" using (this.name.isNotEmpty())
-            "描述 不能为空" using (this.remark.isNotEmpty())
-        }
+        "编码 不能为空" using (code.isNotEmpty())
+        "字典名称 不能为空" using (name.isNotEmpty())
+        "描述 不能为空" using (remark.isNotEmpty())
     }
 }
 

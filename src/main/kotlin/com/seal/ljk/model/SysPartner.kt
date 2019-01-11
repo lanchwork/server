@@ -53,12 +53,10 @@ data class SysPartner(
 ) : Base(), IVerify {
 
     override fun verify() {
-        this.apply {
-            "渠道标识 不能为空" using (this.channelMark.isNotEmpty())
-            "合作方名称 不能为空" using (this.partnerName.isNotEmpty())
-            "是否开启 不能为空" using (this.openFlag.isNotEmpty())
-//            "合作类型 不能为空" using (this.partnerType.isNotEmpty())
-        }
+        "渠道标识 不能为空" using (channelMark.isNotEmpty())
+        "合作方名称 不能为空" using (partnerName.isNotEmpty())
+        "是否开启 不能为空" using (openFlag.isNotEmpty())
+//            "合作类型 不能为空" using (partnerType.isNotEmpty())
     }
 }
 

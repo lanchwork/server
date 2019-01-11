@@ -40,21 +40,19 @@ data class ${entity}(
 ) : Base(), IVerify {
 <#list table.fields as field>
     <#if field.propertyType == "Date">
-            var ${field.propertyName}Begin: ${field.propertyType}? = null
-            var ${field.propertyName}End: ${field.propertyType}? = null
+    var ${field.propertyName}Begin: ${field.propertyType}? = null
+    var ${field.propertyName}End: ${field.propertyType}? = null
     </#if>
 </#list>
 
     override fun verify() {
-        this.apply {
     <#list table.fields as field>
         <#if field.propertyType == "String">
-            "${field.comment!} 不能为空" using (this.${field.propertyName}.isNotEmpty())
+        "${field.comment!} 不能为空" using (${field.propertyName}.isNotEmpty())
         <#else>
-            "${field.comment!} 不能为空" using (this.${field.propertyName} != null)
+        "${field.comment!} 不能为空" using (${field.propertyName} != null)
         </#if>
     </#list>
-        }
     }
 }
 

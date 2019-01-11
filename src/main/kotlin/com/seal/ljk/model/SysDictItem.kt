@@ -48,12 +48,10 @@ data class SysDictItem(
 ) : Base(), IVerify {
 
     override fun verify() {
-        this.apply {
-            "真实值 不能为空" using (this.value.isNotEmpty())
-            "显示值 不能为空" using (this.showVal.isNotEmpty())
-            "描述 不能为空" using (this.remark.isNotEmpty())
-            "字典id 不能为空" using (this.typeId.isNotEmpty())
-        }
+        "真实值 不能为空" using (value.isNotEmpty())
+        "显示值 不能为空" using (showVal.isNotEmpty())
+        "描述 不能为空" using (remark.isNotEmpty())
+        "字典id 不能为空" using (typeId.isNotEmpty())
     }
 }
 

@@ -49,10 +49,10 @@ data class SysBanner(
 ) : Base(), IVerify {
 
     override fun verify() {
-        this.apply {
-            "标题 不能为空" using (this.title.isNotEmpty())
-            "路径 不能为空" using (this.imgPath.isNotEmpty())
-        }
+        "标题 不能为空" using (this.title.isNotEmpty())
+        "路径 不能为空" using (this.imgPath.isNotEmpty())
+        type = type.ifEmpty { "0" }
+        status = status.ifEmpty { "1" }
     }
 }
 

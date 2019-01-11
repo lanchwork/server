@@ -5,6 +5,8 @@ import com.seal.ljk.base.PrimaryKey
 import com.seal.ljk.common.Constant
 import com.seal.ljk.model.Base
 import com.seal.ljk.common.using
+import com.seal.ljk.model.SysUser.Companion.USER_TYPE_ADMIN
+import com.seal.ljk.model.SysUser.Companion.USER_TYPE_SUPER
 
 /**
  * 用户表
@@ -13,56 +15,56 @@ import com.seal.ljk.common.using
  */
 data class SysUser(
 
-    /**
-     * 主键id
-     */
-    @PrimaryKey
-    var id: String = "",
+        /**
+         * 主键id
+         */
+        @PrimaryKey
+        var id: String = "",
 
-    /**
-     * 用户名
-     */
-    var username: String = "",
+        /**
+         * 用户名
+         */
+        var username: String = "",
 
-    /**
-     * 初始明文密码
-     */
-    var initPass: String = "",
+        /**
+         * 初始明文密码
+         */
+        var initPass: String = "",
 
-    /**
-     * 密文密码
-     */
-    var password: String = "",
+        /**
+         * 密文密码
+         */
+        var password: String = "",
 
-    /**
-     * 渠道标识
-     */
-    var channelMark: String = "",
+        /**
+         * 渠道标识
+         */
+        var channelMark: String = "",
 
-    /**
-     * 姓名
-     */
-    var name: String = "",
+        /**
+         * 姓名
+         */
+        var name: String = "",
 
-    /**
-     * 手机号
-     */
-    var phone: String = "",
+        /**
+         * 手机号
+         */
+        var phone: String = "",
 
-    /**
-     * 邮箱
-     */
-    var email: String = "",
+        /**
+         * 邮箱
+         */
+        var email: String = "",
 
-    /**
-     * 是否开启   0为是 1为否
-     */
-    var openFlag: String = "",
-    /**
-     * 用户类型 0超级管理员用户 1合作方管理员，2普通用户
-     * 管理员用户只能由 seal 创建及删除
-     */
-    var userType: String = ""
+        /**
+         * 是否开启   0为是 1为否
+         */
+        var openFlag: String = "",
+        /**
+         * 用户类型 0超级管理员用户 1合作方管理员，2普通用户
+         * 管理员用户只能由 seal 创建及删除
+         */
+        var userType: String = ""
 
 ) : Base(), IVerify {
 
@@ -75,14 +77,12 @@ data class SysUser(
     var partner: SysPartner? = null
 
     override fun verify() {
-        this.apply {
-            "用户名 不能为空" using (this.username.isNotEmpty())
-            "初始密码 不能为空" using (this.initPass.isNotEmpty())
-            "姓名 不能为空" using (this.name.isNotEmpty())
-            "手机号 不能为空" using (this.phone.isNotEmpty())
-            "邮箱 不能为空" using (this.email.isNotEmpty())
-            "是否开启 不能为空" using (this.openFlag.isNotEmpty())
-        }
+        "用户名 不能为空" using (username.isNotEmpty())
+        "初始密码 不能为空" using (initPass.isNotEmpty())
+        "姓名 不能为空" using (name.isNotEmpty())
+        "手机号 不能为空" using (phone.isNotEmpty())
+        "邮箱 不能为空" using (email.isNotEmpty())
+        "是否开启 不能为空" using (openFlag.isNotEmpty())
     }
 
     fun isSeal(): Boolean {

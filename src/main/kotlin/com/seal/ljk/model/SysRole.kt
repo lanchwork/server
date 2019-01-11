@@ -34,9 +34,7 @@ data class SysRole(
 ) : Base(), IVerify {
 
     override fun verify() {
-        this.apply {
-            "角色名称 不能为空" using (this.roleName.isNotEmpty())
-        }
+        "角色名称 不能为空" using (roleName.isNotEmpty())
     }
 }
 
