@@ -11,6 +11,7 @@ import com.seal.ljk.base.IdNotFoundException
 import com.seal.ljk.base.SealException
 import com.seal.ljk.base.loggerFor
 import com.seal.ljk.common.getSessionUser
+import com.seal.ljk.service.ISysDictTypeService
 
 /**
  * <p>
@@ -26,6 +27,8 @@ class SysDictItemServiceImpl : ISysDictItemService {
 
     @Autowired
     lateinit var sysDictItemDao: SysDictItemDao
+    @Autowired
+    lateinit var sysDictTypeService: ISysDictTypeService
 
     override fun getSysDictItem(id: String): SysDictItem {
         return sysDictItemDao.get(id) ?: throw IdNotFoundException()
@@ -36,30 +39,33 @@ class SysDictItemServiceImpl : ISysDictItemService {
     }
 
     override fun getAllSysDictItemByPage(sysDictItem: SysDictItem): Page<SysDictItem> {
-        val newSysDictItem=SysDictItem()
+        val newSysDictItem = SysDictItem()
         newSysDictItem.delFlag = "0"
-        newSysDictItem.typeId=sysDictItem.typeId
+        newSysDictItem.typeId = sysDictItem.typeId
         return sysDictItemDao.getAllByPage(newSysDictItem)
     }
 
     override fun insertSysDictItem(sysDictItem: SysDictItem) {
         sysDictItem.delFlag = "0"
-        if (sysDictItem.sort == null){
+        if (sysDictItem.sort == null) {
             sysDictItem.sort = 0
         }
         sysDictItemDao.insert(sysDictItem)
+        sysDictTypeService.refreshCache()
     }
 
     override fun updateSysDictItem(sysDictItem: SysDictItem) {
         sysDictItemDao.update(sysDictItem)
+        sysDictTypeService.refreshCache()
     }
 
     /**
      * 此处为假删, 只将数据deleteFlag设置为1
      */
     override fun deleteSysDictItem(id: String) {
-        val sysDictItem = SysDictItem(id = id,delFlag = "1")
+        val sysDictItem = SysDictItem(id = id, delFlag = "1")
         sysDictItemDao.update(sysDictItem)
+        sysDictTypeService.refreshCache()
     }
 
 }
