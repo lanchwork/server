@@ -78,7 +78,7 @@
 
     <insert id="insert" parameterType="SysBanner">
         INSERT INTO sys_banner (title,id,img_path,link_url,type,status,lang,create_user,create_date,update_user,update_date)
-        VALUES (#{title},#{id},#{imgPath},#{linkUrl},nullif(#{type},'0'),nullif(#{status},'1'),#{lang},#{createUser},NOW(),#{createUser},NOW());
+        VALUES (#{title},#{id},#{imgPath},#{linkUrl},#{type},#{status},#{lang},#{createUser},NOW(),#{createUser},NOW());
     </insert>
 
     <update id="update" parameterType="SysBanner">
