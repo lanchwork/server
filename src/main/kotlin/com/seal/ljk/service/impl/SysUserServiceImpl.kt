@@ -105,7 +105,7 @@ class SysUserServiceImpl : ISysUserService {
         val partner = sysPartnerService.getByChannelMark(channelMark)
                 ?: throw SealException(message = "合作方不存在。")
         if (partner.openFlag != "1") {
-            throw SealException(message = "该合作方已被禁用，请管理员。")
+            throw SealException(message = "该合作方已被禁用，请联系管理员。")
         }
         val user = sysUserMapper.getUser(channelMark, userName)
                 ?: throw SealException(message = "该用户不存在。")
@@ -113,7 +113,7 @@ class SysUserServiceImpl : ISysUserService {
             throw SealException(message = "密码错误。")
         }
         if (user.openFlag != "1") {
-            throw SealException(message = "该用户已被禁用，请管理员。")
+            throw SealException(message = "该用户已被禁用，请联系管理员。")
         }
         val token = getUserToken(user)
 
