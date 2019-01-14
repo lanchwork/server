@@ -13,6 +13,8 @@ import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import java.math.BigDecimal
+
 /**
  * <p>
  * 项目管理前端控制器
@@ -40,7 +42,7 @@ class TzInvestItemController{
                 if (this.isNotEmpty()) {
                     data.issueAmount = this[0].total_shares?.toBigDecimal()
                     data.allowance = this[0].available_shares?.toBigDecimal()
-                    data.issuePrice = this[0].issue_price
+                    data.issuePrice = this[0].issue_price?.divide(BigDecimal(10000.0))
                 }
             }
         }
@@ -62,7 +64,7 @@ class TzInvestItemController{
                 meta?.apply {
                     it.issueAmount = this.total_shares?.toBigDecimal()
                     it.allowance = this.available_shares?.toBigDecimal()
-                    it.issuePrice = this.curr_price
+                    it.issuePrice = this.curr_price?.divide(BigDecimal(10000.0))
                 }
             }
         }
