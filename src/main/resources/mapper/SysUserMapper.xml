@@ -3,54 +3,51 @@
 <mapper namespace="com.seal.ljk.dao.SysUserMapper">
 
     <select id="get" resultType="SysUser">
-        select b.id,b.username,b.init_pass,b.password,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user,b.user_type_list
+        select b.id,b.username,b.init_pass,b.password,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
         from sys_user b
         where b.id =#{id}
     </select>
 
     <select id="getUser" resultType="SysUser">
-        select b.id,b.username,b.init_pass,b.password,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user,b.user_type_list
+        select b.id,b.username,b.init_pass,b.password,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
         from sys_user b
         where b.channel_mark = #{channelMark}
           and b.username = #{userName}
     </select>
 
     <select id="getAll" resultType="SysUser">
-        select b.id,b.username,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user,b.user_type_list
+        select b.id,b.username,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
         from sys_user b
         <where>
-          <if test="id != null  and id != '' ">
-              and b.id= #{id}
-          </if>
-          <if test="username != null  and username != '' ">
-              and b.username= #{username}
-          </if>
-          <if test="initPass != null  and initPass != '' ">
-              and b.init_pass= #{initPass}
-          </if>
-          <if test="password != null  and password != '' ">
-              and b.password= #{password}
-          </if>
-          <if test="channelMark != null  and channelMark != '' ">
-              and b.channel_mark= #{channelMark}
-          </if>
-          <if test="userType != null  and userType != '' ">
-              and b.user_type= #{userType}
-          </if>
-          <if test="name != null  and name != '' ">
-              and b.name= #{name}
-          </if>
-          <if test="phone != null  and phone != '' ">
-              and b.phone= #{phone}
-          </if>
-          <if test="email != null  and email != '' ">
-              and b.email= #{email}
-          </if>
-          <if test="openFlag != null  and openFlag != '' ">
-              and b.open_flag= #{openFlag}
-          </if>
-            <if test="userTypeList != null  and userTypeList != '' ">
-                and b.user_type_list= #{userTypeList}
+            <if test="id != null  and id != '' ">
+                and b.id= #{id}
+            </if>
+            <if test="username != null  and username != '' ">
+                and b.username= #{username}
+            </if>
+            <if test="initPass != null  and initPass != '' ">
+                and b.init_pass= #{initPass}
+            </if>
+            <if test="password != null  and password != '' ">
+                and b.password= #{password}
+            </if>
+            <if test="channelMark != null  and channelMark != '' ">
+                and b.channel_mark= #{channelMark}
+            </if>
+            <if test="userType != null  and userType != '' ">
+                and b.user_type= #{userType}
+            </if>
+            <if test="name != null  and name != '' ">
+                and b.name= #{name}
+            </if>
+            <if test="phone != null  and phone != '' ">
+                and b.phone= #{phone}
+            </if>
+            <if test="email != null  and email != '' ">
+                and b.email= #{email}
+            </if>
+            <if test="openFlag != null  and openFlag != '' ">
+                and b.open_flag= #{openFlag}
             </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
@@ -62,41 +59,38 @@
     </select>
 
     <select id="getAllByPage" resultType="SysUser">
-        select b.id,b.username,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user,b.user_type_list
+        select b.id,b.username,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
         from sys_user b
         <where>
-          <if test="id != null  and id != '' ">
-              and b.id= #{id}
-          </if>
-          <if test="username != null  and username != '' ">
-              and b.username= #{username}
-          </if>
-          <if test="initPass != null  and initPass != '' ">
-              and b.init_pass= #{initPass}
-          </if>
-          <if test="password != null  and password != '' ">
-              and b.password= #{password}
-          </if>
-          <if test="channelMark != null  and channelMark != '' ">
-              and b.channel_mark= #{channelMark}
-          </if>
+            <if test="id != null  and id != '' ">
+                and b.id= #{id}
+            </if>
+            <if test="username != null  and username != '' ">
+                and b.username= #{username}
+            </if>
+            <if test="initPass != null  and initPass != '' ">
+                and b.init_pass= #{initPass}
+            </if>
+            <if test="password != null  and password != '' ">
+                and b.password= #{password}
+            </if>
+            <if test="channelMark != null  and channelMark != '' ">
+                and b.channel_mark= #{channelMark}
+            </if>
             <if test="userType != null  and userType != '' ">
                 and b.user_type= #{userType}
             </if>
-          <if test="name != null  and name != '' ">
-              and b.name= #{name}
-          </if>
-          <if test="phone != null  and phone != '' ">
-              and b.phone= #{phone}
-          </if>
-          <if test="email != null  and email != '' ">
-              and b.email= #{email}
-          </if>
-          <if test="openFlag != null  and openFlag != '' ">
-              and b.open_flag= #{openFlag}
-          </if>
-            <if test="userTypeList != null  and userTypeList != '' ">
-                and b.user_type_list= #{userTypeList}
+            <if test="name != null  and name != '' ">
+                and b.name= #{name}
+            </if>
+            <if test="phone != null  and phone != '' ">
+                and b.phone= #{phone}
+            </if>
+            <if test="email != null  and email != '' ">
+                and b.email= #{email}
+            </if>
+            <if test="openFlag != null  and openFlag != '' ">
+                and b.open_flag= #{openFlag}
             </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
@@ -108,8 +102,8 @@
     </select>
 
     <insert id="insert" parameterType="SysUser">
-        INSERT INTO sys_user (id,username,init_pass,password,channel_mark,user_type,name,phone,email,open_flag,create_date,create_user,update_date,update_user,user_type_list)
-        VALUES (#{id},#{username},#{initPass},#{password},#{channelMark},#{userType},#{name},#{phone},#{email},#{openFlag},NOW(),#{createUser},NOW(),#{createUser},#{userTypeList});
+        INSERT INTO sys_user (id,username,init_pass,password,channel_mark,user_type,name,phone,email,open_flag,create_date,create_user,update_date,update_user)
+        VALUES (#{id},#{username},#{initPass},#{password},#{channelMark},#{userType},#{name},#{phone},#{email},#{openFlag},NOW(),#{createUser},NOW(),#{createUser});
     </insert>
 
     <update id="update" parameterType="SysUser">
@@ -147,9 +141,6 @@
             </if>
             <if test="updateUser != null and updateUser != ''">
                 update_user=#{updateUser},
-            </if>
-            <if test="userTypeList != null  and userTypeList != '' ">
-                user_type_list= #{userTypeList},
             </if>
             update_date=NOW()
         </set>
