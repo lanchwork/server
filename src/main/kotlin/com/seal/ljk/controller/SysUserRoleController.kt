@@ -3,9 +3,9 @@ package com.seal.ljk.controller
 import com.seal.ljk.service.ISysUserRoleService
 import com.seal.ljk.base.VerifyToken
 import com.seal.ljk.common.*
-import com.seal.ljk.model.SysUser
+import com.seal.ljk.model.SysRole
 import com.seal.ljk.model.SysUserRole
-import com.seal.ljk.service.ISysUserService
+import com.seal.ljk.service.ISysRoleService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
@@ -27,7 +27,7 @@ class SysUserRoleController{
     lateinit var sysUserRoleService: ISysUserRoleService
 
     @Autowired
-    lateinit var sysUserService: ISysUserService
+    lateinit var sysRoleService: ISysRoleService
 
     @PostMapping("/get")
     @ApiOperation(value = "获取用户与角色对应关系")
@@ -58,6 +58,22 @@ class SysUserRoleController{
     fun deleteSysUserRole(@RequestParam id: String): ResVal {
         sysUserRoleService.deleteSysUserRole(id)
         return success()
+    }
+
+    @PostMapping("/getAll")
+    @ApiOperation(value = "查询用户类型列表")
+    @VerifyToken
+    fun getAllSysUserRole(@RequestBody sysUserRole: SysUserRole): ResVal {
+        val roleList=sysRoleService.getAllSysRole(SysRole())
+        val data=sysUserRoleService.getAllSysUserRole(sysUserRole)
+        for(r in roleList){
+            for(d in data){
+                if(r.id == d.roleId){
+                    d.selected="1"
+                }
+            }
+        }
+        return success(data)
     }
 
     @PostMapping("/updateList")
@@ -92,11 +108,7 @@ class SysUserRoleController{
         }
         val str = sb.substring(0, sb.length - 1).toString()
         sysUserRoleService.insertBatch(str)
-        //根据用户id更新对应的userTypeList
-        val user=SysUser()
-        user.id=userId
-        user.userTypeList=roleIdList
-        sysUserService.updateSysUser(user)
+
         return success()
     }
 
