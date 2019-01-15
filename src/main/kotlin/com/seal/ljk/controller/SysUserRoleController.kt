@@ -64,16 +64,17 @@ class SysUserRoleController{
     @ApiOperation(value = "查询用户类型列表")
     @VerifyToken
     fun getAllSysUserRole(@RequestBody sysUserRole: SysUserRole): ResVal {
-        val roleList=sysRoleService.getAllSysRole(SysRole())
-        val data=sysUserRoleService.getAllSysUserRole(sysUserRole)
-        for(r in roleList){
-            for(d in data){
+        val listRole=sysRoleService.getAllSysRole(SysRole())
+        val listUserRole=sysUserRoleService.getAllSysUserRole(sysUserRole)
+        for(r in listRole){
+            for(d in listUserRole){
                 if(r.id == d.roleId){
-                    d.selected="1"
+                    r.selected="1"
                 }
             }
         }
-        return success(data)
+
+        return success(listRole)
     }
 
     @PostMapping("/updateList")

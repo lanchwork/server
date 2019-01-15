@@ -30,7 +30,12 @@ data class SysRole(
     /**
      * 合作方表示
      */
-    var channelMark: String = ""
+    var channelMark: String = "",
+
+    /**
+     * 勾选框 1 已选中
+     */
+    var selected: String = ""
 ) : Base(), IVerify {
 
     override fun verify() {
