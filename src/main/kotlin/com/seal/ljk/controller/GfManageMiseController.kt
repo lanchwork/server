@@ -42,13 +42,7 @@ class GfManageMiseController{
     fun saveGfManageMise(@RequestBody gfManageMise: GfManageMise): ResVal {
         gfManageMise.verify()
         if (gfManageMise.id.isEmpty()) {
-            val address = gfManageMise.address
-            var count = gfManageMiseService.addressExist(address)
-            if(count==1){
-                return error("钱包地址已存在")
-            }else if(count==0) {
                 gfManageMiseService.insertGfManageMise(gfManageMise)
-            }
         } else {
             gfManageMiseService.updateGfManageMise(gfManageMise)
         }

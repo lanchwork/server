@@ -2,6 +2,7 @@ package com.seal.ljk.service.impl
 
 import com.github.pagehelper.Page
 import com.seal.ljk.base.IdNotFoundException
+import com.seal.ljk.base.SealException
 import com.seal.ljk.base.loggerFor
 import com.seal.ljk.dao.GfManageMiseDao
 import com.seal.ljk.model.GfManageMise
@@ -39,7 +40,12 @@ class GfManageMiseServiceImpl : IGfManageMiseService {
     }
 
     override fun insertGfManageMise(gfManageMise: GfManageMise) {
-        gfManageMiseDao.insert(gfManageMise)
+        val count = gfManageMiseDao.isExietAddress(gfManageMise.address)
+       if(1==count) {
+           throw SealException(message = "钱包地址已存在")
+       }else if(0==count){
+           gfManageMiseDao.insert(gfManageMise)
+       }
     }
 
     override fun updateGfManageMise(gfManageMise: GfManageMise) {
