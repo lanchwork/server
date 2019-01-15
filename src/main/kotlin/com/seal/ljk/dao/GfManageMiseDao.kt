@@ -1,7 +1,6 @@
 package com.seal.ljk.dao;
 
 import com.seal.ljk.model.GfManageMise;
-import com.seal.ljk.dao.BaseMapper;
 
 /**
  * <p>
@@ -11,4 +10,6 @@ import com.seal.ljk.dao.BaseMapper;
  * @author kangxj
  * @since 2019-01-04
  */
-interface GfManageMiseDao : BaseMapper<GfManageMise>
+interface GfManageMiseDao : BaseMapper<GfManageMise>{
+    fun isExietAddress(address: String):Int
+}

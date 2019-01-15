@@ -99,4 +99,7 @@
         delete from gf_manage_mise where id=#{id}
     </delete>
 
+    <select id="isExietAddress" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(address) from gf_manage_mise where address = #{address}
+    </select>
 </mapper>

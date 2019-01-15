@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service
 @Service
 class GfManageMiseServiceImpl : IGfManageMiseService {
 
+
     val log = loggerFor(this.javaClass)
 
     @Autowired
@@ -47,6 +48,9 @@ class GfManageMiseServiceImpl : IGfManageMiseService {
 
     override fun deleteGfManageMise(id: String) {
         gfManageMiseDao.delete(id)
+    }
+    override fun addressExist(address: String): Int {
+        return gfManageMiseDao.isExietAddress(address)
     }
 
 }

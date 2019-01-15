@@ -2,10 +2,7 @@ package com.seal.ljk.controller
 
 import com.seal.ljk.service.IGfManageMiseService
 import com.seal.ljk.base.VerifyToken
-import com.seal.ljk.common.ResVal
-import com.seal.ljk.common.SysDictUtil
-import com.seal.ljk.common.success
-import com.seal.ljk.common.getPageInfo
+import com.seal.ljk.common.*
 import com.seal.ljk.model.GfManageMise
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -45,7 +42,13 @@ class GfManageMiseController{
     fun saveGfManageMise(@RequestBody gfManageMise: GfManageMise): ResVal {
         gfManageMise.verify()
         if (gfManageMise.id.isEmpty()) {
-            gfManageMiseService.insertGfManageMise(gfManageMise)
+            val address = gfManageMise.address
+            var count = gfManageMiseService.addressExist(address)
+            if(count==1){
+                return error("钱包地址已存在",0)
+            }else if(count==0) {
+                gfManageMiseService.insertGfManageMise(gfManageMise)
+            }
         } else {
             gfManageMiseService.updateGfManageMise(gfManageMise)
         }
@@ -64,5 +67,6 @@ class GfManageMiseController{
     @ApiOperation(value = "管理员字典")
     @VerifyToken
     fun dicTzNoticeInfo(): ResVal = success(SysDictUtil.mapOf("gfMagMiseFuncMod"))
+
 
 }

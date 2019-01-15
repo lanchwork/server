@@ -18,4 +18,5 @@ interface IGfManageMiseService{
     fun insertGfManageMise(gfManageMise: GfManageMise)
     fun updateGfManageMise(gfManageMise: GfManageMise)
     fun deleteGfManageMise(id: String)
+    fun addressExist(address:String):Int
 }
