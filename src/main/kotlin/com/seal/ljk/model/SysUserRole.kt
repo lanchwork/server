@@ -32,7 +32,12 @@ data class SysUserRole(
         /**
          * 角色编码
          */
-        var roleCode: String = ""
+        var roleCode: String = "",
+
+        /**
+         * 角色ID列表
+         */
+        var roleIdList: String = ""
 ) : Base(), IVerify {
 
     override fun verify() {

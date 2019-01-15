@@ -1,7 +1,6 @@
 package com.seal.ljk.dao;
 
 import com.seal.ljk.model.SysUserRole;
-import com.seal.ljk.dao.BaseMapper;
 
 /**
  * <p>
@@ -11,4 +10,7 @@ import com.seal.ljk.dao.BaseMapper;
  * @author chenjh
  * @since 2018-12-26
  */
-interface SysUserRoleDao : BaseMapper<SysUserRole>
+interface SysUserRoleDao : BaseMapper<SysUserRole> {
+    fun deleteByUserId(userId: String)
+    fun insertBatch(str:String)
+}

@@ -49,4 +49,12 @@ class SysUserRoleServiceImpl : ISysUserRoleService {
         sysUserRoleDao.delete(id)
     }
 
+    override fun deleteByUserId(userId: String) {
+        sysUserRoleDao.deleteByUserId(userId)
+    }
+
+    override fun insertBatch(str:String) {
+        sysUserRoleDao.insertBatch(str)
+    }
+
 }

@@ -64,7 +64,12 @@ data class SysUser(
          * 用户类型 0超级管理员用户 1合作方管理员，2普通用户
          * 管理员用户只能由 seal 创建及删除
          */
-        var userType: String = ""
+        var userType: String = "",
+
+        /**
+         * 用户类型列表
+         */
+        var userTypeList: String = ""
 
 ) : Base(), IVerify {
 
