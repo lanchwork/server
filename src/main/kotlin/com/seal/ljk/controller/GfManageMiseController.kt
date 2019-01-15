@@ -8,6 +8,7 @@ import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+
 /**
  * <p>
  * 管理员 前端控制器
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*
 @Api(description = "管理员功能相关接口")
 @RestController
 @RequestMapping("/ljk/gf-manage-mise")
-class GfManageMiseController{
+class GfManageMiseController {
 
     @Autowired
     lateinit var gfManageMiseService: IGfManageMiseService
@@ -42,7 +43,7 @@ class GfManageMiseController{
     fun saveGfManageMise(@RequestBody gfManageMise: GfManageMise): ResVal {
         gfManageMise.verify()
         if (gfManageMise.id.isEmpty()) {
-                gfManageMiseService.insertGfManageMise(gfManageMise)
+            gfManageMiseService.insertGfManageMise(gfManageMise)
         } else {
             gfManageMiseService.updateGfManageMise(gfManageMise)
         }

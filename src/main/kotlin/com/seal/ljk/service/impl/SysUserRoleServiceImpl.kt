@@ -2,12 +2,16 @@ package com.seal.ljk.service.impl
 
 import com.github.pagehelper.Page
 import com.seal.ljk.base.IdNotFoundException
+import com.seal.ljk.base.SealException
 import com.seal.ljk.base.loggerFor
+import com.seal.ljk.common.UUIDUtil
 import com.seal.ljk.dao.SysUserRoleDao
 import com.seal.ljk.model.SysUserRole
 import com.seal.ljk.service.ISysUserRoleService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 /**
  * <p>
@@ -19,6 +23,7 @@ import org.springframework.stereotype.Service
  */
 @Service
 class SysUserRoleServiceImpl : ISysUserRoleService {
+
 
     val log = loggerFor(this.javaClass)
 
@@ -53,8 +58,25 @@ class SysUserRoleServiceImpl : ISysUserRoleService {
         sysUserRoleDao.deleteByUserId(userId)
     }
 
-    override fun insertBatch(str:String) {
-        sysUserRoleDao.insertBatch(str)
-    }
+    @Transactional
+    override fun insertBatchFast(sysUserRole: SysUserRole) {
+        try {
+            var sysUserRoleList = mutableListOf<SysUserRole>()
+            sysUserRoleDao.deleteByUserId(sysUserRole.userId)
+            var strList=sysUserRole.roleId.split(",")
+            strList.forEach{
+                val newSysUserRole = SysUserRole()
+                newSysUserRole.roleId=it
+                newSysUserRole.id = UUIDUtil.uuid
+                newSysUserRole.roleCode = sysUserRole.roleCode
+                newSysUserRole.userId = sysUserRole.userId
+                newSysUserRole.partnerId = sysUserRole.partnerId
+                sysUserRoleList.add(newSysUserRole)
+            }
+            sysUserRoleDao.insertFast(sysUserRoleList)
+        }catch (e:SealException){
+            throw SealException("更新失败")
+        }
 
+    }
 }

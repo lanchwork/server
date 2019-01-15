@@ -41,11 +41,11 @@ class GfManageMiseServiceImpl : IGfManageMiseService {
 
     override fun insertGfManageMise(gfManageMise: GfManageMise) {
         val count = gfManageMiseDao.isExietAddress(gfManageMise.address)
-       if(1==count) {
-           throw SealException(message = "钱包地址已存在")
-       }else if(0==count){
-           gfManageMiseDao.insert(gfManageMise)
-       }
+        if (1 == count) {
+            throw SealException(message = "钱包地址已存在")
+        } else if (0 == count) {
+            gfManageMiseDao.insert(gfManageMise)
+        }
     }
 
     override fun updateGfManageMise(gfManageMise: GfManageMise) {
@@ -55,6 +55,7 @@ class GfManageMiseServiceImpl : IGfManageMiseService {
     override fun deleteGfManageMise(id: String) {
         gfManageMiseDao.delete(id)
     }
+
     override fun addressExist(address: String): Int {
         return gfManageMiseDao.isExietAddress(address)
     }

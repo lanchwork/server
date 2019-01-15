@@ -1,6 +1,7 @@
 package com.seal.ljk.dao;
 
 import com.seal.ljk.model.SysUserRole;
+import org.apache.ibatis.annotations.Param
 
 /**
  * <p>
@@ -12,5 +13,5 @@ import com.seal.ljk.model.SysUserRole;
  */
 interface SysUserRoleDao : BaseMapper<SysUserRole> {
     fun deleteByUserId(userId: String)
-    fun insertBatch(str:String)
+    fun insertFast(@Param("sysUserRoleList") sysUserRoleList:List<SysUserRole>)
 }

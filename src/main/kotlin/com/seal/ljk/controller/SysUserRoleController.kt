@@ -73,43 +73,14 @@ class SysUserRoleController{
                 }
             }
         }
-
         return success(listRole)
     }
 
-    @PostMapping("/updateList")
+    @PostMapping("/updateListFast(")
     @ApiOperation(value = "配置用户类型列表")
     @VerifyToken
-    fun updateUserTypeList(@RequestBody sysUserRole: SysUserRole):ResVal{
-        val userId = sysUserRole.userId
-        val roleIdList = sysUserRole.roleIdList
-        //根据roleIdList更新对应的用户角色列表 先删后增
-        sysUserRoleService.deleteByUserId(userId)
-        //拼接sql
-        val sb = StringBuilder()
-        sb.append("INSERT INTO sys_user_role (id,partner_id,user_id,role_id,role_code,create_date,update_date,create_user,update_user) VALUES")
-        val roles = roleIdList.split(",")
-        val userSession = getSessionUser()!!
-        roles.forEach{
-            sb.append("(\'"+UUIDUtil.uuid+"\',")
-            sb.append("null,")
-            sb.append("\'"+userId+"\'")
-            sb.append(",")
-            sb.append(it)
-            sb.append(",")
-            sb.append("null,")
-            sb.append("Now()")
-            sb.append(",")
-            sb.append("Now()")
-            sb.append(",")
-            sb.append("\'"+userSession.username+"\',")
-            sb.append("\'"+userSession.username+"\'")
-            sb.append(")")
-            sb.append(",")
-        }
-        val str = sb.substring(0, sb.length - 1).toString()
-        sysUserRoleService.insertBatch(str)
-
+    fun updateUserTypeListFast(@RequestBody sysUserRole: SysUserRole):ResVal{
+        sysUserRoleService.insertBatchFast(sysUserRole)
         return success()
     }
 
