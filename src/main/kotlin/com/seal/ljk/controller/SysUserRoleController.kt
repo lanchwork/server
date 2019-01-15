@@ -2,10 +2,7 @@ package com.seal.ljk.controller
 
 import com.seal.ljk.service.ISysUserRoleService
 import com.seal.ljk.base.VerifyToken
-import com.seal.ljk.common.ResVal
-import com.seal.ljk.common.UUIDUtil
-import com.seal.ljk.common.getSessionUser
-import com.seal.ljk.common.success
+import com.seal.ljk.common.*
 import com.seal.ljk.model.SysUser
 import com.seal.ljk.model.SysUserRole
 import com.seal.ljk.service.ISysUserService
@@ -40,7 +37,7 @@ class SysUserRoleController{
     @PostMapping("/list")
     @ApiOperation(value = "用户与角色对应关系列表")
     @VerifyToken
-    fun listSysUserRole(@RequestBody sysUserRole: SysUserRole): ResVal = success(sysUserRoleService.getAllSysUserRole(sysUserRole))
+    fun listSysUserRole(@RequestBody sysUserRole: SysUserRole): ResVal = success(sysUserRoleService.getAllSysUserRoleByPage(sysUserRole).getPageInfo())
 
     @PostMapping("/save")
     @ApiOperation(value = "新增或修改用户与角色对应关系")
