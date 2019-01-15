@@ -1,6 +1,5 @@
 package com.seal.ljk.model
 
-import com.seal.ljk.model.Base
 import com.seal.ljk.common.using
 import com.seal.ljk.base.PrimaryKey
 

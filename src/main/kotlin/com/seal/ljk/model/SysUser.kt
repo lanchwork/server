@@ -1,12 +1,8 @@
 package com.seal.ljk.model
 
-import com.baomidou.mybatisplus.annotation.TableField
 import com.seal.ljk.base.PrimaryKey
 import com.seal.ljk.common.Constant
-import com.seal.ljk.model.Base
 import com.seal.ljk.common.using
-import com.seal.ljk.model.SysUser.Companion.USER_TYPE_ADMIN
-import com.seal.ljk.model.SysUser.Companion.USER_TYPE_SUPER
 
 /**
  * 用户表
