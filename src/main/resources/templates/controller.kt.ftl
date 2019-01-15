@@ -42,8 +42,8 @@ class ${table.controllerName}<#if superControllerClass??> : ${superControllerCla
     @ApiOperation(value = "新增或修改${table.comment!}")
     @VerifyToken
     fun save${entity}(@RequestBody ${entity?uncap_first}: ${entity}): ResVal {
-        ${entity?uncap_first}.verify()
         if (${entity?uncap_first}.id.isEmpty()) {
+            ${entity?uncap_first}.verify()
             ${table.serviceName?substring(1)?uncap_first}.insert${entity}(${entity?uncap_first})
         } else {
             ${table.serviceName?substring(1)?uncap_first}.update${entity}(${entity?uncap_first})

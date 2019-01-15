@@ -3,20 +3,20 @@
 <mapper namespace="com.seal.ljk.dao.SysUserMapper">
 
     <select id="get" resultType="SysUser">
-        select b.id,b.username,b.init_pass,b.password,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.username,b.init_pass,b.password,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user,b.user_type_list
         from sys_user b
         where b.id =#{id}
     </select>
 
     <select id="getUser" resultType="SysUser">
-        select b.id,b.username,b.init_pass,b.password,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.username,b.init_pass,b.password,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user,b.user_type_list
         from sys_user b
         where b.channel_mark = #{channelMark}
           and b.username = #{userName}
     </select>
 
     <select id="getAll" resultType="SysUser">
-        select b.id,b.username,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.username,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user,b.user_type_list
         from sys_user b
         <where>
           <if test="id != null  and id != '' ">
@@ -49,6 +49,9 @@
           <if test="openFlag != null  and openFlag != '' ">
               and b.open_flag= #{openFlag}
           </if>
+            <if test="userTypeList != null  and userTypeList != '' ">
+                and b.user_type_list= #{userTypeList}
+            </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -59,7 +62,7 @@
     </select>
 
     <select id="getAllByPage" resultType="SysUser">
-        select b.id,b.username,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user
+        select b.id,b.username,b.channel_mark,b.user_type,b.name,b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user,b.user_type_list
         from sys_user b
         <where>
           <if test="id != null  and id != '' ">
@@ -92,6 +95,9 @@
           <if test="openFlag != null  and openFlag != '' ">
               and b.open_flag= #{openFlag}
           </if>
+            <if test="userTypeList != null  and userTypeList != '' ">
+                and b.user_type_list= #{userTypeList}
+            </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -102,8 +108,8 @@
     </select>
 
     <insert id="insert" parameterType="SysUser">
-        INSERT INTO sys_user (id,username,init_pass,password,channel_mark,user_type,name,phone,email,open_flag,create_date,create_user,update_date,update_user)
-        VALUES (#{id},#{username},#{initPass},#{password},#{channelMark},#{userType},#{name},#{phone},#{email},#{openFlag},NOW(),#{createUser},NOW(),#{createUser});
+        INSERT INTO sys_user (id,username,init_pass,password,channel_mark,user_type,name,phone,email,open_flag,create_date,create_user,update_date,update_user,user_type_list)
+        VALUES (#{id},#{username},#{initPass},#{password},#{channelMark},#{userType},#{name},#{phone},#{email},#{openFlag},NOW(),#{createUser},NOW(),#{createUser},#{userTypeList});
     </insert>
 
     <update id="update" parameterType="SysUser">
@@ -141,6 +147,9 @@
             </if>
             <if test="updateUser != null and updateUser != ''">
                 update_user=#{updateUser},
+            </if>
+            <if test="userTypeList != null  and userTypeList != '' ">
+                user_type_list= #{userTypeList},
             </if>
             update_date=NOW()
         </set>
