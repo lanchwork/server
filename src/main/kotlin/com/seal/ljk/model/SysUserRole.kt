@@ -37,7 +37,12 @@ data class SysUserRole(
         /**
          * 角色ID列表
          */
-        var roleIdList: String = ""
+        var roleIdList: String = "",
+
+        /**
+         * 勾选框 1 已选中
+         */
+        var selected: String = ""
 ) : Base(), IVerify {
 
     override fun verify() {
