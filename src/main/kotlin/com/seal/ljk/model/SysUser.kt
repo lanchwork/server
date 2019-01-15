@@ -83,6 +83,7 @@ data class SysUser(
         "手机号 不能为空" using (phone.isNotEmpty())
         "邮箱 不能为空" using (email.isNotEmpty())
         "是否开启 不能为空" using (openFlag.isNotEmpty())
+        userType = "2"
     }
 
     fun isSeal(): Boolean {
