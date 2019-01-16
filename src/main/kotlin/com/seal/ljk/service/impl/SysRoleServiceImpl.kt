@@ -6,6 +6,7 @@ import com.seal.ljk.base.IdNotFoundException
 import com.seal.ljk.base.loggerFor
 import com.seal.ljk.common.getSessionUser
 import com.seal.ljk.dao.SysRoleDao
+import com.seal.ljk.dao.SysRoleMenuDao
 import com.seal.ljk.model.SysRole
 import com.seal.ljk.service.ISysRoleService
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,6 +27,9 @@ class SysRoleServiceImpl : ISysRoleService {
 
     @Autowired
     lateinit var sysRoleDao: SysRoleDao
+
+    @Autowired
+    lateinit var sysRoleMenuDao: SysRoleMenuDao
 
     override fun getSysRole(id: String): SysRole {
         return sysRoleDao.get(id) ?: throw IdNotFoundException()
@@ -54,6 +58,7 @@ class SysRoleServiceImpl : ISysRoleService {
     }
 
     override fun deleteSysRole(id: String) {
+        sysRoleMenuDao.deleteByRoleId(id)
         sysRoleDao.delete(id)
     }
 
