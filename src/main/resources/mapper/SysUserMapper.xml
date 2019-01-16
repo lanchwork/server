@@ -151,8 +151,21 @@
         delete from sys_user where id=#{id}
     </delete>
 
-    <select id="findRoleNameByUserId" parameterType="java.lang.String" resultType="java.lang.String">
-        SELECT role_name FROM sys_user_role ur JOIN sys_role r ON ur.role_id = r.id where user_id =#{userId}
+    <select id="findRoleNameByUserIdByPage" parameterType="SysUser" resultType="SysUser">
+        SELECT
+        b."id",b.username,b.channel_mark,b."name",b.phone,b.email,b.open_flag,b.create_date,b.create_user,b.update_date,b.update_user,string_agg (r.role_name, ',') user_type
+        FROM
+        sys_user b
+        JOIN sys_user_role ur ON ur.user_id = b.id
+        JOIN sys_role r ON ur.role_id = r.id
+        group by b.id
+        <if test="orderByInfo != null and orderByInfo.length > 0">
+            <foreach collection="orderByInfo" item="order" open="order by "
+                     separator="," close="  ">
+                ${order}
+            </foreach>
+        </if>
+
     </select>
 
 </mapper>

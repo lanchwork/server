@@ -1,5 +1,6 @@
 package com.seal.ljk.dao;
 
+import com.github.pagehelper.Page
 import com.seal.ljk.model.SysUser;
 import com.seal.ljk.dao.BaseMapper;
 
@@ -13,5 +14,5 @@ import com.seal.ljk.dao.BaseMapper;
  */
 interface SysUserMapper : BaseMapper<SysUser> {
     fun getUser(channelMark: String, userName: String): SysUser?
-    fun findRoleNameByUserId(userId:String):List<String>
+    fun findRoleNameByUserIdByPage(sysUser:SysUser): Page<SysUser>
 }
