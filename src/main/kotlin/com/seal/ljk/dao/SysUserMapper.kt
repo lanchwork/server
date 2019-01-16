@@ -13,4 +13,5 @@ import com.seal.ljk.dao.BaseMapper;
  */
 interface SysUserMapper : BaseMapper<SysUser> {
     fun getUser(channelMark: String, userName: String): SysUser?
+    fun findRoleNameByUserId(userId:String):List<String>
 }

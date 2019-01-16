@@ -76,7 +76,7 @@ class SysUserRoleController{
         return success(listRole)
     }
 
-    @PostMapping("/updateListFast(")
+    @PostMapping("/updateListFast")
     @ApiOperation(value = "配置用户类型列表")
     @VerifyToken
     fun updateUserTypeListFast(@RequestBody sysUserRole: SysUserRole):ResVal{
