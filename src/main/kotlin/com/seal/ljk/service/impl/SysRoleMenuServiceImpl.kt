@@ -62,7 +62,7 @@ class SysRoleMenuServiceImpl : ISysRoleMenuService {
         val checkedRoles = getAllSysRoleMenu(SysRoleMenu(roleId = roleId))
 
         val checkedRoleSet = checkedRoles.map {
-            it.roleId
+            it.menuId
         }.toSet()
 
         allMenu.forEach {
