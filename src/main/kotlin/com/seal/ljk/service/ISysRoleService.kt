@@ -17,5 +17,5 @@ interface ISysRoleService : IBaseService {
     fun getAllSysRoleByPage(sysRole: SysRole): Page<SysRole>
     fun insertSysRole(sysRole: SysRole)
     fun updateSysRole(sysRole: SysRole)
-    fun deleteSysRole(id: String)
+    fun deleteSysRole(id: String):Int
 }

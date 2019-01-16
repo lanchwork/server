@@ -57,9 +57,12 @@ class SysRoleServiceImpl : ISysRoleService {
         sysRoleDao.update(sysRole)
     }
 
-    override fun deleteSysRole(id: String) {
-        sysRoleMenuDao.deleteByRoleId(id)
-        sysRoleDao.delete(id)
+    override fun deleteSysRole(id: String): Int {
+       val data=sysRoleMenuDao.queryRoleId(id)
+       if(data==0){
+           sysRoleDao.delete(id)
+       }
+        return data
     }
 
 }

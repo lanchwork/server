@@ -13,4 +13,5 @@ import com.seal.ljk.dao.BaseMapper;
  */
 interface SysRoleMenuDao : BaseMapper<SysRoleMenu> {
     fun deleteByRoleId(roleId: String)
+    fun queryRoleId(id: String):Int
 }

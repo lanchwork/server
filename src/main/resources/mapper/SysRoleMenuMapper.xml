@@ -81,4 +81,9 @@
         delete from sys_role_menu where role_id=#{roleId}
     </delete>
 
+    <select id="queryRoleId" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1) from sys_role_menu where role_id=#{id}
+    </select>
+
+
 </mapper>

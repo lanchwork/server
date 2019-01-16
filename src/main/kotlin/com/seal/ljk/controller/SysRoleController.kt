@@ -55,8 +55,8 @@ class SysRoleController{
     @ApiOperation(value = "删除角色表")
     @VerifyToken
     fun deleteSysRole(@RequestParam id: String): ResVal {
-        sysRoleService.deleteSysRole(id)
-        return success()
+        val data=sysRoleService.deleteSysRole(id)
+        return success(data)
     }
 
 }
