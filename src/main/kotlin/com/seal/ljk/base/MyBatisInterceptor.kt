@@ -29,36 +29,18 @@ class SealInsertInterceptor : Interceptor {
     override fun intercept(invocation: Invocation): Any {
 
         val mappedStatement = invocation.args[0] as MappedStatement
+
         // 获取 SQL 命令
         val sqlCommandType = mappedStatement.sqlCommandType
 
         // 获取参数
         val parameter = invocation.args[1]
 
-        when (parameter) {
-            is Array<*> -> parameter.forEach {
-                it?.apply {
-                    handleObject(sqlCommandType, this)
-                }
-            }
-            is List<*> -> parameter.forEach {
-                it?.apply {
-                    handleObject(sqlCommandType, this)
-                }
-            }
-            else -> handleObject(sqlCommandType, parameter)
-        }
-
-        return invocation.proceed()
-    }
-
-    private fun handleObject(sqlCommandType: SqlCommandType, parameter: Any) {
-
         val declaredFields = mutableListOf<Field>()
         var tempClass = parameter.javaClass
         while (true) {
             declaredFields.addAll(tempClass.declaredFields)
-            tempClass = tempClass.superclass as Class<Any>
+            tempClass = tempClass.superclass
             if (tempClass == Base::class.java) {
                 declaredFields.addAll(tempClass.declaredFields)
                 break
@@ -101,8 +83,9 @@ class SealInsertInterceptor : Interceptor {
                 }
             }
         }
-    }
 
+        return invocation.proceed()
+    }
 
     override fun setProperties(properties: Properties?) {
 

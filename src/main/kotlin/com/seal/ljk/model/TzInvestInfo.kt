@@ -55,10 +55,7 @@ data class TzInvestInfo(
          * 类型
          */
         var type: Char? = null,
-        /**
-         * 项目管理表中 token名
-         */
-        var tokenName: String = "",
+
 
         /**
          * 下单时的价格
@@ -75,6 +72,11 @@ data class TzInvestInfo(
          */
         var lang: String = ""
 ) : Base(), IVerify {
+
+    /**
+     * 项目管理表中 token名
+     */
+    var tokenName: String = ""
 
     override fun verify() {
         "投资项目id 不能为空" using (itemId.isNotEmpty())

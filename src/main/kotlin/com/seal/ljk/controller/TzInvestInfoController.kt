@@ -43,8 +43,8 @@ class TzInvestInfoController{
     @ApiOperation(value = "新增或修改投资信息")
     @VerifyToken
     fun saveTzInvestInfo(@RequestBody tzInvestInfo: TzInvestInfo): ResVal {
-        tzInvestInfo.verify()
         if (tzInvestInfo.id.isEmpty()) {
+            tzInvestInfo.verify()
             tzInvestInfoService.insertTzInvestInfo(tzInvestInfo)
         } else {
             tzInvestInfoService.updateTzInvestInfo(tzInvestInfo)
