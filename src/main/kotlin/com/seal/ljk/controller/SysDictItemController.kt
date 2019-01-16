@@ -12,13 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 /**
  * <p>
- *  数据项列表前端控制器
+ *  数据字典项目列表前端控制器
  * </p>
  *
  * @author lanch
  * @since 2019-01-03
  */
-@Api(description = " 功能相关接口")
+@Api(description = "数据字典项目功能相关接口")
 @RestController
 @RequestMapping("/ljk/sys-dict-item")
 class SysDictItemController{
@@ -28,12 +28,12 @@ class SysDictItemController{
 
 
     @PostMapping("/get")
-    @ApiOperation(value = "获取")
+    @ApiOperation(value = "数据字典项目获取")
     @VerifyToken
     fun getSysDictItem(@RequestParam id: String): ResVal = success(sysDictItemService.getSysDictItem(id))
 
     @PostMapping("/list")
-    @ApiOperation(value = "方列表")
+    @ApiOperation(value = "数据字典项目列表")
     @VerifyToken
     fun listSysDictItem(@RequestBody sysDictItem: SysDictItem): ResVal {
         if (sysDictItem.orderByInfo == null) {
@@ -44,7 +44,7 @@ class SysDictItemController{
 
 
     @PostMapping("/save")
-    @ApiOperation(value = "新增或修改")
+    @ApiOperation(value = "数据字典项目新增或修改")
     @VerifyToken
     fun saveSysDictItem(@RequestBody sysDictItem: SysDictItem): ResVal {
         sysDictItem.verify()
@@ -57,7 +57,7 @@ class SysDictItemController{
     }
 
     @PostMapping("/delete")
-    @ApiOperation(value = "删除表")
+    @ApiOperation(value = "数据字典项目删除")
     @VerifyToken
     fun deleteSysMenu(@RequestParam id: String): ResVal {
         sysDictItemService.deleteSysDictItem(id)
