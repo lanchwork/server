@@ -4,13 +4,11 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.github.pagehelper.Page
 import com.seal.ljk.base.*
-import com.seal.ljk.common.Constant
-import com.seal.ljk.common.MessageDigestUtil
-import com.seal.ljk.common.checkParam
-import com.seal.ljk.common.getSessionUser
+import com.seal.ljk.common.*
 import com.seal.ljk.dao.SysUserMapper
 import com.seal.ljk.model.SysUser
 import com.seal.ljk.service.ISysPartnerService
+import com.seal.ljk.service.ISysUserRoleService
 import com.seal.ljk.service.ISysUserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -33,6 +31,8 @@ class SysUserServiceImpl : ISysUserService {
     lateinit var sysUserMapper: SysUserMapper
     @Autowired
     lateinit var sysPartnerService: ISysPartnerService
+    @Autowired
+    lateinit var sysUserRoleService: ISysUserRoleService
 
 
     override fun getSysUser(id: String): SysUser {
@@ -50,9 +50,23 @@ class SysUserServiceImpl : ISysUserService {
     override fun getAllSysUserByPage(sysUser: SysUser): Page<SysUser> {
         val user = getSessionUser() ?: throw AuthException()
         if (!user.isSeal()) {
+            sysUser.userType = "3"
             sysUser.channelMark = user.channelMark
+        } else {
+            sysUser.userTypes = arrayOf("1", "2")
         }
-        return sysUserMapper.findRoleNameByUserIdByPage(sysUser)
+        val list = sysUserMapper.getAllByPage(sysUser)
+        val userRoleMap = sysUserRoleService.findRoleNameByUserId(list.map { it.id }.toTypedArray())
+                .map { it.userId to it.roleName }.toMap()
+
+        list.forEach {
+            it.userTypeName = SysDictUtil.findType("userType", it.userType)
+            if (it.userType == "2") {
+                it.userTypeName = userRoleMap[it.id]
+            }
+        }
+
+        return list
     }
 
     override fun insertSysUser(sysUser: SysUser) {

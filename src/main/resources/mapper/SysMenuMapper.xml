@@ -42,6 +42,9 @@
             <if test="menuAs != null  and menuAs != '' ">
                 and b.menu_as= #{menuAs}
             </if>
+            <if test="isAll != null  and isAll == '0'.toString() ">
+                and (partner_types != '') IS true
+            </if>
             <if test="partnerTypes != null  and partnerTypes != '' ">
                 and (b.partner_types like concat('%', #{partnerTypes},'%') or (b.partner_types = '') IS NOT false)
             </if>

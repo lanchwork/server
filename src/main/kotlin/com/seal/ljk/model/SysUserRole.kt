@@ -31,13 +31,21 @@ data class SysUserRole(
         /**
          * 角色编码
          */
-        var roleCode: String = "",
+        var roleCode: String = ""
 
-        /**
-         * 角色ID列表
-         */
-        var roleIdList: String = ""
 ) : Base(), IVerify {
+    /**
+     * 角色名称
+     */
+    var roleName: String? = null
+    /**
+     * 角色ID列表
+     */
+    var roleIdList: String? = null
+    /**
+     * 用户ID列表
+     */
+    var userIds: Array<String>? = null
 
     override fun verify() {
         "用户ID 不能为空" using (userId.isNotEmpty())

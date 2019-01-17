@@ -72,6 +72,7 @@ data class SysMenu(
     var children: Array<SysMenu>? = null
     var roleIds: Array<String>? = null
     var checked: String? = null
+    var isAll: String? = null
 
     override fun verify() {
         "父菜单ID 不能为空" using (parentId.isNotEmpty())

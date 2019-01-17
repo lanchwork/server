@@ -4,10 +4,10 @@ import com.seal.ljk.model.SysPartner
 
 object SysDictUtil {
 
-    var sysDict: MutableMap<String, List<Map<String, Any?>>> = mutableMapOf()
+    var sysDict: MutableMap<String, List<Map<String, String?>>> = mutableMapOf()
 
-    fun mapOf(vararg keys: String): MutableMap<String, List<Map<String, Any?>>> {
-        val result = mutableMapOf<String, List<Map<String, Any?>>>()
+    fun mapOf(vararg keys: String): MutableMap<String, List<Map<String, String?>>> {
+        val result = mutableMapOf<String, List<Map<String, String?>>>()
         keys.forEach { sysDict[it]?.apply { result[it] = this } }
         return result
     }
@@ -60,6 +60,18 @@ object SysDictUtil {
                     "showVal" to it.partnerName
             )
         }
+    }
+
+    fun findType(typeCode: String, itemCode: String): String? {
+        sysDict[typeCode]?.apply {
+            for (map in this) {
+                if (map["value"] == itemCode) {
+                    return map["showVal"]
+                }
+            }
+        }
+        return null
+
     }
 
 }

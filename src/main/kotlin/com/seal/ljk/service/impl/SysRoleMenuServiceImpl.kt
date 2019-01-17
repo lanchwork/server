@@ -57,7 +57,9 @@ class SysRoleMenuServiceImpl : ISysRoleMenuService {
     }
 
     override fun getAllSysMenuByRoleId(roleId: String): List<SysMenu> {
-        val allMenu = sysMenuService.getAllSysMenu(SysMenu())
+        val sysMenu = SysMenu(flag = 1)
+        sysMenu.isAll = "0"
+        val allMenu = sysMenuService.getAllSysMenu(sysMenu)
 
         val checkedRoles = getAllSysRoleMenu(SysRoleMenu(roleId = roleId))
 

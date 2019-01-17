@@ -70,7 +70,9 @@ data class SysUser(
         val USER_TYPE_NORMAL = "2"
     }
 
+    var userTypeName: String? = null
     var partner: SysPartner? = null
+    var userTypes: Array<String>? = null
 
     override fun verify() {
         "用户名 不能为空" using (username.isNotEmpty())

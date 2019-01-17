@@ -60,5 +60,5 @@ object MessageDigestUtil {
 }
 
 fun main(args: Array<String>) {
-    println(MessageDigestUtil.md5Pass("mini@2018"))
+    println(MessageDigestUtil.md5Pass("seal@2018"))
 }

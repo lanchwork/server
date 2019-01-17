@@ -49,6 +49,12 @@
             <if test="openFlag != null  and openFlag != '' ">
                 and b.open_flag= #{openFlag}
             </if>
+            <if test="userTypes != null  and userTypes.length > 0 ">
+                <foreach collection="userTypes" item="type" open="and b.user_type in("
+                         separator="," close=")  ">
+                    '${type}'
+                </foreach>
+            </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
@@ -91,6 +97,12 @@
             </if>
             <if test="openFlag != null  and openFlag != '' ">
                 and b.open_flag= #{openFlag}
+            </if>
+            <if test="userTypes != null  and userTypes.length > 0 ">
+                <foreach collection="userTypes" item="type" open="and b.user_type in("
+                         separator="," close=")  ">
+                    '${type}'
+                </foreach>
             </if>
         </where>
         <if test="orderByInfo != null and orderByInfo.length > 0">

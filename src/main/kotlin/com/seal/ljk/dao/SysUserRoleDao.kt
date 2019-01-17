@@ -13,5 +13,6 @@ import org.apache.ibatis.annotations.Param
  */
 interface SysUserRoleDao : BaseMapper<SysUserRole> {
     fun deleteByUserId(userId: String)
-    fun insertFast(@Param("sysUserRoleList") sysUserRoleList:List<SysUserRole>)
+    fun insertFast(@Param("sysUserRoleList") sysUserRoleList: List<SysUserRole>)
+    fun findRoleNameByUserId(userRole: SysUserRole): List<SysUserRole>
 }

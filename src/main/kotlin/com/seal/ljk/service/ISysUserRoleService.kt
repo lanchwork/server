@@ -20,4 +20,5 @@ interface ISysUserRoleService{
     fun deleteSysUserRole(id: String)
     fun deleteByUserId(userId: String)
     fun insertBatchFast(sysUserRole:SysUserRole)
+    fun findRoleNameByUserId(userIds: Array<String>):List<SysUserRole>
 }

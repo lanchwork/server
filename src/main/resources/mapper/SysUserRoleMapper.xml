@@ -64,6 +64,17 @@
         </if>
     </select>
 
+    <select id="findRoleNameByUserId" resultType="SysUserRole">
+        SELECT b.user_id, string_agg(c.role_name, ',') as roleName
+        FROM sys_user_role b
+        LEFT JOIN sys_role c ON b.role_id = c.id
+        <foreach collection="userIds" item="uid" open="where b.user_id in("
+                 separator="," close=")  ">
+            '${uid}'
+        </foreach>
+        group by b.user_id
+    </select>
+
     <insert id="insert" parameterType="SysUserRole">
         INSERT INTO sys_user_role (id,partner_id,user_id,role_id,role_code,create_date,update_date,create_user,update_user)
         VALUES (#{id},#{partnerId},#{userId},#{roleId},#{roleCode},NOW(),NOW(),#{createUser},#{createUser});
@@ -111,4 +122,5 @@
         (#{item.id},#{item.partnerId},#{item.userId},#{item.roleId},#{item.roleCode},NOW(),NOW(),#{item.createUser},#{item.updateUser})
         </foreach>
     </insert>
+
 </mapper>

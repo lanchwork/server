@@ -11,7 +11,6 @@ import com.seal.ljk.service.ISysUserRoleService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.util.*
 
 /**
  * <p>
@@ -61,12 +60,12 @@ class SysUserRoleServiceImpl : ISysUserRoleService {
     @Transactional
     override fun insertBatchFast(sysUserRole: SysUserRole) {
         try {
-            var sysUserRoleList = mutableListOf<SysUserRole>()
+            val sysUserRoleList = mutableListOf<SysUserRole>()
             sysUserRoleDao.deleteByUserId(sysUserRole.userId)
-            var strList=sysUserRole.roleId.split(",")
-            strList.forEach{
+            val strList = sysUserRole.roleId.split(",")
+            strList.forEach {
                 val newSysUserRole = SysUserRole()
-                newSysUserRole.roleId=it
+                newSysUserRole.roleId = it
                 newSysUserRole.id = UUIDUtil.uuid
                 newSysUserRole.roleCode = sysUserRole.roleCode
                 newSysUserRole.userId = sysUserRole.userId
@@ -74,9 +73,16 @@ class SysUserRoleServiceImpl : ISysUserRoleService {
                 sysUserRoleList.add(newSysUserRole)
             }
             sysUserRoleDao.insertFast(sysUserRoleList)
-        }catch (e:SealException){
+        } catch (e: SealException) {
             throw SealException("更新失败")
         }
+
+    }
+
+    override fun findRoleNameByUserId(userIds: Array<String>): List<SysUserRole> {
+        val userRole = SysUserRole()
+        userRole.userIds = userIds
+        return sysUserRoleDao.findRoleNameByUserId(userRole)
 
     }
 }

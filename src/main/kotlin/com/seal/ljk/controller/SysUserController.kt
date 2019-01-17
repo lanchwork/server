@@ -87,7 +87,7 @@ class SysUserController {
     fun login(@RequestParam channelMark: String,
               @RequestParam userName: String,
               @RequestParam password: String): ResVal {
-        return success(sysUserService.login(channelMark, userName, password))
+        return success(sysUserService.login(channelMark.toLowerCase(), userName, password))
     }
 
     @PostMapping("/userInfo")
