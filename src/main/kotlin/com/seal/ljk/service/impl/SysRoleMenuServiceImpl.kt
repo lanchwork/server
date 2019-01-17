@@ -78,4 +78,8 @@ class SysRoleMenuServiceImpl : ISysRoleMenuService {
         sysRoleMenuDao.deleteByRoleId(roleId)
     }
 
+    override fun queryRoleId(id: String): Int {
+        return sysRoleMenuDao.queryRoleId(id)
+    }
+
 }

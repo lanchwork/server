@@ -6,9 +6,9 @@ import com.seal.ljk.base.IdNotFoundException
 import com.seal.ljk.base.loggerFor
 import com.seal.ljk.common.getSessionUser
 import com.seal.ljk.dao.SysRoleDao
-import com.seal.ljk.dao.SysRoleMenuDao
 import com.seal.ljk.model.SysRole
 import com.seal.ljk.model.SysUserRole
+import com.seal.ljk.service.ISysRoleMenuService
 import com.seal.ljk.service.ISysRoleService
 import com.seal.ljk.service.ISysUserRoleService
 import com.seal.ljk.service.ISysUserService
@@ -32,7 +32,7 @@ class SysRoleServiceImpl : ISysRoleService {
     lateinit var sysRoleDao: SysRoleDao
 
     @Autowired
-    lateinit var sysRoleMenuDao: SysRoleMenuDao
+    lateinit var sysRoleMenuService: ISysRoleMenuService
 
     @Autowired
     lateinit var sysUserService: ISysUserService
@@ -89,10 +89,10 @@ class SysRoleServiceImpl : ISysRoleService {
     }
 
     override fun deleteSysRole(id: String): Int {
-        val data = sysRoleMenuDao.queryRoleId(id)
-        if (data == 0) {
-            sysRoleDao.delete(id)
-        }
+       val data=sysRoleMenuService.queryRoleId(id)
+       if(data==0){
+           sysRoleDao.delete(id)
+       }
         return data
     }
 

@@ -21,4 +21,5 @@ interface ISysRoleMenuService : IBaseService {
     fun deleteSysRoleMenu(id: String)
     fun getAllSysMenuByRoleId(roleId: String): List<SysMenu>
     fun deleteSysRoleMenuByRoleId(roleId: String)
+    fun queryRoleId(id: String): Int
 }
