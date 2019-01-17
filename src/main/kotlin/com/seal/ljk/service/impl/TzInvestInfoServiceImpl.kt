@@ -131,9 +131,9 @@ class TzInvestInfoServiceImpl : ITzInvestInfoService {
             else -> if (en) "operate" else "操作"
         }
         return if (en)
-            "Your $accType $last4 have $optName $buyNumber $tokenName, if you have any issues, please contact customer service."
+            "Your $accType $last4 have $optName ${buyNumber?.toInt()} $tokenName, if you have any issues, please contact customer service."
         else
-            "您$accType${last4}已$optName${buyNumber}个$tokenName，若有异议请联系客服。"
+            "您$accType${last4}已$optName${buyNumber?.toInt()}个$tokenName，若有异议请联系客服。"
     }
 
     public fun pushTitle(type: Char?, tokenName: String, isEn: Boolean): String {
