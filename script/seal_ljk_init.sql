@@ -1915,7 +1915,7 @@ INSERT INTO public.sys_task VALUES ('tt4ae0485cb64c75bf9fe4fc17d94df7', 'revenue
 -- Data for Name: sys_user; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.sys_user VALUES ('88ae146c7f374b73a5ecf51173eae7ec', 'admin', 'seal@2018', 'f2c226ac61c0d1c54a0c3601b8d41677', 'seal', '超级管理员', '', '', '1', '1', '2019-01-16 15:42:40.739576+08', '2776cd3a081011e9bd39fa163e168207', '2019-01-16 15:42:40.739576+08', '2776cd3a081011e9bd39fa163e168207');
+INSERT INTO public.sys_user VALUES ('88ae146c7f374b73a5ecf51173eae7ec', 'admin', 'seal@2018', 'f2c226ac61c0d1c54a0c3601b8d41677', 'seal', '超级管理员', '', '', '1', '0', '2019-01-16 15:42:40.739576+08', '', '2019-01-16 15:42:40.739576+08', '');
 
 
 --

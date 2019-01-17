@@ -50,22 +50,23 @@ class SysUserServiceImpl : ISysUserService {
     override fun getAllSysUserByPage(sysUser: SysUser): Page<SysUser> {
         val user = getSessionUser() ?: throw AuthException()
         if (!user.isSeal()) {
-            sysUser.userType = "3"
+            sysUser.userType = "2"
             sysUser.channelMark = user.channelMark
         } else {
             sysUser.userTypes = arrayOf("1", "2")
         }
         val list = sysUserMapper.getAllByPage(sysUser)
-        val userRoleMap = sysUserRoleService.findRoleNameByUserId(list.map { it.id }.toTypedArray())
-                .map { it.userId to it.roleName }.toMap()
+        if (list.isNotEmpty()) {
+            val userRoleMap = sysUserRoleService.findRoleNameByUserId(list.map { it.id }.toTypedArray())
+                    .map { it.userId to it.roleName }.toMap()
 
-        list.forEach {
-            it.userTypeName = SysDictUtil.findType("userType", it.userType)
-            if (it.userType == "2") {
-                it.userTypeName = userRoleMap[it.id]
+            list.forEach {
+                it.userTypeName = SysDictUtil.findType("userType", it.userType)
+                if (it.userType == "2") {
+                    it.userTypeName = userRoleMap[it.id]
+                }
             }
         }
-
         return list
     }
 
