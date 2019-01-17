@@ -85,7 +85,7 @@ class TzInvestInfoServiceImpl : ITzInvestInfoService {
     }
 
 
-    private fun sendInvestPush(info: TzInvestInfo) {
+    fun sendInvestPush(info: TzInvestInfo) {
         if (info.tokenName.isEmpty()) {
             val item = tzInvestItemService.getTzInvestItem(info.itemId)
             info.tokenName = item.tokenName
@@ -113,7 +113,8 @@ class TzInvestInfoServiceImpl : ITzInvestInfoService {
 
     }
 
-    private fun pushContent(mobile: String, account: String, type: Char?, tokenName: String, buyNumber: BigDecimal?, en: Boolean): String {
+
+    public fun pushContent(mobile: String, account: String, type: Char?, tokenName: String, buyNumber: BigDecimal?, en: Boolean): String {
         val isMob = account.isEmpty()
         val last4 = (if (isMob) mobile else account).let {
             it.substring(it.length - 4)
@@ -132,10 +133,10 @@ class TzInvestInfoServiceImpl : ITzInvestInfoService {
         return if (en)
             "Your $accType $last4 have $optName $buyNumber $tokenName, if you have any issues, please contact customer service."
         else
-            "您{$accType}{$last4}已{$optName}{$buyNumber}个{$tokenName}，若有异议请联系客服。"
+            "您$accType${last4}已$optName${buyNumber}个$tokenName，若有异议请联系客服。"
     }
 
-    private fun pushTitle(type: Char?, tokenName: String, isEn: Boolean): String {
+    public fun pushTitle(type: Char?, tokenName: String, isEn: Boolean): String {
         val suc = if (isEn) "Completed" else "成功"
         val optName = when (type) {
             '1' -> if (isEn) "Purchase" else "买入"
@@ -145,6 +146,4 @@ class TzInvestInfoServiceImpl : ITzInvestInfoService {
         }
         return "$optName $tokenName $suc"
     }
-
-
 }
