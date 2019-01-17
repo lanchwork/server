@@ -170,6 +170,44 @@
         sys_user b
         LEFT JOIN sys_user_role ur ON ur.user_id = b.id
         LEFT JOIN sys_role r ON ur.role_id = r.id
+        <where>
+            <if test="id != null  and id != '' ">
+                and b.id= #{id}
+            </if>
+            <if test="username != null  and username != '' ">
+                and b.username= #{username}
+            </if>
+            <if test="initPass != null  and initPass != '' ">
+                and b.init_pass= #{initPass}
+            </if>
+            <if test="password != null  and password != '' ">
+                and b.password= #{password}
+            </if>
+            <if test="channelMark != null  and channelMark != '' ">
+                and b.channel_mark= #{channelMark}
+            </if>
+            <if test="userType != null  and userType != '' ">
+                and b.user_type= #{userType}
+            </if>
+            <if test="name != null  and name != '' ">
+                and b.name= #{name}
+            </if>
+            <if test="phone != null  and phone != '' ">
+                and b.phone= #{phone}
+            </if>
+            <if test="email != null  and email != '' ">
+                and b.email= #{email}
+            </if>
+            <if test="openFlag != null  and openFlag != '' ">
+                and b.open_flag= #{openFlag}
+            </if>
+            <if test="userTypes != null  and userTypes.length > 0 ">
+                <foreach collection="userTypes" item="type" open="and b.user_type in("
+                         separator="," close=")  ">
+                    '${type}'
+                </foreach>
+            </if>
+        </where>
         group by b.id
         <if test="orderByInfo != null and orderByInfo.length > 0">
             <foreach collection="orderByInfo" item="order" open="order by "
