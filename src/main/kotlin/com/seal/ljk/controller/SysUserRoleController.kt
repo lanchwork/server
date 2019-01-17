@@ -10,6 +10,7 @@ import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+
 /**
  * <p>
  * 用户与角色对应关系 前端控制器
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.*
 @Api(description = "用户与角色对应关系 功能相关接口")
 @RestController
 @RequestMapping("/sys/userRole")
-class SysUserRoleController{
+class SysUserRoleController {
 
     @Autowired
     lateinit var sysUserRoleService: ISysUserRoleService
@@ -64,22 +65,13 @@ class SysUserRoleController{
     @ApiOperation(value = "查询用户类型列表")
     @VerifyToken
     fun getAllSysUserRole(@RequestBody sysUserRole: SysUserRole): ResVal {
-        val listRole=sysRoleService.getAllSysRole(SysRole())
-        val listUserRole=sysUserRoleService.getAllSysUserRole(sysUserRole)
-        for(r in listRole){
-            for(d in listUserRole){
-                if(r.id == d.roleId){
-                    r.selected="1"
-                }
-            }
-        }
-        return success(listRole)
+        return success(sysRoleService.getAllSysRoleByUserId(sysUserRole.userId))
     }
 
     @PostMapping("/updateListFast")
     @ApiOperation(value = "配置用户类型列表")
     @VerifyToken
-    fun updateUserTypeListFast(@RequestBody sysUserRole: SysUserRole):ResVal{
+    fun updateUserTypeListFast(@RequestBody sysUserRole: SysUserRole): ResVal {
         sysUserRoleService.insertBatchFast(sysUserRole)
         return success()
     }

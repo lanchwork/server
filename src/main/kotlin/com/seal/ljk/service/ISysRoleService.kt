@@ -18,4 +18,5 @@ interface ISysRoleService : IBaseService {
     fun insertSysRole(sysRole: SysRole)
     fun updateSysRole(sysRole: SysRole)
     fun deleteSysRole(id: String):Int
+    fun getAllSysRoleByUserId(userId: String): List<SysRole>
 }
