@@ -77,13 +77,17 @@ class SysUserServiceImpl : ISysUserService {
             sysUser.channelMark = user.channelMark
         }
 
-        if (sysUser.userType == "0") {//管理员账户
+        if (sysUser.userType == "0" || sysUser.userType == "1") {//管理员账户
             if (!user.isSeal()) {
                 throw SealException(message = "权限不足，无法新增管理员")
             }
         }
         if (sysUser.initPass.isNotEmpty()) {
             sysUser.password = MessageDigestUtil.md5Pass(sysUser.initPass)
+        }
+
+        sysUserMapper.getUser(sysUser.channelMark, sysUser.username)?.apply {
+            throw SealException(message = "合作方【${sysUser.channelMark}】下用户名【${sysUser.username}】已存在")
         }
         sysUserMapper.insert(sysUser)
     }
